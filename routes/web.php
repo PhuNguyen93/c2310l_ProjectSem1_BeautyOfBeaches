@@ -1,10 +1,19 @@
 <?php
 
-use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', [PageController::class, 'home'])->name('home');
-Route::get('/about-us', [PageController::class, 'aboutUs'])->name('aboutUs');
-Route::get('/contact', [PageController::class, 'contact'])->name('contact');
-Route::get('/gallery', [PageController::class, 'gallery'])->name('gallery');
-Route::get('/beaches', [PageController::class, 'beaches'])->name('beaches');
+Route::controller(HomeController::class)->group(function () {
+Route::get('/', 'index')->name('index');
+Route::get('/index', 'index')->name('index');
+Route::get('/index2', 'index2')->name('index2');
+Route::get('/index3', 'index3')->name('index3');
+Route::get('/about', 'about')->name('about');
+Route::get('/destination','destination')->name('destination');
+Route::get('/destinationdetails','destinationdetails')->name('destinationdetails');
+Route::get('/tour','tour')->name('tour');
+Route::get('/tourdetails','tourdetails')->name('tourdetails');
+Route::get('/blog','blog')->name('blog');
+Route::get('/blogdetails','blogdetails')->name('blogdetails');
+Route::get('/contact','contact')->name('contact');
+});

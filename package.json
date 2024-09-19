@@ -1,12 +1,20 @@
 {
+    "name": "travelpro",
+    "version": "1.0.0",
+    "description": "TravelPro - Adventure Tour and Travel Agency Laravel 11 Template",
+    "author": "PixcelsThemes",
     "private": true,
     "type": "module",
     "scripts": {
+        "dev:css": "sass public/assets/sass/style.scss public/assets/css/style.css --watch ",
+        "build:css": "sass public/assets/sass/style.scss public/assets/css/style.css",
+        "minify:css": "sass public/assets/sass/style.scss public/assets/css/style.min.css --style=compressed",
         "dev": "vite",
         "build": "vite build"
     },
     "devDependencies": {
-        "axios": "^1.7.4",
+        "axios": "^1.6.4",
+        "sass": "^1.75.0",
         "laravel-vite-plugin": "^1.0",
         "vite": "^5.0"
     }
