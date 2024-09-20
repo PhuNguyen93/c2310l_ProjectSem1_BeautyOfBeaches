@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RouteController;
 
 Route::controller(HomeController::class)->group(function () {
 Route::get('/', 'index')->name('index');
@@ -17,3 +18,6 @@ Route::get('/blog','blog')->name('blog');
 Route::get('/blogdetails','blogdetails')->name('blogdetails');
 Route::get('/contact','contact')->name('contact');
 });
+
+Route::get("/dashboards-analytics", [RouteController::class, 'index'])->name('dashboards-analytics');
+
