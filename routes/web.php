@@ -35,3 +35,10 @@ Route::controller(LoginController::class) -> group(function(){
 
 });
 
+Route::get('/account', function () {
+    return view('pages-account');
+});
+
+Route::get('/account-settings', function () {
+    return view('pages-account-settings');
+});
