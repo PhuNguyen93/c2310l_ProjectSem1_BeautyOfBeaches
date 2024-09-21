@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RouteController;
+use App\Http\Controllers\UserController;
+
 
 Route::controller(HomeController::class)->group(function () {
 Route::get('/', 'index')->name('index');
@@ -28,3 +30,8 @@ Route::get('/account', function () {
 Route::get('/account-settings', function () {
     return view('pages-account-settings');
 });
+
+// Trong file routes/web.php
+Route::get('/users', [UserController::class, 'index']);
+// Định nghĩa route cho trang danh sách người dùng
+Route::resource('users', UserController::class);
