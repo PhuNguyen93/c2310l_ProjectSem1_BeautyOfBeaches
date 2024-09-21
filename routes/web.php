@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -26,6 +27,15 @@ Route::get("/dashboards-analytics", [RouteController::class, 'index'])->name('da
 
 Route::controller(LoginController::class) -> group(function(){
     Route::get('/login','showLoginForm')->name('login');
+    Route::post('/login', [LoginController::class, 'authenticate']);
+});
 
+
+Route::controller(RegisterController::class) -> group(function(){
+    Route::get('register', function () {
+        return view('auth.register'); // Hiển thị form đăng ký
+    })->name('register');
+
+    Route::post('register', [RegisterController::class, 'store'])->name('register.store');
 });
 
