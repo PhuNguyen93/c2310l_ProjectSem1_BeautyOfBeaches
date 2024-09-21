@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+
 use App\Http\Controllers\RouteController;
+use App\Http\Controllers\LoginController;
 
 Route::controller(HomeController::class)->group(function () {
 Route::get('/', 'index')->name('index');
@@ -20,4 +22,10 @@ Route::get('/contact','contact')->name('contact');
 });
 
 Route::get("/dashboards-analytics", [RouteController::class, 'index'])->name('dashboards-analytics');
+
+
+Route::controller(LoginController::class) -> group(function(){
+    Route::get('/login','showLoginForm')->name('login');
+
+});
 
