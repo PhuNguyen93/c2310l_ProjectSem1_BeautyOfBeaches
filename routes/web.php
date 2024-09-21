@@ -21,3 +21,10 @@ Route::get('/contact','contact')->name('contact');
 
 Route::get("/dashboards-analytics", [RouteController::class, 'index'])->name('dashboards-analytics');
 
+Route::get('/account', function () {
+    return view('pages-account');
+});
+
+Route::get('/account-settings', function () {
+    return view('pages-account-settings');
+});
