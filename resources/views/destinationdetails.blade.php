@@ -3,7 +3,7 @@
 @section('content')
 
     <!-- Start Hero Section -->
-    <x-hero subTitle='Modern & Beautiful Travel Theme' img='assets/images/destination_header_bg.jpeg' title='Popular Destination' />
+    <x-hero subTitle='{{ $beach->name }}' img='{{ asset($beach->image_url) }}' title='Popular Destination' />
     <!-- End Hero Section -->
 
     <!-- Start Destination Details Section -->
@@ -13,57 +13,9 @@
         <div class="row cs_gap_y_50">
           <div class="col-lg-8">
             <div class="cs_post_details">
-              <div class="row">
-                <div class="col-lg-6">
-                  <img src="assets/images/destination_details_1.jpeg" alt="Destination Image">
-                </div>
-                <div class="col-lg-6">
-                  <img src="assets/images/destination_details_2.jpeg" alt="Destination Image">
-                </div>
-              </div>
-              <h2>The Complete Guide for Travelers in London</h2>
-              <p>The foreign and commonwealth office draws up an extensive list of countries that should not be travelled to quite regularly and it is from that our, and other global travel insurance providers', underwriters decide which countries travel insurance should be provided for. We look at the government travel advice and not we can provide insurance to travellers.</p>
-              <div class="cs_list_wrapper cs_gray_bg">
-                <h3 class="cs_fs_20 cs_medium">Good to Know:</h3>
-                <ul class="cs_list cs_style_2 cs_fs_18 cs_primary_color">
-                  <li>
-                    <i><img src="assets/images/icons/location.svg" alt="Icon"></i>
-                    <span>Country: United Kingdom</span>
-                  </li>
-                  <li>
-                    <i><img src="assets/images/icons/visa.svg" alt="Icon"></i>
-                    <span>Visa Requirements: No</span>
-                  </li>
-                  <li>
-                    <i><img src="assets/images/icons/language.svg" alt="Icon"></i>
-                    <span>Languages spoken: English</span>
-                  </li>
-                  <li>
-                    <i><img src="assets/images/icons/rate.svg" alt="Icon"></i>
-                    <span>Per Person: $2707</span>
-                  </li>
-                  <li>
-                    <i><img src="assets/images/icons/area.svg" alt="Icon"></i>
-                    <span>Area (km2): 750.63 km</span>
-                  </li>
-                  <li>
-                    <i><img src="assets/images/icons/location.svg" alt="Icon"></i>
-                    <span>City: London</span>
-                  </li>
-                </ul>
-              </div>
-              <p>The foreign office's travel advice is not to travel to the following countries, even if it means losing business the risk from the warzones listed below is just too great to make the reward worth the danger:</p>
-              <blockquote>“Ei elit omnes impedit ius, vel et hinc agam fabulas. Ut audiamre iracundia vim. An sumo diam ea. Cu omnis. An sumo diam ea.”</blockquote>
-              <p>ere's our top 10 countries to avoid travelling to, and the reasons for the high risk factor! The risk is far from conclusive (the foreign office's travel advice lists many more countries), but to me, these are the ones that all travellers should avoid like the plague:</p>
-              <div class="row">
-                <div class="col-lg-5">
-                  <img src="assets/images/destination_details_3.jpeg" alt="Destination Image">
-                </div>
-                <div class="col-lg-7">
-                  <img src="assets/images/destination_details_4.jpeg" alt="Destination Image">
-                </div>
-              </div>
-              <p>Ai elit omnes lmpedit ius, tel et hinc agam fabulas. Ut audiam invenire iracundia vim. An eam dico similique ut sint posse sit, eum sumo diam ea. Liber consectetuer in mei, sea in imperdiet assueverit contentions cibo blandit tacimates. Iusto iudicabit similique idefinitionem eos an.Sit delicata persequeris ex, in sea rebum deseruisse appella ntur. Lorem ipsum dolor si vix aperiri consequat an.</p>
+              <h2>{{ $beach->name }}</h2>
+              <p>{{ $beach->description }}</p>
+
             </div>
             <div class="cs_social_btns cs_primary_color">
               <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
@@ -228,5 +180,5 @@
       <div class="cs_height_140 cs_height_lg_80"></div>
     </section>
     <!-- End Destination Details Section -->
-   
+
   @endsection

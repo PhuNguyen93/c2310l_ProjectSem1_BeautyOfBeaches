@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-  
+
   <x-head/>
 
   <body>
-    
+
   <x-preloader/>
 
     <!-- Start Header Section -->
     <x-header/>
     <x-header_search/>
     <!-- End Header Section -->
-    
+
     <!-- Start Hero Section -->
-    <section class="cs_hero cs_style_1 cs_center cs_ripple_activate cs_primary_bg" data-src="assets/images/hero_bg.jpeg">
+    {{-- <section class="cs_hero cs_style_1 cs_center cs_ripple_activate cs_primary_bg" data-src="assets/images/hero_bg.jpeg"> --}}
+    <section class="cs_hero cs_style_1 cs_center cs_ripple_activate cs_primary_bg" style="background-image: url('https://plus.unsplash.com/premium_photo-1669748157617-a3a83cc8ea23?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') "     ">
       <div class="container">
         <div class="cs_hero_text text-center">
           <h3 class="cs_hero_subtitle cs_white_color cs_ternary_font cs_fs_25 cs_normal text-uppercase">Let's Travel The World With Us</h3>
@@ -97,7 +98,7 @@
               <svg width="20" height="10" viewBox="0 0 20 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19.5866 5.69629H0.41235C0.184269 5.69629 0 5.46776 0 5.1849C0 4.90204 0.184269 4.67352 0.41235 4.67352H18.5906L16.0881 1.57004C15.927 1.37028 15.927 1.04587 16.0881 0.846109C16.2492 0.646349 16.5108 0.646349 16.6718 0.846109L19.8792 4.82374C19.9977 4.97076 20.0325 5.1897 19.9681 5.38147C19.9036 5.57164 19.7529 5.69629 19.5866 5.69629Z" fill="currentColor"/>
                 <path d="M16.3435 9.11986C16.2384 9.11986 16.1333 9.08012 16.0538 8.99935C15.8935 8.83909 15.8935 8.57884 16.0538 8.41858L19.2487 5.22371C19.4089 5.06345 19.6692 5.06345 19.8294 5.22371C19.9897 5.38396 19.9897 5.64422 19.8294 5.80448L16.6346 8.99935C16.5538 9.08012 16.4487 9.11986 16.3435 9.11986Z" fill="currentColor"/>
-              </svg>                
+              </svg>
             </a>
           </div>
         </div>
@@ -190,7 +191,7 @@
                     <svg width="20" height="10" viewBox="0 0 20 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M19.5866 5.69629H0.41235C0.184269 5.69629 0 5.46776 0 5.1849C0 4.90204 0.184269 4.67352 0.41235 4.67352H18.5906L16.0881 1.57004C15.927 1.37028 15.927 1.04587 16.0881 0.846109C16.2492 0.646349 16.5108 0.646349 16.6718 0.846109L19.8792 4.82374C19.9977 4.97076 20.0325 5.1897 19.9681 5.38147C19.9036 5.57164 19.7529 5.69629 19.5866 5.69629Z" fill="currentColor"/>
                       <path d="M16.3435 9.11986C16.2384 9.11986 16.1333 9.08012 16.0538 8.99935C15.8935 8.83909 15.8935 8.57884 16.0538 8.41858L19.2487 5.22371C19.4089 5.06345 19.6692 5.06345 19.8294 5.22371C19.9897 5.38396 19.9897 5.64422 19.8294 5.80448L16.6346 8.99935C16.5538 9.08012 16.4487 9.11986 16.3435 9.11986Z" fill="currentColor"/>
-                    </svg>                
+                    </svg>
                   </a>
                   <span class="cs_card_price cs_fs_24 cs_medium cs_white_color mb-0">$370</span>
                 </div>
@@ -222,7 +223,7 @@
                     <svg width="20" height="10" viewBox="0 0 20 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M19.5866 5.69629H0.41235C0.184269 5.69629 0 5.46776 0 5.1849C0 4.90204 0.184269 4.67352 0.41235 4.67352H18.5906L16.0881 1.57004C15.927 1.37028 15.927 1.04587 16.0881 0.846109C16.2492 0.646349 16.5108 0.646349 16.6718 0.846109L19.8792 4.82374C19.9977 4.97076 20.0325 5.1897 19.9681 5.38147C19.9036 5.57164 19.7529 5.69629 19.5866 5.69629Z" fill="currentColor"/>
                       <path d="M16.3435 9.11986C16.2384 9.11986 16.1333 9.08012 16.0538 8.99935C15.8935 8.83909 15.8935 8.57884 16.0538 8.41858L19.2487 5.22371C19.4089 5.06345 19.6692 5.06345 19.8294 5.22371C19.9897 5.38396 19.9897 5.64422 19.8294 5.80448L16.6346 8.99935C16.5538 9.08012 16.4487 9.11986 16.3435 9.11986Z" fill="currentColor"/>
-                    </svg>                
+                    </svg>
                   </a>
                   <span class="cs_card_price cs_fs_24 cs_medium cs_white_color mb-0">$380</span>
                 </div>
@@ -254,7 +255,7 @@
                     <svg width="20" height="10" viewBox="0 0 20 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M19.5866 5.69629H0.41235C0.184269 5.69629 0 5.46776 0 5.1849C0 4.90204 0.184269 4.67352 0.41235 4.67352H18.5906L16.0881 1.57004C15.927 1.37028 15.927 1.04587 16.0881 0.846109C16.2492 0.646349 16.5108 0.646349 16.6718 0.846109L19.8792 4.82374C19.9977 4.97076 20.0325 5.1897 19.9681 5.38147C19.9036 5.57164 19.7529 5.69629 19.5866 5.69629Z" fill="currentColor"/>
                       <path d="M16.3435 9.11986C16.2384 9.11986 16.1333 9.08012 16.0538 8.99935C15.8935 8.83909 15.8935 8.57884 16.0538 8.41858L19.2487 5.22371C19.4089 5.06345 19.6692 5.06345 19.8294 5.22371C19.9897 5.38396 19.9897 5.64422 19.8294 5.80448L16.6346 8.99935C16.5538 9.08012 16.4487 9.11986 16.3435 9.11986Z" fill="currentColor"/>
-                    </svg>                
+                    </svg>
                   </a>
                   <span class="cs_card_price cs_fs_24 cs_medium cs_white_color mb-0">$390</span>
                 </div>
@@ -286,7 +287,7 @@
                     <svg width="20" height="10" viewBox="0 0 20 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M19.5866 5.69629H0.41235C0.184269 5.69629 0 5.46776 0 5.1849C0 4.90204 0.184269 4.67352 0.41235 4.67352H18.5906L16.0881 1.57004C15.927 1.37028 15.927 1.04587 16.0881 0.846109C16.2492 0.646349 16.5108 0.646349 16.6718 0.846109L19.8792 4.82374C19.9977 4.97076 20.0325 5.1897 19.9681 5.38147C19.9036 5.57164 19.7529 5.69629 19.5866 5.69629Z" fill="currentColor"/>
                       <path d="M16.3435 9.11986C16.2384 9.11986 16.1333 9.08012 16.0538 8.99935C15.8935 8.83909 15.8935 8.57884 16.0538 8.41858L19.2487 5.22371C19.4089 5.06345 19.6692 5.06345 19.8294 5.22371C19.9897 5.38396 19.9897 5.64422 19.8294 5.80448L16.6346 8.99935C16.5538 9.08012 16.4487 9.11986 16.3435 9.11986Z" fill="currentColor"/>
-                    </svg>                
+                    </svg>
                   </a>
                   <span class="cs_card_price cs_fs_24 cs_medium cs_white_color mb-0">$360</span>
                 </div>
@@ -299,7 +300,7 @@
     <!-- End Package Section -->
 
     <!-- Start FunFact Section -->
-    <section>
+    {{-- <section>
       <div class="cs_height_135 cs_height_lg_80"></div>
       <div class="container">
         <div class="row cs_gap_y_40">
@@ -320,7 +321,7 @@
               <div class="cs_funfact_1_icon cs_accent_bg cs_center rounded-circle">
                 <svg width="40" height="36" viewBox="0 0 40 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M35.522 18.002C35.522 19.629 36.858 20.9528 38.5 20.9528C39.328 20.9528 40 21.6186 40 22.439V27.7916C40 32.318 36.284 36 31.716 36H8.286C3.718 36 0 32.318 0 27.7916V22.439C0 21.6186 0.672 20.9528 1.5 20.9528C3.144 20.9528 4.48 19.629 4.48 18.002C4.48 16.4166 3.198 15.2236 1.5 15.2236C1.102 15.2236 0.722 15.067 0.44 14.7876C0.158 14.5082 0 14.1296 0 13.7373L0.00400019 8.21028C0.00400019 3.68402 3.72 0 8.288 0H31.712C36.28 0 39.998 3.68402 39.998 8.21028L40 13.5649C40 13.9573 39.842 14.3378 39.562 14.6152C39.28 14.8946 38.9 15.0512 38.5 15.0512C36.858 15.0512 35.522 16.375 35.522 18.002ZM24.504 19.296L26.862 17.021C27.272 16.6286 27.414 16.05 27.236 15.515C27.06 14.9798 26.6 14.5994 26.044 14.522L22.786 14.0504L21.328 11.1254C21.078 10.622 20.57 10.3089 20.004 10.3069H20C19.436 10.3069 18.928 10.6201 18.674 11.1234L17.216 14.0504L13.964 14.52C13.402 14.5994 12.942 14.9798 12.764 15.515C12.588 16.05 12.73 16.6286 13.138 17.021L15.496 19.296L14.94 22.5124C14.844 23.0672 15.07 23.6182 15.53 23.9492C15.79 24.1334 16.092 24.2286 16.398 24.2286C16.632 24.2286 16.868 24.171 17.084 24.0582L20 22.5402L22.91 24.0542C23.414 24.3216 24.012 24.28 24.47 23.9472C24.932 23.6182 25.158 23.0672 25.062 22.5124L24.504 19.296Z" fill="white"/>
-                </svg>                  
+                </svg>
               </div>
               <div class="col-sm-6">
                 <div class="cs_funfact cs_style_1 text-center">
@@ -350,79 +351,39 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> --}}
     <!-- End FunFact Section -->
 
     <!-- Start destination Section -->
-     <section>
-      <div class="cs_height_135 cs_height_lg_80"></div>
-      <div class="container">
-        <div class="cs_section_heading cs_style_1 text-center">
-          <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">POPULAR DESTINATION</h3>
-          <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">Popular Destinations</h2>
+    <section>
+        <div class="cs_height_135 cs_height_lg_80"></div>
+        <div class="container">
+            <div class="cs_section_heading cs_style_1 text-center">
+                <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">POPULAR DESTINATION</h3>
+                <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">Popular Destinations</h2>
+            </div>
+            <div class="cs_height_55 cs_height_lg_40"></div>
+            <div class="cs_grid_1">
+                @foreach($beaches as $beach)
+                    <div class="cs_grid_item">
+                        <!-- Link tới trang chi tiết bãi biển với ID -->
+                        <a href="{{ route('destinationdetails', ['id' => $beach->id]) }}" class="cs_card cs_style_2 cs_zoom position-relative cs_radius_8">
+                            <div class="cs_card_thumb w-100 h-100">
+                                <!-- Hiển thị hình ảnh bãi biển -->
+                                <img src="{{ asset($beach->image_url) }}" alt="Card Image" class="w-100 h-100 cs_zoom_in">
+                            </div>
+                            <div class="cs_card_content position-absolute">
+                                <!-- Hiển thị tên bãi biển -->
+                                <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">{{ $beach->name }}</h2>
+                                <!-- Hiển thị vị trí bãi biển và số chuyến đi (nếu có) -->
+                                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">{{ $beach->location }}, {{ $beach->trips_count }} Trips</p>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
         </div>
-        <div class="cs_height_55 cs_height_lg_40"></div>
-        <div class="cs_grid_1">
-          <div class="cs_grid_item">
-            <a href="{{ route('destinationdetails') }}" class="cs_card cs_style_2 cs_zoom position-relative cs_radius_8">
-              <div class="cs_card_thumb w-100 h-100">
-                <img src="assets/images/popular_destination_1.jpeg" alt="Card Image" class="w-100 h-100 cs_zoom_in">
-              </div>
-              <div class="cs_card_content position-absolute">
-                <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">Eiffel Tower</h2>
-                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">Paris, 24 Trips</p>
-              </div>
-            </a>
-          </div>
-          <div class="cs_grid_item">
-            <a href="{{ route('destinationdetails') }}" class="cs_card cs_style_2 cs_zoom position-relative cs_radius_8">
-              <div class="cs_card_thumb w-100 h-100">
-                <img src="assets/images/popular_destination_2.jpeg" alt="Card Image" class="w-100 h-100 cs_zoom_in">
-              </div>
-              <div class="cs_card_content position-absolute">
-                <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">
-                  Pryde Mountains</h2>
-                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">
-                 Prydelands, 100 Trips</p>
-              </div>
-            </a>
-          </div>
-          <div class="cs_grid_item">
-            <a href="{{ route('destinationdetails') }}" class="cs_card cs_style_2 cs_zoom position-relative cs_radius_8">
-              <div class="cs_card_thumb w-100 h-100">
-                <img src="assets/images/popular_destination_3.jpeg" alt="Card Image" class="w-100 h-100 cs_zoom_in">
-              </div>
-              <div class="cs_card_content position-absolute">
-                <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">Lao Lading Island</h2>
-                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">Krabal, 12 Trips</p>
-              </div>
-            </a>
-          </div>
-          <div class="cs_grid_item">
-            <a href="{{ route('destinationdetails') }}" class="cs_card cs_style_2 cs_zoom position-relative cs_radius_8">
-              <div class="cs_card_thumb w-100 h-100">
-                <img src="assets/images/popular_destination_4.jpeg" alt="Card Image" class="w-100 h-100 cs_zoom_in">
-              </div>
-              <div class="cs_card_content position-absolute">
-                <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">Ton Kwen Temple</h2>
-                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">Thailand, 20 Trips</p>
-              </div>
-            </a>
-          </div>
-          <div class="cs_grid_item">
-            <a href="{{ route('destinationdetails') }}" class="cs_card cs_style_2 cs_zoom position-relative cs_radius_8">
-              <div class="cs_card_thumb w-100 h-100">
-                <img src="assets/images/popular_destination_5.jpeg" alt="Card Image" class="w-100 h-100 cs_zoom_in">
-              </div>
-              <div class="cs_card_content position-absolute">
-                <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">Taj Mahal</h2>
-                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">Thailand, 50 Trips</p>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="cs_height_140 cs_height_lg_80"></div>
+        <div class="cs_height_140 cs_height_lg_80"></div>
     </section>
     <!-- End destination Section -->
 
@@ -446,8 +407,8 @@
               <path d="M54.9049 13.8223L57.3655 13.1743L58.3935 16.4669L54.9049 13.8223ZM60.5676 9.56647H56.2363L54.9049 5.32812L53.5735 9.56647H49.2422L52.7477 12.1935L51.4163 16.4319L54.9218 13.8048L57.079 12.1935L60.5676 9.56647Z" fill="white"/>
               <path d="M77.0631 13.8223L79.5237 13.1743L80.5517 16.4669L77.0631 13.8223ZM82.7258 9.56647H78.3945L77.0631 5.32812L75.7317 9.56647H71.4004L74.9059 12.1935L73.5745 16.4319L77.08 13.8048L79.2372 12.1935L82.7258 9.56647Z" fill="white"/>
               <path d="M99.2213 13.8223L101.682 13.1743L102.71 16.4669L99.2213 13.8223ZM104.884 9.56647H100.553L99.2213 5.32812L97.8899 9.56647H93.5586L97.0641 12.1935L95.7327 16.4319L99.2382 13.8048L101.395 12.1935L104.884 9.56647Z" fill="white"/>
-            </svg>   
-            01 Jan 2024           
+            </svg>
+            01 Jan 2024
           </div>
         </div>
       </div>
@@ -564,7 +525,7 @@
                       </svg> Comment(5)</a>
                     <a href="{{ route('blogdetails') }}" class="cs_post_btn cs_primary_bg">
                       More<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip02)"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.15616 4.59014L1.31712 0.0641602C1.24542 0.0224266 1.164 0.000298672 1.08104 0H1.07968C0.996674 0.000329659 0.915216 0.022469 0.843465 0.0641992C0.771208 0.105407 0.711218 0.165101 0.669653 0.237153C0.628087 0.309204 0.606443 0.391019 0.606942 0.474199V9.52607C0.606614 9.60931 0.628283 9.69115 0.669757 9.76332C0.711231 9.83548 0.771035 9.89541 0.843117 9.93703C0.915198 9.97864 0.996997 10.0005 1.08023 10.0003C1.16346 10.0002 1.24518 9.97801 1.3171 9.93611L9.15616 5.41012C9.22813 5.36857 9.2879 5.30881 9.32946 5.23684C9.37101 5.16487 9.39289 5.08323 9.39289 5.00013C9.39289 4.91702 9.37101 4.83538 9.32946 4.76341C9.2879 4.69145 9.22813 4.63168 9.15616 4.59014Z" fill="currentColor"/></g><defs><clipPath id="clip02"><rect width="10" height="10" fill="currentColor"/></clipPath></defs>
-                      </svg>                      
+                      </svg>
                     </a>
                   </div>
                 </div>
@@ -600,11 +561,11 @@
                     </a>
                     <a href="{{ route('blogdetails') }}" class="cs_post_btn cs_primary_bg">
                       More<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_346_351)"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.15616 4.59014L1.31712 0.0641602C1.24542 0.0224266 1.164 0.000298672 1.08104 0H1.07968C0.996674 0.000329659 0.915216 0.022469 0.843465 0.0641992C0.771208 0.105407 0.711218 0.165101 0.669653 0.237153C0.628087 0.309204 0.606443 0.391019 0.606942 0.474199V9.52607C0.606614 9.60931 0.628283 9.69115 0.669757 9.76332C0.711231 9.83548 0.771035 9.89541 0.843117 9.93703C0.915198 9.97864 0.996997 10.0005 1.08023 10.0003C1.16346 10.0002 1.24518 9.97801 1.3171 9.93611L9.15616 5.41012C9.22813 5.36857 9.2879 5.30881 9.32946 5.23684C9.37101 5.16487 9.39289 5.08323 9.39289 5.00013C9.39289 4.91702 9.37101 4.83538 9.32946 4.76341C9.2879 4.69145 9.22813 4.63168 9.15616 4.59014Z" fill="currentColor"/></g><defs><clipPath id="clip0_346_351"><rect width="10" height="10" fill="currentColor"/></clipPath></defs>
-                      </svg>                      
+                      </svg>
                     </a>
                   </div>
                 </div>
-                
+
               </div>
             </article>
           </div>

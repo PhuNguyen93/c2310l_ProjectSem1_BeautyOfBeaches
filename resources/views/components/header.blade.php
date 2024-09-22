@@ -3,7 +3,7 @@
         <div class="cs_main_header_in">
           <div class="cs_main_header_left">
             <a class="cs_site_branding" href="{{ route('index') }}">
-              <img src="assets/images/logo.svg" alt="Logo">
+              <img src="{{ asset('assets/images/favicon.png') }}" alt="Logo">
             </a>
           </div>
           <div class="cs_main_header_center">
@@ -11,18 +11,18 @@
               <ul class="cs_nav_list">
                 <li class="menu-item-has-children">
                   <a href="{{ route('index') }}">Home</a>
-                  <ul>
+                  {{-- <ul>
                     <li><a href="{{ route('index') }}">Home</a></li>
                     <li><a href="{{ route('index2') }}">Home v2</a></li>
                     <li><a href="{{ route('index3') }}">Home v3</a></li>
-                  </ul>
+                  </ul> --}}
                 </li>
                 <li><a href="{{ route('about') }}">About Us</a></li>
                 <li class="menu-item-has-children">
                   <a href="{{ route('destination') }}">Destinations</a>
                   <ul>
-                    <li><a href="{{ route('destination') }}">Destination</a></li>
-                    <li><a href="{{ route('destinationdetails') }}">Destination Details</a></li>
+                    {{-- <li><a href="{{ route('destination') }}">Destination</a></li> --}}
+                    {{-- <li><a href="{{ route('destinationdetails') }}">Destination Details</a></li> --}}
                   </ul>
                 </li>
                 <li class="menu-item-has-children">

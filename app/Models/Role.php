@@ -9,12 +9,14 @@ class Role extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        // Thêm các thuộc tính khác nếu cần
-    ];
+
+  
 
     // Quan hệ với model User (nếu cần)
+
+    protected $fillable = ['name', 'description'];
+
+    // Một role có thể thuộc nhiều người dùng
     public function users()
     {
         return $this->hasMany(User::class);
