@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 Route::controller(HomeController::class)->group(function () {
 Route::get('/', 'index')->name('index');
@@ -26,6 +27,15 @@ Route::get("/dashboards-analytics", [RouteController::class, 'index'])->name('da
 
 Route::controller(LoginController::class) -> group(function(){
     Route::get('/login','showLoginForm')->name('login');
+    Route::post('/login', [LoginController::class, 'authenticate']);
+});
 
+
+Route::controller(RegisterController::class) -> group(function(){
+    Route::get('register', function () {
+        return view('auth.register'); // Hiển thị form đăng ký
+    })->name('register');
+
+    Route::post('register', [RegisterController::class, 'store'])->name('register.store');
 });
 
