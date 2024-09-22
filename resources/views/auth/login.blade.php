@@ -17,7 +17,7 @@
                             <p class="text-slate-500 dark:text-zink-200">Sign in to continue to Tailwick.</p>
                         </div>
 
-                        <form method="POST" action="{{ route('login') }}" class="mt-10" id="signInForm">
+                        {{-- <form method="POST" action="{{ route('login') }}" class="mt-10" id="signInForm">
                             @csrf
                             <div class="mb-3">
                                 <label for="username" class="inline-block mb-2 text-base font-medium">UserName/ Email
@@ -81,6 +81,70 @@
                                         href="{{ url('register') }}"
                                         class="font-semibold underline transition-all duration-150 ease-linear text-slate-500 dark:text-zink-200 hover:text-custom-500 dark:hover:text-custom-500">
                                         SignUp</a> </p>
+                            </div>
+                        </form> --}}
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+
+                            <div class="d-flex flex-row align-items-center justify-content-center mb-4">
+                                <p class="lead fw-normal mb-0 me-3 text-dark">Sign in with</p>
+                                <button type="button" class="btn btn-primary btn-floating mx-1">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-floating mx-1">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-floating mx-1">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </button>
+                            </div>
+
+                            <div class="divider d-flex align-items-center my-4">
+                                <p class="text-center fw-bold mx-3 mb-0 text-dark">Login</p>
+                            </div>
+
+                            @if($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <input type="email" id="email" name="email" class="form-control form-control-lg"
+                                       placeholder="Enter a valid email address" value="{{ old('email') }}" required autofocus />
+                                <label class="form-label" for="email">Email address</label>
+                                @error('email')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-outline mb-3">
+                                <input type="password" id="password" name="password" class="form-control form-control-lg"
+                                       placeholder="Enter password" required />
+                                <label class="form-label" for="password">Password</label>
+                                @error('password')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div class="form-check mb-0">
+                                    <input class="form-check-input me-2" type="checkbox" name="remember" id="remember" />
+                                    <label class="form-check-label text-dark" for="remember">Remember me</label>
+                                </div>
+                                <a href="" class="text-body">Forgot password?</a>
+                            </div>
+
+                            <div class="text-center text-lg-start mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+                                <p class="small fw-bold mt-2 pt-1 mb-0 text-dark">Don't have an account? <a href="{{ route('register') }}"
+                                    class="link-danger">Register</a></p>
                             </div>
                         </form>
                     </div>

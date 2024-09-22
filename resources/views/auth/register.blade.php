@@ -24,7 +24,7 @@
                     <div>
                         <div class="mt-5 tab-content">
                             <div class="block tab-pane" id="emailTabs">
-                                <form action="{{ route('register.store') }}" method="POST" class="mt-10" id="signInForm">
+                                {{-- <form action="{{ route('register.store') }}" method="POST" class="mt-10" id="signInForm">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="email-id-field" class="inline-block mb-2 text-base font-medium">Email</label>
@@ -55,8 +55,66 @@
                                     <div class="mt-10">
                                         <button type="submit" class="w-full text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">Sign In</button>
                                     </div>
-                                </form>
+                                </form> --}}
+                                <form method="POST" action="{{ route('register.store') }}">
+                                    @csrf
+                                    <input type="hidden" name="role_id" value="1">
+                                    <div class="divider d-flex align-items-center my-4">
+                                        <p class="text-center fw-bold mx-3 mb-0 text-dark">Register</p>
+                                    </div>
 
+                                    @if($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+
+                                    <!-- Name input -->
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="Enter your name" value="{{ old('name') }}" required autofocus />
+                                        <label class="form-label" for="name">Full Name</label>
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <!-- Email input -->
+                                    <div class="form-outline mb-4">
+                                        <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="Enter a valid email address" value="{{ old('email') }}" required />
+                                        <label class="form-label" for="email">Email address</label>
+                                        @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+
+                                    <!-- Password input -->
+                                    <div class="form-outline mb-3">
+                                        <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Enter password" required />
+                                        <label class="form-label" for="password">Password</label>
+                                        @error('password')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <!-- Confirm Password input -->
+                                    <div class="form-outline mb-4">
+                                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control form-control-lg" placeholder="Confirm password" required />
+                                        <label class="form-label" for="password_confirmation">Confirm Password</label>
+                                    </div>
+
+                                    <!-- Driver License Number input -->
+
+
+                                    <div class="text-center text-lg-start mt-4">
+                                        <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Register</button>
+                                        <p class="small fw-bold mt-2 pt-1 mb-0 text-dark">Already have an account? <a href="{{ route('login') }}" class="link-danger">Login</a></p>
+                                    </div>
+                                </form>
                             </div>
                             <div class="hidden tab-pane" id="phoneTabs">
                                 <form action="index.html" class="mt-10" id="signInForm">
