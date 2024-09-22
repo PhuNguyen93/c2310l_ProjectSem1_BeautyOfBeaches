@@ -9,6 +9,11 @@ class Role extends Model
 {
     use HasFactory;
 
+
+  
+
+    // Quan hệ với model User (nếu cần)
+
     protected $fillable = ['name', 'description'];
 
     // Một role có thể thuộc nhiều người dùng
