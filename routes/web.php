@@ -1,6 +1,8 @@
 <?php
 
+
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DestinationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -20,9 +22,14 @@ Route::get('/tourdetails','tourdetails')->name('tourdetails');
 Route::get('/blog','blog')->name('blog');
 Route::get('/blogdetails','blogdetails')->name('blogdetails');
 Route::get('/contact','contact')->name('contact');
+
 });
 
-Route::get("/dashboards-analytics", [RouteController::class, 'index'])->name('dashboards-analytics');
+Route::get('/destinationdetails/{id}', [HomeController::class, 'destinationdetails'])->name('destinationdetails');
+//
+
+
+Route::get("/dashboards-analytics", [RouteController::class, 'index'])->name('  ');
 
 
 Route::controller(LoginController::class) -> group(function(){
@@ -39,3 +46,10 @@ Route::controller(RegisterController::class) -> group(function(){
     Route::post('register', [RegisterController::class, 'store'])->name('register.store');
 });
 
+Route::get('/account', function () {
+    return view('pages-account');
+});
+
+Route::get('/account-settings', function () {
+    return view('pages-account-settings');
+});
