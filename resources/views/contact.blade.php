@@ -15,7 +15,7 @@
                         <div class="cs_iconbox_icon cs_accent_bg cs_white_color cs_center cs_radius_5"><i
                                 class="fa-solid fa-location-dot"></i></div>
                         <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Office Address</h2>
-                        <p class="cs_iconbox_subtitle mb-0">7 Green Lake Street <br> Crawfordsville, IN 47933</p>
+                        <p class="cs_iconbox_subtitle mb-0">35/6 Đường D5, Phường 25, Bình Thạnh, Hồ Chí Minh 72308, Việt Nam</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -23,7 +23,7 @@
                         <div class="cs_iconbox_icon cs_accent_bg cs_white_color cs_center cs_radius_5"><i
                                 class="fa-solid fa-phone"></i></div>
                         <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Phone Call</h2>
-                        <p class="cs_iconbox_subtitle mb-0">+98 234 (4567) 890 <br>+98 234 (4567) 890</p>
+                        <p class="cs_iconbox_subtitle mb-0">036 7777 747 <br>036 7777 747</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">

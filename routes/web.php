@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 
 Route::controller(HomeController::class)->group(function () {
 Route::get('/', 'index')->name('index');
@@ -29,6 +30,8 @@ Route::get('/blogdetails','blogdetails')->name('blogdetails');
 Route::get('/contact','contact')->name('contact');
 
 });
+
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 Route::get('/destinationdetails/{id}', [HomeController::class, 'destinationdetails'])->name('destinationdetails');
 //

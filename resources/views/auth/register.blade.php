@@ -165,7 +165,7 @@
                                         <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Register</button>
                                         <p class="small fw-bold mt-2 pt-1 mb-0 text-dark">Already have an account? <a href="{{ route('login') }}" class="link-danger">Login</a></p>
                                     </div>
-                                </form> --}}
+                                </form>
 
                                 <form method="POST" action="{{ route('register.store') }}" class="mt-10" id="signInForm">
                                     @csrf

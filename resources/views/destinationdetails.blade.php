@@ -32,7 +32,7 @@
                                     @endif --}}
                                 <div class="cs_tab active" id="tab_2">
                                     <iframe id="map"
-                                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBz-katKMRGe1Jjh_uGgoFCEvZmKXgKd3A&q={{ urlencode($beach->location) }}"
+                                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-_OQuqIYNqz9RgImViWzdHs2g_j9CUYg&q={{ urlencode($beach->location) }}"
                                         target="_blank" allowfullscreen></iframe>
                                 </div>
                                 <div class="cs_tab" id="tab_3">
