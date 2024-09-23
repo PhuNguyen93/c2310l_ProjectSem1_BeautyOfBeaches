@@ -20,10 +20,10 @@
                 <li><a href="{{ route('about') }}">About Us</a></li>
                 <li class="menu-item-has-children">
                   <a href="{{ route('destination') }}">Destinations</a>
-                  <ul>
-                    {{-- <li><a href="{{ route('destination') }}">Destination</a></li> --}}
-                    {{-- <li><a href="{{ route('destinationdetails') }}">Destination Details</a></li> --}}
-                  </ul>
+                  {{-- <ul>
+                    <li><a href="{{ route('destination') }}">Destination</a></li>
+                    <li><a href="{{ route('destinationdetails') }}">Destination Details</a></li>
+                  </ul> --}}
                 </li>
                 <li class="menu-item-has-children">
                   <a href="{{ route('tour') }}">Tours</a>
