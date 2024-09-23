@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable // Đảm bảo kế thừa từ lớp Authenticatable
 {
     use HasFactory, Notifiable;
 
@@ -21,6 +21,8 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
+        'status',
+
     ];
 
     /**
@@ -44,5 +46,11 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // Nếu bạn có quan hệ với bảng roles, có thể thêm quan hệ ở đây
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 }

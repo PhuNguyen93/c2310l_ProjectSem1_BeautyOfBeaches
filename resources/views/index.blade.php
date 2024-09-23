@@ -300,7 +300,7 @@
     <!-- End Package Section -->
 
     <!-- Start FunFact Section -->
-    <section>
+    {{-- <section>
       <div class="cs_height_135 cs_height_lg_80"></div>
       <div class="container">
         <div class="row cs_gap_y_40">
@@ -351,79 +351,39 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> --}}
     <!-- End FunFact Section -->
 
     <!-- Start destination Section -->
-     <section>
-      <div class="cs_height_135 cs_height_lg_80"></div>
-      <div class="container">
-        <div class="cs_section_heading cs_style_1 text-center">
-          <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">POPULAR DESTINATION</h3>
-          <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">Popular Destinations</h2>
+    <section>
+        <div class="cs_height_135 cs_height_lg_80"></div>
+        <div class="container">
+            <div class="cs_section_heading cs_style_1 text-center">
+                <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">POPULAR DESTINATION</h3>
+                <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">Popular Destinations</h2>
+            </div>
+            <div class="cs_height_55 cs_height_lg_40"></div>
+            <div class="cs_grid_1">
+                @foreach($beaches as $beach)
+                    <div class="cs_grid_item">
+                        <!-- Link tới trang chi tiết bãi biển với ID -->
+                        <a href="{{ route('destinationdetails', ['id' => $beach->id]) }}" class="cs_card cs_style_2 cs_zoom position-relative cs_radius_8">
+                            <div class="cs_card_thumb w-100 h-100">
+                                <!-- Hiển thị hình ảnh bãi biển -->
+                                <img src="{{ asset($beach->image_url) }}" alt="Card Image" class="w-100 h-100 cs_zoom_in">
+                            </div>
+                            <div class="cs_card_content position-absolute">
+                                <!-- Hiển thị tên bãi biển -->
+                                <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">{{ $beach->name }}</h2>
+                                <!-- Hiển thị vị trí bãi biển và số chuyến đi (nếu có) -->
+                                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">{{ $beach->location }}, {{ $beach->trips_count }} Trips</p>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
         </div>
-        <div class="cs_height_55 cs_height_lg_40"></div>
-        <div class="cs_grid_1">
-          <div class="cs_grid_item">
-            <a href="{{ route('destinationdetails') }}" class="cs_card cs_style_2 cs_zoom position-relative cs_radius_8">
-              <div class="cs_card_thumb w-100 h-100">
-                <img src="assets/images/popular_destination_1.jpeg" alt="Card Image" class="w-100 h-100 cs_zoom_in">
-              </div>
-              <div class="cs_card_content position-absolute">
-                <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">Eiffel Tower</h2>
-                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">Paris, 24 Trips</p>
-              </div>
-            </a>
-          </div>
-          <div class="cs_grid_item">
-            <a href="{{ route('destinationdetails') }}" class="cs_card cs_style_2 cs_zoom position-relative cs_radius_8">
-              <div class="cs_card_thumb w-100 h-100">
-                <img src="assets/images/popular_destination_2.jpeg" alt="Card Image" class="w-100 h-100 cs_zoom_in">
-              </div>
-              <div class="cs_card_content position-absolute">
-                <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">
-                  Pryde Mountains</h2>
-                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">
-                 Prydelands, 100 Trips</p>
-              </div>
-            </a>
-          </div>
-          <div class="cs_grid_item">
-            <a href="{{ route('destinationdetails') }}" class="cs_card cs_style_2 cs_zoom position-relative cs_radius_8">
-              <div class="cs_card_thumb w-100 h-100">
-                <img src="assets/images/popular_destination_3.jpeg" alt="Card Image" class="w-100 h-100 cs_zoom_in">
-              </div>
-              <div class="cs_card_content position-absolute">
-                <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">Lao Lading Island</h2>
-                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">Krabal, 12 Trips</p>
-              </div>
-            </a>
-          </div>
-          <div class="cs_grid_item">
-            <a href="{{ route('destinationdetails') }}" class="cs_card cs_style_2 cs_zoom position-relative cs_radius_8">
-              <div class="cs_card_thumb w-100 h-100">
-                <img src="assets/images/popular_destination_4.jpeg" alt="Card Image" class="w-100 h-100 cs_zoom_in">
-              </div>
-              <div class="cs_card_content position-absolute">
-                <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">Ton Kwen Temple</h2>
-                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">Thailand, 20 Trips</p>
-              </div>
-            </a>
-          </div>
-          <div class="cs_grid_item">
-            <a href="{{ route('destinationdetails') }}" class="cs_card cs_style_2 cs_zoom position-relative cs_radius_8">
-              <div class="cs_card_thumb w-100 h-100">
-                <img src="assets/images/popular_destination_5.jpeg" alt="Card Image" class="w-100 h-100 cs_zoom_in">
-              </div>
-              <div class="cs_card_content position-absolute">
-                <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">Taj Mahal</h2>
-                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">Thailand, 50 Trips</p>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="cs_height_140 cs_height_lg_80"></div>
+        <div class="cs_height_140 cs_height_lg_80"></div>
     </section>
     <!-- End destination Section -->
 

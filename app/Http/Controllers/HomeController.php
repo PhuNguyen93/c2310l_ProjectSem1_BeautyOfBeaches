@@ -2,23 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Beach;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('index');
-    }
-    
-    public function index2()
-    {
-        return view('index2');
-    }
+        // Lấy tối đa 5 bãi biển mới nhất đã được cập nhật, sắp xếp theo ngày cập nhật gần nhất
+        $beaches = Beach::orderBy('updated_at', 'desc')->take(5)->get();
 
-    public function index3()
-    {
-        return view('index3');
+        // Trả dữ liệu về view
+        return view('index', compact('beaches'));
     }
 
     public function about()
@@ -31,10 +26,14 @@ class HomeController extends Controller
         return view('destination');
     }
 
-    public function destinationdetails()
-    {
-        return view('destinationdetails');
-    }
+    public function destinationdetails($id)
+{
+    // Lấy bãi biển theo ID
+    $beach = Beach::findOrFail($id); // Tìm bãi biển hoặc trả về 404 nếu không tồn tại
+
+    // Trả dữ liệu về view chi tiết bãi biển
+    return view('destinationdetails', compact('beach'));
+}
 
     public function tour()
     {
@@ -60,5 +59,4 @@ class HomeController extends Controller
     {
         return view('contact');
     }
-
 }

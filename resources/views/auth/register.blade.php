@@ -24,7 +24,11 @@
                     <div>
                         <div class="mt-5 tab-content">
                             <div class="block tab-pane" id="emailTabs">
+<<<<<<< HEAD
                                 {{-- <form action="{{ route('register.store') }}" method="POST" class="mt-10" id="signInForm">
+=======
+                                <form action="{{ route('register.store') }}" method="POST" class="mt-10" id="signInForm">
+>>>>>>> origin/master
                                     @csrf
                                     <div class="mb-3">
                                         <label for="email-id-field" class="inline-block mb-2 text-base font-medium">Email</label>
@@ -55,6 +59,7 @@
                                     <div class="mt-10">
                                         <button type="submit" class="w-full text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">Sign In</button>
                                     </div>
+<<<<<<< HEAD
                                 </form> --}}
 
                                 {{-- <form method="POST" action="{{ route('register.store') }}">
@@ -164,6 +169,11 @@
                             </div>
 
 
+=======
+                                </form>
+
+                            </div>
+>>>>>>> origin/master
                             <div class="hidden tab-pane" id="phoneTabs">
                                 <form action="index.html" class="mt-10" id="signInForm">
                                     <div class="mb-3">

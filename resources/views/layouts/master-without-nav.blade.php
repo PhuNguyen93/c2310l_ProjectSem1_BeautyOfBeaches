@@ -23,7 +23,11 @@
 <!-- Vendor Script -->
 @include('layouts.vendor-scripts')
 <!-- Livewire cript -->
+<<<<<<< HEAD
 {{-- @livewireScripts --}}
+=======
+@livewireScripts
+>>>>>>> origin/master
 
 </body>
 
