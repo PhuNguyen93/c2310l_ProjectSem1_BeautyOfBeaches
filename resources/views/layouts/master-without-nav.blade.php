@@ -23,6 +23,7 @@
 <!-- Vendor Script -->
 @include('layouts.vendor-scripts')
 <!-- Livewire cript -->
+@livewireScripts
 {{-- @livewireScripts --}}
 
 </body>

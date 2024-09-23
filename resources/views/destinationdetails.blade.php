@@ -16,14 +16,12 @@
                         <p>{{ $beach->description }}</p>
                         <div class="cs_tabs">
                             <ul class="cs_tab_links cs_style_1 cs_mp0">
-                                <!-- Xóa phần Tour Plan -->
                                 <li class="active"><a href="#tab_2"
                                         class="cs_primary_bg cs_white_color cs_radius_5">Location</a></li>
                                 <li><a href="#tab_3" class="cs_primary_bg cs_white_color cs_radius_5">Gallery</a></li>
                                 <li><a href="#tab_4" class="cs_primary_bg cs_white_color cs_radius_5">Reviews</a></li>
                             </ul>
                             <div class="cs_tab_body">
-                                <!-- Hiển thị tab Location đầu tiên -->
                                 {{-- @if ($beach->location)
                                         <a href="https://www.google.com/maps?q={{ urlencode($beach->location) }}"
                                             target="_blank">

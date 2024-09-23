@@ -11,7 +11,6 @@
             <div class="grid grid-cols-1 gap-0 lg:grid-cols-12">
                 <div class="lg:col-span-5">
                     <div class="!px-12 !py-12 card-body">
-
                         <div class="text-center">
                             <h4 class="mb-2 text-purple-500 dark:text-purple-500">Welcome Back !</h4>
                             <p class="text-slate-500 dark:text-zink-200">Sign in to continue to Tailwick.</p>
@@ -141,7 +140,6 @@
                                 </div>
                                 <a href="" class="text-body">Forgot password?</a>
                             </div>
-
                             <div class="text-center text-lg-start mt-4">
                                 <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
                                 <p class="small fw-bold mt-2 pt-1 mb-0 text-dark">Don't have an account? <a href="{{ route('register') }}"
@@ -185,6 +183,7 @@
                                         class="inline-block text-base font-medium align-middle cursor-pointer">Remember
                                         me</label>
                                 </div>
+
                                  <div  class="hidden mt-1 text-sm text-red-500">Please check the "Remember
                                     me" before submitting the form.</div>
                                  </div>
@@ -226,6 +225,13 @@
 
 
                         </form>
+
+                        <div class="text-center">
+                            <h4 class="mb-2 text-purple-500 dark:text-purple-500">Welcome Back !</h4>
+                            <p class="text-slate-500 dark:text-zink-200">Sign in to continue to Tailwick.</p>
+                        </div>
+
+                        <form method="POST" action="{{ route('login') }}" class="mt-10" id="signInForm">
 
                         {{-- <form method="POST" action="{{ route('login') }}" class="mt-10" id="signInForm">
                             @csrf
@@ -292,6 +298,7 @@
                                         class="font-semibold underline transition-all duration-150 ease-linear text-slate-500 dark:text-zink-200 hover:text-custom-500 dark:hover:text-custom-500">
                                         SignUp</a> </p>
                             </div>
+                        </form>
                         </form> --}}
                     </div>
                 </div>

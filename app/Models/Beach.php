@@ -24,6 +24,7 @@ class Beach extends Model
     }
 
     // Bãi biển có thể có nhiều hình ảnh trong gallery
+
     public function gallery()
     {
         return $this->hasMany(BeachGallery::class);

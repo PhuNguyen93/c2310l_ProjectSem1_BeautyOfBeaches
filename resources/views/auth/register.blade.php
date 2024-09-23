@@ -24,7 +24,39 @@
                     <div>
                         <div class="mt-5 tab-content">
                             <div class="block tab-pane" id="emailTabs">
-
+                                {{-- <form action="{{ route('register.store') }}" method="POST" class="mt-10" id="signInForm">
+                                <form action="{{ route('register.store') }}" method="POST" class="mt-10" id="signInForm">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <label for="email-id-field" class="inline-block mb-2 text-base font-medium">Email</label>
+                                        <input type="email" name="email" id="email-id-field" class="form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Enter email" required>
+                                        @error('email')
+                                            <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="username-field" class="inline-block mb-2 text-base font-medium">UserName</label>
+                                        <input type="text" name="name" id="username-field" class="form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Enter username" required>
+                                        @error('name')
+                                            <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="inline-block mb-2 text-base font-medium">Password</label>
+                                        <input type="password" name="password" id="password" class="form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Enter password" required>
+                                        @error('password')
+                                            <div class="mt-1 text-sm text-red-500">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password_confirmation" class="inline-block mb-2 text-base font-medium">Confirm Password</label>
+                                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Confirm password" required>
+                                    </div>
+                                    <p class="italic text-15 text-slate-500 dark:text-zink-200">By registering you agree to the Tailwick <a href="#!" class="underline">Terms of Use</a></p>
+                                    <div class="mt-10">
+                                        <button type="submit" class="w-full text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">Sign In</button>
+                                    </div>
+                                </form> --}}
                                 {{-- <form action="{{ route('register.store') }}" method="POST" class="mt-10" id="signInForm">
 
                                 <form action="{{ route('register.store') }}" method="POST" class="mt-10" id="signInForm">
@@ -60,7 +92,6 @@
                                     </div>
 
                                 </form> --}}
-
                                 {{-- <form method="POST" action="{{ route('register.store') }}">
                                     @csrf
                                     <input type="hidden" name="role_id" value="1">
@@ -113,6 +144,21 @@
                                     </div>
 
                                     <!-- Driver License Number input -->
+
+                                    <div class="text-center text-lg-start mt-4">
+                                        <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Register</button>
+                                        <p class="small fw-bold mt-2 pt-1 mb-0 text-dark">Already have an account? <a href="{{ route('login') }}" class="link-danger">Login</a></p>
+                                    </div>
+                                </form> --}}
+
+                                <form method="POST" action="{{ route('register.store') }}" class="mt-10" id="signInForm">
+                                    @csrf
+                                    <input type="hidden" name="role_id" value="1">
+                                      <!-- Email input -->
+                                    <div class="mb-3">
+                                        <label for="email-id-field" class="inline-block mb-2 text-base font-medium">Email</label>
+                                        <input type="email" name="email" id="email-id-field" class="form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Enter email" required>
+                                    </div>
 
 
                                     <div class="text-center text-lg-start mt-4">
@@ -167,6 +213,9 @@
 
                             </div>
 
+                                </form>
+
+                            </div>
                             <div class="hidden tab-pane" id="phoneTabs">
                                 <form action="index.html" class="mt-10" id="signInForm">
                                     <div class="mb-3">

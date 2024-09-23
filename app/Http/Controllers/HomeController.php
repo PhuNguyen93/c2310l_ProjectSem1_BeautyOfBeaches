@@ -31,6 +31,7 @@ class HomeController extends Controller
     }
 
     public function destinationdetails($id)
+
     {
         // Lấy bãi biển theo ID
         $beach = Beach::with('gallery')->findOrFail($id);
