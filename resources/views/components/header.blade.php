@@ -20,10 +20,10 @@
                 <li><a href="{{ route('about') }}">About Us</a></li>
                 <li class="menu-item-has-children">
                   <a href="{{ route('destination') }}">Destinations</a>
-                  <ul>
-                    {{-- <li><a href="{{ route('destination') }}">Destination</a></li> --}}
-                    {{-- <li><a href="{{ route('destinationdetails') }}">Destination Details</a></li> --}}
-                  </ul>
+                  {{-- <ul>
+                    <li><a href="{{ route('destination') }}">Destination</a></li>
+                    <li><a href="{{ route('destinationdetails') }}">Destination Details</a></li>
+                  </ul> --}}
                 </li>
                 <li class="menu-item-has-children">
                   <a href="{{ route('tour') }}">Tours</a>
@@ -40,6 +40,17 @@
                   </ul>
                 </li>
                 <li><a href="{{ route('contact') }}">Contacts</a></li>
+              {{--  --}}
+                    @auth
+                    @if(Auth::user()->role_id == 2)
+                        <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                    @endif
+                @endauth
+                @if(Auth::check())
+                    <li><a href="{{ route('profile', ['id' => Auth::user()->id]) }}">Profile</a></li>
+                @endif
+
+
               </ul>
             </div>
           </div>
