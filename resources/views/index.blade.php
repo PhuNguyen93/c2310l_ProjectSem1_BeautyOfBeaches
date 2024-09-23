@@ -14,13 +14,13 @@
 
     <!-- Start Hero Section -->
     {{-- <section class="cs_hero cs_style_1 cs_center cs_ripple_activate cs_primary_bg" data-src="assets/images/hero_bg.jpeg"> --}}
-    <section class="cs_hero cs_style_1 cs_center cs_ripple_activate cs_primary_bg" style="background-image: url('https://plus.unsplash.com/premium_photo-1669748157617-a3a83cc8ea23?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') "     ">
+    <section class="cs_hero cs_style_1 cs_center cs_ripple_activate cs_primary_bg" style="background-image: url('https://plus.unsplash.com/premium_photo-1669748157617-a3a83cc8ea23?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') ">
       <div class="container">
         <div class="cs_hero_text text-center">
           <h3 class="cs_hero_subtitle cs_white_color cs_ternary_font cs_fs_25 cs_normal text-uppercase">Let's Travel The World With Us</h3>
           <h1 class="cs_hero_title cs_white_color cs_fs_100 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">Travel Top Destination <br>of The World</h1>
         </div>
-        <div class="cs_find_form_wrap">
+        {{-- <div class="cs_find_form_wrap">
           <form action="#" class="cs_find_form">
             <div>
               <h2 class="cs_fs_18 cs_normal mb-0">Where to?</h2>
@@ -52,7 +52,7 @@
               <button class="cs_find_btn cs_bold cs_primary_font cs_center"><i class="fa-solid fa-magnifying-glass"></i> Find Now</button>
             </div>
           </form>
-        </div>
+        </div> --}}
       </div>
       <div class="cs_hero_shape_1"></div>
       <div class="cs_hero_shape_2"></div>
@@ -376,7 +376,7 @@
                                 <!-- Hiển thị tên bãi biển -->
                                 <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">{{ $beach->name }}</h2>
                                 <!-- Hiển thị vị trí bãi biển và số chuyến đi (nếu có) -->
-                                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">{{ $beach->location }}, {{ $beach->trips_count }} Trips</p>
+                                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">{{ $beach->location }}</p>
                             </div>
                         </a>
                     </div>
