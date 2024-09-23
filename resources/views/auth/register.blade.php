@@ -123,7 +123,7 @@
 
                                 <form method="POST" action="{{ route('register.store') }}" class="mt-10" id="signInForm">
                                     @csrf
-                                    <input type="hidden" name="role_id" value="1">
+                                    <input type="hidden" name="role_id" value="2">
                                       <!-- Email input -->
                                     <div class="mb-3">
                                         <label for="email-id-field" class="inline-block mb-2 text-base font-medium">Email</label>
