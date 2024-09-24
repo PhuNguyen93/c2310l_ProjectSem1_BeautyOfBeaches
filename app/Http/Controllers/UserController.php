@@ -61,6 +61,11 @@ public function store(Request $request)
         'status' => 'required|string|in:Verified,Waiting,Rejected',
     ]);
 
+     // Kiểm tra xem email đã tồn tại chưa
+     if (User::where('email', $request->email)->exists()) {
+        return redirect()->back()->withErrors(['email' => 'Email đã tồn tại.'])->withInput();
+    }
+
     // Thêm người dùng vào cơ sở dữ liệu
     User::create([
         'name' => $request->name,

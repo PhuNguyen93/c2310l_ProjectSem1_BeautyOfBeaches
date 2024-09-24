@@ -12,15 +12,27 @@
                 <div class="card-body">
                     <div class="flex items-center">
                         <h6 class="text-15 grow">Users List</h6>
+
                         <div class="shrink-0">
                             <button data-modal-target="addUserModal" type="button"
                                 class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20"><i
                                     data-lucide="plus" class="inline-block size-4"></i> <span class="align-middle">Add
                                     User</span></button>
                         </div>
+
                     </div>
                 </div>
                 <div class="!py-3.5 card-body border-y border-dashed border-slate-200 dark:border-zink-500">
+                                    <!-- Kiểm tra và hiển thị thông báo lỗi -->
+                @if ($errors->any())
+                <div class="mb-4">
+                    <ul class="text-red-500">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                     <form action="{{ route('users.index') }}" method="GET">
                         <div class="grid grid-cols-1 gap-5 xl:grid-cols-12">
                             <div class="relative xl:col-span-2">
@@ -274,8 +286,6 @@
         </button>
     </div>
 @endif
-
-
 
 @endsection
 
