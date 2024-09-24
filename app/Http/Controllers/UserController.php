@@ -122,14 +122,21 @@ public function store(Request $request)
 
      // Hàm để xóa người dùng
      public function destroy($id)
-     {
-         // Tìm người dùng theo ID
-         $user = User::findOrFail($id);
+{
+    // Tìm người dùng theo ID
+    $user = User::findOrFail($id);
 
-         // Xóa người dùng
-         $user->delete();
+    // Kiểm tra nếu vai trò của người dùng là admin
+    if ($user->role_id == 1) { // 1 là role_id của admin
+        // Điều hướng về trang danh sách người dùng với thông báo lỗi
+        return redirect()->route('users.index')->with('error', 'Admin account cannot be deleted.');
+    }
 
-         // Điều hướng về trang danh sách người dùng với thông báo thành công
-         return redirect()->route('users.index')->with('success', 'User deleted successfully.');
-     }
+    // Xóa người dùng nếu không phải admin
+    $user->delete();
+
+    // Điều hướng về trang danh sách người dùng với thông báo thành công
+    return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+}
+
 }

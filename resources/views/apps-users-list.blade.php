@@ -38,7 +38,7 @@
                                     <option value="Verified" {{ request('status') == 'Verified' ? 'selected' : '' }}>Verified</option>
                                     <option value="Waiting" {{ request('status') == 'Waiting' ? 'selected' : '' }}>Waiting</option>
                                     <option value="Rejected" {{ request('status') == 'Rejected' ? 'selected' : '' }}>Rejected</option>
-                                    <option value="Hidden" {{ request('status') == 'Hidden' ? 'selected' : '' }}>Hidden</option>
+                                    {{-- <option value="Hidden" {{ request('status') == 'Hidden' ? 'selected' : '' }}>Hidden</option> --}}
                                 </select>
                             </div><!--end col-->
                             <div class="xl:col-span-3 xl:col-start-10">
@@ -254,8 +254,52 @@
     </div>
 </div>
 <!--end add user-->
+
+@if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert"
+        style="background-color: #28a745; color: white; font-size: 18px; padding: 20px; border-radius: 8px; box-shadow: 0px 4px 12px rgba(0,0,0,0.1);">
+        {{ session('success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: white;">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert"
+        style="background-color: #dc3545; color: white; font-size: 18px; padding: 20px; border-radius: 8px; box-shadow: 0px 4px 12px rgba(0,0,0,0.1);">
+        {{ session('error') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: white;">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+
+
+
 @endsection
+
 @push('scripts')
     <!-- App js -->
     <script src="{{ URL::asset('build/js/app.js') }}"></script>
+
+    <script>
+        // Đợi cho DOM sẵn sàng
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tìm tất cả các alert có class 'alert-dismissible'
+            var alerts = document.querySelectorAll('.alert-dismissible');
+
+            // Đặt thời gian để tự động đóng các alert sau 3 giây (3000ms)
+            alerts.forEach(function(alert) {
+                setTimeout(function() {
+                    alert.classList.remove('show');
+                    alert.classList.add('fade');
+                    alert.addEventListener('transitionend', function() {
+                        alert.style.display = 'none';
+                    });
+                }, 3000); // 3000ms = 3 giây
+            });
+        });
+        </script>
+
 @endpush
