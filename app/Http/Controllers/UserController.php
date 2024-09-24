@@ -61,6 +61,11 @@ public function store(Request $request)
         'status' => 'required|string|in:Verified,Waiting,Rejected',
     ]);
 
+     // Kiểm tra xem email đã tồn tại chưa
+     if (User::where('email', $request->email)->exists()) {
+        return redirect()->back()->withErrors(['email' => 'Email đã tồn tại.'])->withInput();
+    }
+
     // Thêm người dùng vào cơ sở dữ liệu
     User::create([
         'name' => $request->name,
@@ -90,7 +95,7 @@ public function store(Request $request)
     $validatedData = $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|email|max:255|unique:users,email,' . $user->id,
-        'password' => 'nullable|string|min:8',
+        'password' => 'nullable|string|min:0',
         'role_id' => 'required|integer|exists:roles,id',
         'status' => 'required|in:Verified,Waiting,Rejected',
     ]);
@@ -122,14 +127,21 @@ public function store(Request $request)
 
      // Hàm để xóa người dùng
      public function destroy($id)
-     {
-         // Tìm người dùng theo ID
-         $user = User::findOrFail($id);
+{
+    // Tìm người dùng theo ID
+    $user = User::findOrFail($id);
 
-         // Xóa người dùng
-         $user->delete();
+    // Kiểm tra nếu vai trò của người dùng là admin
+    if ($user->role_id == 2) { // 2 là role_id của admin
+        // Điều hướng về trang danh sách người dùng với thông báo lỗi
+        return redirect()->route('users.index')->with('error', 'Admin account cannot be deleted.');
+    }
 
-         // Điều hướng về trang danh sách người dùng với thông báo thành công
-         return redirect()->route('users.index')->with('success', 'User deleted successfully.');
-     }
+    // Xóa người dùng nếu không phải admin
+    $user->delete();
+
+    // Điều hướng về trang danh sách người dùng với thông báo thành công
+    return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+}
+
 }
