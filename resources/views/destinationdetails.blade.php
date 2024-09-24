@@ -14,6 +14,8 @@
                     <div class="cs_post_details">
                         <h1>{{ $beach->name }}</h1>
                         <p>{{ $beach->description }}</p>
+                        <p>{{ $beach->description2 }}</p>
+                        <p>{{ $beach->description3 }}</p>
                         <div class="cs_tabs">
                             <ul class="cs_tab_links cs_style_1 cs_mp0">
                                 <li class="active"><a href="#tab_2"

@@ -376,7 +376,7 @@
                                 <!-- Hiển thị tên bãi biển -->
                                 <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">{{ $beach->name }}</h2>
                                 <!-- Hiển thị vị trí bãi biển và số chuyến đi (nếu có) -->
-                                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">{{ $beach->location }}</p>
+                                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">{{ $beach->country }}</p>
                             </div>
                         </a>
                     </div>
