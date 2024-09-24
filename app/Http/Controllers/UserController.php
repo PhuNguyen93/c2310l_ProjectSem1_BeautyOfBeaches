@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -11,6 +12,9 @@ class UserController extends Controller
     // Hàm để hiển thị danh sách người dùng với phân trang
     public function index(Request $request)
 {
+    if (Auth::user()->role_id != 2) {
+        return redirect()->route('index')->with('error', 'You do not have the required permissions.');
+    }
     // Nhận các tham số từ yêu cầu
     $search = $request->input('search');
     $status = $request->input('status');

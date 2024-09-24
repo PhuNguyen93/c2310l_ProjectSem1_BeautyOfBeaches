@@ -18,21 +18,21 @@
                   </ul> --}}
                         </li>
                         <li><a href="{{ route('about') }}">About Us</a></li>
-                        <li class="menu-item-has-children">
+                        <li>
                             <a href="{{ route('destination') }}">Destinations</a>
                             {{-- <ul>
                     <li><a href="{{ route('destination') }}">Destination</a></li>
                     <li><a href="{{ route('destinationdetails') }}">Destination Details</a></li>
                   </ul> --}}
                         </li>
-                        <li class="menu-item-has-children">
+                        <li>
                             <a href="{{ route('tour') }}">Tours</a>
                             <ul>
                                 <li><a href="{{ route('tour') }}">Tour</a></li>
                                 <li><a href="{{ route('tourdetails') }}">Tour Details</a></li>
                             </ul>
                         </li>
-                        <li class="menu-item-has-children">
+                        <li>
                             <a href="{{ route('blog') }}">Blog</a>
                             <ul>
                                 <li><a href="{{ route('blog') }}">Blog</a></li>
@@ -42,15 +42,16 @@
                         <li><a href="{{ route('contact') }}">Contacts</a></li>
                         {{--  --}}
                         @auth
+                            <!-- Nếu người dùng là admin (role_id == 2), hiển thị Dashboard -->
                             @if (Auth::user()->role_id == 2)
-                                <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                                <li><a href="{{ route('dashboards-analytics') }}">Dashboard</a></li>
+                            @endif
+
+                            <!-- Nếu người dùng là user (role_id == 1), hiển thị Profile -->
+                            @if (Auth::user()->role_id == 1)
+                                <li><a href="{{ route('profile', ['id' => Auth::user()->id]) }}">Profile</a></li>
                             @endif
                         @endauth
-                        @if (Auth::check())
-                            <li><a href="{{ route('profile', ['id' => Auth::user()->id]) }}">Profile</a></li>
-                        @endif
-
-
                     </ul>
                 </div>
             </div>
@@ -61,9 +62,21 @@
                                 class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                     <div class="cs_header_buttons">
-                        <a href="{{ route('login') }}" class="cs_btn cs_style_1 me-2">Login</a>
-                        <a href="{{ route('register') }}" class="cs_btn cs_style_1">Sign Up</a>
+                        @if (Auth::check())
+                            <!-- Hiển thị khi người dùng đã đăng nhập -->
+                            <span class="cs_welcome_text">Welcome, {{ Auth::user()->name }}!</span>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                style="display: inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-info m-2">Logout</button>
+                            </form>
+                        @else
+                            <!-- Hiển thị nút Login và Sign Up khi người dùng chưa đăng nhập -->
+                            <a href="{{ route('login') }}" class="cs_btn cs_style_1 me-2">Login</a>
+                            <a href="{{ route('register') }}" class="cs_btn cs_style_1">Sign Up</a>
+                        @endif
                     </div>
+
                 </div>
             </div>
         </div>

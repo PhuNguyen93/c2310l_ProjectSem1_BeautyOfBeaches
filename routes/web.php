@@ -14,6 +14,7 @@ use App\Http\Controllers\LoginController;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
+use Illuminate\Support\Facades\Auth;
 
 Route::controller(HomeController::class)->group(function () {
 Route::get('/', 'index')->name('index');
@@ -37,7 +38,7 @@ Route::get('/destinationdetails/{id}', [HomeController::class, 'destinationdetai
 //
 
 
-Route::get("/dashboards-analytics", [RouteController::class, 'index'])->name('  ');
+Route::get("/dashboards-analytics", [RouteController::class, 'index'])->name('dashboards-analytics');
 
 
 Route::controller(LoginController::class) -> group(function(){
@@ -45,6 +46,10 @@ Route::controller(LoginController::class) -> group(function(){
     Route::post('/login', [LoginController::class, 'authenticate']);
 });
 
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('logout');
 
 Route::controller(RegisterController::class) -> group(function(){
     Route::get('register', function () {
