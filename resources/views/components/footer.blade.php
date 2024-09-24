@@ -1,4 +1,4 @@
-<footer class="cs_footer cs_style_1 cs_white_color cs_bg_filed cs_primary_bg" data-src="assets/images/footer_bg.jpeg">
+<footer class="cs_footer cs_style_1 cs_white_color cs_bg_filed cs_primary_bg" data-src="assets/images/beach.jpg">
       <div class="cs_newsletter_1_wrap">
         <div class="container-fluid">
           <div class="cs_newsletter cs_style_1 cs_accent_bg">
@@ -25,11 +25,11 @@
               <ul class="cs_contact_widget mb-0">
                 <li>
                   <p>Call Us</p>
-                  <p class="cs_fs_20">+423 5362 42365</p>
+                  <p class="cs_fs_20">0367 777 747</p>
                 </li>
                 <li>
                   <p>Mail Us</p>
-                  <p class="cs_fs_20">hello@travelpro.com</p>
+                  <p class="cs_fs_20">hello@gmail.com</p>
                 </li>
                 <li>
                   <p>Follow Us</p>
@@ -53,13 +53,7 @@
               <h3 class="cs_footer_widget_title cs_fs_24 cs_semibold cs_white_color">Useful Links</h3>
               <ul class="cs_menu_widget">
                 <li><a href="{{ route('index') }}">Home</a></li>
-                <li><a href="{{ route('about') }}">Activites</a></li>
-                <li><a href="">Flights</a></li>
-                <li><a href="">Organized Trips</a></li>
-                <li><a href="">Hotels</a></li>
-                <li><a href="">Booking</a></li>
-                <li><a href="">Transfers</a></li>
-                <li><a href="">Requests</a></li>
+                <li><a href="{{ route('about') }}">about</a></li>
               </ul>
             </div>
           </div>
@@ -77,7 +71,7 @@
                 <li><a href="{{ route('destinationdetails') }}">Golden Frame, Dubai</a></li> --}}
               </ul>
             </div>
-          </div> --}}
+          </div>
         </div>
       </div>
       <div class="container">

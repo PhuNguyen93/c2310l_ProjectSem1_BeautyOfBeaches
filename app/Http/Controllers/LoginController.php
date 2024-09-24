@@ -18,9 +18,10 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
         dd(1);
+        // dd(1);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('home'); // Chuyển đến trang home
+            return redirect()->route('index'); // Chuyển đến trang home
         }
 
         return back()->withErrors([

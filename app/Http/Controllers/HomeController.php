@@ -23,17 +23,22 @@ class HomeController extends Controller
 
     public function destination()
     {
-        return view('destination');
+        // Lấy tất cả các bãi biển từ database
+        $beaches = Beach::all();
+
+        // Truyền danh sách bãi biển sang view 'destination'
+        return view('destination', compact('beaches'));
     }
 
     public function destinationdetails($id)
-{
-    // Lấy bãi biển theo ID
-    $beach = Beach::findOrFail($id); // Tìm bãi biển hoặc trả về 404 nếu không tồn tại
 
-    // Trả dữ liệu về view chi tiết bãi biển
-    return view('destinationdetails', compact('beach'));
-}
+    {
+        // Lấy bãi biển theo ID
+        $beach = Beach::with('gallery')->findOrFail($id);
+
+        // Trả dữ liệu về view chi tiết bãi biển
+        return view('destinationdetails', compact('beach'));
+    }
 
     public function tour()
     {

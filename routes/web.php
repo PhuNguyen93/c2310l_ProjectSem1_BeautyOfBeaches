@@ -1,7 +1,7 @@
 <?php
 
-
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DestinationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -12,6 +12,8 @@ use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\LoginController;
 
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 
 Route::controller(HomeController::class)->group(function () {
 Route::get('/', 'index')->name('index');
@@ -28,6 +30,8 @@ Route::get('/blogdetails','blogdetails')->name('blogdetails');
 Route::get('/contact','contact')->name('contact');
 
 });
+
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 Route::get('/destinationdetails/{id}', [HomeController::class, 'destinationdetails'])->name('destinationdetails');
 //
@@ -61,6 +65,7 @@ Route::get('/account-settings', function () {
 
 // Định nghĩa route cho trang danh sách người dùng
 Route::resource('users', UserController::class);
-
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile');
