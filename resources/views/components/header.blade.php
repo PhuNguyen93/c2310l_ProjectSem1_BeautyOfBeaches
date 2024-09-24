@@ -61,8 +61,8 @@
                                 class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                     <div class="cs_header_buttons">
-                        <a href="{{ route('login') }}" class="cs_btn cs_style_1 cs_medium me-2">Login</a>
-                        <a href="{{ route('register') }}" class="cs_btn cs_style_1 cs_medium">Sign Up</a>
+                        <a href="{{ route('login') }}" class="cs_btn cs_style_1 me-2">Login</a>
+                        <a href="{{ route('register') }}" class="cs_btn cs_style_1">Sign Up</a>
                     </div>
                 </div>
             </div>

@@ -2048,7 +2048,7 @@ hr {
 }
 
 /*-----------------------------------
- Start Review 
+ Start Review
  ------------------------------------*/
 .cs_rating_container {
   max-width: 140px;
@@ -2748,6 +2748,7 @@ hr {
   border: none;
   outline: none;
   background-color: transparent;
+  z-index: 10;
 }
 .cs_search_btn:hover {
   color: var(--accent);
