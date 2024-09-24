@@ -38,7 +38,7 @@ Route::get('/destinationdetails/{id}', [HomeController::class, 'destinationdetai
 //
 
 
-Route::get("/dashboards-analytics", [RouteController::class, 'index'])->name('dashboards-analytics');
+Route::get("/dashboards", [RouteController::class, 'index'])->name('dashboards');
 
 
 Route::controller(LoginController::class) -> group(function(){
