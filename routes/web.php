@@ -62,10 +62,10 @@ Route::get('/account-settings', function () {
     return view('pages-account-settings');
 });
 
-// Trong file routes/web.php
-Route::get('/users', [UserController::class, 'index']);
+
 // Định nghĩa route cho trang danh sách người dùng
 Route::resource('users', UserController::class);
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile');
