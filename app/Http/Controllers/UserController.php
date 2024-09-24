@@ -95,7 +95,7 @@ public function store(Request $request)
     $validatedData = $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|email|max:255|unique:users,email,' . $user->id,
-        'password' => 'nullable|string|min:8',
+        'password' => 'nullable|string|min:0',
         'role_id' => 'required|integer|exists:roles,id',
         'status' => 'required|in:Verified,Waiting,Rejected',
     ]);
@@ -132,7 +132,7 @@ public function store(Request $request)
     $user = User::findOrFail($id);
 
     // Kiểm tra nếu vai trò của người dùng là admin
-    if ($user->role_id == 1) { // 1 là role_id của admin
+    if ($user->role_id == 2) { // 2 là role_id của admin
         // Điều hướng về trang danh sách người dùng với thông báo lỗi
         return redirect()->route('users.index')->with('error', 'Admin account cannot be deleted.');
     }

@@ -240,8 +240,8 @@
                 <div class="mb-3">
                     <label for="role_id" class="inline-block mb-2 text-base font-medium">Role</label>
                     <select class="form-input border-slate-300 focus:outline-none focus:border-custom-500" name="role_id" id="role_id">
-                        <option value="1" {{ old('role_id') == 1 ? 'selected' : '' }}>Admin</option>
-                        <option value="2" {{ old('role_id') == 2 ? 'selected' : '' }}>User</option>
+                        <option value="1" {{ old('role_id') == 2 ? 'selected' : '' }}>Admin</option>
+                        <option value="2" {{ old('role_id') == 1 ? 'selected' : '' }}>User</option>
                     </select>
                 </div>
 
