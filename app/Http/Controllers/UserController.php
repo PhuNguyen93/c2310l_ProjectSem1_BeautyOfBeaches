@@ -86,44 +86,40 @@ public function store(Request $request)
         return view('users.edit', compact('user'));
     }
 
-    public function update(Request $request, $id)
+   public function update(Request $request, $id)
 {
-    // Lấy người dùng theo ID
     $user = User::findOrFail($id);
 
-    // Kiểm tra và validate dữ liệu
     $validatedData = $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|email|max:255|unique:users,email,' . $user->id,
-        'password' => 'nullable|string|min:0',
-        'role_id' => 'required|integer|exists:roles,id',
-        'status' => 'required|in:Verified,Waiting,Rejected',
+        'phone' => 'nullable|string|max:20',
+        'country' => 'nullable|string|max:100',
+        'birth_date' => 'nullable|date',
+        'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
 
     try {
-        // Cập nhật dữ liệu người dùng
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
+        $user->phone = $validatedData['phone'] ?? $user->phone;
+        $user->country = $validatedData['country'] ?? $user->country;
+        $user->birth_date = $validatedData['birth_date'] ?? $user->birth_date;
 
-        // Nếu người dùng muốn cập nhật mật khẩu
-        if ($request->filled('password')) {
-            $user->password = Hash::make($validatedData['password']);
+        if ($request->hasFile('img')) {
+            $imagePath = $request->file('img')->store('profile_images', 'public');
+            $user->img = $imagePath;
         }
 
-        // Cập nhật role và status
-        $user->role_id = $validatedData['role_id'];
-        $user->status = $validatedData['status'];
-
-        // Lưu thay đổi
         $user->save();
 
-        // Điều hướng về trang danh sách người dùng
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     } catch (\Exception $e) {
-        // Nếu có lỗi xảy ra, chuyển hướng về trang trước và hiển thị lỗi
         return redirect()->back()->withErrors(['error' => 'There was a problem updating the user.']);
     }
 }
+
+
 
      // Hàm để xóa người dùng
      public function destroy($id)
@@ -143,5 +139,34 @@ public function store(Request $request)
     // Điều hướng về trang danh sách người dùng với thông báo thành công
     return redirect()->route('users.index')->with('success', 'User deleted successfully.');
 }
+
+public function changePassword(Request $request)
+{
+    // Kiểm tra nếu người dùng đã xác thực
+    if (!Auth::check()) {
+        return redirect()->route('login')->withErrors(['error' => 'You must be logged in to change your password.']);
+    }
+
+    // Lấy ID người dùng hiện tại
+    $userId = Auth::id();
+    // Lấy người dùng từ cơ sở dữ liệu
+    $user = User::findOrFail($userId); // Đảm bảo $user là instance của model User
+
+    $request->validate([
+        'old_password' => 'required|string',
+        'new_password' => 'required|string|min:0|confirmed', // Đảm bảo mật khẩu mới có độ dài tối thiểu
+    ]);
+
+    // Kiểm tra mật khẩu cũ
+    if (!Hash::check($request->old_password, $user->password)) {
+        return redirect()->back()->withErrors(['old_password' => 'The provided password does not match our records.']);
+    }
+
+    // Cập nhật mật khẩu mới mà không cần gọi $user->save()
+    $user->update(['password' => Hash::make($request->new_password)]);
+
+    return redirect()->back()->with('status', 'Password changed successfully!');
+}
+
 
 }

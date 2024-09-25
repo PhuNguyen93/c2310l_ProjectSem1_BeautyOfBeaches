@@ -17,11 +17,7 @@ class User extends Authenticatable // Đảm bảo kế thừa từ lớp Authen
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'role_id',
-        'status',
+        'name', 'email', 'password', 'phone', 'country', 'img', 'birth_date', 'role_id', 'status'
     ];
 
     /**
