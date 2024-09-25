@@ -22,6 +22,10 @@ class User extends Authenticatable // Đảm bảo kế thừa từ lớp Authen
         'password',
         'role_id',
         'status',
+        'create_at',
+        'phone',
+        'img',
+        'birth_date'
     ];
 
     /**

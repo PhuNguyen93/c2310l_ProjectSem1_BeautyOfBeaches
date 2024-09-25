@@ -73,4 +73,10 @@ Route::resource('users', UserController::class);
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+
 Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile');
+// Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+// Route::post('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
+
+Route::post('/profile/upload-avatar', [ProfileController::class, 'uploadAvatar'])->name('profile.upload_avatar');
+Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
