@@ -14,6 +14,8 @@
                     <div class="cs_post_details">
                         <h1>{{ $beach->name }}</h1>
                         <p>{{ $beach->description }}</p>
+                        <p>{{ $beach->description2 }}</p>
+                        <p>{{ $beach->description3 }}</p>
                         <div class="cs_tabs">
                             <ul class="cs_tab_links cs_style_1 cs_mp0">
                                 <li class="active"><a href="#tab_2"
@@ -51,73 +53,54 @@
                                     </div>
                                 </div>
                                 <div class="cs_tab" id="tab_4">
-                                    <div class="cs_review_content">
-                                        <h3 class="cs_review_title cs_semibold">Our Clients Reviews Details</h3>
-                                        <div class="row align-items-center">
-                                            <div class="col-xl-3 col-lg-4">
-                                                <div class="cs_review_count_box cs_radius_5 text-center">
-                                                    <h3 class="cs_rating_value cs_fs_30">4.5</h3>
-                                                    <div class="cs_rating_container">
-                                                        <div class="cs_rating" data-rating="4.5">
-                                                            <div class="cs_rating_percentage"></div>
-                                                        </div>
-                                                    </div>
-                                                    <p>5 Reviews</p>
+                                    <div class="container mt-5">
+                                        <h3 class="mb-4">Our Clients Reviews Details</h3>
+                                        <div class="row">
+                                            <!-- Cột hiển thị điểm trung bình và tổng số đánh giá -->
+                                            <div class="col-lg-4 text-center">
+                                                <h3>{{ $averageRating }}</h3>
+                                                <div>
+                                                    <!-- Hiển thị ngôi sao trung bình -->
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        @if ($i <= $averageRating)
+                                                            <i class="fas fa-star text-warning"></i>
+                                                        @else
+                                                            <i class="far fa-star text-warning"></i>
+                                                        @endif
+                                                    @endfor
                                                 </div>
+                                                <p>{{ $totalReviews }} Reviews</p>
                                             </div>
-                                            <div class="col-xl-9 col-lg-8">
-                                                <div class="cs_progress_bars">
-                                                    <div class="cs_progress_bar">
-                                                        <div class="cs_rating_number cs_medium cs_primary_color">5</div>
-                                                        <div class="cs_rating_container">
-                                                            <div class="cs_rating" data-rating="5">
-                                                                <div class="cs_rating_percentage"></div>
-                                                            </div>
+
+                                            <!-- Cột hiển thị số lượng đánh giá từng sao -->
+                                            <div class="col-lg-8">
+                                                @foreach ([5, 4, 3, 2, 1] as $star)
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <!-- Số sao -->
+                                                        <div class="flex-shrink-0 me-3">
+                                                            {{ $star }} <i class="fas fa-star text-warning"></i>
                                                         </div>
-                                                        <div class="cs_progress_line"></div>
-                                                        <div class="cs_progress_hint_value cs_primary_color">20</div>
-                                                    </div>
-                                                    <div class="cs_progress_bar">
-                                                        <div class="cs_rating_number cs_medium cs_primary_color">4</div>
-                                                        <div class="cs_rating_container">
-                                                            <div class="cs_rating" data-rating="4">
-                                                                <div class="cs_rating_percentage"></div>
-                                                            </div>
+
+                                                        <!-- Thanh tiến trình cho mỗi sao -->
+                                                        <div class="progress flex-grow-1 me-3" style="height: 8px;">
+                                                            @php
+                                                                $percentage =
+                                                                    $totalReviews > 0
+                                                                        ? ($ratingCount[$star] / $totalReviews) * 100
+                                                                        : 0;
+                                                            @endphp
+                                                            <div class="progress-bar bg-warning" role="progressbar"
+                                                                style="width: {{ $percentage }}%;"
+                                                                aria-valuenow="{{ $percentage }}" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
                                                         </div>
-                                                        <div class="cs_progress_line"></div>
-                                                        <div class="cs_progress_hint_value cs_primary_color">15</div>
-                                                    </div>
-                                                    <div class="cs_progress_bar">
-                                                        <div class="cs_rating_number cs_medium cs_primary_color">3</div>
-                                                        <div class="cs_rating_container">
-                                                            <div class="cs_rating" data-rating="3">
-                                                                <div class="cs_rating_percentage"></div>
-                                                            </div>
+
+                                                        <!-- Số lượng đánh giá mỗi sao -->
+                                                        <div class="flex-shrink-0">
+                                                            {{ $ratingCount[$star] }}
                                                         </div>
-                                                        <div class="cs_progress_line"></div>
-                                                        <div class="cs_progress_hint_value cs_primary_color">5</div>
                                                     </div>
-                                                    <div class="cs_progress_bar">
-                                                        <div class="cs_rating_number cs_medium cs_primary_color">2</div>
-                                                        <div class="cs_rating_container">
-                                                            <div class="cs_rating" data-rating="2">
-                                                                <div class="cs_rating_percentage"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="cs_progress_line"></div>
-                                                        <div class="cs_progress_hint_value cs_primary_color">0</div>
-                                                    </div>
-                                                    <div class="cs_progress_bar">
-                                                        <div class="cs_rating_number cs_medium cs_primary_color">1</div>
-                                                        <div class="cs_rating_container">
-                                                            <div class="cs_rating" data-rating="1">
-                                                                <div class="cs_rating_percentage"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="cs_progress_line"></div>
-                                                        <div class="cs_progress_hint_value cs_primary_color">0</div>
-                                                    </div>
-                                                </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
@@ -136,39 +119,90 @@
                     <div class="cs_comments">
                         <h3 class="cs_fs_24 cs_semibold">Comment</h3>
                         <ol class="cs_comment_list cs_mp0">
-                            <li class="cs_comment">
-                                <div class="cs_comment_body">
-                                    <div class="cs_comment_author cs_fs_20 cs_semibold cs_primary_color">
-                                        <img src="assets/images/avatar_3.jpeg" alt="Avatar">
-                                        <a href="#">Martha Grey</a>
+                            @foreach ($beach->feedbacks as $feedback)
+                                <li class="cs_comment">
+                                    <div class="cs_comment_body row">
+                                        <div class="col-md-10">
+                                            <div class="cs_comment_author cs_fs_20 cs_semibold cs_primary_color">
+                                                <img src="{{ asset('assets/images/avatar_3.jpeg') }}" alt="Avatar"
+                                                    class="rounded-circle me-2" width="40" height="40">
+                                                <a
+                                                    href="#">{{ $feedback->user ? $feedback->user->name : 'Unknown User' }}</a>
+                                                <span class="rating-stars">
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        @if ($i <= $feedback->rating)
+                                                            <i class="fas fa-star text-warning"></i>
+                                                        @else
+                                                            <i class="far fa-star text-warning"></i>
+                                                        @endif
+                                                    @endfor
+                                                </span>
+                                            </div>
+                                            <p class="cs_comment_subtitle">{{ $feedback->message }}</p>
+                                        </div>
+
+                                        <div class="col-md-2 text-end">
+                                            @if (auth()->check() && (auth()->user()->id === $feedback->user_id || auth()->user()->role == 'admin'))
+                                                <form action="{{ route('feedbacks.destroy', $feedback->id) }}"
+                                                    method="POST" class="d-inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger cs_medium">Del</button>
+                                                </form>
+                                            @endif
+                                        </div>
                                     </div>
-                                    <p class="cs_comment_subtitle">Ut sint posse sit, eum sumo diam ea. Liber consectetuer
-                                        in mei, sea in imperdiet assueverit contentiones, an his cib.</p>
-                                    <div class="cs_reply_btn"><a class="cs_reply_link cs_radius_5"
-                                            href="#">Reply</a></div>
-                                </div>
-                            </li>
+                                </li>
+                            @endforeach
                         </ol>
-                        <form action="#" class="cs_comment_form cs_white_bg cs_radius_5">
-                            <h3 class="cs_fs_24 cs_semibold">Post Comemnt</h3>
-                            <div class="row row cs_gap_y_30">
-                                <div class="col-lg-12">
-                                    <textarea class="cs_gray_bg cs_radius_5 cs_form_field" placeholder="Write Comment" cols="35" rows="8"></textarea>
+                        <!-- Kiểm tra nếu người dùng đã đăng nhập, cho phép họ gửi bình luận -->
+                        @if (auth()->check())
+                            <form action="{{ route('feedbacks.store', $beach->id) }}" method="POST"
+                                class="cs_comment_form cs_white_bg cs_radius_5">
+                                @csrf
+                                <h3 class="cs_fs_24 cs_semibold">Post Comment</h3>
+                                <div class="row row cs_gap_y_30">
+                                    <div class="col-lg-12">
+                                        <textarea class="cs_gray_bg cs_radius_5 cs_form_field" name="message" placeholder="Write Comment" cols="35"
+                                            rows="8" required></textarea>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="cs_gray_bg cs_radius_5 cs_form_field" type="text" name="name"
+                                            value="{{ auth()->user()->name }}" readonly>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="cs_gray_bg cs_radius_5 cs_form_field" type="email" name="email"
+                                            value="{{ auth()->user()->email }}" readonly>
+                                    </div>
+                                    <div class="col-lg-6 d-flex align-items-center">
+                                        <label for="rating">Rating:</label>
+                                        <div class="star-rating">
+                                            <input type="radio" id="star5" name="rating" value="5" />
+                                            <label for="star5" title="5 stars">★</label>
+                                            <input type="radio" id="star4" name="rating" value="4" />
+                                            <label for="star4" title="4 stars">★</label>
+                                            <input type="radio" id="star3" name="rating" value="3" />
+                                            <label for="star3" title="3 stars">★</label>
+                                            <input type="radio" id="star2" name="rating" value="2" />
+                                            <label for="star2" title="2 stars">★</label>
+                                            <input type="radio" id="star1" name="rating" value="1" />
+                                            <label for="star1" title="1 star">★</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <button type="submit" class="cs_btn cs_style_1 w-100">Post Comment</button>
+                                    </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <input class="cs_gray_bg cs_radius_5 cs_form_field" type="text"
-                                        placeholder="Your Name*">
-                                </div>
-                                <div class="col-lg-6">
-                                    <input class="cs_gray_bg cs_radius_5 cs_form_field" type="email"
-                                        placeholder="Write Your Email*">
-                                </div>
-                                <div class="col-lg-12">
-                                    <button class="cs_btn cs_style_1 w-100">Post Comment</button>
-                                </div>
+                            </form>
+                        @else
+                            <!-- Nếu người dùng chưa đăng nhập, hiển thị nút yêu cầu đăng nhập -->
+                            <div class="alert alert-info">
+                                <strong>Bạn phải <a href="{{ route('login') }}">đăng nhập</a> để có thể bình luận và đánh
+                                    giá.</strong>
                             </div>
-                        </form>
+                        @endif
                     </div>
+
                 </div>
                 <aside class="col-lg-4">
                     <div class="cs_sidebar cs_style_1 cs_white_bg cs_right_sidebar">
@@ -300,3 +334,10 @@
     </section>
     <!-- End Destination Details Section -->
 @endsection
+<script>
+    document.querySelectorAll('.star-rating input').forEach((star) => {
+        star.addEventListener('click', function() {
+            console.log(`Rating selected: ${this.value}`);
+        });
+    });
+</script>
