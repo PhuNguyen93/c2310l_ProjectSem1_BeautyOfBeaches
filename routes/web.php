@@ -62,6 +62,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile');
 });
 
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile');
+// Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+// Route::post('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
+
+Route::post('/profile/upload-avatar', [ProfileController::class, 'uploadAvatar'])->name('profile.upload_avatar');
+Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
 // Feedback Routes
 Route::post('/beaches/{beach}/feedbacks', [FeedbackController::class, 'store'])->name('feedbacks.store');
 Route::delete('/feedbacks/{feedback}', [FeedbackController::class, 'destroy'])->name('feedbacks.destroy');
