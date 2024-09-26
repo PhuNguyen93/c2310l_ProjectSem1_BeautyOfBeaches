@@ -180,5 +180,15 @@ public function show($id)
     return view('pages-account', compact('user'));
 }
 
+public function showProfile($id)
+{
+    // Lấy dữ liệu của user với ID nhất định
+    $user = User::find($id);
+
+    // Truyền dữ liệu user sang view
+    return view('profile', compact('user'));
+}
+
 
 }
+

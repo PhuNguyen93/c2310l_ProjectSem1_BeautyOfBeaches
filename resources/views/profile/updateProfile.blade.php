@@ -10,7 +10,53 @@
     <meta content="Themesdesign" name="author">
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ URL::asset('build/images/favicon.ico') }}">
+    <style>
+/* Container for the avatar */
+        .avatar-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto; /* Center horizontally */
+        }
 
+        /* Avatar image styling */
+        .avatar-image {
+            width: 100%; /* Full width of the container */
+            height: 100%; /* Full height of the container */
+            object-fit: cover; /* Maintain aspect ratio and cover the container */
+            border-radius: 50%; /* Make the image round */
+            border: 2px solid #e5e7eb; /* Optional border */
+        }
+
+        /* Icon wrapper for edit icon */
+        .edit-icon-wrapper {
+            width: 40px;
+            height: 40px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Icon styling */
+        .edit-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e5e7eb;
+        }
+
+        .icon-size-4 {
+            font-size: 1.5rem; /* Adjust size of the icon */
+        }
+
+
+        </style>
     @include('layouts.head-css')
     <!-- Styles -->
     {{-- @livewireStyles --}}
@@ -45,8 +91,8 @@
                                 {{-- @method('PUT') --}}
                                 <div class="lg:col-span-2 2xl:col-span-1">
                                     <div class="relative inline-block size-20 rounded-full shadow-md bg-slate-100 profile-user xl:size-28">
-                                        <img src="{{ asset($user->img ) }}" alt="Avatar" alt=""
-                                            class="object-cover border-0 rounded-full img-thumbnail user-profile-image">
+                                       <img src="{{ asset($user->img ) }}" alt="Avatar" alt=""
+                                            class="object-cover border-0 rounded-full img-thumbnail user-profile-image avatar-image rounded-full object-cover border-2 border-gray-200">
                                         <div
                                             class="absolute bottom-0 flex items-center justify-center size-8 rounded-full ltr:right-0 rtl:left-0 profile-photo-edit">
                                             <input id="profile-img-file-input" type="file" name="avatar" class="hidden profile-img-file-input" accept="image/*" required  >
@@ -131,9 +177,7 @@
                                     <a href="mailto:themesdesign@gmail.com"
                                         class="flex items-center justify-center size-[37.5px] p-0 text-slate-500 btn bg-slate-100 hover:text-white hover:bg-slate-600 focus:text-white focus:bg-slate-600 focus:ring focus:ring-slate-100 active:text-white active:bg-slate-600 active:ring active:ring-slate-100 dark:bg-slate-500/20 dark:text-slate-400 dark:hover:bg-slate-500 dark:hover:text-white dark:focus:bg-slate-500 dark:focus:text-white dark:active:bg-slate-500 dark:active:text-white dark:ring-slate-400/20"><i
                                             data-lucide="mail" class="size-4"></i></a>
-                                    <button type="button"
-                                        class="text-white transition-all duration-200 ease-linear btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">Hire
-                                        Us</button>
+
 
                                     <div class="relative dropdown">
                                         <button

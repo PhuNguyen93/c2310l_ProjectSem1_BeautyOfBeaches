@@ -34,7 +34,7 @@
         </div>
         <!-- End Page-content -->
         <!-- footer -->
-        @include('layouts.footer')
+        {{-- @include('layouts.footer') --}}
     </div>
 </div>
 <!-- end main content -->
