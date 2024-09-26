@@ -107,8 +107,8 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
                     <div class="cs_social_btns cs_primary_color">
                         <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
                         <a href="#"><i class="fa-brands fa-twitter"></i></a>
@@ -118,9 +118,26 @@
                     <hr>
                     <div class="cs_comments">
                         <h3 class="cs_fs_24 cs_semibold">Comment</h3>
-                        <ol class="cs_comment_list cs_mp0">
-                            @foreach ($beach->feedbacks as $feedback)
-                                <li class="cs_comment">
+
+                        <!-- Phần chọn lọc đánh giá -->
+                        <div class="cs_filter_rating mb-4">
+                            <div class="d-flex justify-content-start">
+                                <button class="btn btn-outline-primary me-2 filter-rating" data-rating="all">
+                                    All
+                                </button>
+                                @for ($i = 5; $i >= 1; $i--)
+                                    <button class="btn btn-outline-primary me-2 filter-rating"
+                                        data-rating="{{ $i }}">
+                                        {{ $i }} <i class="fas fa-star text-warning"></i>
+                                    </button>
+                                @endfor
+                            </div>
+                        </div>
+
+                        <!-- Danh sách comment được lọc -->
+                        <ol class="cs_comment_list cs_mp0" id="comments-list">
+                            @foreach ($feedbacks as $feedback)
+                                <li class="cs_comment" data-rating="{{ $feedback->rating }}">
                                     <div class="cs_comment_body row">
                                         <div class="col-md-10">
                                             <div class="cs_comment_author cs_fs_20 cs_semibold cs_primary_color">
@@ -155,7 +172,8 @@
                                 </li>
                             @endforeach
                         </ol>
-                        <!-- Kiểm tra nếu người dùng đã đăng nhập, cho phép họ gửi bình luận -->
+
+                        <!-- Form gửi bình luận -->
                         @if (auth()->check())
                             <form action="{{ route('feedbacks.store', $beach->id) }}" method="POST"
                                 class="cs_comment_form cs_white_bg cs_radius_5">
@@ -166,17 +184,10 @@
                                         <textarea class="cs_gray_bg cs_radius_5 cs_form_field" name="message" placeholder="Write Comment" cols="35"
                                             rows="8" required></textarea>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <input class="cs_gray_bg cs_radius_5 cs_form_field" type="text" name="name"
-                                            value="{{ auth()->user()->name }}" readonly>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <input class="cs_gray_bg cs_radius_5 cs_form_field" type="email" name="email"
-                                            value="{{ auth()->user()->email }}" readonly>
-                                    </div>
+
                                     <div class="col-lg-6 d-flex align-items-center">
                                         <label for="rating">Rating:</label>
-                                        <div class="star-rating">
+                                        <div class="star-rating ms-2">
                                             <input type="radio" id="star5" name="rating" value="5" />
                                             <label for="star5" title="5 stars">★</label>
                                             <input type="radio" id="star4" name="rating" value="4" />
@@ -189,13 +200,14 @@
                                             <label for="star1" title="1 star">★</label>
                                         </div>
                                     </div>
+
                                     <div class="col-lg-12">
                                         <button type="submit" class="cs_btn cs_style_1 w-100">Post Comment</button>
                                     </div>
                                 </div>
                             </form>
                         @else
-                            <!-- Nếu người dùng chưa đăng nhập, hiển thị nút yêu cầu đăng nhập -->
+                            <!-- Nếu người dùng chưa đăng nhập, hiển thị thông báo -->
                             <div class="alert alert-info">
                                 <strong>Bạn phải <a href="{{ route('login') }}">đăng nhập</a> để có thể bình luận và đánh
                                     giá.</strong>
@@ -338,6 +350,35 @@
     document.querySelectorAll('.star-rating input').forEach((star) => {
         star.addEventListener('click', function() {
             console.log(`Rating selected: ${this.value}`);
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.filter-rating');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const rating = this.getAttribute('data-rating');
+                const comments = document.querySelectorAll('#comments-list .cs_comment');
+
+                if (rating === 'all') {
+                    // Hiển thị tất cả comment
+                    comments.forEach(comment => {
+                        comment.style.display = 'block';
+                    });
+                } else {
+                    // Ẩn tất cả comment trước
+                    comments.forEach(comment => {
+                        comment.style.display = 'none';
+                    });
+
+                    // Hiển thị comment có rating tương ứng
+                    const filteredComments = document.querySelectorAll(
+                        `#comments-list .cs_comment[data-rating="${rating}"]`);
+                    filteredComments.forEach(comment => {
+                        comment.style.display = 'block';
+                    });
+                }
+            });
         });
     });
 </script>
