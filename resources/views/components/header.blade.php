@@ -44,7 +44,7 @@
                         @auth
                             <!-- Nếu người dùng là admin (role_id == 2), hiển thị Dashboard -->
                             @if (Auth::user()->role_id == 2)
-                                <li><a href="{{ route('dashboards') }}">Dashboard</a></li>
+                                <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                             @endif
 
                             <!-- Nếu người dùng là user (role_id == 1), hiển thị Profile -->
