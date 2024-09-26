@@ -26,7 +26,7 @@
                     </div>
                 </div><!--end col-->
                 <div class="lg:col-span-10 2xl:col-span-9">
-                    <h5 class="mb-1">Paula Keenan <i data-lucide="badge-check"
+                    <h5 class="mb-1">{{ Auth::user()->name }}<i data-lucide="badge-check"
                             class="inline-block size-4 text-sky-500 fill-sky-100 dark:fill-custom-500/20"></i></h5>
 
                     <div class="flex gap-2 mt-4">

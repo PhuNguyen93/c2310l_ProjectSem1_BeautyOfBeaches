@@ -75,3 +75,7 @@ Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('
 // Feedback Routes
 Route::post('/beaches/{beach}/feedbacks', [FeedbackController::class, 'store'])->name('feedbacks.store');
 Route::delete('/feedbacks/{feedback}', [FeedbackController::class, 'destroy'])->name('feedbacks.destroy');
+
+Route::get('/account', [UserController::class, 'account'])->name('account');
+
+Route::get('/account/{id}', [UserController::class, 'show'])->name('account.show');
