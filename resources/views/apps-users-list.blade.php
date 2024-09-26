@@ -69,16 +69,12 @@
                             <thead class="text-left">
                                 <tr class="relative rounded-md bg-slate-100 dark:bg-zink-600 after:absolute ltr:after:border-l-2 rtl:after:border-r-2 ltr:after:left-0 rtl:after:right-0 after:top-0 after:bottom-0 after:border-transparent [&.active]:after:border-custom-500 [&.active]:bg-slate-100 dark:[&.active]:bg-zink-600">
                                     <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold">
-                                        <div class="flex items-center h-full">
-                                            <input id="CheckboxAll"
-                                                class="size-4 bg-white border border-slate-200 rounded-sm appearance-none cursor-pointer"
-                                                type="checkbox">
-                                        </div>
                                     </th>
                                     <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort" data-sort="user-id">User ID</th>
+                                    {{-- <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort" data-sort="user-id">User ID</th> --}}
                                     <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort" data-sort="name">Name</th>
                                     <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort" data-sort="email">Email</th>
-                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort" data-sort="role-id">Role ID</th>
+                                    {{-- <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort" data-sort="role-id">Role ID</th> --}}
                                     <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort" data-sort="joining-date">Joining Date</th>
                                     <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort" data-sort="status">Status</th>
                                     <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold">Action</th>
@@ -98,7 +94,7 @@
                                     <td class="px-3.5 py-2.5">{{ $user->id }}</td>
                                     <td class="px-3.5 py-2.5">{{ $user->name }}</td>
                                     <td class="px-3.5 py-2.5">{{ $user->email }}</td>
-                                    <td class="px-3.5 py-2.5">{{ $user->role_id }}</td>
+                                    {{-- <td class="px-3.5 py-2.5">{{ $user->role_id }}</td> --}}
                                     <td class="px-3.5 py-2.5">{{ $user->created_at }}</td>
                                     <td class="px-3.5 py-2.5">{{ $user->status }}</td>
                                     <td class="px-3.5 py-2.5">
