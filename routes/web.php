@@ -64,6 +64,9 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile');
+
+Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+Route::post('/users/change-password', [UserController::class, 'changePassword'])->name('users.changePassword');
 // Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 // Route::post('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
 
