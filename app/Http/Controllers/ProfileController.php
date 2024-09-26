@@ -16,14 +16,14 @@ class ProfileController extends Controller
         }
         // Truyền thông tin user vào view
         // dd($user->birth_date);
-        return view('profile', ['user' => $user]);
+        return view('profile.profile', ['user' => $user]);
     }
 
     public function edit($id)
     {
 
         $user = User::findOrFail($id);
-        return view('profile.edit', compact('user')); // Chuyển đến view chỉnh sửa
+        return view('profile.profile.edit', compact('user')); // Chuyển đến view chỉnh sửa
     }
 
     public function update(Request $request, $id)
@@ -81,7 +81,7 @@ class ProfileController extends Controller
             }
             // Truyền thông tin user vào view
             // dd($user->birth_date);
-            return view('updateProfile', ['user' => $user]);
+            return view('profile.updateProfile', ['user' => $user]);
         }
 
 
