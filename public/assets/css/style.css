@@ -6370,3 +6370,28 @@ hr {
 }
 
 /*# sourceMappingURL=style.css.map */
+/* Star Rating */
+.star-rating {
+    direction: rtl; /* Để xếp ngược sao từ phải sang trái giống như Google */
+    font-size: 2em;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.star-rating input {
+    display: none; /* Ẩn các ô radio */
+}
+
+.star-rating label {
+    color: #ccc; /* Màu cho sao chưa chọn */
+    cursor: pointer;
+}
+
+.star-rating input:checked ~ label {
+    color: #ffc700; /* Màu vàng cho các sao được chọn */
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #ffc700; /* Đổi màu sao khi hover */
+}
