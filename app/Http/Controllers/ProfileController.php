@@ -42,8 +42,8 @@ class ProfileController extends Controller
         $user->birth_date = $request->input('birth_date');
         $user->country = $request->input('country');
         $user->save();
-
-        return redirect()->route('index')->with('success', 'Profile updated successfully');
+        return redirect()->route('profile', ['id' => $user->id]);
+        // return redirect()->route('profile')->with('success', 'Profile updated successfully');
     }
     public function uploadAvatar(Request $request)
         {
@@ -70,6 +70,18 @@ class ProfileController extends Controller
 
 
             return back()->withErrors('Error uploading image.');
+        }
+
+    public function showUpdateForm($id)
+        {
+        // Lấy thông tin người dùng dựa trên $id
+            $user = User::findOrFail($id);
+            if (Auth::user()->role_id != 1) {
+                return redirect()->route('index')->with('error', 'You do not have the required permissions.');
+            }
+            // Truyền thông tin user vào view
+            // dd($user->birth_date);
+            return view('updateProfile', ['user' => $user]);
         }
 
 
