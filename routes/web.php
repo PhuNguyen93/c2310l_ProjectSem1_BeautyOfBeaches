@@ -77,3 +77,6 @@ Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile')
 
 Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 Route::post('/users/change-password', [UserController::class, 'changePassword'])->name('users.changePassword');
+Route::get('/account', [UserController::class, 'account'])->name('account');
+
+Route::get('/account/{id}', [UserController::class, 'show'])->name('account.show');

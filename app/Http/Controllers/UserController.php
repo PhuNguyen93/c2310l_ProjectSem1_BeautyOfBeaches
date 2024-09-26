@@ -119,8 +119,6 @@ public function store(Request $request)
     }
 }
 
-
-
      // Hàm để xóa người dùng
      public function destroy($id)
 {
@@ -147,11 +145,10 @@ public function changePassword(Request $request)
         return redirect()->route('login')->withErrors(['error' => 'You must be logged in to change your password.']);
     }
 
-    // Lấy ID người dùng hiện tại
-    $userId = Auth::id();
-    // Lấy người dùng từ cơ sở dữ liệu
-    $user = User::findOrFail($userId); // Đảm bảo $user là instance của model User
+    /** @var \App\Models\User $user */
+    $user = Auth::user(); // Lấy user hiện tại
 
+    // Validate yêu cầu
     $request->validate([
         'old_password' => 'required|string',
         'new_password' => 'required|string|min:0|confirmed', // Đảm bảo mật khẩu mới có độ dài tối thiểu
@@ -162,10 +159,25 @@ public function changePassword(Request $request)
         return redirect()->back()->withErrors(['old_password' => 'The provided password does not match our records.']);
     }
 
-    // Cập nhật mật khẩu mới mà không cần gọi $user->save()
-    $user->update(['password' => Hash::make($request->new_password)]);
+    // Cập nhật mật khẩu mới
+    $user->update(['password' => Hash::make($request->new_password)]); // Sử dụng phương thức update
 
     return redirect()->back()->with('status', 'Password changed successfully!');
+}
+
+public function account()
+{
+    // Lấy người dùng hiện tại
+    $user = Auth::user();
+
+    // Truyền dữ liệu người dùng vào view
+    return view('pages-account', compact('user'));
+}
+
+public function show($id)
+{
+    $user = User::findOrFail($id);
+    return view('pages-account', compact('user'));
 }
 
 
