@@ -5,30 +5,98 @@
 @section('content')
     <!-- page title -->
     <x-page-title title="Account Settings" pagetitle="Pages" />
+    <style>
 
+        .avatar-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto; /* Center horizontally */
+        }
+
+        /* Avatar image styling */
+        .avatar-image {
+            width: 100%; /* Full width of the container */
+            height: 100%; /* Full height of the container */
+            object-fit: cover; /* Maintain aspect ratio and cover the container */
+            border-radius: 50%; /* Make the image round */
+            border: 2px solid #e5e7eb; /* Optional border */
+        }
+
+        /* Icon wrapper for edit icon */
+        .edit-icon-wrapper {
+            width: 40px;
+            height: 40px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Icon styling */
+        .edit-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e5e7eb;
+        }
+
+        .icon-size-4 {
+            font-size: 1.5rem; /* Adjust size of the icon */
+        }
+
+
+    </style>
     <div class="card">
         <div class="card-body">
             <div class="grid grid-cols-1 gap-5 lg:grid-cols-12 2xl:grid-cols-12">
                 <div class="lg:col-span-2 2xl:col-span-1">
-                    <div
-                        class="relative inline-block size-20 rounded-full shadow-md bg-slate-100 profile-user xl:size-28">
-                        <img src="{{ URL::asset('build/images/users/avatar-1.png') }}" alt=""
-                            class="object-cover border-0 rounded-full img-thumbnail user-profile-image">
-                        <div
-                            class="absolute bottom-0 flex items-center justify-center size-8 rounded-full ltr:right-0 rtl:left-0 profile-photo-edit">
-                            <input id="profile-img-file-input" type="file" class="hidden profile-img-file-input">
-                            <label for="profile-img-file-input"
-                                class="flex items-center justify-center size-8 bg-white rounded-full shadow-lg cursor-pointer dark:bg-zink-600 profile-photo-edit">
-                                <i data-lucide="image-plus"
-                                    class="size-4 text-slate-500 dark:text-zink-200 fill-slate-100 dark:fill-zink-500"></i>
-                            </label>
+                    <form action="{{ route('User.upload_avatar',$user->id) }}" method="POST" enctype="multipart/form-data" id="UpdateAvatar" >
+                        @csrf
+                        {{-- @method('PUT') --}}
+                        <div class="lg:col-span-2 2xl:col-span-1">
+                            <div class="relative inline-block size-20 rounded-full shadow-md bg-slate-100 profile-user xl:size-28">
+                               <img src="{{ asset($user->img ) }}" alt="Avatar" alt=""
+                                    class="object-cover border-0 rounded-full img-thumbnail user-profile-image avatar-image rounded-full object-cover border-2 border-gray-200">
+                                <div
+                                    class="absolute bottom-0 flex items-center justify-center size-8 rounded-full ltr:right-0 rtl:left-0 profile-photo-edit">
+                                    <input id="profile-img-file-input" type="file" name="avatar" class="hidden profile-img-file-input" accept="image/*" required  >
+                                    <label for="profile-img-file-input"
+                                        class="flex items-center justify-center size-8 bg-white rounded-full shadow-lg cursor-pointer dark:bg-zink-600 profile-photo-edit">
+                                        <i data-lucide="image-plus"
+                                            class="size-4 text-slate-500 dark:text-zink-200 fill-slate-100 dark:fill-zink-500"></i>
+                                    </label>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
+                    </form>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                           // Lắng nghe sự kiện change trên input file
+                           document.getElementById('profile-img-file-input').addEventListener('change', function() {
+                               // Kiểm tra xem có file được chọn hay không
+                               if (this.files && this.files[0]) {
+                                   // Submit form khi người dùng đã chọn ảnh
+                                   document.getElementById('UpdateAvatar').submit();
+                               }
+                           });
+                       });
+                   </script>
                 </div><!--end col-->
                 <div class="lg:col-span-10 2xl:col-span-9">
-                    <h5 class="mb-1">{{ Auth::user()->name }}<i data-lucide="badge-check"
-                            class="inline-block size-4 text-sky-500 fill-sky-100 dark:fill-custom-500/20"></i></h5>
-
+                    <h5 class="mb-1">{{ $user->name }} <i data-lucide="badge-check"
+                        class="inline-block size-4 text-sky-500 fill-sky-100 dark:fill-custom-500/20"></i></h5>
+                <div class="flex gap-3 mb-4">
+                    <p class="text-slate-500 dark:text-zink-200"><i data-lucide="map-pin"
+                            class="inline-block size-4 ltr:mr-1 rtl:ml-1 text-slate-500 dark:text-zink-200 fill-slate-100 dark:fill-zink-500"></i>
+                        {{ $user->country }}</p>
+                </div>
                     <div class="flex gap-2 mt-4">
                         <a href="#!"
                             class="flex items-center justify-center transition-all duration-200 ease-linear rounded size-9 text-sky-500 bg-sky-100 hover:bg-sky-200 dark:bg-sky-500/20 dark:hover:bg-sky-500/30">
@@ -56,6 +124,7 @@
                         </a>
                     </div>
                 </div>
+                {{-- nut  ... --}}
                 <div class="lg:col-span-12 2xl:col-span-2">
                     <div class="flex gap-2 2xl:justify-end">
                         <a href="mailto:themesdesign@gmail.com"
@@ -122,7 +191,7 @@
                     <h6 class="mb-1 text-15">Personal Information</h6>
                     <p class="mb-4 text-slate-500 dark:text-zink-200">Update your photo and personal details here easily.
                     </p>
-                    <form action="{{ route('users.update', Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -130,7 +199,7 @@
                             <!-- First Name -->
                             <div class="xl:col-span-6">
                                 <label for="name" class="inline-block mb-2 text-base font-medium text-gray-700 dark:text-zinc-200">First Name</label>
-                                <input type="text" name="name" id="name" value="{{ Auth::user()->name }}"
+                                <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}"
                                     class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out dark:bg-zinc-800 dark:border-zinc-600 dark:text-zinc-100"
                                     required placeholder="Enter your first name">
                             </div>
@@ -138,40 +207,42 @@
                             <!-- Phone Number -->
                             <div class="xl:col-span-6">
                                 <label for="phone" class="inline-block mb-2 text-base font-medium text-gray-700 dark:text-zinc-200">Phone Number</label>
-                                <input type="text" name="phone" id="phone" value="{{ Auth::user()->phone }}"
+                                <input type="text" name="phone" id="phone"value="{{ old('phone', $user->phone) }}"
                                     class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out dark:bg-zinc-800 dark:border-zinc-600 dark:text-zinc-100"
                                     placeholder="Enter your phone number">
                             </div>
 
                             <!-- Email Address -->
                             <div class="xl:col-span-6">
-                                <label for="email" class="inline-block mb-2 text-base font-medium text-gray-700 dark:text-zinc-200">Email Address</label>
-                                <input type="email" name="email" id="email" value="{{ Auth::user()->email }}"
-                                    class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out dark:bg-zinc-800 dark:border-zinc-600 dark:text-zinc-100"
-                                    required placeholder="Enter your email address">
-                            </div>
+                                <label for="emailInput" class="inline-block mb-2 text-base font-medium">Email Address</label>
+                                <input type="email" id="emailInput"
+                                    class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                    placeholder="Enter your email address" value="{{ old('email', $user->email) }}" disabled>
+                            </div><!--end col-->
 
                             <!-- Birth Date -->
                             <div class="xl:col-span-6">
                                 <label for="birth_date" class="inline-block mb-2 text-base font-medium text-gray-700 dark:text-zinc-200">Birth Date</label>
-                                <input type="date" name="birth_date" id="birth_date" value="{{ Auth::user()->birth_date }}"
+                                <input type="date" name="birth_date" id="birth_date" value="{{ old('birth_date', $user->birth_data) }}"
                                     class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out dark:bg-zinc-800 dark:border-zinc-600 dark:text-zinc-100">
                             </div>
 
+                            <div class="xl:col-span-6">
+                                <label for="joiningDateInput" class="inline-block mb-2 text-base font-medium">Joining Date</label>
+                                <input type="text" id="joiningDateInput"
+                                    class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                    placeholder="Select date" data-provider="flatpickr" data-date-format="d M, Y" value="{{ old('created_at', $user->created_at) }}" disabled>
+                            </div><!--end col-->
                             <!-- Country -->
-                            <div class="xl:col-span-4">
+                            <div class="xl:col-span-6">
                                 <label for="country" class="inline-block mb-2 text-base font-medium text-gray-700 dark:text-zinc-200">Country</label>
-                                <input type="text" name="country" id="country" value="{{ Auth::user()->country }}"
+                                <input type="text" name="country" id="country" value="{{ old('country', $user->country) }}"
                                     class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out dark:bg-zinc-800 dark:border-zinc-600 dark:text-zinc-100"
                                     placeholder="Enter your country">
                             </div>
 
                             <!-- Profile Image -->
-                            <div class="xl:col-span-12">
-                                <label for="img" class="block mb-2 text-base font-medium text-gray-700 dark:text-zinc-200">Profile Image</label>
-                                <input type="file" name="img" id="img" accept="image/*"
-                                    class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out dark:bg-zinc-800 dark:border-zinc-600 dark:text-zinc-100">
-                            </div>
+
                         </div>
 
                         <!-- Action Buttons -->

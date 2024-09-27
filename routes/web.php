@@ -48,20 +48,20 @@ Route::controller(RegisterController::class)->group(function () {
     Route::post('register', 'store')->name('register.store');
 });
 
-// Account and Profile Routes
-Route::middleware(['auth'])->group(function () {
-    Route::get('/account', function () {
-        return view('pages-account');
-    });
+//Account and Profile Routes
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/account', function () {
+//         return view('pages-account');
+//     });
 
-    Route::get('/account-settings', function () {
-        return view('pages-account-settings');
-    });
+//     Route::get('/account-settings', function () {
+//         return view('pages-account-settings');
+//     });
 
-    Route::resource('users', UserController::class);
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-    Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile');
-});
+//     Route::resource('users', UserController::class );
+//     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+//     // Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile');
+// });
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile');
@@ -91,3 +91,11 @@ Route::get('/account/{id}', [UserController::class, 'show'])->name('account.show
 
 //beaches
 Route::resource('beaches', BeachController::class);
+
+// dashboard
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+Route::resource('users', UserController::class);
+Route::get('/account-settings/{id}', [UserController::class, 'showProfile'])->name('account-settings');
+
+Route::post('/account-settings/{id}/upload-avatar', [UserController::class, 'uploadAvatar'])->name('User.upload_avatar');
+Route::put('/account-settings/{id}/update_user', [UserController::class, 'update'])->name('users.update');
