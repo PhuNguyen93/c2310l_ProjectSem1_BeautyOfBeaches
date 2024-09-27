@@ -92,20 +92,9 @@ public function store(Request $request)
 {
     // dd(1);
     $request->validate([
-        'name' => [
-            'required',
-            'string',
-            'max:255',
-            Rule::unique('users')->ignore($id), // Kiểm tra name duy nhất, bỏ qua user hiện tại
-        ],
+        'name' => ['required','string','max:255',Rule::unique('users')->ignore($id) ],
         'country' => 'required|string|max:255',
-        'phone' => [
-            'required',
-            'string',
-            'max:10',
-            'regex:/^[0-9]+$/', // Chỉ cho phép số
-            Rule::unique('users')->ignore($id), // Kiểm tra phone duy nhất, bỏ qua user hiện tại
-        ],
+        'phone' => ['string','max:10','regex:/^[0-9]+$/',Rule::unique('users')->ignore($id)],
     ]);
     // dd($request);
     $user = User::findOrFail($id);
