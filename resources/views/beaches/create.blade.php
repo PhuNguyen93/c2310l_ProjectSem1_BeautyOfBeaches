@@ -33,7 +33,7 @@
             <input type="text" class="form-control" id="location" name="location" placeholder="Nhập vị trí">
         </div>
 
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="area_id" class="form-label">Khu Vực</label>
             <select class="form-control" id="area_id" name="area_id">
                 <option value="">Chọn Khu Vực</option>
@@ -41,7 +41,7 @@
                     <option value="{{ $area->id }}">{{ $area->name }}</option>
                 @endforeach
             </select>
-        </div>
+        </div> --}}
 
         <div class="mb-3">
             <label for="description" class="form-label">Mô Tả</label>
