@@ -118,7 +118,6 @@
                     <hr>
                     <div class="cs_comments">
                         <h3 class="cs_fs_24 cs_semibold">Comment</h3>
-
                         <!-- Phần chọn lọc đánh giá -->
                         <div class="cs_filter_rating mb-4">
                             <div class="d-flex justify-content-start">
@@ -157,9 +156,15 @@
                                             </div>
                                             <p class="cs_comment_subtitle">{{ $feedback->message }}</p>
                                         </div>
-
                                         <div class="col-md-2 text-end">
                                             @if (auth()->check() && (auth()->user()->id === $feedback->user_id || auth()->user()->role == 'admin'))
+                                                <!-- Nút Edit (mở modal) -->
+                                                <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal"
+                                                    data-bs-target="#editModal{{ $feedback->id }}">
+                                                    Edit
+                                                </button>
+
+                                                <!-- Nút Delete -->
                                                 <form action="{{ route('feedbacks.destroy', $feedback->id) }}"
                                                     method="POST" class="d-inline">
                                                     @csrf
@@ -167,6 +172,57 @@
                                                     <button type="submit" class="btn btn-danger cs_medium">Del</button>
                                                 </form>
                                             @endif
+                                        </div>
+
+                                        <!-- Modal chỉnh sửa comment -->
+                                        <div class="modal fade" id="editModal{{ $feedback->id }}" tabindex="-1"
+                                            aria-labelledby="editModalLabel{{ $feedback->id }}" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="editModalLabel{{ $feedback->id }}">
+                                                            Edit Comment</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="{{ route('feedbacks.update', $feedback->id) }}"
+                                                            method="POST" id="editForm{{ $feedback->id }}">
+                                                            @csrf
+                                                            @method('PUT')
+
+                                                            <!-- Nội dung comment để chỉnh sửa -->
+                                                            <div class="form-group">
+                                                                <label for="message">Comment</label>
+                                                                <textarea name="message" id="message" class="form-control" rows="5" required>{{ old('message', $feedback->message) }}</textarea>
+                                                            </div>
+
+                                                            <!-- Rating -->
+                                                            <div class="col-lg-6 d-flex align-items-center">
+                                                                <label for="rating">Rating:</label>
+                                                                <div class="star-rating ms-2">
+                                                                    <input type="radio" id="star5" name="rating" value="5" />
+                                                                    <label for="star5" title="5 stars">★</label>
+                                                                    <input type="radio" id="star4" name="rating" value="4" />
+                                                                    <label for="star4" title="4 stars">★</label>
+                                                                    <input type="radio" id="star3" name="rating" value="3" />
+                                                                    <label for="star3" title="3 stars">★</label>
+                                                                    <input type="radio" id="star2" name="rating" value="2" />
+                                                                    <label for="star2" title="2 stars">★</label>
+                                                                    <input type="radio" id="star1" name="rating" value="1" />
+                                                                    <label for="star1" title="1 star">★</label>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" form="editForm{{ $feedback->id }}"
+                                                            class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </li>
@@ -214,8 +270,8 @@
                             </div>
                         @endif
                     </div>
-
                 </div>
+
                 <aside class="col-lg-4">
                     <div class="cs_sidebar cs_style_1 cs_white_bg cs_right_sidebar">
                         <div class="cs_info_widget cs_white_bg">
