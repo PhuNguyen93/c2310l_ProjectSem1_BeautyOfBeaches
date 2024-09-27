@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BeachController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DestinationController;
@@ -86,3 +87,7 @@ Route::delete('/feedbacks/{id}', [FeedbackController::class, 'destroy'])->name('
 
 Route::get('/account', [UserController::class, 'account'])->name('account');
 Route::get('/account/{id}', [UserController::class, 'show'])->name('account.show');
+
+
+//beaches
+Route::resource('beaches', BeachController::class);
