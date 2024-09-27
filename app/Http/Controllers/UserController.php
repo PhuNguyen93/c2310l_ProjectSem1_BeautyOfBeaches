@@ -37,7 +37,7 @@ class UserController extends Controller
 
     // Phân trang kết quả
     $users = $query->paginate(10);
-
+    // dd(7);
     // Trả về view với dữ liệu người dùng
     return view('apps-users-list', compact('users'));
 }
@@ -83,41 +83,29 @@ public function store(Request $request)
     public function edit($id)
     {
         $user = User::findOrFail($id);
+        dd(1);
         return view('users.edit', compact('user'));
     }
 
    public function update(Request $request, $id)
 {
-    $user = User::findOrFail($id);
-
-    $validatedData = $request->validate([
+    // dd(1);
+    $request->validate([
         'name' => 'required|string|max:255',
-        'email' => 'required|email|max:255|unique:users,email,' . $user->id,
-        'phone' => 'nullable|string|max:20',
-        'country' => 'nullable|string|max:100',
-        'birth_date' => 'nullable|date',
-        'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        // 'country' => 'required|string|max:255',
     ]);
+    // dd($request);
+    $user = User::findOrFail($id);
+    // dd($user);
+    // Cập nhật thông tin người dùng
+    // $user = User::findOrFail($id);
+    $user->name = $request->input('name');
+    $user->phone = $request->input('phone');
+    $user->birth_date = $request->input('birth_date');
+    $user->country = $request->input('country');
+    $user->save();
 
-    try {
-        $user->name = $validatedData['name'];
-        $user->email = $validatedData['email'];
-        $user->phone = $validatedData['phone'] ?? $user->phone;
-        $user->country = $validatedData['country'] ?? $user->country;
-        $user->birth_date = $validatedData['birth_date'] ?? $user->birth_date;
-
-        if ($request->hasFile('img')) {
-            $imagePath = $request->file('img')->store('profile_images', 'public');
-            $user->img = $imagePath;
-        }
-
-        $user->save();
-
-        return redirect()->route('users.index')->with('success', 'User updated successfully.');
-    } catch (\Exception $e) {
-        return redirect()->back()->withErrors(['error' => 'There was a problem updating the user.']);
-    }
-    return redirect()->route('users.index');
+    return redirect()->route('dashboard');
 }
 
      // Hàm để xóa người dùng
@@ -166,11 +154,12 @@ public function changePassword(Request $request)
     return redirect()->back()->with('status', 'Password changed successfully!');
 }
 
-public function account()
+public function account($id)
 {
     // Lấy người dùng hiện tại
-    $user = Auth::user();
-
+    // $user = Auth::user();
+    $user = User::findOrFail($id);
+    dd(3);
     // Truyền dữ liệu người dùng vào view
     return view('pages-account', compact('user'));
 }
@@ -178,16 +167,44 @@ public function account()
 public function show($id)
 {
     $user = User::findOrFail($id);
+
     return view('pages-account', compact('user'));
 }
 
 public function showProfile($id)
 {
+
     // Lấy dữ liệu của user với ID nhất định
     $user = User::find($id);
-
+    // dd($user);
     // Truyền dữ liệu user sang view
-    return view('profile', compact('user'));
+    return view('pages-account-settings', compact('user'));
+}
+public function uploadAvatar(Request $request,$id)
+{
+
+    // dd($request->file);
+    $request->validate([
+        'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Giới hạn kích thước file nếu cần
+    ]);
+    // dd($request);
+
+    if ($request->hasFile('avatar')) {
+        $avatar = $request->file('avatar');
+        $filename = time() . '.' . $avatar->getClientOriginalExtension();
+        $avatar->move(public_path('assets/images/Avatar'), $filename);
+
+        // Cập nhật đường dẫn trong cơ sở dữ liệu
+        $user = User::find($id);
+        $user->img = 'assets/images/Avatar/' . $filename;
+
+        $user->save();
+
+        return back()->with('success', 'Avatar updated successfully.');
+    }
+
+
+    return back()->withErrors('Error uploading image.');
 }
 
 

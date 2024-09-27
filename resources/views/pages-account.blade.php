@@ -3,36 +3,98 @@
     {{ __('Account') }}
 @endsection
 @section('content')
+<style>
+
+    .avatar-container {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        margin: 0 auto; /* Center horizontally */
+    }
+
+    /* Avatar image styling */
+    .avatar-image {
+        width: 100%; /* Full width of the container */
+        height: 100%; /* Full height of the container */
+        object-fit: cover; /* Maintain aspect ratio and cover the container */
+        border-radius: 50%; /* Make the image round */
+        border: 2px solid #e5e7eb; /* Optional border */
+    }
+
+    /* Icon wrapper for edit icon */
+    .edit-icon-wrapper {
+        width: 40px;
+        height: 40px;
+        background-color: #ffffff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Icon styling */
+    .edit-icon {
+        width: 40px;
+        height: 40px;
+        background-color: #ffffff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #e5e7eb;
+    }
+
+    .icon-size-4 {
+        font-size: 1.5rem; /* Adjust size of the icon */
+    }
+
+
+</style>
     <div class="mt-1 -ml-3 -mr-3 rounded-none card">
         <div class="card-body !px-2.5">
             <div class="grid grid-cols-1 gap-5 lg:grid-cols-12 2xl:grid-cols-12">
                 <div class="lg:col-span-2 2xl:col-span-1">
-                    <div
-                        class="relative inline-block size-20 rounded-full shadow-md bg-slate-100 profile-user xl:size-28">
-                        <img src="{{ URL::asset('build/images/users/avatar-1.png') }}" alt=""
-                            class="object-cover border-0 rounded-full img-thumbnail user-profile-image">
-                        <div
-                            class="absolute bottom-0 flex items-center justify-center size-8 rounded-full ltr:right-0 rtl:left-0 profile-photo-edit">
-                            <input id="profile-img-file-input" type="file" class="hidden profile-img-file-input">
-                            <label for="profile-img-file-input"
-                                class="flex items-center justify-center size-8 bg-white rounded-full shadow-lg cursor-pointer dark:bg-zink-600 profile-photo-edit">
-                                <i data-lucide="image-plus"
-                                    class="size-4 text-slate-500 dark:text-zink-200 fill-slate-100 dark:fill-zink-500"></i>
-                            </label>
+                    <form action="{{ route('profile.upload_avatar') }}" method="POST" enctype="multipart/form-data" id="UpdateAvatar" >
+                        @csrf
+                        {{-- @method('PUT') --}}
+                        <div class="lg:col-span-2 2xl:col-span-1">
+                            <div class="relative inline-block size-20 rounded-full shadow-md bg-slate-100 profile-user xl:size-28">
+                               <img src="{{ asset($user->img ) }}" alt="Avatar" alt=""
+                                    class="object-cover border-0 rounded-full img-thumbnail user-profile-image avatar-image rounded-full object-cover border-2 border-gray-200">
+                                <div
+                                    class="absolute bottom-0 flex items-center justify-center size-8 rounded-full ltr:right-0 rtl:left-0 profile-photo-edit">
+                                    <input id="profile-img-file-input" type="file" name="avatar" class="hidden profile-img-file-input" accept="image/*" required  >
+                                    <label for="profile-img-file-input"
+                                        class="flex items-center justify-center size-8 bg-white rounded-full shadow-lg cursor-pointer dark:bg-zink-600 profile-photo-edit">
+                                        <i data-lucide="image-plus"
+                                            class="size-4 text-slate-500 dark:text-zink-200 fill-slate-100 dark:fill-zink-500"></i>
+                                    </label>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
+                    </form>
+                    <script>
+                         document.addEventListener('DOMContentLoaded', function () {
+                            // Lắng nghe sự kiện change trên input file
+                            document.getElementById('profile-img-file-input').addEventListener('change', function() {
+                                // Kiểm tra xem có file được chọn hay không
+                                if (this.files && this.files[0]) {
+                                    // Submit form khi người dùng đã chọn ảnh
+                                    document.getElementById('UpdateAvatar').submit();
+                                }
+                            });
+                        });
+                    </script>
                 </div><!--end col-->
                 <div class="lg:col-span-10 2xl:col-span-9">
-                    <h5 class="mb-1">Paula Keenan <i data-lucide="badge-check"
-                            class="inline-block size-4 text-sky-500 fill-sky-100 dark:fill-custom-500/20"></i></h5>
-                    <div class="flex gap-3 mb-4">
-                        <p class="text-slate-500 dark:text-zink-200"><i data-lucide="user-circle"
-                                class="inline-block size-4 ltr:mr-1 rtl:ml-1 text-slate-500 dark:text-zink-200 fill-slate-100 dark:fill-zink-500"></i>
-                            CEO & Founder</p>
-                        <p class="text-slate-500 dark:text-zink-200"><i data-lucide="map-pin"
-                                class="inline-block size-4 ltr:mr-1 rtl:ml-1 text-slate-500 dark:text-zink-200 fill-slate-100 dark:fill-zink-500"></i>
-                            Los Angeles, California</p>
-                    </div>
+                    <h5 class="mb-1">{{ $user->name }} <i data-lucide="badge-check"
+                        class="inline-block size-4 text-sky-500 fill-sky-100 dark:fill-custom-500/20"></i></h5>
+                <div class="flex gap-3 mb-4">
+                    <p class="text-slate-500 dark:text-zink-200"><i data-lucide="map-pin"
+                            class="inline-block size-4 ltr:mr-1 rtl:ml-1 text-slate-500 dark:text-zink-200 fill-slate-100 dark:fill-zink-500"></i>
+                        {{ $user->country }}</p>
+                </div>
 
                     {{-- <p class="mt-4 text-slate-500 dark:text-zink-200">Strong leader and negotiator adept at driving
                         collaboration and innovation. Highly accomplished CEO & Founder with 10+ years of experience
@@ -191,251 +253,9 @@
 
 
         <div class="hidden tab-pane" id="followersTabs">
-            <h5 class="mb-4 underline">Followers</h5>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-x-5">
-                <div class="relative card">
-                    <div class="card-body">
-                        <p
-                            class="absolute inline-block px-5 py-1 text-xs ltr:left-0 rtl:right-0 text-custom-600 bg-custom-100 dark:bg-custom-500/20 top-5 ltr:rounded-e rtl:rounded-l">
-                            Executive Operations</p>
-                        <div class="flex items-center justify-end">
-                            <p class="text-slate-500 dark:text-zink-200">Doj : 15 Jan, 2023</p>
-                        </div>
-                        <div class="mt-4 text-center">
-                            <div class="flex justify-center">
-                                <div class="size-20 overflow-hidden rounded-full bg-slate-100">
-                                    <img src="{{ URL::asset('build/images/users/avatar-3.png') }}" alt=""
-                                        class="">
-                                </div>
-                            </div>
-                            <a href="#!">
-                                <h4 class="mt-4 mb-2 font-semibold text-16">Ralaphe Flores </h4>
-                            </a>
-                            <div class="text-slate-500 dark:text-zink-200">
-                                <p class="mb-1">floral12@tailwick.com</p>
-                                <p>+213 617 219 6245</p>
-                                <p
-                                    class="inline-block px-3 py-1 my-4 font-semibold rounded-md text-slate-600 bg-slate-100 dark:bg-zink-600 dark:text-zink-200">
-                                    Exp. : 1.5 years</p>
-                                <h4 class="text-15 text-custom-500">Salary : $463.42 <span
-                                        class="text-xs font-normal text-slate-500 dark:text-zink-200">/ Month<span></h4>
-                            </div>
-                        </div>
-                    </div>
-                </div><!--end card-->
-                <div class="relative card">
-                    <div class="card-body">
-                        <p
-                            class="absolute inline-block px-5 py-1 text-xs text-green-600 bg-green-100 ltr:left-0 rtl:right-0 dark:bg-green-500/20 top-5 ltr:rounded-e rtl:rounded-l">
-                            Project Manager</p>
-                        <div class="flex items-center justify-end">
-                            <p class="text-slate-500 dark:text-zink-200">Doj : 29 Feb, 2023</p>
-                        </div>
-                        <div class="mt-4 text-center">
-                            <div class="flex justify-center">
-                                <div class="size-20 overflow-hidden rounded-full bg-slate-100">
-                                    <img src="{{ URL::asset('build/images/users/avatar-2.png') }}" alt=""
-                                        class="">
-                                </div>
-                            </div>
-                            <a href="#!">
-                                <h4 class="mt-4 mb-2 font-semibold text-16">James Lash </h4>
-                            </a>
-                            <div class="text-slate-500 dark:text-zink-200">
-                                <p class="mb-1">jameslash@tailwick.com</p>
-                                <p>+210 85 383 2388</p>
-                                <p
-                                    class="inline-block px-3 py-1 my-4 font-semibold rounded-md text-slate-600 bg-slate-100 dark:bg-zink-600 dark:text-zink-200">
-                                    Exp. : 0.5 years</p>
-                                <h4 class="text-15 text-custom-500">Salary : $701.77 <span
-                                        class="text-xs font-normal text-slate-500 dark:text-zink-200">/ Month<span></h4>
-                            </div>
-                        </div>
-                    </div>
-                </div><!--end card-->
-                <div class="relative card">
-                    <div class="card-body">
-                        <p
-                            class="absolute inline-block px-5 py-1 text-xs ltr:left-0 rtl:right-0 text-sky-600 bg-sky-100 dark:bg-sky-500/20 top-5 ltr:rounded-e rtl:rounded-l">
-                            React Developer</p>
-                        <div class="flex items-center justify-end">
-                            <p class="text-slate-500 dark:text-zink-200">Doj : 04 March, 2023</p>
-                        </div>
-                        <div class="mt-4 text-center">
-                            <div class="flex justify-center">
-                                <div class="size-20 overflow-hidden rounded-full bg-slate-100">
-                                    <img src="{{ URL::asset('build/images/users/avatar-4.png') }}" alt=""
-                                        class="">
-                                </div>
-                            </div>
-                            <a href="#!">
-                                <h4 class="mt-4 mb-2 font-semibold text-16">Angus Garnsey</h4>
-                            </a>
-                            <div class="text-slate-500 dark:text-zink-200">
-                                <p class="mb-1">angusgarnsey@tailwick.com</p>
-                                <p>+210 41521 1325</p>
-                                <p
-                                    class="inline-block px-3 py-1 my-4 font-semibold rounded-md text-slate-600 bg-slate-100 dark:bg-zink-600 dark:text-zink-200">
-                                    Exp. : 0.7 years</p>
-                                <h4 class="text-15 text-custom-500">Salary : $478.32 <span
-                                        class="text-xs font-normal text-slate-500 dark:text-zink-200">/ Month<span></h4>
-                            </div>
-                        </div>
-                    </div>
-                </div><!--end card-->
-                <div class="relative card">
-                    <div class="card-body">
-                        <p
-                            class="absolute inline-block px-5 py-1 text-xs text-yellow-600 bg-yellow-100 ltr:left-0 rtl:right-0 dark:bg-yellow-500/20 top-5 ltr:rounded-e rtl:rounded-l">
-                            Shopify Developer</p>
-                        <div class="flex items-center justify-end">
-                            <p class="text-slate-500 dark:text-zink-200">Doj : 11 March, 2023</p>
-                        </div>
-                        <div class="mt-4 text-center">
-                            <div class="flex justify-center">
-                                <div class="size-20 overflow-hidden rounded-full bg-slate-100">
-                                    <img src="{{ URL::asset('build/images/users/avatar-5.png') }}" alt=""
-                                        class="">
-                                </div>
-                            </div>
-                            <a href="#!">
-                                <h4 class="mt-4 mb-2 font-semibold text-16">Matilda Marston</h4>
-                            </a>
-                            <div class="text-slate-500 dark:text-zink-200">
-                                <p class="mb-1">matildamarston@tailwick.com</p>
-                                <p>+210 082 288 1065</p>
-                                <p
-                                    class="inline-block px-3 py-1 my-4 font-semibold rounded-md text-slate-600 bg-slate-100 dark:bg-zink-600 dark:text-zink-200">
-                                    Exp. : 1 years</p>
-                                <h4 class="text-15 text-custom-500">Salary : $120.37 <span
-                                        class="text-xs font-normal text-slate-500 dark:text-zink-200">/ Month<span></h4>
-                            </div>
-                        </div>
-                    </div>
-                </div><!--end card-->
-                <div class="relative card">
-                    <div class="card-body">
-                        <p
-                            class="absolute inline-block px-5 py-1 text-xs text-red-600 bg-red-100 ltr:left-0 rtl:right-0 dark:bg-red-500/20 top-5 ltr:rounded-e rtl:rounded-l">
-                            Angular Developer</p>
-                        <div class="flex items-center justify-end">
-                            <p class="text-slate-500 dark:text-zink-200">Doj : 22 March, 2023</p>
-                        </div>
-                        <div class="mt-4 text-center">
-                            <div class="flex justify-center">
-                                <div class="size-20 overflow-hidden rounded-full bg-slate-100">
-                                    <img src="{{ URL::asset('build/images/users/avatar-6.png') }}" alt=""
-                                        class="">
-                                </div>
-                            </div>
-                            <a href="#!">
-                                <h4 class="mt-4 mb-2 font-semibold text-16">Zachary Benjamin</h4>
-                            </a>
-                            <div class="text-slate-500 dark:text-zink-200">
-                                <p class="mb-1">zacharybenjamin@tailwick.com</p>
-                                <p>+120 348 9730 237</p>
-                                <p
-                                    class="inline-block px-3 py-1 my-4 font-semibold rounded-md text-slate-600 bg-slate-100 dark:bg-zink-600 dark:text-zink-200">
-                                    Exp. : 0 years</p>
-                                <h4 class="text-15 text-custom-500">Salary : $89.99 <span
-                                        class="text-xs font-normal text-slate-500 dark:text-zink-200">/ Month<span></h4>
-                            </div>
-                        </div>
-                    </div>
-                </div><!--end card-->
-                <div class="relative card">
-                    <div class="card-body">
-                        <p
-                            class="absolute inline-block px-5 py-1 text-xs text-purple-600 bg-purple-100 ltr:left-0 rtl:right-0 dark:bg-purple-500/20 top-5 ltr:rounded-e rtl:rounded-l">
-                            Graphic Designer</p>
-                        <div class="flex items-center justify-end">
-                            <p class="text-slate-500 dark:text-zink-200">Doj : 09 June, 2023</p>
-                        </div>
-                        <div class="mt-4 text-center">
-                            <div class="flex justify-center">
-                                <div class="size-20 overflow-hidden rounded-full bg-slate-100">
-                                    <img src="{{ URL::asset('build/images/users/avatar-7.png') }}" alt=""
-                                        class="">
-                                </div>
-                            </div>
-                            <a href="#!">
-                                <h4 class="mt-4 mb-2 font-semibold text-16">Ruby Chomley</h4>
-                            </a>
-                            <div class="text-slate-500 dark:text-zink-200">
-                                <p class="mb-1">rubychomley@tailwick.com</p>
-                                <p>+120 1234 56789</p>
-                                <p
-                                    class="inline-block px-3 py-1 my-4 font-semibold rounded-md text-slate-600 bg-slate-100 dark:bg-zink-600 dark:text-zink-200">
-                                    Exp. : 0.2 years</p>
-                                <h4 class="text-15 text-custom-500">Salary : $214.82 <span
-                                        class="text-xs font-normal text-slate-500 dark:text-zink-200">/ Month<span></h4>
-                            </div>
-                        </div>
-                    </div>
-                </div><!--end card-->
-                <div class="relative card">
-                    <div class="card-body">
-                        <p
-                            class="absolute inline-block px-5 py-1 text-xs text-yellow-600 bg-yellow-100 ltr:left-0 rtl:right-0 dark:bg-yellow-500/20 top-5 ltr:rounded-e rtl:rounded-l">
-                            Shopify Developer</p>
-                        <div class="flex items-center justify-end">
-                            <p class="text-slate-500 dark:text-zink-200">Doj : 27 June, 2023</p>
-                        </div>
-                        <div class="mt-4 text-center">
-                            <div class="flex justify-center">
-                                <div class="size-20 overflow-hidden rounded-full bg-slate-100">
-                                    <img src="{{ URL::asset('build/images/users/avatar-8.png') }}" alt=""
-                                        class="">
-                                </div>
-                            </div>
-                            <a href="#!">
-                                <h4 class="mt-4 mb-2 font-semibold text-16">Jesse Edouardy</h4>
-                            </a>
-                            <div class="text-slate-500 dark:text-zink-200">
-                                <p class="mb-1">jessedouard@tailwick.com</p>
-                                <p>+87 044 017 3869</p>
-                                <p
-                                    class="inline-block px-3 py-1 my-4 font-semibold rounded-md text-slate-600 bg-slate-100 dark:bg-zink-600 dark:text-zink-200">
-                                    Exp. : 1.7 years</p>
-                                <h4 class="text-15 text-custom-500">Salary : $278.96 <span
-                                        class="text-xs font-normal text-slate-500 dark:text-zink-200">/ Month<span></h4>
-                            </div>
-                        </div>
-                    </div>
-                </div><!--end card-->
-                <div class="relative card">
-                    <div class="card-body">
-                        <p
-                            class="absolute inline-block px-5 py-1 text-xs text-orange-600 bg-orange-100 ltr:left-0 rtl:right-0 dark:bg-orange-500/20 top-5 ltr:rounded-e rtl:rounded-l">
-                            Team Leader</p>
-                        <div class="flex items-center justify-end">
-                            <p class="text-slate-500 dark:text-zink-200">Doj : 15 July, 2023</p>
-                        </div>
-                        <div class="mt-4 text-center">
-                            <div class="flex justify-center">
-                                <div class="size-20 overflow-hidden rounded-full bg-slate-100">
-                                    <img src="{{ URL::asset('build/images/users/avatar-9.png') }}" alt=""
-                                        class="">
-                                </div>
-                            </div>
-                            <a href="#!">
-                                <h4 class="mt-4 mb-2 font-semibold text-16">Xavier Bower</h4>
-                            </a>
-                            <div class="text-slate-500 dark:text-zink-200">
-                                <p class="mb-1">xavierbower@tailwick.com</p>
-                                <p>+159 98765 32451</p>
-                                <p
-                                    class="inline-block px-3 py-1 my-4 font-semibold rounded-md text-slate-600 bg-slate-100 dark:bg-zink-600 dark:text-zink-200">
-                                    Exp. : 6.7 years</p>
-                                <h4 class="text-15 text-custom-500">Salary : $901.94 <span
-                                        class="text-xs font-normal text-slate-500 dark:text-zink-200">/ Month<span></h4>
-                            </div>
-                        </div>
-                    </div>
-                </div><!--end card-->
-            </div><!--end grid-->
-            <div class="flex flex-col items-center gap-4 mb-4 md:flex-row">
+
+            {{-- <div class="flex flex-col items-center gap-4 mb-4 md:flex-row">
                 <div class="grow">
                     <p class="text-slate-500 dark:text-zink-200">Showing <b>8</b> of <b>18</b> Results</p>
                 </div>
@@ -475,7 +295,7 @@
                                 class="size-4 rtl:rotate-180" data-lucide="chevron-right"></i></a>
                     </li>
                 </ul>
-            </div>
+            </div> --}}
         </div><!--end tab pane-->
     </div><!--end tab content-->
 
