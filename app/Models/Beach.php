@@ -9,7 +9,16 @@ class Beach extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'location', 'area_id', 'image_url'];
+    protected $fillable = [
+        'name',
+        'description',
+        'description2',
+        'description3',
+        'location',
+        'area_id',
+        'country',
+        'image_url',
+    ];
 
     // Bãi biển thuộc về một khu vực (area)
     public function area()
