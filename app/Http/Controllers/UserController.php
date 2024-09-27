@@ -117,6 +117,7 @@ public function store(Request $request)
     } catch (\Exception $e) {
         return redirect()->back()->withErrors(['error' => 'There was a problem updating the user.']);
     }
+    return redirect()->route('users.index');
 }
 
      // Hàm để xóa người dùng
