@@ -79,7 +79,10 @@ Route::get('/profile/{id}/updateProfile', [ProfileController::class, 'showUpdate
 // Feedback Routes
 Route::post('/beaches/{beach}/feedbacks', [FeedbackController::class, 'store'])->name('feedbacks.store');
 Route::delete('/feedbacks/{feedback}', [FeedbackController::class, 'destroy'])->name('feedbacks.destroy');
+Route::get('/feedbacks/{id}/edit', [FeedbackController::class, 'edit'])->name('feedbacks.edit');
+Route::put('/feedbacks/{id}', [FeedbackController::class, 'update'])->name('feedbacks.update');
+Route::delete('/feedbacks/{id}', [FeedbackController::class, 'destroy'])->name('feedbacks.destroy');
+
 
 Route::get('/account', [UserController::class, 'account'])->name('account');
-
 Route::get('/account/{id}', [UserController::class, 'show'])->name('account.show');
