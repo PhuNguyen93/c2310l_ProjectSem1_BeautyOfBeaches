@@ -24,8 +24,21 @@
                     <div>
                         <div class="mt-5 tab-content">
                             <div class="block tab-pane" id="emailTabs">
-                                <form method="POST" action="{{ route('register.store') }}" class="mt-10" id="signInForm">
+
+                                <!-- Hiển thị tất cả thông báo lỗi -->
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+                                <form method="POST" action="{{ route('users.store') }}" class="mt-10" id="signInForm">
                                     @csrf
+
                                     <input type="hidden" name="role_id" value="2">
                                       <!-- Email input -->
                                     <div class="mb-3">

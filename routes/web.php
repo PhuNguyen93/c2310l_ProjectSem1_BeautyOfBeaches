@@ -19,7 +19,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/about', 'about')->name('about');
     Route::get('/destination', 'destination')->name('destination');
-    Route::get('/destinationdetails/{id}', 'destinationdetails')->name('destinationdetails');  // Đảm bảo route này chỉ có 1
+    Route::get('/destinationdetails/{id}', 'destinationdetails')->name('destinationdetails'); // Đảm bảo route này chỉ có 1
     Route::get('/tour', 'tour')->name('tour');
     Route::get('/tourdetails', 'tourdetails')->name('tourdetails');
     Route::get('/blog', 'blog')->name('blog');
@@ -41,6 +41,7 @@ Route::post('/logout', function () {
     return redirect('/');
 })->name('logout');
 
+// Register routes
 Route::controller(RegisterController::class)->group(function () {
     Route::get('register', function () {
         return view('auth.register'); // Hiển thị form đăng ký
@@ -48,34 +49,20 @@ Route::controller(RegisterController::class)->group(function () {
     Route::post('register', 'store')->name('register.store');
 });
 
-//Account and Profile Routes
-// Route::middleware(['auth'])->group(function () {
-//     Route::get('/account', function () {
-//         return view('pages-account');
-//     });
+// Account and Profile Routes (có middleware auth)
+Route::middleware(['auth'])->group(function () {
+    Route::get('/account', function () {
+        return view('pages-account');
+    });
 
-//     Route::get('/account-settings', function () {
-//         return view('pages-account-settings');
-//     });
+    Route::get('/account-settings/{id}', [UserController::class, 'showProfile'])->name('account-settings');
+    Route::put('/account-settings/{id}/update_user', [UserController::class, 'update'])->name('users.update_user');
 
-//     Route::resource('users', UserController::class );
-//     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-//     // Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile');
-// });
-
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile');
-
-Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
-Route::post('/users/change-password', [UserController::class, 'changePassword'])->name('users.changePassword');
-// Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
-// Route::post('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
-
-Route::post('/profile/upload-avatar', [ProfileController::class, 'uploadAvatar'])->name('profile.upload_avatar');
-Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
-Route::get('/profile/{id}/updateProfile', [ProfileController::class, 'showUpdateForm'])->name('profile.showUpdateForm');
-// Route::get('/profile/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/upload-avatar', [ProfileController::class, 'uploadAvatar'])->name('profile.upload_avatar');
+    Route::get('/profile/{id}/updateProfile', [ProfileController::class, 'showUpdateForm'])->name('profile.showUpdateForm');
+});
 
 // Feedback Routes
 Route::post('/beaches/{beach}/feedbacks', [FeedbackController::class, 'store'])->name('feedbacks.store');
@@ -84,18 +71,25 @@ Route::get('/feedbacks/{id}/edit', [FeedbackController::class, 'edit'])->name('f
 Route::put('/feedbacks/{id}', [FeedbackController::class, 'update'])->name('feedbacks.update');
 Route::delete('/feedbacks/{id}', [FeedbackController::class, 'destroy'])->name('feedbacks.destroy');
 
-
-Route::get('/account', [UserController::class, 'account'])->name('account');
-Route::get('/account/{id}', [UserController::class, 'show'])->name('account.show');
-
-
-//beaches
+// Beaches routes
 Route::resource('beaches', BeachController::class);
 
-// dashboard
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-Route::resource('users', UserController::class);
-Route::get('/account-settings/{id}', [UserController::class, 'showProfile'])->name('account-settings');
+// OTP Routes
+Route::get('otp/verify', [UserController::class, 'showOtpForm'])->name('otp.verify.form');
+Route::post('otp/verify', [UserController::class, 'verifyOtp'])->name('otp.verify');
 
-Route::post('/account-settings/{id}/upload-avatar', [UserController::class, 'uploadAvatar'])->name('User.upload_avatar');
-Route::put('/account-settings/{id}/update_user', [UserController::class, 'update'])->name('users.update');
+// Hiển thị form nhập OTP và xác thực OTP
+Route::get('/verify-otp', [UserController::class, 'showOtpForm'])->name('verify.otp.form');
+Route::post('/verify-otp', [UserController::class, 'verifyOtp'])->name('verify.otp');
+
+// Dashboard (chỉ giữ 1 route)
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+
+// Resource controller for users
+Route::resource('users', UserController::class);
+
+Route::get('/success', [UserController::class, 'showSuccess']);
+
+Route::get('/success', function () {
+    return view('plugins-sweetalert');
+})->name('success'); // Thêm tên cho route
