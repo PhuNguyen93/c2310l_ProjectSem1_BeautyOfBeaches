@@ -11,7 +11,7 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ URL::asset('build/images/favicon.ico') }}">
     <style>
-/* Container for the avatar */
+
         .avatar-container {
             position: relative;
             width: 150px;
@@ -56,7 +56,7 @@
         }
 
 
-        </style>
+    </style>
     @include('layouts.head-css')
     <!-- Styles -->
     {{-- @livewireStyles --}}
@@ -126,25 +126,7 @@
                                         class="inline-block size-4 ltr:mr-1 rtl:ml-1 text-slate-500 dark:text-zink-200 fill-slate-100 dark:fill-zink-500"></i>
                                     {{ $user->country }}</p>
                             </div>
-                                {{-- <ul
-                                    class="flex flex-wrap gap-3 mt-4 text-center divide-x divide-slate-200 dark:divide-zink-500 rtl:divide-x-reverse">
-                                    <li class="px-5">
-                                        <h5>1542</h5>
-                                        <p class="text-slate-500 dark:text-zink-200">Following</p>
-                                    </li>
-                                    <li class="px-5">
-                                        <h5>10.65k</h5>
-                                        <p class="text-slate-500 dark:text-zink-200">Followers</p>
-                                    </li>
-                                    <li class="px-5">
-                                        <h5>115+</h5>
-                                        <p class="text-slate-500 dark:text-zink-200">Products</p>
-                                    </li>
-                                </ul> --}}
-                                {{-- <p class="mt-4 text-slate-500 dark:text-zink-200">Strong leader and negotiator adept at driving
-                                    collaboration and innovation. Highly accomplished CEO & Founder with 10+ years of experience
-                                    creating, launching and leading successful business ventures. Proven ability to build relationships,
-                                    drive customer loyalty and increase profitability.</p> --}}
+
                                 <div class="flex gap-2 mt-4">
                                     <a href="#!"
                                         class="flex items-center justify-center transition-all duration-200 ease-linear rounded size-9 text-sky-500 bg-sky-100 hover:bg-sky-200 dark:bg-sky-500/20 dark:hover:bg-sky-500/30">
@@ -178,7 +160,7 @@
                                         class="flex items-center justify-center size-[37.5px] p-0 text-slate-500 btn bg-slate-100 hover:text-white hover:bg-slate-600 focus:text-white focus:bg-slate-600 focus:ring focus:ring-slate-100 active:text-white active:bg-slate-600 active:ring active:ring-slate-100 dark:bg-slate-500/20 dark:text-slate-400 dark:hover:bg-slate-500 dark:hover:text-white dark:focus:bg-slate-500 dark:focus:text-white dark:active:bg-slate-500 dark:active:text-white dark:ring-slate-400/20"><i
                                             data-lucide="mail" class="size-4"></i></a>
 
-
+                                    {{-- NUT .... --}}
                                     <div class="relative dropdown">
                                         <button
                                             class="flex items-center justify-center size-[37.5px] dropdown-toggle p-0 text-slate-500 btn bg-slate-100 hover:text-white hover:bg-slate-600 focus:text-white focus:bg-slate-600 focus:ring focus:ring-slate-100 active:text-white active:bg-slate-600 active:ring active:ring-slate-100 dark:bg-slate-500/20 dark:text-slate-400 dark:hover:bg-slate-500 dark:hover:text-white dark:focus:bg-slate-500 dark:focus:text-white dark:active:bg-slate-500 dark:active:text-white dark:ring-slate-400/20"
@@ -224,11 +206,11 @@
                                     class="inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-t-md text-slate-500 dark:text-zink-200 border-b border-transparent group-[.active]:text-custom-500 dark:group-[.active]:text-custom-500 group-[.active]:border-b-custom-500 hover:text-custom-500 dark:hover:text-custom-500 active:text-custom-500 dark:active:text-custom-500 -mb-[1px]">Change
                                     Password</a>
                             </li>
-                            {{-- <li class="group">
+                            <li class="group">
                                 <a href="javascript:void(0);" data-tab-toggle data-target="privacyPolicyTabs"
                                     class="inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-t-md text-slate-500 dark:text-zink-200 border-b border-transparent group-[.active]:text-custom-500 dark:group-[.active]:text-custom-500 group-[.active]:border-b-custom-500 hover:text-custom-500 dark:hover:text-custom-500 active:text-custom-500 dark:active:text-custom-500 -mb-[1px]">Privacy
                                     Policy</a>
-                            </li> --}}
+                            </li>
                         </ul>
                     </div>
                 </div><!--end card-->
@@ -306,7 +288,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="hidden tab-pane" id="integrationTabs">
+                    {{-- <div class="hidden tab-pane" id="integrationTabs">
                         <h6 class="mb-4 text-15">Connected Apps</h6>
                         <div class="grid grid-cols-1 gap-x-5 sm:grid-cols-2 xl:grid-cols-4">
                             <div class="card">
@@ -559,7 +541,7 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
 

@@ -47,7 +47,7 @@ class ProfileController extends Controller
     }
     public function uploadAvatar(Request $request)
         {
-            // dd(1);
+
             // dd($request->file);
             $request->validate([
                 'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Giới hạn kích thước file nếu cần
