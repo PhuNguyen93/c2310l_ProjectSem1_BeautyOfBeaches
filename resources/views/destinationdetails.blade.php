@@ -175,19 +175,15 @@
                                         </div>
 
                                         <!-- Modal chỉnh sửa comment -->
-                                        <div class="modal fade" id="editModal{{ $feedback->id }}" tabindex="-1"
-                                            aria-labelledby="editModalLabel{{ $feedback->id }}" aria-hidden="true">
+                                        <div class="modal fade" id="editModal{{ $feedback->id }}" tabindex="-1" aria-labelledby="editModalLabel{{ $feedback->id }}" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="editModalLabel{{ $feedback->id }}">
-                                                            Edit Comment</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
+                                                        <h5 class="modal-title" id="editModalLabel{{ $feedback->id }}">Edit Comment</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="{{ route('feedbacks.update', $feedback->id) }}"
-                                                            method="POST" id="editForm{{ $feedback->id }}">
+                                                        <form action="{{ route('feedbacks.update', $feedback->id) }}" method="POST" id="editForm{{ $feedback->id }}">
                                                             @csrf
                                                             @method('PUT')
 
@@ -201,25 +197,27 @@
                                                             <div class="col-lg-6 d-flex align-items-center">
                                                                 <label for="rating">Rating:</label>
                                                                 <div class="star-rating ms-2">
-                                                                    <input type="radio" id="star5" name="rating" value="5" />
-                                                                    <label for="star5" title="5 stars">★</label>
-                                                                    <input type="radio" id="star4" name="rating" value="4" />
-                                                                    <label for="star4" title="4 stars">★</label>
-                                                                    <input type="radio" id="star3" name="rating" value="3" />
-                                                                    <label for="star3" title="3 stars">★</label>
-                                                                    <input type="radio" id="star2" name="rating" value="2" />
-                                                                    <label for="star2" title="2 stars">★</label>
-                                                                    <input type="radio" id="star1" name="rating" value="1" />
-                                                                    <label for="star1" title="1 star">★</label>
+                                                                    <input type="radio" id="editStar5_{{ $feedback->id }}" name="rating" value="5" {{ $feedback->rating == 5 ? 'checked' : '' }} />
+                                                                    <label for="editStar5_{{ $feedback->id }}" title="5 stars">★</label>
+
+                                                                    <input type="radio" id="editStar4_{{ $feedback->id }}" name="rating" value="4" {{ $feedback->rating == 4 ? 'checked' : '' }} />
+                                                                    <label for="editStar4_{{ $feedback->id }}" title="4 stars">★</label>
+
+                                                                    <input type="radio" id="editStar3_{{ $feedback->id }}" name="rating" value="3" {{ $feedback->rating == 3 ? 'checked' : '' }} />
+                                                                    <label for="editStar3_{{ $feedback->id }}" title="3 stars">★</label>
+
+                                                                    <input type="radio" id="editStar2_{{ $feedback->id }}" name="rating" value="2" {{ $feedback->rating == 2 ? 'checked' : '' }} />
+                                                                    <label for="editStar2_{{ $feedback->id }}" title="2 stars">★</label>
+
+                                                                    <input type="radio" id="editStar1_{{ $feedback->id }}" name="rating" value="1" {{ $feedback->rating == 1 ? 'checked' : '' }} />
+                                                                    <label for="editStar1_{{ $feedback->id }}" title="1 star">★</label>
                                                                 </div>
                                                             </div>
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" form="editForm{{ $feedback->id }}"
-                                                            class="btn btn-primary">Save changes</button>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" form="editForm{{ $feedback->id }}" class="btn btn-primary">Save changes</button>
                                                     </div>
                                                 </div>
                                             </div>

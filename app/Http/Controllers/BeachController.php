@@ -10,11 +10,16 @@ class BeachController extends Controller
     /**
      * Hiển thị danh sách các bãi biển.
      */
-    public function index()
-    {
-        $beaches = Beach::all();
-        return view('beaches.index', compact('beaches'));
-    }
+    public function index(Request $request)
+{
+    $search = $request->input('search');
+
+    $beaches = Beach::when($search, function ($query, $search) {
+        return $query->where('name', 'like', "%{$search}%");
+    })->paginate(5);
+
+    return view('beaches.index', compact('beaches'));
+}
 
     /**
      * Hiển thị form tạo bãi biển mới.
