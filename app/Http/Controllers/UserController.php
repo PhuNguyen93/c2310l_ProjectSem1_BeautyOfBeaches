@@ -65,19 +65,25 @@ class UserController extends Controller
     ],[
         'email.unique' => 'Email này đã được sử dụng để đăng ký tài khoản. Vui lòng sử dụng email khác.',
     ]
-
 );
-
     if ($validator->fails()) {
         return back()->withErrors($validator)->withInput();
     }
 
+
     // Gửi OTP nếu kiểm tra thành công
     $otp = rand(1000, 9999);
-    session(['otp' => $otp, 'name' => $request->name, 'email' => $request->email, 'password' => bcrypt($request->password), 'role_id' => $request->role_id]);
+    session([   'otp' => $otp,
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'role_id' => $request->role_id,
+            ]);
 
+    // Gửi OTP qua email
     Mail::to($request->email)->send(new OtpMail($otp));
 
+    // Chuyển hướng đến form xác minh OTP
     return redirect()->route('verify.otp.form')->with('success', 'OTP has been sent to your email.');
 }
 

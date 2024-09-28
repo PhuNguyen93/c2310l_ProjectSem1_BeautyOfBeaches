@@ -35,7 +35,6 @@
     </ul>
 </div>
 @endif
-
                                 <form method="POST" action="{{ route('users.store') }}" class="mt-10" id="signInForm">
                                     @csrf
 

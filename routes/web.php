@@ -79,9 +79,8 @@ Route::get('otp/verify', [UserController::class, 'showOtpForm'])->name('otp.veri
 Route::post('otp/verify', [UserController::class, 'verifyOtp'])->name('otp.verify');
 
 // Hiển thị form nhập OTP và xác thực OTP
-Route::get('/verify-otp', [UserController::class, 'showOtpForm'])->name('verify.otp.form');
-Route::post('/verify-otp', [UserController::class, 'verifyOtp'])->name('verify.otp');
-
+Route::get('verify-otp', [UserController::class, 'showOtpForm'])->name('verify.otp.form');
+Route::post('verify-otp', [UserController::class, 'verifyOtp'])->name('verify.otp');
 
 // Resource controller for users
 Route::resource('users', UserController::class);
@@ -112,3 +111,4 @@ Route::get('/account-settings/{id}', [UserController::class, 'showProfile'])->na
 Route::post('/account-settings/{id}/upload-avatar', [UserController::class, 'uploadAvatar'])->name('User.upload_avatar');
 Route::put('/account-settings/{id}/update_user', [UserController::class, 'update'])->name('users.update');
 // -------(lam Xuan Hung)------------------------------------
+
