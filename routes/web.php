@@ -50,19 +50,19 @@ Route::controller(RegisterController::class)->group(function () {
 });
 
 // Account and Profile Routes (có middleware auth)
-Route::middleware(['auth'])->group(function () {
-    Route::get('/account', function () {
-        return view('pages-account');
-    });
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/account', function () {
+//         return view('pages-account');
+//     });
 
-    Route::get('/account-settings/{id}', [UserController::class, 'showProfile'])->name('account-settings');
-    Route::put('/account-settings/{id}/update_user', [UserController::class, 'update'])->name('users.update_user');
+//     Route::get('/account-settings/{id}', [UserController::class, 'showProfile'])->name('account-settings');
+//     Route::put('/account-settings/{id}/update_user', [UserController::class, 'update'])->name('users.update_user');
 
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-    Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
-    Route::post('/profile/upload-avatar', [ProfileController::class, 'uploadAvatar'])->name('profile.upload_avatar');
-    Route::get('/profile/{id}/updateProfile', [ProfileController::class, 'showUpdateForm'])->name('profile.showUpdateForm');
-});
+//     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+//     Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::post('/profile/upload-avatar', [ProfileController::class, 'uploadAvatar'])->name('profile.upload_avatar');
+//     Route::get('/profile/{id}/updateProfile', [ProfileController::class, 'showUpdateForm'])->name('profile.showUpdateForm');
+// });
 
 // Feedback Routes
 Route::post('/beaches/{beach}/feedbacks', [FeedbackController::class, 'store'])->name('feedbacks.store');
@@ -82,8 +82,6 @@ Route::post('otp/verify', [UserController::class, 'verifyOtp'])->name('otp.verif
 Route::get('/verify-otp', [UserController::class, 'showOtpForm'])->name('verify.otp.form');
 Route::post('/verify-otp', [UserController::class, 'verifyOtp'])->name('verify.otp');
 
-// Dashboard (chỉ giữ 1 route)
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
 // Resource controller for users
 Route::resource('users', UserController::class);
@@ -93,3 +91,24 @@ Route::get('/success', [UserController::class, 'showSuccess']);
 Route::get('/success', function () {
     return view('plugins-sweetalert');
 })->name('success'); // Thêm tên cho route
+
+
+// profile (Lam Xuan Hung)
+
+Route::post('/profile/upload-avatar', [ProfileController::class, 'uploadAvatar'])->name('profile.upload_avatar');
+Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
+Route::get('/profile/{id}/updateProfile', [ProfileController::class, 'showUpdateForm'])->name('profile.showUpdateForm');
+
+// Dashboard (Lam Xuan Hung)
+
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile');
+Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+Route::post('/users/change-password', [UserController::class, 'changePassword'])->name('users.changePassword');
+Route::get('/account', [UserController::class, 'account'])->name('account');
+Route::get('/account/{id}', [UserController::class, 'show'])->name('account.show');
+Route::resource('users', UserController::class);
+Route::get('/account-settings/{id}', [UserController::class, 'showProfile'])->name('account-settings');
+Route::post('/account-settings/{id}/upload-avatar', [UserController::class, 'uploadAvatar'])->name('User.upload_avatar');
+Route::put('/account-settings/{id}/update_user', [UserController::class, 'update'])->name('users.update');
+// -------(lam Xuan Hung)------------------------------------
