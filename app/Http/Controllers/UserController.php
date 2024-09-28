@@ -6,6 +6,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\OtpMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
+
 
 class UserController extends Controller
 {
@@ -50,34 +55,31 @@ class UserController extends Controller
     }
 
     // Hàm để lưu người dùng mới (với việc lấy ID người dùng vừa tạo)
-public function store(Request $request)
+    public function store(Request $request)
 {
-    // Validate dữ liệu nhập vào
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users,email',
-        'password' => 'required|string|min:0',
-        'role_id' => 'required|integer',
-        'status' => 'required|string|in:Verified,Waiting,Rejected',
-    ]);
+    // Kiểm tra xem email đã tồn tại chưa
+    $validator = Validator::make($request->all(), [
+        'email' => 'required|email|unique:users,email',
+        // Các trường khác
+    ],[
+        'email.unique' => 'Email này đã được sử dụng để đăng ký tài khoản. Vui lòng sử dụng email khác.',
+    ]
 
-     // Kiểm tra xem email đã tồn tại chưa
-     if (User::where('email', $request->email)->exists()) {
-        return redirect()->back()->withErrors(['email' => 'Email đã tồn tại.'])->withInput();
+);
+
+    if ($validator->fails()) {
+        return back()->withErrors($validator)->withInput();
     }
 
-    // Thêm người dùng vào cơ sở dữ liệu
-    User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password), // Mã hóa mật khẩu
-        'role_id' => $request->role_id,
-        'status' => $request->status,
-    ]);
+    // Gửi OTP nếu kiểm tra thành công
+    $otp = rand(1000, 9999);
+    session(['otp' => $otp, 'name' => $request->name, 'email' => $request->email, 'password' => bcrypt($request->password), 'role_id' => $request->role_id]);
 
-    // Chuyển hướng lại trang danh sách với thông báo thành công
-    return redirect()->route('users.index')->with('success', 'User added successfully!');
+    Mail::to($request->email)->send(new OtpMail($otp));
+
+    return redirect()->route('verify.otp.form')->with('success', 'OTP has been sent to your email.');
 }
+
 
 
     public function edit($id)
@@ -206,6 +208,71 @@ public function uploadAvatar(Request $request,$id)
 
     return back()->withErrors('Error uploading image.');
 }
+
+// Method to generate OTP and send it via email
+public function register(Request $request)
+{
+    // Validate input
+    $request->validate([
+        'email' => 'required|email|unique:users,email',
+        'name' => 'required|string|max:255',
+        'password' => 'required|confirmed|min:0',
+    ]);
+
+    // Create OTP
+    $otp = rand(1000, 9999);
+
+    // Store data including OTP
+    User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'otp' => $otp,
+        'status' => 'Waiting', // Set status to 'Waiting' until OTP is verified
+    ]);
+
+    // Send OTP to email
+    Mail::to($request->email)->send(new OtpMail($otp));
+
+    return redirect()->route('verify.otp.form');
+}
+
+// Method to verify OTP
+public function verifyOtp(Request $request)
+{
+    // Kiểm tra OTP
+    if ($request->otp == session('otp')) {
+        // Tạo tài khoản nếu OTP đúng
+        User::create([
+            'name' => session('name'),
+            'email' => session('email'),
+            'password' => session('password'),
+            'role_id' => session('role_id'),
+            'status' => 'Verified',
+        ]);
+
+        // Xóa session sau khi xác thực
+        session()->forget(['name', 'email', 'password', 'role_id', 'otp']);
+
+        // Chuyển hướng đến trang success
+        return redirect()->route('success')->with('success', 'Account created successfully!');
+    }
+
+    // Trả về lỗi nếu OTP sai
+    return back()->withErrors(['otp' => 'Invalid OTP']);
+}
+
+
+public function showOtpForm()
+{
+    return view('auth.verify-otp');
+}
+
+public function showSuccess()
+{
+    return view('plugins-sweetalert');
+}
+
 
 
 }
