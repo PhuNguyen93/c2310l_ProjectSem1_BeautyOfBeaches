@@ -24,8 +24,21 @@
                     <div>
                         <div class="mt-5 tab-content">
                             <div class="block tab-pane" id="emailTabs">
-                                <form method="POST" action="{{ route('register.store') }}" class="mt-10" id="signInForm">
+
+                                <!-- Hiển thị tất cả thông báo lỗi -->
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+                                <form method="POST" action="{{ route('users.store') }}" class="mt-10" id="signInForm">
                                     @csrf
+
                                     <input type="hidden" name="role_id" value="2">
                                       <!-- Email input -->
                                     <div class="mb-3">
@@ -46,7 +59,7 @@
                                         <label for="password" class="inline-block mb-2 text-base font-medium">Password</label>
                                         <input type="password" name="password" id="password" class="form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Enter password" required>
                                         @error('password')
-                                        <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
 
                                     </div>

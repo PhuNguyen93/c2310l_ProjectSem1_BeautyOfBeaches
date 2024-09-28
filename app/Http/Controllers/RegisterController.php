@@ -23,12 +23,11 @@ class RegisterController extends Controller
 
         // Validate dữ liệu đầu vào
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-
+            'name' => 'required|string|max:255|unique:users',
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'regex:/^[A-Za-z0-9]+@gmail\.com$/'],
             'password' => 'required|string|confirmed',
-            // 'role_id' => 'required|integer', // Chắc chắn rằng role_id là bắt buộc
         ]);
+
 
         //  dd( $request->role_id);
         // Lưu user vào database

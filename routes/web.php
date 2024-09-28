@@ -1,49 +1,39 @@
 <?php
 
+use App\Http\Controllers\BeachController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DestinationController;
+use App\Http\Controllers\FeedbackController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-
 use App\Http\Controllers\RouteController;
-
 use App\Http\Controllers\UserController;
-
 use App\Http\Controllers\LoginController;
-
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Auth;
 
+// Routes for HomeController
 Route::controller(HomeController::class)->group(function () {
-Route::get('/', 'index')->name('index');
-Route::get('/index', 'index')->name('index');
-Route::get('/index2', 'index2')->name('index2');
-Route::get('/index3', 'index3')->name('index3');
-Route::get('/about', 'about')->name('about');
-Route::get('/destination','destination')->name('destination');
-Route::get('/destinationdetails','destinationdetails')->name('destinationdetails');
-Route::get('/tour','tour')->name('tour');
-Route::get('/tourdetails','tourdetails')->name('tourdetails');
-Route::get('/blog','blog')->name('blog');
-Route::get('/blogdetails','blogdetails')->name('blogdetails');
-Route::get('/contact','contact')->name('contact');
-
+    Route::get('/', 'index')->name('index');
+    Route::get('/about', 'about')->name('about');
+    Route::get('/destination', 'destination')->name('destination');
+    Route::get('/destinationdetails/{id}', 'destinationdetails')->name('destinationdetails'); // Đảm bảo route này chỉ có 1
+    Route::get('/tour', 'tour')->name('tour');
+    Route::get('/tourdetails', 'tourdetails')->name('tourdetails');
+    Route::get('/blog', 'blog')->name('blog');
+    Route::get('/blogdetails', 'blogdetails')->name('blogdetails');
+    Route::get('/contact', 'contact')->name('contact');
 });
 
+// Search route
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 
-Route::get('/destinationdetails/{id}', [HomeController::class, 'destinationdetails'])->name('destinationdetails');
-//
-
-
-Route::get("/dashboards", [RouteController::class, 'index'])->name('dashboards');
-
-
-Route::controller(LoginController::class) -> group(function(){
-    Route::get('/login','showLoginForm')->name('login');
-    Route::post('/login', [LoginController::class, 'authenticate']);
+// Login and Register Routes
+Route::controller(LoginController::class)->group(function () {
+    Route::get('/login', 'showLoginForm')->name('login');
+    Route::post('/login', 'authenticate');
 });
 
 Route::post('/logout', function () {
@@ -51,26 +41,55 @@ Route::post('/logout', function () {
     return redirect('/');
 })->name('logout');
 
-Route::controller(RegisterController::class) -> group(function(){
+// Register routes
+Route::controller(RegisterController::class)->group(function () {
     Route::get('register', function () {
         return view('auth.register'); // Hiển thị form đăng ký
     })->name('register');
-
-    Route::post('register', [RegisterController::class, 'store'])->name('register.store');
+    Route::post('register', 'store')->name('register.store');
 });
 
-Route::get('/account', function () {
-    return view('pages-account');
+// Account and Profile Routes (có middleware auth)
+Route::middleware(['auth'])->group(function () {
+    Route::get('/account', function () {
+        return view('pages-account');
+    });
+
+    Route::get('/account-settings/{id}', [UserController::class, 'showProfile'])->name('account-settings');
+    Route::put('/account-settings/{id}/update_user', [UserController::class, 'update'])->name('users.update_user');
+
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/upload-avatar', [ProfileController::class, 'uploadAvatar'])->name('profile.upload_avatar');
+    Route::get('/profile/{id}/updateProfile', [ProfileController::class, 'showUpdateForm'])->name('profile.showUpdateForm');
 });
 
-Route::get('/account-settings', function () {
-    return view('pages-account-settings');
-});
+// Feedback Routes
+Route::post('/beaches/{beach}/feedbacks', [FeedbackController::class, 'store'])->name('feedbacks.store');
+Route::delete('/feedbacks/{feedback}', [FeedbackController::class, 'destroy'])->name('feedbacks.destroy');
+Route::get('/feedbacks/{id}/edit', [FeedbackController::class, 'edit'])->name('feedbacks.edit');
+Route::put('/feedbacks/{id}', [FeedbackController::class, 'update'])->name('feedbacks.update');
+Route::delete('/feedbacks/{id}', [FeedbackController::class, 'destroy'])->name('feedbacks.destroy');
 
+// Beaches routes
+Route::resource('beaches', BeachController::class);
 
-// Định nghĩa route cho trang danh sách người dùng
-Route::resource('users', UserController::class);
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
+// OTP Routes
+Route::get('otp/verify', [UserController::class, 'showOtpForm'])->name('otp.verify.form');
+Route::post('otp/verify', [UserController::class, 'verifyOtp'])->name('otp.verify');
 
+// Hiển thị form nhập OTP và xác thực OTP
+Route::get('/verify-otp', [UserController::class, 'showOtpForm'])->name('verify.otp.form');
+Route::post('/verify-otp', [UserController::class, 'verifyOtp'])->name('verify.otp');
+
+// Dashboard (chỉ giữ 1 route)
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile');
+
+// Resource controller for users
+Route::resource('users', UserController::class);
+
+Route::get('/success', [UserController::class, 'showSuccess']);
+
+Route::get('/success', function () {
+    return view('plugins-sweetalert');
+})->name('success'); // Thêm tên cho route

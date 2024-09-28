@@ -69,19 +69,16 @@
                             <thead class="text-left">
                                 <tr class="relative rounded-md bg-slate-100 dark:bg-zink-600 after:absolute ltr:after:border-l-2 rtl:after:border-r-2 ltr:after:left-0 rtl:after:right-0 after:top-0 after:bottom-0 after:border-transparent [&.active]:after:border-custom-500 [&.active]:bg-slate-100 dark:[&.active]:bg-zink-600">
                                     <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold">
-                                        <div class="flex items-center h-full">
-                                            <input id="CheckboxAll"
-                                                class="size-4 bg-white border border-slate-200 rounded-sm appearance-none cursor-pointer"
-                                                type="checkbox">
-                                        </div>
                                     </th>
-                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort" data-sort="user-id">User ID</th>
+                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold">Avatar</th>
+                                    {{-- <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort" data-sort="user-id">User ID</th> --}}
+                                    {{-- <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort" data-sort="user-img">img</th> --}}
                                     <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort" data-sort="name">Name</th>
                                     <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort" data-sort="email">Email</th>
-                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort" data-sort="role-id">Role ID</th>
+                                    {{-- <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort" data-sort="role-id">Role ID</th> --}}
+                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort" data-sort="phone">phone</th>
                                     <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort" data-sort="joining-date">Joining Date</th>
-                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort" data-sort="status">Status</th>
-                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold">Action</th>
+                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort " data-sort="status">Action</th>
                                 </tr>
                             </thead>
 
@@ -95,13 +92,17 @@
                                                 type="checkbox">
                                         </div>
                                     </td>
-                                    <td class="px-3.5 py-2.5">{{ $user->id }}</td>
-                                    <td class="px-3.5 py-2.5">{{ $user->name }}</td>
-                                    <td class="px-3.5 py-2.5">{{ $user->email }}</td>
-                                    <td class="px-3.5 py-2.5">{{ $user->role_id }}</td>
-                                    <td class="px-3.5 py-2.5">{{ $user->created_at }}</td>
-                                    <td class="px-3.5 py-2.5">{{ $user->status }}</td>
                                     <td class="px-3.5 py-2.5">
+                                        <img src="{{ asset($user->img) }}" alt="Avatar" class="w-10 h-10 rounded-full"> <!-- Hiển thị avatar -->
+                                    </td>
+                                    {{-- <td class="px-3.5 py-2.5">{{ $user->id }}</td> --}}
+                                    {{-- <td class="px-3.5 py-2.5">{{ $user->img }}</td> --}}
+                                    <td class="px-3.5 py-2.5"  data-sort="name">{{ $user->name }}</td>
+                                    <td class="px-3.5 py-2.5" data-sort="email">{{ $user->email }}</td>
+                                    {{-- <td class="px-3.5 py-2.5">{{ $user->role_id }}</td> --}}
+                                    <td class="px-3.5 py-2.5" data-sort="phone">{{ $user->phone }}</td>
+                                    <td class="px-3.5 py-2.5" data-sort="joining-date">{{ $user->created_at }}</td>
+                                    {{-- <td class="px-3.5 py-2.5" data-sort="status">
                                         @if ($user->status === 'Rejected')
                                             <span class="px-2.5 py-0.5 inline-flex items-center text-xs font-medium rounded border bg-red-100 border-transparent text-red-500 dark:bg-red-500/20 dark:border-transparent status">
                                                 <i data-lucide="x" class="size-3 mr-1.5"></i> Rejected
@@ -115,7 +116,7 @@
                                                 <i data-lucide="check-circle" class="size-3 mr-1.5"></i> Verified
                                             </span>
                                         @endif
-                                    </td>
+                                    </td> --}}
 
 
                                     <td class="px-3.5 py-2.5">
@@ -128,14 +129,14 @@
                                                 aria-labelledby="usersAction{{ $user->id }}">
                                                 <li>
                                                     <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200"
-                                                       href="http://127.0.0.1:8000/account">
-                                                        <i data-lucide="eye" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i>
-                                                        <span class="align-middle">Overview</span>
-                                                    </a>
+                                                    href="{{ route('account.show', $user->id) }}">
+                                                     <i data-lucide="eye" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i>
+                                                     <span class="align-middle">Overview</span>
+                                                 </a>
                                                 </li>
                                                 <li>
                                                     <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200"
-                                                       href="http://127.0.0.1:8000/account-settings">
+                                                       href="{{ route('account-settings', $user->id) }}">
                                                         <i data-lucide="file-edit" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i>
                                                         <span class="align-middle">Edit</span>
                                                     </a>
@@ -310,6 +311,51 @@
                 }, 3000); // 3000ms = 3 giây
             });
         });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const headers = document.querySelectorAll('.sort');
+                const tbody = document.querySelector('.list');
+
+                let currentSort = null;
+                let currentDirection = 'asc';
+
+                headers.forEach(header => {
+                    header.addEventListener('click', () => {
+                        const sortAttribute = header.getAttribute('data-sort');
+
+                        // Nếu cột được sắp xếp đã được chọn, thì đảo chiều
+                        if (currentSort === sortAttribute) {
+                            currentDirection = (currentDirection === 'asc') ? 'desc' : 'asc';
+                        } else {
+                            currentSort = sortAttribute;
+                            currentDirection = 'asc'; // Mặc định sắp xếp tăng dần khi chọn cột mới
+                        }
+
+                        // Sắp xếp dữ liệu
+                        sortTable(tbody, currentSort, currentDirection);
+                    });
+                });
+
+                function sortTable(tbody, sortAttribute, direction) {
+                    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+                    rows.sort((a, b) => {
+                        const aText = a.querySelector(`[data-sort="${sortAttribute}"]`).textContent.trim();
+                        const bText = b.querySelector(`[data-sort="${sortAttribute}"]`).textContent.trim();
+
+                        if (direction === 'asc') {
+                            return aText.localeCompare(bText);
+                        } else {
+                            return bText.localeCompare(aText);
+                        }
+                    });
+
+                    // Xóa tất cả các hàng và thêm hàng đã sắp xếp
+                    tbody.innerHTML = '';
+                    rows.forEach(row => tbody.appendChild(row));
+                }
+            });
         </script>
 
 @endpush
