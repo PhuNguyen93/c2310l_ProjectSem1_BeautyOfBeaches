@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use App\Mail\OtpMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -93,8 +94,9 @@ class UserController extends Controller
 {
     // dd(1);
     $request->validate([
-        'name' => 'required|string|max:255',
-        // 'country' => 'required|string|max:255',
+        'name' => ['required','string','max:255',Rule::unique('users')->ignore($id) ],
+        'country' => 'required|string|max:255',
+        'phone' => ['string','max:10','regex:/^[0-9]+$/',Rule::unique('users')->ignore($id)],
     ]);
     // dd($request);
     $user = User::findOrFail($id);

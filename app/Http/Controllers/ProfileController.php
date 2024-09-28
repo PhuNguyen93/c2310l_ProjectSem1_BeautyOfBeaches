@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {
@@ -29,14 +30,26 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('users')->ignore($id), // Kiểm tra name duy nhất, bỏ qua user hiện tại
+            ],
             'country' => 'required|string|max:255',
+            'phone' => [
+                'required',
+                'string',
+                'max:10',
+                'regex:/^[0-9]+$/', // Chỉ cho phép số
+                Rule::unique('users')->ignore($id), // Kiểm tra phone duy nhất, bỏ qua user hiện tại
+            ],
         ]);
         // dd($request);
         $user = User::findOrFail($id);
         // dd($user);
         // Cập nhật thông tin người dùng
-        $user = User::findOrFail($id);
+        // $user = User::findOrFail($id);
         $user->name = $request->input('name');
         $user->phone = $request->input('phone');
         $user->birth_date = $request->input('birth_date');
