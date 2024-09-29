@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master-without-nav')
 
 @section('title')
     {{ __('Sweetalert') }}

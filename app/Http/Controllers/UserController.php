@@ -281,7 +281,37 @@ public function showSuccess()
     return view('plugins-sweetalert');
 }
 
+ // Phương thức resendOtp để gửi lại mã OTP
+ public function resendOtp(Request $request)
+ {
+     // Lấy email của người dùng từ session hoặc một nguồn khác
+     $email = session('email');
 
+     // Kiểm tra nếu email tồn tại
+     if (!$email) {
+         return redirect()->back()->withErrors('Email not found in session.');
+     }
+
+     // Tìm người dùng theo email
+     $user = User::where('email', $email)->first();
+
+     if (!$user) {
+         return redirect()->back()->withErrors('User not found.');
+     }
+
+     // Tạo mã OTP mới
+     $otp = rand(1000, 9999);
+
+     // Cập nhật mã OTP cho người dùng
+     $user->otp = $otp;
+     $user->save();
+
+     // Gửi lại OTP qua email
+     Mail::to($user->email)->send(new OtpMail($otp));
+
+     // Trả về thông báo thành công
+     return redirect()->back()->with('success', 'OTP has been resent to your email.');
+ }
 
 }
 

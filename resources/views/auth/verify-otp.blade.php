@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master-without-nav')
 
 @section('content')
 <body
@@ -83,10 +83,22 @@ class="flex items-center justify-center min-h-screen px-4 py-16 bg-cover bg-auth
                             <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="" class="block h-6 dark:hidden">
                         </a>
                     </div>
-                </div>
+
+
+                    <div class="shrink-0">
+                        <div class="relative dropdown text-end">
+                            {{-- add button:"bạn chưa nhận được mã? gửi lại OTP" --}}
+                            <p class="text-sm text-slate-500 dark:text-zink-200">Bạn chưa nhận được mã?
+                                <a href="{{ route('resend.otp') }}" class="text-custom-500 dark:text-custom-500 hover:underline">Gửi lại OTP</a>
+                            </p>
+
+                        </div>
+
+
                 <div class="mt-auto">
                     <img src="{{ URL::asset('build/images/auth/img-01.png') }}" alt="" class="md:max-w-[32rem] mx-auto">
                 </div>
+                  </div>
             </div>
         </div>
     </div>

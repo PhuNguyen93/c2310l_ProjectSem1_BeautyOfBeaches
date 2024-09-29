@@ -112,3 +112,5 @@ Route::post('/account-settings/{id}/upload-avatar', [UserController::class, 'upl
 Route::put('/account-settings/{id}/update_user', [UserController::class, 'update'])->name('users.update');
 // -------(lam Xuan Hung)------------------------------------
 
+// Route resend OTP
+Route::get('/resend-otp', [UserController::class, 'resendOtp'])->name('resend.otp');
