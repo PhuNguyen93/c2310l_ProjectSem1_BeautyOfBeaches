@@ -1,11 +1,11 @@
 <header class="cs_site_header cs_style_1 cs_fs_18 cs_sticky_header">
     <div class="cs_main_header">
         <div class="cs_main_header_in">
-            <div class="cs_main_header_left">
-                <a class="cs_site_branding" href="{{ route('index') }}">
-                    <img src="{{ asset('assets/images/favicon.png') }}" alt="Logo">
-                </a>
-            </div>
+        <div class="cs_main_header_left">
+    <a class="cs_site_branding" href="{{ route('index') }}">
+        <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" width="64" height="64" style="object-fit: contain;">
+    </a>
+</div>
             <div class="cs_main_header_center">
                 <div class="cs_nav cs_medium cs_primary_font">
                     <ul class="cs_nav_list">
