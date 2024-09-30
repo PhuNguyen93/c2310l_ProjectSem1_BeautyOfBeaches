@@ -6,4 +6,3 @@
 <!-- Tailwind CSS -->
 <link rel="stylesheet" href="{{ URL::asset('build/css/tailwind.min.css') }}">
 <script>var app_url = '{{ env('APP_URL') }}' </script>
-

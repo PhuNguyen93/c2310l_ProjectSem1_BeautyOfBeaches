@@ -425,10 +425,31 @@
                             <div class="cs_card_content position-absolute">
                                 <!-- Hiển thị tên bãi biển -->
                                 <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">{{ $beach->name }}</h2>
-                                <!-- Hiển thị vị trí bãi biển và số chuyến đi (nếu có) -->
+                                <!-- Hiển thị vị trí bãi biển -->
                                 <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">
-                                    {{ $beach->location }}</p>
-                                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">{{ $beach->country }}</p>
+                                    {{ $beach->location }}
+                                </p>
+                                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">
+                                    {{ $beach->country }}
+                                </p>
+
+                                <!-- Tính và hiển thị tổng số sao và số lượng người đánh giá -->
+                                @php
+                                    $totalReviews = $beach->feedbacks->count();
+                                    $averageRating = $totalReviews > 0 ? round($beach->feedbacks->avg('rating'), 1) : 0;
+                                @endphp
+
+                                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">
+                                    Rating:
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= $averageRating)
+                                            <i class="fas fa-star text-warning"></i>
+                                        @else
+                                            <i class="far fa-star text-warning"></i>
+                                        @endif
+                                    @endfor
+                                    ({{ $totalReviews }} reviews)
+                                </p>
                             </div>
                         </a>
                     </div>
