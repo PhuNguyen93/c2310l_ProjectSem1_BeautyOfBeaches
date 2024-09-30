@@ -84,21 +84,18 @@ class="flex items-center justify-center min-h-screen px-4 py-16 bg-cover bg-auth
                         </a>
                     </div>
 
-
                     <div class="shrink-0">
                         <div class="relative dropdown text-end">
-                            {{-- add button:"bạn chưa nhận được mã? gửi lại OTP" --}}
                             <p class="text-sm text-slate-500 dark:text-zink-200">Bạn chưa nhận được mã?
                                 <a href="{{ route('resend.otp') }}" class="text-custom-500 dark:text-custom-500 hover:underline">Gửi lại OTP</a>
                             </p>
-
                         </div>
-
+                    </div>
+                </div>
 
                 <div class="mt-auto">
                     <img src="{{ URL::asset('build/images/auth/img-01.png') }}" alt="" class="md:max-w-[32rem] mx-auto">
                 </div>
-                  </div>
             </div>
         </div>
     </div>
@@ -139,6 +136,25 @@ class="flex items-center justify-center min-h-screen px-4 py-16 bg-cover bg-auth
         updateOtp();
     });
 </script>
+
+@if (session('otp_success'))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            title: 'Authentication successful!',
+            text: 'Your OTP has been verified successfully.',
+            icon: 'success',
+            confirmButtonText: 'Back to Login',
+            customClass: {
+                confirmButton: 'text-white bg-custom-500 border-custom-500 hover:bg-custom-600'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "{{ route('login') }}";
+            }
+        });
+    </script>
+@endif
 
 @endsection
 

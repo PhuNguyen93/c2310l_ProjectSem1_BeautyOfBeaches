@@ -287,8 +287,8 @@ public function verifyOtp(Request $request)
         // Xóa session sau khi xác thực
         session()->forget(['name', 'email', 'password', 'role_id', 'otp']);
 
-        // Chuyển hướng đến trang success
-        return redirect()->route('success')->with('success', 'Account created successfully!');
+           // Thông báo thành công OTP
+        return redirect()->back()->with('otp_success', 'Account created successfully!');
     }
 
     // Trả về lỗi nếu OTP sai
@@ -301,10 +301,7 @@ public function showOtpForm()
     return view('auth.verify-otp');
 }
 
-public function showSuccess()
-{
-    return view('plugins-sweetalert');
-}
+
 
  // Phương thức resendOtp để gửi lại mã OTP
  public function resendOtp(Request $request)
