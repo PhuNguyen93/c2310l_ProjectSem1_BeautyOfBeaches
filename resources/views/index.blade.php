@@ -6,7 +6,8 @@
 <body>
 
     <x-preloader />
-
+    <!-- Nút cuộn lên đầu trang (ScrollToTop Component) -->
+    <x-scroll-to-top/>
     <!-- Start Header Section -->
     <x-header />
     <x-header_search />
