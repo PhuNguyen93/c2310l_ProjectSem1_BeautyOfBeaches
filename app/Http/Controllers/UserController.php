@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use App\Mail\OtpMail;
+use App\Models\Feedback;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -178,7 +179,30 @@ public function show($id)
 {
     $user = User::findOrFail($id);
 
-    return view('pages-account', compact('user'));
+    $feedbacks = $user->feedbacks()->with('beach')->paginate(5);
+
+    return view('pages-account', compact('user', 'feedbacks'));
+}
+
+public function filterFeedback(Request $request, $id)
+{
+    $user = User::findOrFail($id);
+
+    // Lấy giá trị lọc từ request
+    $rating = $request->input('rating');
+
+    // Lọc bình luận theo số sao nếu có giá trị rating được chọn
+    $query = Feedback::where('user_id', $id)->with('beach');
+
+    if (!empty($rating)) {
+        $query->where('rating', $rating);
+    }
+
+    // Phân trang các bình luận đã lọc
+    $feedbacks = $query->paginate(5);
+
+    // Trả về view cùng với kết quả
+    return view('pages-account', compact('user', 'feedbacks'));
 }
 
 public function showProfile($id)
@@ -190,6 +214,7 @@ public function showProfile($id)
     // Truyền dữ liệu user sang view
     return view('pages-account-settings', compact('user'));
 }
+
 public function uploadAvatar(Request $request,$id)
 {
 

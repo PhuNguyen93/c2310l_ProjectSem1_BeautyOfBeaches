@@ -186,7 +186,7 @@
                 </li>
             </ul>
         </div> --}}
-    </div><!--end card-->
+    </div><
 
     <div class="tab-content">
         <div class="block tab-pane" id="overviewTabs">
@@ -297,10 +297,96 @@
                 </ul>
             </div> --}}
         </div><!--end tab pane-->
-    </div><!--end tab content-->
+    </div>
+    <div class="mt-5 w-full overflow-x-auto">
+        <div class="card-body w-full">
+            <h4 class="mb-3 font-semibold text-xl">All Comments on Beaches</h4>
+
+            <!-- Form lọc theo số sao -->
+            <form method="GET" action="{{ route('user.filterFeedback', ['id' => $user->id]) }}" class="mb-4">
+                <label for="ratingFilter" class="mr-2">Filter by Rating:</label>
+                <select name="rating" id="ratingFilter" class="border px-2 py-1">
+                    <option value="">All Ratings</option>
+                    <option value="5" {{ request('rating') == 5 ? 'selected' : '' }}>5 Stars</option>
+                    <option value="4" {{ request('rating') == 4 ? 'selected' : '' }}>4 Stars</option>
+                    <option value="3" {{ request('rating') == 3 ? 'selected' : '' }}>3 Stars</option>
+                    <option value="2" {{ request('rating') == 2 ? 'selected' : '' }}>2 Stars</option>
+                    <option value="1" {{ request('rating') == 1 ? 'selected' : '' }}>1 Star</option>
+                </select>
+                <button type="submit" class="btn bg-custom-500 text-white">
+                    Filter
+                </button>
+            </form>
+
+            @if($feedbacks->isEmpty())
+                <p class="text-gray-500">No comments yet.</p>
+            @else
+                <table class="min-w-full w-full table-auto">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-sm font-bold text-gray-600">Avatar</th>
+                            <th class="px-6 py-3 text-left text-sm font-bold text-gray-600">Name</th>
+                            <th class="px-6 py-3 text-left text-sm font-bold text-gray-600">Country</th>
+                            <th class="px-6 py-3 text-left text-sm font-bold text-gray-600">Rating</th>
+                            <th class="px-6 py-3 text-left text-sm font-bold text-gray-600">Comment</th>
+                            <th class="px-6 py-3 text-left text-sm font-bold text-gray-600">Creation Date</th>
+                            <th class="px-6 py-3 text-left text-sm font-bold text-gray-600">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($feedbacks as $feedback)
+                        <tr class="bg-white border-b">
+                            <!-- Beach Image -->
+                            <td class="px-6 py-4">
+                                <img src="{{ asset($feedback->beach->image_url) }}" alt="Beach Image"
+                                    class="w-12 h-12 rounded-full object-cover">
+                            </td>
+
+                            <!-- Beach Name -->
+                            <td class="px-6 py-4 text-gray-700">{{ $feedback->beach->name }}</td>
+
+                            <!-- Country -->
+                            <td class="px-6 py-4 text-gray-700">{{ $feedback->beach->country }}</td>
+
+                            <!-- Rating -->
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= $feedback->rating)
+                                            <span class="text-yellow-400">★</span>
+                                        @else
+                                            <span class="text-gray-300">★</span>
+                                        @endif
+                                    @endfor
+                                </div>
+                            </td>
+
+                            <!-- Comment -->
+                            <td class="px-6 py-4 text-gray-700">{{ $feedback->message }}</td>
+
+                            <!-- Creation Date -->
+                            <td class="px-6 py-4 text-gray-500">{{ $feedback->created_at->format('Y-m-d H:i:s') }}</td>
+
+                            <!-- Action -->
+                            <td class="px-6 py-4">
+                                <button class="bg-gray-200 text-gray-600 px-2 py-1 rounded">...</button>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <div class="mt-4">
+                    {{ $feedbacks->appends(request()->query())->links() }}
+                </div>
+            @endif
+        </div>
+    </div>
 
 
-    <!--Add Documents Modal-->
+
+
+
+
 
 @endsection
 @push('scripts')

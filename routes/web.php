@@ -112,5 +112,13 @@ Route::post('/account-settings/{id}/upload-avatar', [UserController::class, 'upl
 Route::put('/account-settings/{id}/update_user', [UserController::class, 'update'])->name('users.update');
 // -------(lam Xuan Hung)------------------------------------
 
+// Route hiển thị trang profile và bình luận
+Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+
+// Route để lọc bình luận theo số sao
+Route::get('/user/{id}/filter-feedback', [UserController::class, 'filterFeedback'])->name('user.filterFeedback');
+
+
 // Route resend OTP
 Route::get('/resend-otp', [UserController::class, 'resendOtp'])->name('resend.otp');
+
