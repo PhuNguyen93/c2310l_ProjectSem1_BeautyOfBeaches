@@ -175,15 +175,19 @@
                                         </div>
 
                                         <!-- Modal chỉnh sửa comment -->
-                                        <div class="modal fade" id="editModal{{ $feedback->id }}" tabindex="-1" aria-labelledby="editModalLabel{{ $feedback->id }}" aria-hidden="true">
+                                        <div class="modal fade" id="editModal{{ $feedback->id }}" tabindex="-1"
+                                            aria-labelledby="editModalLabel{{ $feedback->id }}" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="editModalLabel{{ $feedback->id }}">Edit Comment</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <h5 class="modal-title" id="editModalLabel{{ $feedback->id }}">
+                                                            Edit Comment</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="{{ route('feedbacks.update', $feedback->id) }}" method="POST" id="editForm{{ $feedback->id }}">
+                                                        <form action="{{ route('feedbacks.update', $feedback->id) }}"
+                                                            method="POST" id="editForm{{ $feedback->id }}">
                                                             @csrf
                                                             @method('PUT')
 
@@ -197,27 +201,49 @@
                                                             <div class="col-lg-6 d-flex align-items-center">
                                                                 <label for="rating">Rating:</label>
                                                                 <div class="star-rating ms-2">
-                                                                    <input type="radio" id="editStar5_{{ $feedback->id }}" name="rating" value="5" {{ $feedback->rating == 5 ? 'checked' : '' }} />
-                                                                    <label for="editStar5_{{ $feedback->id }}" title="5 stars">★</label>
+                                                                    <input type="radio"
+                                                                        id="editStar5_{{ $feedback->id }}" name="rating"
+                                                                        value="5"
+                                                                        {{ $feedback->rating == 5 ? 'checked' : '' }} />
+                                                                    <label for="editStar5_{{ $feedback->id }}"
+                                                                        title="5 stars">★</label>
 
-                                                                    <input type="radio" id="editStar4_{{ $feedback->id }}" name="rating" value="4" {{ $feedback->rating == 4 ? 'checked' : '' }} />
-                                                                    <label for="editStar4_{{ $feedback->id }}" title="4 stars">★</label>
+                                                                    <input type="radio"
+                                                                        id="editStar4_{{ $feedback->id }}" name="rating"
+                                                                        value="4"
+                                                                        {{ $feedback->rating == 4 ? 'checked' : '' }} />
+                                                                    <label for="editStar4_{{ $feedback->id }}"
+                                                                        title="4 stars">★</label>
 
-                                                                    <input type="radio" id="editStar3_{{ $feedback->id }}" name="rating" value="3" {{ $feedback->rating == 3 ? 'checked' : '' }} />
-                                                                    <label for="editStar3_{{ $feedback->id }}" title="3 stars">★</label>
+                                                                    <input type="radio"
+                                                                        id="editStar3_{{ $feedback->id }}" name="rating"
+                                                                        value="3"
+                                                                        {{ $feedback->rating == 3 ? 'checked' : '' }} />
+                                                                    <label for="editStar3_{{ $feedback->id }}"
+                                                                        title="3 stars">★</label>
 
-                                                                    <input type="radio" id="editStar2_{{ $feedback->id }}" name="rating" value="2" {{ $feedback->rating == 2 ? 'checked' : '' }} />
-                                                                    <label for="editStar2_{{ $feedback->id }}" title="2 stars">★</label>
+                                                                    <input type="radio"
+                                                                        id="editStar2_{{ $feedback->id }}" name="rating"
+                                                                        value="2"
+                                                                        {{ $feedback->rating == 2 ? 'checked' : '' }} />
+                                                                    <label for="editStar2_{{ $feedback->id }}"
+                                                                        title="2 stars">★</label>
 
-                                                                    <input type="radio" id="editStar1_{{ $feedback->id }}" name="rating" value="1" {{ $feedback->rating == 1 ? 'checked' : '' }} />
-                                                                    <label for="editStar1_{{ $feedback->id }}" title="1 star">★</label>
+                                                                    <input type="radio"
+                                                                        id="editStar1_{{ $feedback->id }}" name="rating"
+                                                                        value="1"
+                                                                        {{ $feedback->rating == 1 ? 'checked' : '' }} />
+                                                                    <label for="editStar1_{{ $feedback->id }}"
+                                                                        title="1 star">★</label>
                                                                 </div>
                                                             </div>
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" form="editForm{{ $feedback->id }}" class="btn btn-primary">Save changes</button>
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" form="editForm{{ $feedback->id }}"
+                                                            class="btn btn-primary">Save changes</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -228,45 +254,70 @@
                         </ol>
 
                         <!-- Form gửi bình luận -->
-                        @if (auth()->check())
-                            <form action="{{ route('feedbacks.store', $beach->id) }}" method="POST"
-                                class="cs_comment_form cs_white_bg cs_radius_5">
-                                @csrf
-                                <h3 class="cs_fs_24 cs_semibold">Post Comment</h3>
-                                <div class="row row cs_gap_y_30">
-                                    <div class="col-lg-12">
-                                        <textarea class="cs_gray_bg cs_radius_5 cs_form_field" name="message" placeholder="Write Comment" cols="35"
-                                            rows="8" required></textarea>
-                                    </div>
+                        <form action="{{ route('feedbacks.store', $beach->id) }}" method="POST"
+                            class="cs_comment_form cs_white_bg cs_radius_5" id="commentForm">
+                            @csrf
+                            <h3 class="cs_fs_24 cs_semibold">Post Comment</h3>
+                            <div class="row row cs_gap_y_30">
+                                <div class="col-lg-12">
+                                    <textarea class="cs_gray_bg cs_radius_5 cs_form_field" name="message" placeholder="Write Comment" cols="35"
+                                        rows="8" required>{{ old('message') }}</textarea>
+                                </div>
 
-                                    <div class="col-lg-6 d-flex align-items-center">
-                                        <label for="rating">Rating:</label>
-                                        <div class="star-rating ms-2">
-                                            <input type="radio" id="star5" name="rating" value="5" />
-                                            <label for="star5" title="5 stars">★</label>
-                                            <input type="radio" id="star4" name="rating" value="4" />
-                                            <label for="star4" title="4 stars">★</label>
-                                            <input type="radio" id="star3" name="rating" value="3" />
-                                            <label for="star3" title="3 stars">★</label>
-                                            <input type="radio" id="star2" name="rating" value="2" />
-                                            <label for="star2" title="2 stars">★</label>
-                                            <input type="radio" id="star1" name="rating" value="1" />
-                                            <label for="star1" title="1 star">★</label>
-                                        </div>
+                                <div class="col-lg-6 d-flex align-items-center">
+                                    <label for="rating">Rating:</label>
+                                    <div class="star-rating ms-2">
+                                        <input type="radio" id="star5" name="rating" value="5"
+                                            {{ old('rating') == 5 ? 'checked' : '' }} />
+                                        <label for="star5" title="5 stars">★</label>
+                                        <input type="radio" id="star4" name="rating" value="4"
+                                            {{ old('rating') == 4 ? 'checked' : '' }} />
+                                        <label for="star4" title="4 stars">★</label>
+                                        <input type="radio" id="star3" name="rating" value="3"
+                                            {{ old('rating') == 3 ? 'checked' : '' }} />
+                                        <label for="star3" title="3 stars">★</label>
+                                        <input type="radio" id="star2" name="rating" value="2"
+                                            {{ old('rating') == 2 ? 'checked' : '' }} />
+                                        <label for="star2" title="2 stars">★</label>
+                                        <input type="radio" id="star1" name="rating" value="1"
+                                            {{ old('rating') == 1 ? 'checked' : '' }} />
+                                        <label for="star1" title="1 star">★</label>
                                     </div>
+                                    <!-- Hiển thị lỗi kế bên phần rating -->
+                                    @error('rating')
+                                        <span class="text-danger ms-3">{{ $message }}</span>
+                                    @enderror
+                                </div>
 
-                                    <div class="col-lg-12">
-                                        <button type="submit" class="cs_btn cs_style_1 w-100">Post Comment</button>
+                                <div class="col-lg-12">
+                                    <button type="submit" class="cs_btn cs_style_1 w-100" id="submitCommentButton">Post
+                                        Comment</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Popup cho người dùng chưa đăng nhập -->
+                        <div id="loginPopup" class="modal" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">You're not logged in</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Please log in to post a comment.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
-                            </form>
-                        @else
-                            <!-- Nếu người dùng chưa đăng nhập, hiển thị thông báo -->
-                            <div class="alert alert-info">
-                                <strong>Bạn phải <a href="{{ route('login') }}">đăng nhập</a> để có thể bình luận và đánh
-                                    giá.</strong>
                             </div>
-                        @endif
+                        </div>
+
                     </div>
                 </div>
 
@@ -401,38 +452,52 @@
     <!-- End Destination Details Section -->
 @endsection
 <script>
+   document.addEventListener('DOMContentLoaded', function () {
+    // Bắt sự kiện khi người dùng chọn rating
     document.querySelectorAll('.star-rating input').forEach((star) => {
         star.addEventListener('click', function() {
             console.log(`Rating selected: ${this.value}`);
         });
     });
-    document.addEventListener('DOMContentLoaded', function() {
-        const filterButtons = document.querySelectorAll('.filter-rating');
 
-        filterButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const rating = this.getAttribute('data-rating');
-                const comments = document.querySelectorAll('#comments-list .cs_comment');
+    // Bắt sự kiện lọc comment dựa trên rating
+    const filterButtons = document.querySelectorAll('.filter-rating');
 
-                if (rating === 'all') {
-                    // Hiển thị tất cả comment
-                    comments.forEach(comment => {
-                        comment.style.display = 'block';
-                    });
-                } else {
-                    // Ẩn tất cả comment trước
-                    comments.forEach(comment => {
-                        comment.style.display = 'none';
-                    });
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const rating = this.getAttribute('data-rating');
+            const comments = document.querySelectorAll('#comments-list .cs_comment');
 
-                    // Hiển thị comment có rating tương ứng
-                    const filteredComments = document.querySelectorAll(
-                        `#comments-list .cs_comment[data-rating="${rating}"]`);
-                    filteredComments.forEach(comment => {
-                        comment.style.display = 'block';
-                    });
-                }
-            });
+            if (rating === 'all') {
+                // Hiển thị tất cả comment
+                comments.forEach(comment => {
+                    comment.style.display = 'block';
+                });
+            } else {
+                // Ẩn tất cả comment trước
+                comments.forEach(comment => {
+                    comment.style.display = 'none';
+                });
+
+                // Hiển thị comment có rating tương ứng
+                const filteredComments = document.querySelectorAll(`#comments-list .cs_comment[data-rating="${rating}"]`);
+                filteredComments.forEach(comment => {
+                    comment.style.display = 'block';
+                });
+            }
         });
     });
+
+    // Bắt sự kiện nếu người dùng chưa đăng nhập, hiển thị popup
+    const submitButton = document.getElementById('submitCommentButton');
+    const isAuthenticated = {{ auth()->check() ? 'true' : 'false' }};
+
+    submitButton.addEventListener('click', function (e) {
+        if (!isAuthenticated) {
+            e.preventDefault();  // Ngăn chặn form được submit nếu chưa đăng nhập
+            $('#loginPopup').modal('show');  // Hiển thị popup
+        }
+    });
+});
+
 </script>

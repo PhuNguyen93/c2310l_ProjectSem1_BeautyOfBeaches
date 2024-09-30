@@ -92,6 +92,9 @@
                     </div>
                 @endforeach
             </div>
+            <!-- Thêm phân trang -->
+            {{ $beaches->links('pagination::bootstrap-5') }}
+
         </div>
         <div class="cs_height_140 cs_height_lg_80"></div>
     </section>
