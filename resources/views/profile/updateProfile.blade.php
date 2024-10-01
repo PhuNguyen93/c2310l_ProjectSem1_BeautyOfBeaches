@@ -243,9 +243,9 @@
 
                                         <div class="xl:col-span-6">
                                             <label for="emailInput" class="inline-block mb-2 text-base font-medium">Email Address</label>
-                                            <input type="email" id="emailInput"
+                                            <input type="email" id="emailInput" name="email"
                                                 class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                                                placeholder="Enter your email address" value="{{ $user->email }}" disabled>
+                                                placeholder="Enter your email address" value="{{ old('email', $user->email) }}" >
                                         </div><!--end col-->
 
                                         <div class="xl:col-span-6">
@@ -253,7 +253,7 @@
                                             <input type="date" id="birthDateInput" name="birth_date"
                                                 class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
                                                 placeholder="Select date" data-provider="flatpickr" data-date-format="d M, Y",
-                                                value="{{ $user->birth_date }}">
+                                             value="{{ old('birth_date', $user->birth_date) }}">
                                         </div><!--end col-->
 
                                         <div class="xl:col-span-6">

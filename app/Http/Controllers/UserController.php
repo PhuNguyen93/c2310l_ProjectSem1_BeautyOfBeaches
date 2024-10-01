@@ -99,23 +99,33 @@ class UserController extends Controller
 
    public function update(Request $request, $id)
 {
-    // dd(1);
+    // dd($request);
     $request->validate([
         'name' => ['required','string','max:255',Rule::unique('users')->ignore($id) ],
         'country' => 'required|string|max:255',
         'phone' => ['string','max:10','regex:/^[0-9]+$/',Rule::unique('users')->ignore($id)],
+        'email' => [ // Thêm xác thực cho email
+            'nullable', // Cho phép email là null
+            'string',
+            'email',
+            'max:255',
+            Rule::unique('users')->ignore($id), // Kiểm tra email duy nhất, bỏ qua user hiện tại
+        ],
     ]);
     // dd($request);
     $user = User::findOrFail($id);
     // dd($user);
-    // Cập nhật thông tin người dùng
-    // $user = User::findOrFail($id);
+
+
+    if ($request->filled('email')) {
+        $user->email = $request->input('email');
+    }
     $user->name = $request->input('name');
     $user->phone = $request->input('phone');
     $user->birth_date = $request->input('birth_date');
     $user->country = $request->input('country');
     $user->save();
-
+    // dd($user);
     return redirect()->route('dashboard');
 }
 
