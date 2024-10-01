@@ -85,11 +85,9 @@ Route::post('verify-otp', [UserController::class, 'verifyOtp'])->name('verify.ot
 // Resource controller for users
 Route::resource('users', UserController::class);
 
-Route::get('/success', [UserController::class, 'showSuccess']);
 
-Route::get('/success', function () {
-    return view('plugins-sweetalert');
-})->name('success'); // Thêm tên cho route
+
+
 
 
 // profile (Lam Xuan Hung)
