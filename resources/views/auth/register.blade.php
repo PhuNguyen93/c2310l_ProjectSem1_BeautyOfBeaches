@@ -82,7 +82,7 @@
                             </div>
 
                             <div class="hidden tab-pane" id="phoneTabs">
-                                <form action="index.html" class="mt-10" id="signInForm">
+                                {{-- <form action="index.html" class="mt-10" id="signInForm">
                                     <div class="mb-3">
                                         <label for="phone-number-field" class="inline-block mb-2 text-base font-medium">Phone Number</label>
                                         <input type="number" id="phone-number-field" class="form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Enter phone">
@@ -103,11 +103,32 @@
                                         <input type="password" name="password_confirmation" id="password_confirmation" class="form-input dark:bg-zink-600/50 border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Confirm password" required>
                                     </div>
 
-                                    {{-- <p class="italic text-15 text-slate-500 dark:text-zink-200">By registering you agree to the Tailwick <a href="#!" class="underline">Terms of Use</a></p> --}}
                                     <div class="mt-10">
                                         <button type="submit" class="w-full text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">Sign In</button>
                                     </div>
+                                </form> --}}
+                                <form action="{{ route('register.phone') }}" method="POST">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <label for="phone" class="inline-block mb-2 text-base font-medium">Phone Number</label>
+                                        <input type="text" name="phone" class="form-input" placeholder="Enter phone number" required>
+                                    </div>
+                                    <input type="hidden" name="role_id" value="1">
+                                    <div class="mb-3">
+                                        <label for="name" class="inline-block mb-2 text-base font-medium">Name</label>
+                                        <input type="text" name="name" class="form-input" placeholder="Enter your name" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="inline-block mb-2 text-base font-medium">Password</label>
+                                        <input type="password" name="password" class="form-input" placeholder="Enter password" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password_confirmation" class="inline-block mb-2 text-base font-medium">Confirm Password</label>
+                                        <input type="password" name="password_confirmation" class="form-input" placeholder="Confirm password" required>
+                                    </div>
+                                    <button type="submit" class="w-full text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">Sign In</button>
                                 </form>
+
                             </div>
                         </div>
                         <div class="relative text-center my-9 before:absolute before:top-3 before:left-0 before:right-0 before:border-t before:border-t-slate-200 dark:before:border-t-zink-500">

@@ -44,4 +44,25 @@ class RegisterController extends Controller
         // Redirect về trang đăng nhập
         return redirect()->route('login')->with('success', 'Registration successful.');
     }
+
+    public function registerWithPhone(Request $request)
+    {
+        // Validation cho số điện thoại
+
+        $request->validate([
+            'name' => 'required|string|max:255|unique:users',
+            'phone' => 'required|string|unique:users,phone', // Kiểm tra số điện thoại
+            'password' => 'required|string|confirmed',
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'phone' => $request->phone, // Lưu số điện thoại
+            'email' => null, // Đặt giá trị email là null
+            'password' => Hash::make($request->password),
+            'role_id' => $request->role_id,
+        ]);
+
+        return redirect()->route('login')->with('success', 'Registration successful.');
+    }
 }

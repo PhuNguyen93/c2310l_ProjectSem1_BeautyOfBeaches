@@ -59,9 +59,9 @@ Route::controller(RegisterController::class)->group(function () {
 //     Route::put('/account-settings/{id}/update_user', [UserController::class, 'update'])->name('users.update_user');
 
 //     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-//     Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::post('/profile/upload-avatar', [ProfileController::class, 'uploadAvatar'])->name('profile.upload_avatar');
-//     Route::get('/profile/{id}/updateProfile', [ProfileController::class, 'showUpdateForm'])->name('profile.showUpdateForm');
+    // Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::post('/profile/upload-avatar', [ProfileController::class, 'uploadAvatar'])->name('profile.upload_avatar');
+    // Route::get('/profile/{id}/updateProfile', [ProfileController::class, 'showUpdateForm'])->name('profile.showUpdateForm');
 // });
 
 // Feedback Routes
@@ -120,3 +120,4 @@ Route::get('/user/{id}/filter-feedback', [UserController::class, 'filterFeedback
 // Route resend OTP
 Route::get('/resend-otp', [UserController::class, 'resendOtp'])->name('resend.otp');
 
+Route::post('/register/phone', [RegisterController::class, 'registerWithPhone'])->name('register.phone'); // Route cho số điện thoại

@@ -215,15 +215,15 @@
                             <!-- Email Address -->
                             <div class="xl:col-span-6">
                                 <label for="emailInput" class="inline-block mb-2 text-base font-medium">Email Address</label>
-                                <input type="email" id="emailInput"
+                                <input type="email" id="emailInput" name="email"
                                     class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                                    placeholder="Enter your email address" value="{{ old('email', $user->email) }}" disabled>
+                                    placeholder="Enter your email address" value="{{ old('email', $user->email) }}" >
                             </div><!--end col-->
 
                             <!-- Birth Date -->
                             <div class="xl:col-span-6">
                                 <label for="birth_date" class="inline-block mb-2 text-base font-medium text-gray-700 dark:text-zinc-200">Birth Date</label>
-                                <input type="date" name="birth_date" id="birth_date" value="{{ old('birth_date', $user->birth_data) }}"
+                                <input type="date" name="birth_date" id="birth_date" value="{{ old('birth_date', $user->birth_date) }}"
                                     class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out dark:bg-zinc-800 dark:border-zinc-600 dark:text-zinc-100">
                             </div>
 
