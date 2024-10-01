@@ -14,39 +14,40 @@
           <div class="col-lg-6">
             <div class="cs_section_heading cs_style_1">
               <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">About Us</h3>
-              <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0">We are Professional Planners For your </h2>
+              <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0">Welcome to Travel Top Destination of The World </h2>
             </div>
             <div class="cs_about_text">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. sed do eiusmod tem por incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam Lorem ipsum dolor sit amet, consectetur adipiscing elit. sed do</p>
-              <p class="mb-0 cs_accent_color cs_medium cs_fs_18">Speak to our Destination Experts at Direct Call +1 546 378 654</p>
+                <p>Your gateway to discovering the most beautiful beaches and enjoying exceptional services. We take pride in offering unforgettable vacation experiences at the most pristine and enchanting coastal destinations. With a dedicated team, we are committed to providing the best information and services to help you plan your dream getaway. Let us be your guide as you explore nature and enjoy a perfect beach holiday!</p>
+                <p class="mb-0 cs_accent_color cs_medium cs_fs_18">For inquiries or to book your perfect beach getaway, feel free to contact us at 07 1234 5678 – we’re here to help you every step of the way!</p>
+
             </div>
             <ul class="cs_list cs_style_1 cs_mp0 cs_fs_18">
-              <li>
-                <i class="fa-solid fa-circle-check cs_accent_color"></i>
-                All placges and activiates are carefully picked by us.
-              </li>
-              <li>
-                <i class="fa-solid fa-circle-check cs_accent_color"></i>
-                98% Course Completitation Rates
-              </li>
-              <li>
-                <i class="fa-solid fa-circle-check cs_accent_color"></i>
-                We are an award winning agency
-              </li>
-              <li>
-                <i class="fa-solid fa-circle-check cs_accent_color"></i>
-                Trusted by more than 80,000 customers
-              </li>
+                <li>
+                    <i class="fa-solid fa-circle-check cs_accent_color"></i>
+                    Discover paradise at the world’s most breathtaking beaches – your dream vacation awaits!
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-check cs_accent_color"></i>
+                   Unwind, relax, and let the waves carry your worries away with our tailored beach services.
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-check cs_accent_color"></i>
+                    Explore hidden gems and pristine shores, where luxury meets nature.
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-check cs_accent_color"></i>
+                    Book your unforgettable beach escape today and create memories that will last a lifetime!
+                </li>
             </ul>
             <a href="" class="cs_btn cs_style_1 cs_fs_18 cs_medium">
               Read More
               <svg width="20" height="10" viewBox="0 0 20 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19.5866 5.69629H0.41235C0.184269 5.69629 0 5.46776 0 5.1849C0 4.90204 0.184269 4.67352 0.41235 4.67352H18.5906L16.0881 1.57004C15.927 1.37028 15.927 1.04587 16.0881 0.846109C16.2492 0.646349 16.5108 0.646349 16.6718 0.846109L19.8792 4.82374C19.9977 4.97076 20.0325 5.1897 19.9681 5.38147C19.9036 5.57164 19.7529 5.69629 19.5866 5.69629Z" fill="currentColor"/>
                 <path d="M16.3435 9.11986C16.2384 9.11986 16.1333 9.08012 16.0538 8.99935C15.8935 8.83909 15.8935 8.57884 16.0538 8.41858L19.2487 5.22371C19.4089 5.06345 19.6692 5.06345 19.8294 5.22371C19.9897 5.38396 19.9897 5.64422 19.8294 5.80448L16.6346 8.99935C16.5538 9.08012 16.4487 9.11986 16.3435 9.11986Z" fill="currentColor"/>
-              </svg>                
+              </svg>
             </a>
           </div>
-          <div class="col-lg-5 offset-lg-1"><img src="assets/images/about_img.png" alt=""></div>
+          <div class="col-lg-5 offset-lg-1"><img src="assets/images/about-us.jpg" alt=""></div>
         </div>
       </div>
       <div class="cs_height_140 cs_height_lg_80"></div>
@@ -73,7 +74,7 @@
                 <svg width="20" height="10" viewBox="0 0 20 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M19.5866 5.69629H0.41235C0.184269 5.69629 0 5.46776 0 5.1849C0 4.90204 0.184269 4.67352 0.41235 4.67352H18.5906L16.0881 1.57004C15.927 1.37028 15.927 1.04587 16.0881 0.846109C16.2492 0.646349 16.5108 0.646349 16.6718 0.846109L19.8792 4.82374C19.9977 4.97076 20.0325 5.1897 19.9681 5.38147C19.9036 5.57164 19.7529 5.69629 19.5866 5.69629Z" fill="currentColor"/>
                   <path d="M16.3435 9.11986C16.2384 9.11986 16.1333 9.08012 16.0538 8.99935C15.8935 8.83909 15.8935 8.57884 16.0538 8.41858L19.2487 5.22371C19.4089 5.06345 19.6692 5.06345 19.8294 5.22371C19.9897 5.38396 19.9897 5.64422 19.8294 5.80448L16.6346 8.99935C16.5538 9.08012 16.4487 9.11986 16.3435 9.11986Z" fill="currentColor"/>
-                </svg>                
+                </svg>
               </a>
             </div>
           </div>
