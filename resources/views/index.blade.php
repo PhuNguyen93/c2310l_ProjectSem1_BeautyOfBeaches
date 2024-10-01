@@ -69,36 +69,34 @@
         <div class="cs_height_140 cs_height_lg_80"></div>
         <div class="container">
             <div class="row align-items-center cs_gap_y_40">
-                <div class="col-lg-5"><img src="assets/images/about_img.png" alt=""></div>
+                <div class="col-lg-5"><img src="assets/images/about-us.jpg" alt=""></div>
                 <div class="col-lg-6 offset-lg-1">
                     <div class="cs_section_heading cs_style_1">
                         <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">About Us</h3>
                         <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0 wow fadeInRight" data-wow-duration="0.8s"
-                            data-wow-delay="0.2s">We are Professional Planners For your </h2>
+                            data-wow-delay="0.2s">Welcome to Travel Top Destination of The World</h2>
                     </div>
                     <div class="cs_about_text">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. sed do eiusmod tem por incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit. sed do</p>
-                        <p class="mb-0 cs_accent_color cs_medium cs_fs_18">Speak to our Destination Experts at Direct
-                            Call +1 546 378 654</p>
+                        <p>Your gateway to discovering the most beautiful beaches and enjoying exceptional services. We take pride in offering unforgettable vacation experiences at the most pristine and enchanting coastal destinations. With a dedicated team, we are committed to providing the best information and services to help you plan your dream getaway. Let us be your guide as you explore nature and enjoy a perfect beach holiday!</p>
+                        <p class="mb-0 cs_accent_color cs_medium cs_fs_18">For inquiries or to book your perfect beach getaway, feel free to contact us at 07 1234 5678 – we’re here to help you every step of the way!</p>
+
                     </div>
                     <ul class="cs_list cs_style_1 cs_mp0 cs_fs_18">
                         <li>
                             <i class="fa-solid fa-circle-check cs_accent_color"></i>
-                            All placges and activiates are carefully picked by us.
+                            Discover paradise at the world’s most breathtaking beaches – your dream vacation awaits!
                         </li>
                         <li>
                             <i class="fa-solid fa-circle-check cs_accent_color"></i>
-                            98% Course Completitation Rates
+                           Unwind, relax, and let the waves carry your worries away with our tailored beach services.
                         </li>
                         <li>
                             <i class="fa-solid fa-circle-check cs_accent_color"></i>
-                            We are an award winning agency
+                            Explore hidden gems and pristine shores, where luxury meets nature.
                         </li>
                         <li>
                             <i class="fa-solid fa-circle-check cs_accent_color"></i>
-                            Trusted by more than 80,000 customers
+                            Book your unforgettable beach escape today and create memories that will last a lifetime!
                         </li>
                     </ul>
                     <a href="{{ route('about') }}" class="cs_btn cs_style_1 cs_fs_18 cs_medium">
@@ -121,7 +119,7 @@
     <!-- End About Section -->
 
     <!-- Start featured section -->
-    <section class="cs_featured cs_style_1 cs_bg_filed" data-src="assets/images/feature_bg.jpeg">
+    <section class="cs_featured cs_style_1 cs_bg_filed" data-src="assets/images/feature-bg.jpg">
         <div class="cs_height_140 cs_height_lg_80"></div>
         <div class="container">
             <div class="row cs_gap_y_40 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.2s">
@@ -130,9 +128,8 @@
                         <div class="cs_iconbox_icon cs_radius_15 cs_center">
                             <img src="assets/images/icons/feature_icon_1.svg" alt="Featured Icon">
                         </div>
-                        <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Customer Delight</h2>
-                        <p class="cs_iconbox_subtitle mb-0">We deliver the best service and you to <br>experience for
-                            our customer we est <br>service and you to experie</p>
+                        <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Safety</h2>
+                        <p class="cs_iconbox_subtitle mb-0">We prioritize your safety, <br>ensuring strict protective measures at every destination <br>and throughout all services.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
@@ -140,9 +137,8 @@
                         <div class="cs_iconbox_icon cs_radius_15 cs_center">
                             <img src="assets/images/icons/feature_icon_2.svg" alt="Featured Icon">
                         </div>
-                        <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Trusted Adventure</h2>
-                        <p class="cs_iconbox_subtitle mb-0">We deliver the best service and you to <br>experience for
-                            our customer we est <br>service and you to experie</p>
+                        <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Unforgettable Journey</h2>
+                        <p class="cs_iconbox_subtitle mb-0">Each trip is crafted to offer unforgettable moments, <br>from breathtaking nature <br>to unique experiences.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
@@ -150,9 +146,10 @@
                         <div class="cs_iconbox_icon cs_radius_15 cs_center">
                             <img src="assets/images/icons/feature_icon_3.svg" alt="Featured Icon">
                         </div>
-                        <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Expert Guides</h2>
-                        <p class="cs_iconbox_subtitle mb-0">We deliver the best service and you to <br>experience for
-                            our customer we est <br>service and you to experie</p>
+                        <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Trusted Community</h2>
+                        <p class="cs_iconbox_subtitle mb-0">Our community consists of experienced professionals,
+                            <br>dedicated to providing top-notch <br>
+                            service and expertise.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
@@ -160,9 +157,8 @@
                         <div class="cs_iconbox_icon cs_radius_15 cs_center">
                             <img src="assets/images/icons/feature_icon_4.svg" alt="Featured Icon">
                         </div>
-                        <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Time Flexibility</h2>
-                        <p class="cs_iconbox_subtitle mb-0">We deliver the best service and you to <br>experience for
-                            our customer we est <br>service and you to experie</p>
+                        <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Time-Saving</h2>
+                        <p class="cs_iconbox_subtitle mb-0">With fast booking processes and 24/7 support,<br>we help you save time <br>and focus on enjoying your vacation.</p>
                     </div>
                 </div>
             </div>
@@ -176,10 +172,10 @@
         <div class="cs_height_135 cs_height_lg_75"></div>
         <div class="container">
             <div class="cs_section_heading cs_style_1 text-center">
-                <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">CHOOSE YOUR PACKAGE
+                <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">CHOOSE YOUR BEST BEACH
                 </h3>
                 <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0 wow fadeInUp" data-wow-duration="0.8s"
-                    data-wow-delay="0.2s">Popular Tours Packages</h2>
+                    data-wow-delay="0.2s">Famous Beaches</h2>
             </div>
             <div class="cs_height_55 cs_height_lg_40"></div>
         </div>
@@ -187,25 +183,24 @@
             <div class="row cs_gap_y_24">
                 <div class="col-lg-3 col-sm-6">
                     <div class="cs_card cs_style_1 cs_bg_filed cs_radius_5 position-relative"
-                        data-src="assets/images/package_img_1.jpeg">
+                        data-src="assets/images/whitehaven-hill-inlet.jpg">
                         <div class="cs_card_overlay cs_radius_5 position-absolute w-100 h-100"></div>
                         <div class="cs_card_content position-absolute">
                             <div class="cs_card_meta cs_white_color">
                                 <div>
                                     <i class="fa-solid fa-location-dot"></i>
-                                    <span>Paris</span>
+                                    <span>Australia</span>
                                 </div>
                                 <div>
                                     <i class="fa-regular fa-clock"></i>
-                                    <span>07 Days</span>
+                                    <span>Famous for its pristine white sand and crystal-clear waters</span>
                                 </div>
                                 <div>
                                     <i class="fa-solid fa-star"></i>
-                                    <span> 5K+ Rating</span>
+                                    <span> 7K+ Rating</span>
                                 </div>
                             </div>
-                            <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Aegean
-                                    Adventure</a></h2>
+                            <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Whitehaven Beach</a></h2>
                             <div class="cs_card_action">
                                 <a href="" class="cs_btn cs_style_1 cs_fs_18 cs_medium">
                                     Book Now
@@ -226,25 +221,24 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="cs_card cs_style_1 cs_bg_filed cs_radius_5 position-relative"
-                        data-src="assets/images/package_img_2.jpeg">
+                        data-src="assets/images/BaiadoSancho02.jpg">
                         <div class="cs_card_overlay cs_radius_5 position-absolute w-100 h-100"></div>
                         <div class="cs_card_content position-absolute">
                             <div class="cs_card_meta cs_white_color">
                                 <div>
                                     <i class="fa-solid fa-location-dot"></i>
-                                    <span>Paris</span>
+                                    <span>Brazil</span>
                                 </div>
                                 <div>
                                     <i class="fa-regular fa-clock"></i>
-                                    <span>07 Days</span>
+                                    <span>Consistently ranked as the number one beach in the world</span>
                                 </div>
                                 <div>
                                     <i class="fa-solid fa-star"></i>
-                                    <span> 4.5K+ Rating</span>
+                                    <span> 11K+ Rating</span>
                                 </div>
                             </div>
-                            <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Aegean
-                                    Adventure</a></h2>
+                            <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Baia do Sancho</a></h2>
                             <div class="cs_card_action">
                                 <a href="" class="cs_btn cs_style_1 cs_fs_18 cs_medium">
                                     Book Now
@@ -265,25 +259,24 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="cs_card cs_style_1 cs_bg_filed cs_radius_5 position-relative"
-                        data-src="assets/images/package_img_3.jpeg">
+                        data-src="assets/images/AnseSourced.jpg">
                         <div class="cs_card_overlay cs_radius_5 position-absolute w-100 h-100"></div>
                         <div class="cs_card_content position-absolute">
                             <div class="cs_card_meta cs_white_color">
                                 <div>
                                     <i class="fa-solid fa-location-dot"></i>
-                                    <span>Paris</span>
+                                    <span>Seychelles</span>
                                 </div>
                                 <div>
                                     <i class="fa-regular fa-clock"></i>
-                                    <span>07 Days</span>
+                                    <span> With its iconic granite boulders and soft white sand</span>
                                 </div>
                                 <div>
                                     <i class="fa-solid fa-star"></i>
-                                    <span> 4K+ Rating</span>
+                                    <span> 5K+ Rating</span>
                                 </div>
                             </div>
-                            <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Aegean
-                                    Adventure</a></h2>
+                            <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Anse Source d'Argent</a></h2>
                             <div class="cs_card_action">
                                 <a href="" class="cs_btn cs_style_1 cs_fs_18 cs_medium">
                                     Book Now
@@ -304,25 +297,24 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="cs_card cs_style_1 cs_bg_filed cs_radius_5 position-relative"
-                        data-src="assets/images/package_img_4.jpeg">
+                        data-src="assets/images/pinksand.jpg">
                         <div class="cs_card_overlay cs_radius_5 position-absolute w-100 h-100"></div>
                         <div class="cs_card_content position-absolute">
                             <div class="cs_card_meta cs_white_color">
                                 <div>
                                     <i class="fa-solid fa-location-dot"></i>
-                                    <span>Paris</span>
+                                    <span>Bahamas</span>
                                 </div>
                                 <div>
                                     <i class="fa-regular fa-clock"></i>
-                                    <span>07 Days</span>
+                                    <span>Renowned for its unique pink sand</span>
                                 </div>
                                 <div>
                                     <i class="fa-solid fa-star"></i>
-                                    <span> 5K+ Rating</span>
+                                    <span> 3.5K+ Rating</span>
                                 </div>
                             </div>
-                            <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Aegean
-                                    Adventure</a></h2>
+                            <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Pink Sands Beach</a></h2>
                             <div class="cs_card_action">
                                 <a href="" class="cs_btn cs_style_1 cs_fs_18 cs_medium">
                                     Book Now
@@ -462,15 +454,13 @@
     <!-- End destination Section -->
 
     <!-- Start Banner Section -->
-    <section class="cs_banner cs_style_1 cs_bg_filed cs_primary_bg" data-src="assets/images/banner_bg.jpeg">
+    <section class="cs_banner cs_style_1 cs_bg_filed cs_primary_bg" data-src="assets/images/baibiennhatrangbanner.jpg">
         <div class="cs_height_125 cs_height_lg_70"></div>
         <div class="container">
             <div class="cs_banner_text cs_white_color">
                 <h2 class="cs_banner_title cs_white_color cs_fs_56 wow fadeInRight" data-wow-duration="0.8s"
-                    data-wow-delay="0.2s">A Truly Wonderful Experience</h2>
-                <p class="cs_banner_subtitle cs_fs_18">Brilliant for anyone looking to get away from the hustle and
-                    bustle of city life or detox from their tech for a few days. I could have stayed another
-                    week!<br><br>
+                    data-wow-delay="0.2s">Nha Trang Beach</h2>
+                <p class="cs_banner_subtitle cs_fs_18"> With its enchanting beauty both day and night, is a must-visit destination to experience at least once in a lifetime. During the day, the soft white sand merges with the sparkling turquoise waters under the bright sun, creating a stunning natural landscape. Visitors can immerse themselves in the crystal-clear sea or stroll along the serene shoreline. As night falls, Nha Trang transforms into a romantic haven, with twinkling lights reflecting on the water's surface and the gentle sound of waves lapping the shore. It’s a tranquil moment that soothes the soul and leaves an unforgettable impression.<br><br>
                     They really have thought about everything here down to the finest details.</p>
                 <div class="cs_banner_review cs_medium">
                     <svg width="110" height="22" viewBox="0 0 110 22" fill="none"
@@ -509,38 +499,38 @@
         <div class="cs_height_135 cs_height_lg_80"></div>
         <div class="container">
             <div class="cs_section_heading cs_style_1 text-center">
-                <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">HOW IT WORKS</h3>
+                <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">HOW TO EXPERIENCE</h3>
                 <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0 wow fadeInUp" data-wow-duration="0.8s"
-                    data-wow-delay="0.2s">Getting Started? It’s Simple</h2>
+                    data-wow-delay="0.2s">It’s Simple</h2>
             </div>
             <div class="cs_height_55 cs_height_lg_40"></div>
             <div class="cs_steps cs_style_1">
                 <div class="cs_step text-center position-relative">
                     <div class="cs_step_thumb rounded-circle position-relative">
-                        <img src="assets/images/working_process_1.png" alt="Thumb" class="rounded-circle">
+                        <img src="assets/images/checklist01.png" alt="Thumb" class="rounded-circle">
                         <span
                             class="cs_step_number cs_semibold text-white cs_fs_25 rounded-circle cs_accent_bg d-flex align-items-center justify-content-center position-absolute">01</span>
                     </div>
-                    <h2 class="cs_fs_25 cs_semibold">Get Travel Insurence</h2>
-                    <p class="m-0">We provide a range of digital marketing lutions including website design.</p>
+                    <h2 class="cs_fs_25 cs_semibold">Research and Create a List</h2>
+                    <p class="m-0">Explore different beaches based on your preferences, such as scenery, activities, and services available. Read reviews from previous visitors and compile a list of potential beaches to visit.</p>
                 </div>
                 <div class="cs_step text-center position-relative">
                     <div class="cs_step_thumb rounded-circle position-relative">
-                        <img src="assets/images/working_process_2.png" alt="Thumb" class="rounded-circle">
+                        <img src="assets/images/checklist02.png" alt="Thumb" class="rounded-circle">
                         <span
                             class="cs_step_number cs_semibold text-white cs_fs_25 rounded-circle cs_accent_bg d-flex align-items-center justify-content-center position-absolute">02</span>
                     </div>
-                    <h2 class="cs_fs_25 cs_semibold">Compare & Book</h2>
-                    <p class="m-0">We provide a range of digital marketing lutions including website design.</p>
+                    <h2 class="cs_fs_25 cs_semibold">Identify Needs and Budget</h2>
+                    <p class="m-0">Determine what’s important for your trip, including your budget, accommodation type (hotel, resort, or vacation rental), and desired activities (snorkeling, water sports, relaxation, etc.). Ensure the beach you choose aligns with your needs and budget.</p>
                 </div>
                 <div class="cs_step text-center position-relative">
                     <div class="cs_step_thumb rounded-circle position-relative">
-                        <img src="assets/images/working_process_3.png" alt="Thumb" class="rounded-circle">
+                        <img src="assets/images/checklist03.png" alt="Thumb" class="rounded-circle">
                         <span
                             class="cs_step_number cs_semibold text-white cs_fs_25 rounded-circle cs_accent_bg d-flex align-items-center justify-content-center position-absolute">03</span>
                     </div>
-                    <h2 class="cs_fs_25 cs_semibold">Book a Room</h2>
-                    <p class="m-0">We provide a range of digital marketing lutions including website design.</p>
+                    <h2 class="cs_fs_25 cs_semibold">Book Services and Plan Itinerary</h2>
+                    <p class="m-0">Once you’ve selected a beach, book your travel services, such as flights, accommodations, and activities. Create a detailed itinerary, including sightseeing, travel times, and other planned activities. Don’t forget to check the weather for optimal vacation preparation!</p>
                 </div>
             </div>
         </div>
@@ -552,7 +542,7 @@
     <section>
         <div class="container">
             <div class="cs_video_block cs_style_1 cs_bg_filed position-relative"
-                data-src="assets/images/video_block.jpeg">
+                data-src="assets/images/Philippines.jpg">
                 <a href="https://www.youtube.com/embed/eSUmkFPln_U"
                     class="cs_player_btn cs_center cs_accent_bg cs_video_open">
                     <svg width="40" height="47" viewBox="0 0 40 47" fill="none"
@@ -601,7 +591,7 @@
                     <article class="cs_post cs_style_1">
                         <a href="{{ route('blogdetails') }}"
                             class="cs_post_thumb cs_zoom overflow-hidden position-relative">
-                            <img src="assets/images/post_1.jpeg" alt="Post Thumb" class="cs_zoom_in">
+                            <img src="assets/images/beach3.jpg" alt="Post Thumb" class="cs_zoom_in">
                             <div class="cs_posted_by position-absolute">
                                 <span class="cs_accent_bg cs_white_color">27</span>
                                 <span class="cs_primary_bg cs_white_color">March 2024</span>
@@ -611,15 +601,14 @@
                             <div class="cs_post_info_in">
                                 <div class="cs_post_avatar">
                                     <div class="cs_avatar_thumb">
-                                        <img src="assets/images/avatar_1.png" alt="Avatar">
+                                        <img src="assets/images/WHpost.jpeg" alt="Avatar">
                                     </div>
                                     <div class="cs_avatar_info">By. <br>Admin</div>
                                 </div>
                                 <h2 class="cs_post_title cs_fs_24 cs_semibold"><a
-                                        href="{{ route('blogdetails') }}">Useful VS Code Esions Front- End Develop</a>
+                                        href="{{ route('blogdetails') }}">Whitehaven Beach, Australia</a>
                                 </h2>
-                                <p class="cs_post_subtitle">Lorem ipsum dolor sit amet, atomorum ds sosidon ium est as
-                                    Id vim rrem princi pes suas molesti interpretaris</p>
+                                <p class="cs_post_subtitle">Protecting Paradise: New Conservation Efforts at Whitehaven Beach,In a recent initiative to preserve the natural beauty of Whitehaven Beach, local authorities have announced new conservation measures aimed at protecting the unique ecosystem of the Whitsunday Islands. The program includes stricter regulations on tourism activities and the introduction of guided eco-tours to educate visitors about the delicate environment. Tourists can now enjoy the stunning white sands and clear waters while contributing to the conservation of this breathtaking paradise.</p>
                                 <div class="cs_post_btns cs_gray_bg_1">
                                     <a href="#">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -658,25 +647,25 @@
                     <article class="cs_post cs_style_1">
                         <a href="{{ route('blogdetails') }}"
                             class="cs_post_thumb cs_zoom overflow-hidden position-relative">
-                            <img src="assets/images/post_2.jpeg" alt="Post Thumb" class="cs_zoom_in">
+                            <img src="assets/images/baiadopost.webp" alt="Post Thumb" class="cs_zoom_in">
                             <div class="cs_posted_by position-absolute">
-                                <span class="cs_accent_bg cs_white_color">27</span>
-                                <span class="cs_primary_bg cs_white_color">March 2024</span>
+                                <span class="cs_accent_bg cs_white_color">11</span>
+                                <span class="cs_primary_bg cs_white_color">September 2015</span>
                             </div>
                         </a>
                         <div class="cs_post_info">
                             <div class="cs_post_info_in">
                                 <div class="cs_post_avatar">
                                     <div class="cs_avatar_thumb">
-                                        <img src="assets/images/avatar_2.png" alt="Avatar">
+                                        <img src="assets/images/avatar02.jpeg" alt="Avatar">
                                     </div>
                                     <div class="cs_avatar_info">By. <br>Admin</div>
                                 </div>
                                 <h2 class="cs_post_title cs_fs_24 cs_semibold"><a
-                                        href="{{ route('blogdetails') }}">Designing Better Linke Website And Email</a>
+                                        href="{{ route('blogdetails') }}">Baia do Sancho, Brazil</a>
                                 </h2>
-                                <p class="cs_post_subtitle">Lorem ipsum dolor sit amet, atomorum ds sosidon ium est as
-                                    Id vim rrem princi pes suas molesti interpretaris</p>
+                                <p class="cs_post_subtitle">Title: "Baia do Sancho Named Best Beach Again!"
+                                    For the third consecutive year, Baia do Sancho has been voted the "Best Beach in the World" in a popular travel survey conducted by Beach Lovers Magazine. Renowned for its stunning scenery and vibrant marine life, this beautiful beach continues to attract visitors from around the globe. In response to its popularity, local businesses are stepping up efforts to enhance visitor experience by offering new water sports activities and eco-friendly tours. Don’t miss the chance to visit this award-winning destination on your next trip to Brazil!</p>
                                 <div class="cs_post_btns cs_gray_bg_1">
                                     <a href="#">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
