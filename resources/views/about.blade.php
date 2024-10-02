@@ -3,7 +3,7 @@
 @section('content')
 
     <!-- Start Hero Section -->
-    <x-hero subTitle='Modern & Beautiful TravelPro Theme' img='assets/images/destination_header_bg.jpeg' title='about us' />
+    <x-hero subTitle='' img='assets/images/about-us-new.png' title='ABOUT US' />
     <!-- End Hero Section -->
 
     <!-- Start About Section -->
@@ -55,20 +55,20 @@
     <!-- End About Section -->
 
     <!-- Start Banner Section -->
-     <section class="cs_banner cs_style_2 cs_bg_filed cs_primary_bg" data-src="assets/images/banner_bg_3.jpeg">
+     <section class="cs_banner cs_style_2 cs_bg_filed cs_primary_bg" data-src="assets/images/bg_3.jpg">
       <div class="cs_height_115 cs_height_lg_80"></div>
       <div class="container">
         <div class="row align-items-center cs_gap_y_40">
           <div class="col-lg-6">
-            <div class="cs_banner_thumb">
+            {{-- <div class="cs_banner_thumb">
               <img src="assets/images/offer_text.png" alt="Offer Text">
-            </div>
+            </div> --}}
           </div>
           <div class="col-lg-6">
             <div class="cs_banner_text cs_white_color">
-              <h2 class="cs_banner_title cs_white_color cs_fs_50">Last  TravelPro Offer</h2>
-              <h3 class="cs_banner_title_mini cs_fs_20 cs_medium cs_white_color">Aerial view of Cape Town with Cape Town Stadium</h3>
-              <p class="cs_banner_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam hendrerit felis sit amet turpis vehicula convallis. Ut ac tellus velit. Nulla mollis sollicitudin lacus id ornare. Phasellus laoreet nulla et nulla sagittis, sit amet cursus urna mollis.</p>
+              <h2 class="cs_banner_title cs_white_color cs_fs_50">Let Us Be the Pioneer</h2>
+              <h3 class="cs_banner_title_mini cs_fs_20 cs_medium cs_white_color">"Your Experience, Our Pride."</h3>
+              <p class="cs_banner_subtitle">we don’t just offer ordinary vacations; we are pioneers in discovering the most breathtaking and unique beach destinations. We strive to lead the way in providing high-quality travel services, with creativity and dedication in every detail. With our team of experienced experts, we’ll guide you on a journey to explore stunning beaches, delivering fresh, innovative, and unforgettable experiences. Let us be the one to open the door to pristine nature and the best vacations of your life!</p>
               <a href="#" class="cs_btn cs_style_1 cs_fs_18 cs_medium">
                 Read More
                 <svg width="20" height="10" viewBox="0 0 20 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -101,8 +101,8 @@
                   <div class="cs_iconbox_icon cs_center">
                     <img src="assets/images/icons/calendar_icon_2.svg" alt="Calendar Icon">
                   </div>
-                  <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Set Travel Plan</h2>
-                  <p class="cs_iconbox_subtitle mb-0">Distinctively impact client-centered ideas via future-proof paradigms.</p>
+                  <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Exclusive Destinations</h2>
+                  <p class="cs_iconbox_subtitle mb-0">We offer access to some of the world’s most beautiful and serene beaches, ensuring you experience the perfect blend of luxury and nature.</p>
                 </div>
               </div>
               <div class="col-lg-12 col-6">
@@ -110,15 +110,15 @@
                   <div class="cs_iconbox_icon cs_center">
                     <img src="assets/images/icons/hotel-icon.svg" alt="Hotel Icon">
                   </div>
-                  <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Luxary Hotel</h2>
-                  <p class="cs_iconbox_subtitle mb-0">Distinctively impact client-centered ideas via future-proof paradigms.</p>
+                  <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Expert Guidance</h2>
+                  <p class="cs_iconbox_subtitle mb-0">With our team of knowledgeable experts, we make planning easy and stress-free, ensuring every detail of your vacation is taken care of.</p>
                 </div>
               </div>
             </div>
           </div>
           <div>
             <div class="cs_iconbox_4_thumb cs_center">
-              <img src="assets/images/about_4.png" alt="About Thumb">
+              <img src="assets/images/bestexperiences.jpg" alt="About Thumb">
             </div>
           </div>
           <div>
@@ -128,8 +128,8 @@
                   <div class="cs_iconbox_icon cs_center">
                     <img src="assets/images/icons/compass_icon.svg" alt="Calendar Icon">
                   </div>
-                  <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Explore Around</h2>
-                  <p class="cs_iconbox_subtitle mb-0">Distinctively impact client-centered ideas via future-proof paradigms.</p>
+                  <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Safety and Convenience</h2>
+                  <p class="cs_iconbox_subtitle mb-0">We prioritize your safety and comfort, offering secure, hassle-free bookings and reliable support throughout your entire beach journey.</p>
                 </div>
               </div>
               <div class="col-lg-12 col-6">
@@ -137,8 +137,8 @@
                   <div class="cs_iconbox_icon cs_center">
                     <img src="assets/images/icons/headset_icon.svg" alt="Hotel Icon">
                   </div>
-                  <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Support 24/7</h2>
-                  <p class="cs_iconbox_subtitle mb-0">Distinctively impact client-centered ideas via future-proof paradigms.</p>
+                  <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Personalized Services</h2>
+                  <p class="cs_iconbox_subtitle mb-0">Our services are tailored to meet your individual needs, providing you with a customized beach getaway that exceeds expectations.</p>
                 </div>
               </div>
             </div>
@@ -149,75 +149,121 @@
     </section>
     <!-- End Why Choose Us Section -->
 
-    <!-- Start Team Section -->
-     <section class="cs_accent_bg_1">
-      <div class="cs_height_135 cs_height_lg_75"></div>
-      <div class="container">
-        <div class="cs_section_heading cs_style_1 text-center">
-          <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">Travel Agents</h3>
-          <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0">Our Experts Team Member</h2>
-        </div>
-        <div class="cs_height_55 cs_height_lg_40"></div>
-        <div class="row cs_gap_y_24">
-          <div class="col-lg-4">
-            <div class="cs_team cs_style_1 position-relative">
-              <div class="cs_team_thumb cs_zoom overflow-hidden">
-                <img src="assets/images/team_1.jpeg" alt="Team Thumb" class="cs_zoom_in">
-              </div>
-              <div class="cs_team_info text-center position-absolute">
-                <h2 class="cs_team_title cs_fs_24 cs_medium cs_white_color">David Cooper</h2>
-               <p class="cs_team_subtitle cs_white_color">CO FOUNDER</p>
-               <div class="cs_social_btns">
-                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-              </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="cs_team cs_style_1 position-relative">
-              <div class="cs_team_thumb cs_zoom overflow-hidden">
-                <img src="assets/images/team_2.jpeg" alt="Team Thumb" class="cs_zoom_in">
-              </div>
-              <div class="cs_team_info text-center position-absolute">
-                <h2 class="cs_team_title cs_fs_24 cs_medium cs_white_color">David Cooper</h2>
-               <p class="cs_team_subtitle cs_white_color">CO FOUNDER</p>
-               <div class="cs_social_btns">
-                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-              </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="cs_team cs_style_1 position-relative">
-              <div class="cs_team_thumb cs_zoom overflow-hidden">
-                <img src="assets/images/team_3.jpeg" alt="Team Thumb" class="cs_zoom_in">
-              </div>
-              <div class="cs_team_info text-center position-absolute">
-                <h2 class="cs_team_title cs_fs_24 cs_medium cs_white_color">David Cooper</h2>
-               <p class="cs_team_subtitle cs_white_color">CO FOUNDER</p>
-               <div class="cs_social_btns">
-                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-              </div>
-              </div>
-            </div>
-          </div>
-        </div>
+   <!-- Start Team Section -->
+<section class="cs_accent_bg_1">
+  <div class="cs_height_135 cs_height_lg_75"></div>
+  <div class="container">
+      <div class="cs_section_heading cs_style_1 text-center">
+          <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">About Us</h3>
+          <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0">Our Team Member</h2>
       </div>
-      <div class="cs_height_140 cs_height_lg_80"></div>
-     </section>
-    <!-- End Team Section -->
+      <div class="cs_height_55 cs_height_lg_40"></div>
+      <div class="row cs_gap_y_24">
+          <!-- Team Member 1 -->
+          <div class="col-lg-4">
+              <div class="cs_team cs_style_1 position-relative">
+                  <div class="cs_team_thumb cs_zoom overflow-hidden">
+                      <img src="assets/images/trangiabao.jpg" alt="Team Thumb" class="cs_zoom_in">
+                  </div>
+                  <div class="cs_team_info text-center position-absolute">
+                      <h2 class="cs_team_title cs_fs_24 cs_medium cs_white_color">Trần Gia Bảo</h2>
+                      <p class="cs_team_subtitle cs_white_color">Developer</p>
+                      <div class="cs_social_btns">
+                          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- Team Member 2 -->
+          <div class="col-lg-4">
+              <div class="cs_team cs_style_1 position-relative">
+                  <div class="cs_team_thumb cs_zoom overflow-hidden">
+                      <img src="assets/images/nguyenminhphu.png" alt="Team Thumb" class="cs_zoom_in">
+                  </div>
+                  <div class="cs_team_info text-center position-absolute">
+                      <h2 class="cs_team_title cs_fs_24 cs_medium cs_white_color">Nguyễn Minh Phú</h2>
+                      <p class="cs_team_subtitle cs_white_color">Developer</p>
+                      <div class="cs_social_btns">
+                          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- Team Member 3 -->
+          <div class="col-lg-4">
+              <div class="cs_team cs_style_1 position-relative">
+                  <div class="cs_team_thumb cs_zoom overflow-hidden">
+                      <img src="assets/images/lamxuanhung.jpg" alt="Team Thumb" class="cs_zoom_in">
+                  </div>
+                  <div class="cs_team_info text-center position-absolute">
+                      <h2 class="cs_team_title cs_fs_24 cs_medium cs_white_color">Lâm Xuân Hùng</h2>
+                      <p class="cs_team_subtitle cs_white_color">Developer</p>
+                      <div class="cs_social_btns">
+                          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Team Member 4 -->
+          <div class="col-lg-4 offset-lg-2">
+            <div class="cs_team cs_style_1 position-relative">
+                <div class="cs_team_thumb cs_zoom overflow-hidden">
+                    <img src="assets/images/nguyenvietduc.png" alt="Team Thumb" class="cs_zoom_in">
+                </div>
+                <div class="cs_team_info text-center position-absolute">
+                    <h2 class="cs_team_title cs_fs_24 cs_medium cs_white_color">Nguyễn Việt Đức</h2>
+                    <p class="cs_team_subtitle cs_white_color">Product Owner</p>
+                    <div class="cs_social_btns">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Member 5 -->
+        <div class="col-lg-4">
+          <div class="cs_team cs_style_1 position-relative">
+              <div class="cs_team_thumb cs_zoom overflow-hidden">
+                  <img src="assets/images/dangbaan.png" alt="Team Thumb" class="cs_zoom_in">
+              </div>
+              <div class="cs_team_info text-center position-absolute">
+                  <h2 class="cs_team_title cs_fs_24 cs_medium cs_white_color">Đặng Bá An</h2>
+                  <p class="cs_team_subtitle cs_white_color">Tester</p>
+                  <div class="cs_social_btns">
+                      <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                      <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                      <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                      <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      </div>
+  </div>
+
+
+  <div class="cs_height_140 cs_height_lg_80"></div>
+</section>
+<!-- End Team Section -->
+
+
 
     <!-- Start Video Section -->
-    <section>
+    {{-- <section>
       <div class="cs_height_140 cs_height_lg_80"></div>
       <div class="container">
         <div class="cs_video_block cs_style_1 cs_bg_filed position-relative" data-src="assets/images/video_block.jpeg">
@@ -230,7 +276,7 @@
             <i class="fa-solid fa-location-dot"></i> Location Mountain Strait, Any State</span>
         </div>
       </div>
-    </section>
+    </section> --}}
     <!-- End Video Section -->
 
     <!-- Start Brands Section -->
@@ -238,11 +284,11 @@
       <div class="cs_height_76 cs_height_lg_40"></div>
       <div class="container">
         <div class="cs_brand_list cs_style_1">
-          <div class="cs_brand"><img src="assets/images/brand_1.svg" alt="Brand"></div>
+          {{-- <div class="cs_brand"><img src="assets/images/brand_1.svg" alt="Brand"></div>
           <div class="cs_brand"><img src="assets/images/brand_2.svg" alt="Brand"></div>
           <div class="cs_brand"><img src="assets/images/brand_3.svg" alt="Brand"></div>
           <div class="cs_brand"><img src="assets/images/brand_4.svg" alt="Brand"></div>
-          <div class="cs_brand"><img src="assets/images/brand_5.svg" alt="Brand"></div>
+          <div class="cs_brand"><img src="assets/images/brand_5.svg" alt="Brand"></div> --}}
         </div>
       </div>
       <div class="cs_height_135 cs_height_lg_80"></div>
