@@ -9,7 +9,7 @@
             <div class="cs_main_header_center">
                 <div class="cs_nav cs_medium cs_primary_font">
                     <ul class="cs_nav_list">
-                        <li class="menu-item-has-children">
+                        <li class="menu-item">
                             <a href="{{ route('index') }}">Home</a>
                             {{-- <ul>
                     <li><a href="{{ route('index') }}">Home</a></li>

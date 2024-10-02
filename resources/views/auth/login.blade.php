@@ -6,14 +6,14 @@
 
     <body
         class="flex items-center justify-center min-h-screen px-4 py-16 bg-cover bg-auth-pattern dark:bg-auth-pattern-dark dark:text-zink-100 font-public">
-
+         {{-- <class=" flex items-center justify-center min-h-screen px-4 py-16 bg-cover dark:bg-auth-pattern-dark dark:text-zink-100 font-public" > --}}
         <div class="mb-0 border-none shadow-none xl:w-2/3 card bg-white/70 dark:bg-zink-500/70">
             <div class="grid grid-cols-1 gap-0 lg:grid-cols-12">
                 <div class="lg:col-span-5">
                     <div class="!px-12 !py-12 card-body">
                         <div class="text-center">
-                            <h4 class="mb-2 text-purple-500 dark:text-purple-500">Welcome Back !</h4>
-                            <p class="text-slate-500 dark:text-zink-200">Sign in to continue to Tailwick.</p>
+                            <h4 class="mb-2 text-purple-500 dark:text-purple-500">Welcome !</h4>
+                            <p class="text-slate-500 dark:text-zink-200">Sign in to continue </p>
                         </div>
 
 
@@ -103,11 +103,11 @@
                         <div class="flex items-center justify-between gap-3">
                             <div class="grow">
                                 <a href="index">
-                                    <img src="{{ URL::asset('build/images/logo-light.png') }}" alt="" class="hidden h-6 dark:block">
-                                    <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="" class="block h-6 dark:hidden">
+                                    {{-- <img src="{{ URL::asset('build/images/logo-light.png') }}" alt="" class="hidden h-6 dark:block"> --}}
+                                    {{-- <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="" class="block h-6 dark:hidden"> --}}
                                 </a>
                             </div>
-                            <div class="shrink-0">
+                            {{-- <div class="shrink-0">
                                 <div class="relative dropdown text-end">
                                     <button type="button"
                                         class="inline-flex items-center gap-3 transition-all duration-200 ease-linear dropdown-toggle btn border-slate-200 dark:border-zink-400/60 group/items focus:border-custom-500 dark:focus:border-custom-500"
@@ -179,7 +179,7 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="mt-auto">
                             <img src="{{ URL::asset('build/images/auth/img-01.png') }}" alt="" class="md:max-w-[32rem] mx-auto">

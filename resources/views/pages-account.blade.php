@@ -186,7 +186,7 @@
                 </li>
             </ul>
         </div> --}}
-    </div><
+    </div>
 
     <div class="tab-content">
         <div class="block tab-pane" id="overviewTabs">
