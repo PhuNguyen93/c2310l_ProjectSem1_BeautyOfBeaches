@@ -12,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ForgotPasswordController;
 use Illuminate\Support\Facades\Auth;
 
 // Routes for HomeController
@@ -126,3 +127,10 @@ Route::post('/profile/{id}/updateProfile/change-password', [ProfileController::c
 // Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('change.password');
 Route::get('/profile/{id}/updateProfile/change-password/enter-otp', [ProfileController::class, 'enterOtp'])->name('enter.otp'); // Route cho trang nhập OTP
 Route::post('/verify-otp', [ProfileController::class, 'verifyOtp'])->name('verify.otp');
+
+Route::post('/send-otp-for-reset', [ForgotPasswordController::class, 'sendOtpForReset'])->name('sendOtpForReset');
+Route::post('/verify-reset-otp', [ForgotPasswordController::class, 'verifyResetOtp'])->name('verifyResetOtp');
+
+Route::get('/password/reset', function () {
+    return view('auth.forgot-password');
+})->name('password.reset');
