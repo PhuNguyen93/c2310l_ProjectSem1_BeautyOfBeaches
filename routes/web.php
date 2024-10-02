@@ -121,3 +121,8 @@ Route::get('/user/{id}/filter-feedback', [UserController::class, 'filterFeedback
 Route::get('/resend-otp', [UserController::class, 'resendOtp'])->name('resend.otp');
 
 Route::post('/register/phone', [RegisterController::class, 'registerWithPhone'])->name('register.phone'); // Route cho số điện thoại
+
+Route::post('/profile/{id}/updateProfile/change-password', [ProfileController::class, 'changePassword'])->name('change.password');
+// Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('change.password');
+Route::get('/profile/{id}/updateProfile/change-password/enter-otp', [ProfileController::class, 'enterOtp'])->name('enter.otp'); // Route cho trang nhập OTP
+Route::post('/verify-otp', [ProfileController::class, 'verifyOtp'])->name('verify.otp');

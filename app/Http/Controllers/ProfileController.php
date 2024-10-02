@@ -1,9 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Mail\OtpMail;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
@@ -98,6 +101,70 @@ class ProfileController extends Controller
             // dd($user->birth_date);
             return view('profile.updateProfile', ['user' => $user]);
         }
+
+        public function changePassword(Request $request)
+        {
+            // Validate input
+            $request->validate([
+                'old_password' => 'required',
+                'new_password' => 'required|string|min:0|confirmed', // Thay đổi độ dài tối thiểu thành 6
+            ]);
+
+            // Lấy thông tin user hiện tại
+            $user = Auth::user();
+
+            // Kiểm tra mật khẩu cũ
+            if (!Hash::check($request->old_password, $user->password)) {
+                return back()->withErrors(['old_password' => 'Old password is incorrect.']);
+            }
+
+            // Tạo OTP
+            $otp = rand(1000, 9999);
+             // Tạo số OTP ngẫu nhiên 6 chữ số
+
+            // Lưu OTP vào session
+            $request->session()->put('otp', $otp);
+            $request->session()->put('new_password', $request->new_password); // Lưu mật khẩu mới tạm thời
+
+            // Gửi OTP qua email
+            Mail::to($user->email)->send(new OtpMail($otp));
+
+            // Chuyển hướng đến trang nhập OTP
+            return redirect()->route('enter.otp', ['id' => $user->id]);
+        }
+
+    public function verifyOtp(Request $request)
+{
+    // Kiểm tra OTP
+    $request->validate([
+        'otp' => 'required|integer',
+    ]);
+
+    if ($request->otp == session('otp')) {
+        // Cập nhật mật khẩu mới
+        $user = Auth::user();
+        $user->password = Hash::make(session('new_password'));
+        $user->save();
+
+        // Xóa session sau khi xác thực
+        $request->session()->forget(['otp', 'new_password']);
+
+        // Redirect với thông báo thành công
+        return redirect()->route('profile', ['id' => $user->id])->with('success', 'Password changed successfully.');
+    }
+
+    // Trả về lỗi nếu OTP sai
+    return back()->withErrors(['otp' => 'Invalid OTP']);
+}
+public function enterOtp($id)
+{
+    // Kiểm tra quyền truy cập, nếu cần
+    if (Auth::user()->role_id != 1) {
+        return redirect()->route('index')->with('error', 'You do not have the required permissions.');
+    }
+
+    return view('auth.enter-otp', ['userId' => $id]); // Chuyển ID vào view nếu cần
+}
 
 
 }
