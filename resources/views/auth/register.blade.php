@@ -26,15 +26,15 @@
                             <div class="block tab-pane" id="emailTabs">
 
                                 <!-- Hiển thị tất cả thông báo lỗi -->
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
+                                @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                @endif
                                 <form method="POST" action="{{ route('users.store') }}" class="mt-10" id="signInForm">
                                     @csrf
 
@@ -153,8 +153,8 @@
                     <div class="flex items-center justify-between gap-3">
                         <div class="grow">
                             <a href="index">
-                                <img src="{{ URL::asset('build/images/logo-light.png') }}" alt="" class="hidden h-6 dark:block">
-                                <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="" class="block h-6 dark:hidden">
+                                {{-- <img src="{{ URL::asset('build/images/logo-light.png') }}" alt="" class="hidden h-6 dark:block">
+                                <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="" class="block h-6 dark:hidden"> --}}
                             </a>
                         </div>
                         <div class="shrink-0">
