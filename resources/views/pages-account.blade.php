@@ -3,67 +3,74 @@
     {{ __('Account') }}
 @endsection
 @section('content')
-<style>
+    <style>
+        .avatar-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            /* Center horizontally */
+        }
 
-    .avatar-container {
-        position: relative;
-        width: 150px;
-        height: 150px;
-        margin: 0 auto; /* Center horizontally */
-    }
+        /* Avatar image styling */
+        .avatar-image {
+            width: 100%;
+            /* Full width of the container */
+            height: 100%;
+            /* Full height of the container */
+            object-fit: cover;
+            /* Maintain aspect ratio and cover the container */
+            border-radius: 50%;
+            /* Make the image round */
+            border: 2px solid #e5e7eb;
+            /* Optional border */
+        }
 
-    /* Avatar image styling */
-    .avatar-image {
-        width: 100%; /* Full width of the container */
-        height: 100%; /* Full height of the container */
-        object-fit: cover; /* Maintain aspect ratio and cover the container */
-        border-radius: 50%; /* Make the image round */
-        border: 2px solid #e5e7eb; /* Optional border */
-    }
+        /* Icon wrapper for edit icon */
+        .edit-icon-wrapper {
+            width: 40px;
+            height: 40px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    /* Icon wrapper for edit icon */
-    .edit-icon-wrapper {
-        width: 40px;
-        height: 40px;
-        background-color: #ffffff;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+        /* Icon styling */
+        .edit-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e5e7eb;
+        }
 
-    /* Icon styling */
-    .edit-icon {
-        width: 40px;
-        height: 40px;
-        background-color: #ffffff;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid #e5e7eb;
-    }
-
-    .icon-size-4 {
-        font-size: 1.5rem; /* Adjust size of the icon */
-    }
-
-
-</style>
+        .icon-size-4 {
+            font-size: 1.5rem;
+            /* Adjust size of the icon */
+        }
+    </style>
     <div class="mt-1 -ml-3 -mr-3 rounded-none card">
         <div class="card-body !px-2.5">
             <div class="grid grid-cols-1 gap-5 lg:grid-cols-12 2xl:grid-cols-12">
                 <div class="lg:col-span-2 2xl:col-span-1">
-                    <form action="{{ route('profile.upload_avatar') }}" method="POST" enctype="multipart/form-data" id="UpdateAvatar" >
+                    <form action="{{ route('profile.upload_avatar') }}" method="POST" enctype="multipart/form-data"
+                        id="UpdateAvatar">
                         @csrf
                         {{-- @method('PUT') --}}
                         <div class="lg:col-span-2 2xl:col-span-1">
-                            <div class="relative inline-block size-20 rounded-full shadow-md bg-slate-100 profile-user xl:size-28">
-                               <img src="{{ asset($user->img ) }}" alt="Avatar" alt=""
+                            <div
+                                class="relative inline-block size-20 rounded-full shadow-md bg-slate-100 profile-user xl:size-28">
+                                <img src="{{ asset($user->img) }}" alt="Avatar" alt=""
                                     class="object-cover border-0 rounded-full img-thumbnail user-profile-image avatar-image rounded-full object-cover border-2 border-gray-200">
                                 <div
                                     class="absolute bottom-0 flex items-center justify-center size-8 rounded-full ltr:right-0 rtl:left-0 profile-photo-edit">
-                                    <input id="profile-img-file-input" type="file" name="avatar" class="hidden profile-img-file-input" accept="image/*" required  >
+                                    <input id="profile-img-file-input" type="file" name="avatar"
+                                        class="hidden profile-img-file-input" accept="image/*" required>
                                     <label for="profile-img-file-input"
                                         class="flex items-center justify-center size-8 bg-white rounded-full shadow-lg cursor-pointer dark:bg-zink-600 profile-photo-edit">
                                         <i data-lucide="image-plus"
@@ -75,7 +82,7 @@
                         </div>
                     </form>
                     <script>
-                         document.addEventListener('DOMContentLoaded', function () {
+                        document.addEventListener('DOMContentLoaded', function() {
                             // Lắng nghe sự kiện change trên input file
                             document.getElementById('profile-img-file-input').addEventListener('change', function() {
                                 // Kiểm tra xem có file được chọn hay không
@@ -89,12 +96,12 @@
                 </div><!--end col-->
                 <div class="lg:col-span-10 2xl:col-span-9">
                     <h5 class="mb-1">{{ $user->name }} <i data-lucide="badge-check"
-                        class="inline-block size-4 text-sky-500 fill-sky-100 dark:fill-custom-500/20"></i></h5>
-                <div class="flex gap-3 mb-4">
-                    <p class="text-slate-500 dark:text-zink-200"><i data-lucide="map-pin"
-                            class="inline-block size-4 ltr:mr-1 rtl:ml-1 text-slate-500 dark:text-zink-200 fill-slate-100 dark:fill-zink-500"></i>
-                        {{ $user->country }}</p>
-                </div>
+                            class="inline-block size-4 text-sky-500 fill-sky-100 dark:fill-custom-500/20"></i></h5>
+                    <div class="flex gap-3 mb-4">
+                        <p class="text-slate-500 dark:text-zink-200"><i data-lucide="map-pin"
+                                class="inline-block size-4 ltr:mr-1 rtl:ml-1 text-slate-500 dark:text-zink-200 fill-slate-100 dark:fill-zink-500"></i>
+                            {{ $user->country }}</p>
+                    </div>
 
                     {{-- <p class="mt-4 text-slate-500 dark:text-zink-200">Strong leader and negotiator adept at driving
                         collaboration and innovation. Highly accomplished CEO & Founder with 10+ years of experience
@@ -218,23 +225,28 @@
                                     <tbody>
                                         <tr>
                                             <th class="py-2 font-semibold ps-0" scope="row">Phone </th>
-                                            <td class="py-2 text-right text-slate-500 dark:text-zink-200">{{ $user->phone }}</td>
+                                            <td class="py-2 text-right text-slate-500 dark:text-zink-200">
+                                                {{ $user->phone }}</td>
                                         </tr>
                                         <tr>
                                             <th class="py-2 font-semibold ps-0" scope="row">Birth of Date</th>
-                                            <td class="py-2 text-right text-slate-500 dark:text-zink-200">{{ $user->birth_date }}</td>
+                                            <td class="py-2 text-right text-slate-500 dark:text-zink-200">
+                                                {{ $user->birth_date }}</td>
                                         </tr>
                                         <tr>
                                             <th class="py-2 font-semibold ps-0" scope="row">Email</th>
-                                            <td class="py-2 text-right text-slate-500 dark:text-zink-200">{{ $user->email }}</td>
+                                            <td class="py-2 text-right text-slate-500 dark:text-zink-200">
+                                                {{ $user->email }}</td>
                                         </tr>
                                         <tr>
                                             <th class="py-2 font-semibold ps-0" scope="row">Location</th>
-                                            <td class="py-2 text-right text-slate-500 dark:text-zink-200">{{ $user->country }}</td>
+                                            <td class="py-2 text-right text-slate-500 dark:text-zink-200">
+                                                {{ $user->country }}</td>
                                         </tr>
                                         <tr>
                                             <th class="pt-2 font-semibold ps-0" scope="row">Joining Date</th>
-                                            <td class="pt-2 text-right text-slate-500 dark:text-zink-200">{{ $user->created_at }}</td>
+                                            <td class="pt-2 text-right text-slate-500 dark:text-zink-200">
+                                                {{ $user->created_at }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -313,12 +325,13 @@
                     <option value="2" {{ request('rating') == 2 ? 'selected' : '' }}>2 Stars</option>
                     <option value="1" {{ request('rating') == 1 ? 'selected' : '' }}>1 Star</option>
                 </select>
-                <button type="submit" class="btn bg-custom-500 text-white">
+                <button type="submit"
+                    class="btn bg-custom-500 hover:bg-custom-600 text-white font-semibold rounded shadow">
                     Filter
                 </button>
             </form>
 
-            @if($feedbacks->isEmpty())
+            @if ($feedbacks->isEmpty())
                 <p class="text-gray-500">No comments yet.</p>
             @else
                 <table class="min-w-full w-full table-auto">
@@ -334,46 +347,91 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($feedbacks as $feedback)
-                        <tr class="bg-white border-b">
-                            <!-- Beach Image -->
-                            <td class="px-6 py-4">
-                                <img src="{{ asset($feedback->beach->image_url) }}" alt="Beach Image"
-                                    class="w-12 h-12 rounded-full object-cover">
-                            </td>
+                        @foreach ($feedbacks as $feedback)
+                            <tr class="bg-white border-b">
+                                <!-- Beach Image -->
+                                <td class="px-6 py-4">
+                                    <img src="{{ asset($feedback->beach->image_url) }}" alt="Beach Image"
+                                        class="w-12 h-12 rounded-full object-cover">
+                                </td>
 
-                            <!-- Beach Name -->
-                            <td class="px-6 py-4 text-gray-700">{{ $feedback->beach->name }}</td>
+                                <!-- Beach Name -->
+                                <td class="px-6 py-4 text-gray-700">{{ $feedback->beach->name }}</td>
 
-                            <!-- Country -->
-                            <td class="px-6 py-4 text-gray-700">{{ $feedback->beach->country }}</td>
+                                <!-- Country -->
+                                <td class="px-6 py-4 text-gray-700">{{ $feedback->beach->country }}</td>
 
-                            <!-- Rating -->
-                            <td class="px-6 py-4">
-                                <div class="flex items-center">
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        @if ($i <= $feedback->rating)
-                                            <span class="text-yellow-400">★</span>
-                                        @else
-                                            <span class="text-gray-300">★</span>
-                                        @endif
-                                    @endfor
-                                </div>
-                            </td>
+                                <!-- Rating -->
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= $feedback->rating)
+                                                <span class="text-yellow-400">★</span>
+                                            @else
+                                                <span class="text-gray-300">★</span>
+                                            @endif
+                                        @endfor
+                                    </div>
+                                </td>
 
-                            <!-- Comment -->
-                            <td class="px-6 py-4 text-gray-700">{{ $feedback->message }}</td>
+                                <!-- Comment -->
+                                <td class="px-6 py-4 text-gray-700">{{ Str::limit($feedback->message, 50, '...') }}</td>
 
-                            <!-- Creation Date -->
-                            <td class="px-6 py-4 text-gray-500">{{ $feedback->created_at->format('Y-m-d H:i:s') }}</td>
+                                <!-- Creation Date -->
+                                <td class="px-6 py-4 text-gray-500">{{ $feedback->created_at->format('Y-m-d H:i:s') }}
+                                </td>
 
-                            <!-- Action -->
-                            <td class="px-6 py-4">
-                                <button class="bg-gray-200 text-gray-600 px-2 py-1 rounded">...</button>
-                            </td>
-                        </tr>
+                                <!-- Action -->
+                                <td class="px-6 py-4 text-right">
+                                    <div class="relative dropdown inline-block text-left">
+                                        <button onclick="toggleDropdown(this)"
+                                            class="flex items-center justify-center size-[30px] dropdown-toggle p-0 text-slate-500 btn bg-slate-100 hover:text-white hover:bg-slate-600 focus:text-white focus:bg-slate-600 focus:ring focus:ring-slate-100 active:text-white active:bg-slate-600 active:ring active:ring-slate-100 dark:bg-slate-500/20 dark:text-slate-400 dark:hover:bg-slate-500 dark:hover:text-white dark:focus:bg-slate-500 dark:focus:text-white dark:active:bg-slate-500 dark:active:text-white dark:ring-slate-400/20">
+                                            <i data-lucide="more-horizontal" class="size-3"></i>
+                                        </button>
+                                        <!-- Dropdown content -->
+                                        <ul class="absolute z-50 hidden py-2 mt-1 ltr:text-left rtl:text-right list-none bg-white rounded-md shadow-md dropdown-menu min-w-[10rem] dark:bg-zink-600"
+                                            id="dropdownMenu">
+                                            <li>
+                                                <!-- Action: View -->
+                                                <a href="javascript:void(0)"
+                                                    onclick="openFeedbackModal({{ $feedback->id }})"
+                                                    class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200">
+                                                    <i data-lucide="eye"
+                                                        class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i>
+                                                    <span class="align-middle">View</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <!-- Action: Delete -->
+                                                <form action="{{ route('feedbacks.comment.destroy', $feedback->id) }}"
+                                                    method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="block w-full text-left px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200"
+                                                        onclick="return confirm('Are you sure you want to delete this comment?');">
+                                                        <i data-lucide="trash-2"
+                                                            class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i>
+                                                        <span class="align-middle">Delete</span>
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
+                    <!-- Modal for viewing feedback details -->
+                    <div id="feedbackModal" class="modal hidden">
+                        <div class="modal-content">
+                            <h2 id="modalFeedbackTitle"></h2>
+                            <div id="modalFeedbackDetails" class="modal-body">
+                                <!-- Content will be dynamically filled by JS -->
+                            </div>
+                            <button class="close-btn" onclick="closeFeedbackModal()">Close</button>
+                        </div>
+                    </div>
                 </table>
                 <div class="mt-4">
                     {{ $feedbacks->appends(request()->query())->links() }}
@@ -381,13 +439,6 @@
             @endif
         </div>
     </div>
-
-
-
-
-
-
-
 @endsection
 @push('scripts')
     <!-- apexcharts js -->
@@ -398,3 +449,75 @@
     <!-- App js -->
     <script src="{{ URL::asset('build/js/app.js') }}"></script>
 @endpush
+<script>
+    // Function to open the feedback modal and fetch feedback details
+    function openFeedbackModal(feedbackId) {
+        fetch(`/feedbacks/${feedbackId}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('modalFeedbackTitle').innerText = data.beach_name;
+                document.getElementById('modalFeedbackDetails').innerHTML = `
+                    <p><strong>Name:</strong> ${data.user_name}</p>
+                    <p><strong>Country:</strong> ${data.country}</p>
+                    <p><strong>Rating:</strong> ${'★'.repeat(data.rating)}${'☆'.repeat(5 - data.rating)}</p>
+                    <p><strong>Comment:</strong> ${data.message}</p>
+                    <p><strong>Creation Date:</strong> ${new Date(data.created_at).toLocaleString()}</p>
+                `;
+                document.getElementById('feedbackModal').classList.remove('hidden');
+            })
+            .catch(error => console.error('Error fetching feedback:', error));
+    }
+
+    // Function to close the feedback modal
+    function closeFeedbackModal() {
+        document.getElementById('feedbackModal').classList.add('hidden');
+    }
+</script>
+<style>
+    /* Modal styles */
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 50;
+    }
+
+    .modal-content {
+        background-color: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        width: 400px;
+        /* Adjust width as necessary */
+    }
+
+    .modal-body {
+        margin-top: 10px;
+    }
+
+    .close-btn {
+        background-color: #007BFF;
+        /* Customize your button color */
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .close-btn:hover {
+        background-color: #0056b3;
+        /* Darker shade for hover effect */
+    }
+
+    /* Hiding the modal initially */
+    .hidden {
+        display: none;
+    }
+</style>

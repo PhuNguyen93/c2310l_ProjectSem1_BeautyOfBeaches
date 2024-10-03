@@ -203,31 +203,30 @@
     <div id="feedbackModal" class="modal hidden">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Feedback Form</h3>
+                <h3 id="modalFeedbackTitle">Feedback Form</h3>
             </div>
             <div class="modal-body">
-                <!-- Form bắt đầu từ đây -->
+                <!-- Nội dung hiển thị feedback -->
+                <div id="modalFeedbackDetails"></div>
+                <!-- Form chỉnh sửa -->
                 <form id="feedbackForm">
                     <div class="form-group">
                         <label for="feedback-user">User</label>
                         <input type="text" id="feedback-user" name="user" class="form-control" readonly>
                     </div>
-
                     <div class="form-group">
                         <label for="feedback-beach">Beach</label>
                         <input type="text" id="feedback-beach" name="beach" class="form-control" readonly>
                     </div>
-
                     <div class="form-group">
                         <label for="feedback-rating">Rating</label>
-                        <input type="number" id="feedback-rating" name="rating" class="form-control" min="1" max="5" required>
+                        <input type="number" id="feedback-rating" name="rating" class="form-control" min="1"
+                            max="5" required>
                     </div>
-
                     <div class="form-group">
                         <label for="feedback-message">Message</label>
                         <textarea id="feedback-message" name="message" class="form-control" rows="4" required></textarea>
                     </div>
-
                     <div class="form-group">
                         <label for="feedback-date">Date</label>
                         <input type="text" id="feedback-date" name="date" class="form-control" readonly>
@@ -279,7 +278,8 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.6); /* Background tối */
+        background: rgba(0, 0, 0, 0.6);
+        /* Background tối */
         display: flex;
         justify-content: center;
         align-items: center;
@@ -297,7 +297,8 @@
         background: white;
         padding: 20px;
         border-radius: 8px;
-        width: 50%; /* Chiều rộng modal là 50% màn hình */
+        width: 50%;
+        /* Chiều rộng modal là 50% màn hình */
         max-width: 600px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         animation: fadeIn 0.3s ease;
@@ -372,9 +373,10 @@
             opacity: 0;
             transform: translateY(-20px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
         }
     }
-    </style>
+</style>
