@@ -147,3 +147,8 @@ Route::post('/verify-reset-otp', [ForgotPasswordController::class, 'verifyResetO
 Route::get('/password/reset', function () {
     return view('auth.forgot-password');
 })->name('password.reset');
+
+//  Profile Controller
+Route::get('/register/verify', [RegisterController::class, 'showOtpForm'])->name('res.verify.form');
+Route::post('/register/verify', [RegisterController::class, 'verifyOtp'])->name('res.verify');
+Route::get('/register/resend-otp', [RegisterController::class, 'resendOtp'])->name('resend.res');

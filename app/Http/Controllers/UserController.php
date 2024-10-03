@@ -265,20 +265,22 @@ public function register(Request $request)
     // Create OTP
     $otp = rand(1000, 9999);
 
-    // Store data including OTP
-    User::create([
+    // Save user data temporarily in session
+    session([
         'name' => $request->name,
         'email' => $request->email,
-        'password' => Hash::make($request->password),
+        'password' => Hash::make($request->password), // Hash the password before storing it
         'otp' => $otp,
-        'status' => 'Waiting', // Set status to 'Waiting' until OTP is verified
+        'status' => 'Waiting', // Status until OTP is verified
     ]);
 
     // Send OTP to email
     Mail::to($request->email)->send(new OtpMail($otp));
 
+    // Redirect to OTP verification page
     return redirect()->route('verify.otp.form');
 }
+
 
 // Method to verify OTP
 public function verifyOtp(Request $request)
@@ -316,6 +318,7 @@ public function showOtpForm()
  // Phương thức resendOtp để gửi lại mã OTP
  public function resendOtp(Request $request)
  {
+    // dd(1);
      // Lấy email của người dùng từ session hoặc một nguồn khác
      $email = session('email');
 
