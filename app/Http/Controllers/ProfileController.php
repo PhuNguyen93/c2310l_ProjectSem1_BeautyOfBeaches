@@ -133,7 +133,7 @@ class ProfileController extends Controller
             return redirect()->route('enter.otp', ['id' => $user->id]);
         }
 
-    public function verifyOtp(Request $request)
+    public function Pro_verifyOtp(Request $request)
 {
     // Kiểm tra OTP
     $request->validate([
