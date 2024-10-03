@@ -139,11 +139,12 @@ Route::get('/comment-history/{id}', [CommentHistoryController::class, 'show']);
 Route::post('/profile/{id}/updateProfile/change-password', [ProfileController::class, 'changePassword'])->name('change.password');
 // Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('change.password');
 Route::get('/profile/{id}/updateProfile/change-password/enter-otp', [ProfileController::class, 'enterOtp'])->name('enter.otp'); // Route cho trang nhập OTP
-Route::post('/verify-otp', [ProfileController::class, 'verifyOtp'])->name('verify.otp');
+Route::post('/verify-otp', [ProfileController::class, 'Pro_verifyOtp'])->name('verifyPro');
 
 // Hiển thị form forgot password
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
+
 })->name('forgot-password');
 // Gửi OTP
 Route::post('/send-otp-reset', [ForgotPasswordController::class, 'sendOtpForReset'])->name('sendOtpForReset');
@@ -151,3 +152,10 @@ Route::post('/send-otp-reset', [ForgotPasswordController::class, 'sendOtpForRese
 Route::post('/verify-otp', [ForgotPasswordController::class, 'verifyOtp'])->name('verifyOtp');
 // Reset mật khẩu
 Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('resetPassword');
+
+})->name('password.reset');
+
+//  Profile Controller
+Route::get('/register/verify', [RegisterController::class, 'showOtpForm'])->name('res.verify.form');
+Route::post('/register/verify', [RegisterController::class, 'verifyOtp'])->name('res.verify');
+Route::get('/register/resend-otp', [RegisterController::class, 'resendOtp'])->name('resend.res');
