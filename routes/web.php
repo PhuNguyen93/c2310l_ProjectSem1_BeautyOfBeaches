@@ -141,9 +141,13 @@ Route::post('/profile/{id}/updateProfile/change-password', [ProfileController::c
 Route::get('/profile/{id}/updateProfile/change-password/enter-otp', [ProfileController::class, 'enterOtp'])->name('enter.otp'); // Route cho trang nhập OTP
 Route::post('/verify-otp', [ProfileController::class, 'verifyOtp'])->name('verify.otp');
 
-Route::post('/send-otp-for-reset', [ForgotPasswordController::class, 'sendOtpForReset'])->name('sendOtpForReset');
-Route::post('/verify-reset-otp', [ForgotPasswordController::class, 'verifyResetOtp'])->name('verifyResetOtp');
-
-Route::get('/password/reset', function () {
+// Hiển thị form forgot password
+Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
-})->name('password.reset');
+})->name('forgot-password');
+// Gửi OTP
+Route::post('/send-otp-reset', [ForgotPasswordController::class, 'sendOtpForReset'])->name('sendOtpForReset');
+// Xác thực OTP
+Route::post('/verify-otp', [ForgotPasswordController::class, 'verifyOtp'])->name('verifyOtp');
+// Reset mật khẩu
+Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('resetPassword');
