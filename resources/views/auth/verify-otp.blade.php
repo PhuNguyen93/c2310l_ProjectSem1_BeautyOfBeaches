@@ -29,7 +29,7 @@ class="flex items-center justify-center min-h-screen px-4 py-16 bg-cover bg-auth
                         </div>
                     @endif
 
-                    <form autocomplete="off" action="{{ route('verify.otp') }}" method="POST" id="otpForm">
+                    <form autocomplete="off" action="{{ route('res.verify') }}" method="POST" id="otpForm">
                         @csrf
                         <input type="hidden" name="otp" id="otp" value="">
 
@@ -87,7 +87,7 @@ class="flex items-center justify-center min-h-screen px-4 py-16 bg-cover bg-auth
                     <div class="shrink-0">
                         <div class="relative dropdown text-end">
                             <p class="text-sm text-slate-500 dark:text-zink-200">Bạn chưa nhận được mã?
-                                <a href="{{ route('resend.otp') }}" class="text-custom-500 dark:text-custom-500 hover:underline">Gửi lại OTP</a>
+                                <a href="{{ route('resend.res') }}" class="text-custom-500 dark:text-custom-500 hover:underline">Gửi lại OTP</a>
                             </p>
                         </div>
                     </div>
