@@ -133,6 +133,11 @@ class BeachController extends Controller
         unlink(public_path($beach->image_url));
     }
 
+    if ($beach->feedbacks) { // Kiểm tra xem feedbacks có tồn tại
+        foreach ($beach->feedbacks as $comment) {
+            $comment->delete();
+        }
+    }
     // Xóa bãi biển sau khi đã xóa các bản ghi liên quan
     $beach->delete();
 

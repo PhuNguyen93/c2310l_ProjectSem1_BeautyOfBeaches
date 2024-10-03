@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BeachController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommentHistoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegisterController;
@@ -113,6 +114,10 @@ Route::get('/account-settings/{id}', [UserController::class, 'showProfile'])->na
 Route::post('/account-settings/{id}/upload-avatar', [UserController::class, 'uploadAvatar'])->name('User.upload_avatar');
 Route::put('/account-settings/{id}/update_user', [UserController::class, 'update'])->name('users.update');
 // -------(lam Xuan Hung)------------------------------------
+
+// user_comment
+Route::delete('/feedbacks/{feedback}', [CommentController::class, 'destroy'])->name('feedbacks.comment.destroy');
+Route::get('/feedbacks/{id}', [CommentController::class, 'show'])->name('feedbacks.comment.show');
 
 // Route hiển thị trang profile và bình luận
 Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');

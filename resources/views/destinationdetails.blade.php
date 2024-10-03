@@ -1,7 +1,6 @@
 @extends('layout.layout')
 <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQgZ6Fs6ErAf0bL5tV7fSAg57ocLGAI6k&callback=initMap">
-</script>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQgZ6Fs6ErAf0bL5tV7fSAg57ocLGAI6k&callback=initMap"></script>
 @section('content')
     <!-- Start Hero Section -->
     <x-hero subTitle='{{ $beach->name }}' img='{{ asset($beach->image_url) }}' title='Popular Destination' />
@@ -160,11 +159,16 @@
 
                                                 <!-- Nút Delete -->
                                                 <form action="{{ route('feedbacks.destroy', $feedback->id) }}"
-                                                    method="POST" class="d-inline">
+                                                    method="POST" class="d-inline" onsubmit="return confirmDelete();">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger cs_medium">Del</button>
                                                 </form>
+                                                <script>
+                                                    function confirmDelete() {
+                                                        return confirm('Are you sure you want to delete this feedback? This action cannot be undone.');
+                                                    }
+                                                </script>
                                             @endif
                                         </div>
 
