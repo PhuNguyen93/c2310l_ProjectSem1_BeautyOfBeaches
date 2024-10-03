@@ -2,121 +2,89 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 use App\Mail\SendOtpMail;
 
 class ForgotPasswordController extends Controller
 {
-    // Hiển thị form quên mật khẩu
-    public function showForgotForm()
-    {
-        return view('auth.passwords.email');
-    }
-
-    // Gửi OTP qua email để đặt lại mật khẩu
+    // Gửi OTP đến email của người dùng
     public function sendOtpForReset(Request $request)
     {
-        // Validate email
+        // Xác thực email có tồn tại trong bảng users
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|exists:users,email',
         ]);
 
         // Tìm user theo email
         $user = User::where('email', $request->email)->first();
 
-        // Kiểm tra nếu email không tồn tại
-        if (!$user) {
-            return back()->withErrors(['email' => 'Email not registered']);
-        }
-
-        // Tạo mã OTP ngẫu nhiên
+        // Tạo mã OTP ngẫu nhiên (4 số)
         $otp = rand(1000, 9999);
 
-        // Cập nhật OTP trong cơ sở dữ liệu
+        // Cập nhật mã OTP cho user trong bảng users
         $user->otp = $otp;
         $user->save();
 
         // Gửi OTP qua email
         Mail::to($user->email)->send(new SendOtpMail($otp));
 
-        // Lưu email và trạng thái OTP đã được gửi vào session
-        session(['otp_sent' => true, 'email' => $request->email]);
+        // Lưu email vào session để sử dụng khi reset password
+        session(['reset_email' => $request->email]);
 
-        // Trả về thông báo rằng OTP đã được gửi
-        return redirect()->back()->with('message', 'OTP đã được gửi tới email của bạn.');
+        return redirect()->back()->with('otp_sent', true)->with('success', 'OTP đã được gửi đến email của bạn.');
     }
 
-    // Xác minh OTP khi người dùng nhập OTP
-    public function verifyResetOtp(Request $request)
+    // Xác thực OTP
+    public function verifyOtp(Request $request)
     {
-        // Validate OTP
+        // Xác thực dữ liệu từ form
         $request->validate([
-            'otp' => 'required|numeric',
-            'email' => 'required|email|exists:users,email',
+            'otp' => 'required|digits:4',
         ]);
 
-        // Tìm user theo email
-        $user = User::where('email', $request->email)->first();
+        // Lấy email từ session
+        $email = session('reset_email');
 
+        // Tìm user với email và mã OTP khớp
+        $user = User::where('email', $email)->where('otp', $request->otp)->first();
+
+        // Kiểm tra mã OTP có hợp lệ không
         if (!$user) {
-            return back()->withErrors(['email' => 'Email không tồn tại trong hệ thống.']);
+            return redirect()->back()->with('error', 'Mã OTP không hợp lệ.');
         }
 
-        // Kiểm tra OTP
-        if ($user->otp != $request->otp) {
-            return back()->withErrors(['otp' => 'OTP code does not match']);
-        }
+        // OTP hợp lệ, lưu trạng thái xác thực OTP vào session
+        session(['otp_verified' => true]);
 
-        // OTP chính xác, xóa OTP để tránh tái sử dụng
-        $user->otp = null;
-        $user->save();
-
-        // Xóa session OTP
-        session()->forget('otp_sent');
-
-        // Chuyển hướng người dùng tới trang đặt lại mật khẩu
-        return redirect()->route('password.reset.form', ['email' => $user->email])
-            ->with('message', 'OTP xác nhận thành công. Bạn có thể đặt lại mật khẩu.');
+        return redirect()->back()->with('otp_verified', true)->with('success', 'OTP hợp lệ. Vui lòng đặt lại mật khẩu.');
     }
 
-    // Hiển thị form đặt lại mật khẩu sau khi OTP được xác thực
-    public function showResetForm(Request $request)
-    {
-        // Kiểm tra nếu email có trong request
-        $email = $request->input('email');
-        if (!$email) {
-            return redirect()->route('password.request')->withErrors(['email' => 'Không tìm thấy email.']);
-        }
-
-        return view('auth.passwords.reset', ['email' => $email]);
-    }
-
-    // Đặt lại mật khẩu mới
+    // Xử lý việc reset mật khẩu
     public function resetPassword(Request $request)
     {
-        // Validate mật khẩu mới
+        // Xác thực mật khẩu
         $request->validate([
-            'email' => 'required|email|exists:users,email',
-            'password' => 'required|min:0|confirmed',
+            'new_password' => 'required|min:0',
+            'confirm_password' => 'required|same:new_password',
         ]);
 
-        // Tìm user theo email
-        $user = User::where('email', $request->email)->first();
+        // Lấy email từ session
+        $email = session('reset_email');
 
-        if (!$user) {
-            return back()->withErrors(['email' => 'Email không tồn tại trong hệ thống.']);
-        }
+        // Tìm user theo email
+        $user = User::where('email', $email)->first();
 
         // Cập nhật mật khẩu mới
-        $user->password = Hash::make($request->password);
+        $user->password = Hash::make($request->new_password);
+        $user->otp = null; // Xóa OTP sau khi sử dụng
         $user->save();
 
-        // Chuyển hướng sau khi đặt lại mật khẩu thành công
-        return redirect()->route('login')->with('message', 'Mật khẩu của bạn đã được đặt lại thành công.');
+        // Xóa các session liên quan
+        session()->forget(['reset_email', 'otp_verified']);
+
+        return redirect()->route('login')->with('success', 'Mật khẩu đã được cập nhật thành công.');
     }
 }
