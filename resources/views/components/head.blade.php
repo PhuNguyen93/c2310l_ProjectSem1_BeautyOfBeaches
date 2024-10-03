@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="TravelPro">
     <!-- Favicon Icon -->
-    <link rel="icon" href="{{ asset('assets/images/favicon.png') }}">
+    <link rel="icon" href="{{ asset('assets/images/logo.png') }}">
     <!-- Site Title -->
-    <title>TravelPro - Adventure Tours and Travel HTML Template</title>
+    <title>TravelPro</title>
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">

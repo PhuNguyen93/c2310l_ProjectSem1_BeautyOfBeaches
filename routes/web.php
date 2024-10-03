@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BeachController;
+use App\Http\Controllers\CommentHistoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DestinationController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\VisitorController;
 use Illuminate\Support\Facades\Auth;
 
 // Routes for HomeController
@@ -70,6 +72,7 @@ Route::delete('/feedbacks/{feedback}', [FeedbackController::class, 'destroy'])->
 Route::get('/feedbacks/{id}/edit', [FeedbackController::class, 'edit'])->name('feedbacks.edit');
 Route::put('/feedbacks/{id}', [FeedbackController::class, 'update'])->name('feedbacks.update');
 Route::delete('/feedbacks/{id}', [FeedbackController::class, 'destroy'])->name('feedbacks.destroy');
+Route::get('/feedbacks', [FeedbackController::class, 'index'])->name('feedbacks.index');
 
 // Beaches routes
 Route::resource('beaches', BeachController::class);
@@ -121,3 +124,8 @@ Route::get('/user/{id}/filter-feedback', [UserController::class, 'filterFeedback
 Route::get('/resend-otp', [UserController::class, 'resendOtp'])->name('resend.otp');
 
 Route::post('/register/phone', [RegisterController::class, 'registerWithPhone'])->name('register.phone'); // Route cho số điện thoại
+
+
+//comment history
+Route::resource('comment-history', CommentHistoryController::class);
+Route::get('/comment-history/{id}', [CommentHistoryController::class, 'show']);

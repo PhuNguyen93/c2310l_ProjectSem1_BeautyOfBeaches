@@ -3,17 +3,51 @@
 namespace App\Http\Controllers;
 
 use App\Models\Beach;
-use Illuminate\Http\Request;
+use App\Models\VisitorLog;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Facades\Request;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        // Lấy tối đa 5 bãi biển mới nhất đã được cập nhật, sắp xếp theo ngày cập nhật gần nhất
         $beaches = Beach::orderBy('updated_at', 'desc')->take(5)->get();
 
+        // Ghi lại hoặc cập nhật thông tin truy cập trong bảng visitor_logs
+        VisitorLog::updateOrCreate(
+            [
+                'user_id' => Auth::check() ? Auth::id() : null, // Nếu người dùng đã đăng nhập
+                'ip_address' => request()->ip(),                 // Lấy IP của người dùng hoặc khách
+                'page_name' => 'home'
+            ],
+            [
+                'visit_count' => DB::raw('visit_count + 1'),    // Tăng số lượng truy cập
+                'updated_at' => now(),                          // Cập nhật thời gian hoạt động
+            ]
+        );
+        $totalVisits = VisitorLog::count();
+
+        // Đếm tổng số user online (user_id khác null)
+        $userOnline = VisitorLog::whereNotNull('user_id')->count();
+
+        // Đếm tổng số khách online (user_id là null)
+        $guestOnline = VisitorLog::whereNull('user_id')->count();
+
         // Trả dữ liệu về view
-        return view('index', compact('beaches'));
+        return view('index', compact('beaches','totalVisits', 'userOnline', 'guestOnline'));
+    }
+
+    public function logout()
+    {
+        // Xóa bản ghi khi người dùng logout
+        if (Auth::check()) {
+            VisitorLog::where('user_id', Auth::id())->delete();
+        }
+
+        Auth::logout();
+        return redirect('/login');
     }
 
     public function about()
@@ -25,8 +59,9 @@ class HomeController extends Controller
     {
         // Lấy tất cả các bãi biển từ database
         // $beaches = Beach::all();
-        $beaches = Beach::with('feedbacks')->paginate(10);
-        // Truyền danh sách bãi biển sang view 'destination'
+        $beaches = Beach::with('feedbacks')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
         return view('destination', compact('beaches'));
     }
 

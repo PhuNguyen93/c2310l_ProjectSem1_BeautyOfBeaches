@@ -9,7 +9,7 @@ class VisitorLog extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'page_name', 'visit_count'];
+    protected $fillable = ['user_id', 'page_name', 'ip_address', 'visit_count'];
 
     // Visitor log có thể thuộc về một user
     public function user()

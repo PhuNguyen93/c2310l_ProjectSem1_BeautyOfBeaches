@@ -7,7 +7,7 @@
 
     <x-preloader />
     <!-- Nút cuộn lên đầu trang (ScrollToTop Component) -->
-    <x-scroll-to-top/>
+    <x-scroll-to-top />
     <!-- Start Header Section -->
     <x-header />
     <x-header_search />
@@ -17,50 +17,25 @@
     {{-- <section class="cs_hero cs_style_1 cs_center  cs_primary_bg" data-src="assets/images/hero_bg.jpeg"> --}}
     <section class="cs_hero cs_style_1 cs_center cs_ripple_activate cs_primary_bg" data-src="assets/images/bg1.jpg"
         {{-- style="background-image: url('https://plus.unsplash.com/premium_photo-1669748157617-a3a83cc8ea23?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') "> --}} <div class="container">
-
         <div class="cs_hero_text text-center">
             <h3 class="cs_hero_subtitle cs_white_color cs_ternary_font cs_fs_25 cs_normal text-uppercase">Let's
                 Travel The World With Us</h3>
             <h1 class="cs_hero_title cs_white_color cs_fs_100 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
                 Travel Top Destination <br>of The World</h1>
         </div>
-        {{-- <div class="cs_find_form_wrap">
-          <form action="#" class="cs_find_form">
-            <div>
-              <h2 class="cs_fs_18 cs_normal mb-0">Where to?</h2>
-            </div>
-            <div>
-              <select name="cars" class="st_select">
-                <option value="Destination">Destination</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-              </select>
-            </div>
-            <div>
-              <select name="cars" class="st_select">
-                <option value="Guests">Guests</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-              </select>
-            </div>
-            <div>
-              <button class="cs_find_btn cs_bold cs_primary_font cs_center"><i class="fa-solid fa-magnifying-glass"></i> Find Now</button>
-            </div>
-          </form>
-        </div> --}}
         </div>
-        {{-- <div class="cs_hero_shape_1"></div>
+        <div class="cs_hero_shape_1"></div>
         <div class="cs_hero_shape_2"></div>
-        <div class="cs_hero_shape_3"></div> --}}
+        <div class="cs_hero_shape_3"></div>
+        </div>
+        {{-- <div class="container mt-5 text-center">
+            <!-- Hiển thị tổng số lượng người đã truy cập vào website -->
+            <h4 class="cs_hero_subtitle cs_white_color cs_ternary_font cs_fs_25">
+                Total Visits: {{ $totalVisits }}
+            </h4>
+            <p class="cs_white_color">User Online: {{ $userOnline }}</p>
+            <p class="cs_white_color">Guest Online: {{ $guestOnline }}</p>
+        </div> --}}
     </section>
     <!-- End Hero Section -->
 
@@ -77,8 +52,14 @@
                             data-wow-delay="0.2s">Welcome to Travel Top Destination of The World</h2>
                     </div>
                     <div class="cs_about_text">
-                        <p>Your gateway to discovering the most beautiful beaches and enjoying exceptional services. We take pride in offering unforgettable vacation experiences at the most pristine and enchanting coastal destinations. With a dedicated team, we are committed to providing the best information and services to help you plan your dream getaway. Let us be your guide as you explore nature and enjoy a perfect beach holiday!</p>
-                        <p class="mb-0 cs_accent_color cs_medium cs_fs_18">For inquiries or to book your perfect beach getaway, feel free to contact us at 07 1234 5678 – we’re here to help you every step of the way!</p>
+                        <p>Your gateway to discovering the most beautiful beaches and enjoying exceptional services. We
+                            take pride in offering unforgettable vacation experiences at the most pristine and
+                            enchanting coastal destinations. With a dedicated team, we are committed to providing the
+                            best information and services to help you plan your dream getaway. Let us be your guide as
+                            you explore nature and enjoy a perfect beach holiday!</p>
+                        <p class="mb-0 cs_accent_color cs_medium cs_fs_18">For inquiries or to book your perfect beach
+                            getaway, feel free to contact us at 07 1234 5678 – we’re here to help you every step of the
+                            way!</p>
 
                     </div>
                     <ul class="cs_list cs_style_1 cs_mp0 cs_fs_18">
@@ -88,7 +69,7 @@
                         </li>
                         <li>
                             <i class="fa-solid fa-circle-check cs_accent_color"></i>
-                           Unwind, relax, and let the waves carry your worries away with our tailored beach services.
+                            Unwind, relax, and let the waves carry your worries away with our tailored beach services.
                         </li>
                         <li>
                             <i class="fa-solid fa-circle-check cs_accent_color"></i>
@@ -129,7 +110,8 @@
                             <img src="assets/images/icons/feature_icon_1.svg" alt="Featured Icon">
                         </div>
                         <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Safety</h2>
-                        <p class="cs_iconbox_subtitle mb-0">We prioritize your safety, <br>ensuring strict protective measures at every destination <br>and throughout all services.</p>
+                        <p class="cs_iconbox_subtitle mb-0">We prioritize your safety, <br>ensuring strict protective
+                            measures at every destination <br>and throughout all services.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
@@ -138,7 +120,9 @@
                             <img src="assets/images/icons/feature_icon_2.svg" alt="Featured Icon">
                         </div>
                         <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Unforgettable Journey</h2>
-                        <p class="cs_iconbox_subtitle mb-0">Each trip is crafted to offer unforgettable moments, <br>from breathtaking nature <br>to unique experiences.</p>
+                        <p class="cs_iconbox_subtitle mb-0">Each trip is crafted to offer unforgettable moments,
+                            <br>from breathtaking nature <br>to unique experiences.
+                        </p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
@@ -149,7 +133,8 @@
                         <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Trusted Community</h2>
                         <p class="cs_iconbox_subtitle mb-0">Our community consists of experienced professionals,
                             <br>dedicated to providing top-notch <br>
-                            service and expertise.</p>
+                            service and expertise.
+                        </p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
@@ -158,7 +143,9 @@
                             <img src="assets/images/icons/feature_icon_4.svg" alt="Featured Icon">
                         </div>
                         <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Time-Saving</h2>
-                        <p class="cs_iconbox_subtitle mb-0">With fast booking processes and 24/7 support,<br>we help you save time <br>and focus on enjoying your vacation.</p>
+                        <p class="cs_iconbox_subtitle mb-0">With fast booking processes and 24/7 support,<br>we help
+                            you
+                            save time <br>and focus on enjoying your vacation.</p>
                     </div>
                 </div>
             </div>
@@ -172,7 +159,8 @@
         <div class="cs_height_135 cs_height_lg_75"></div>
         <div class="container">
             <div class="cs_section_heading cs_style_1 text-center">
-                <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">CHOOSE YOUR BEST BEACH
+                <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">CHOOSE YOUR BEST
+                    BEACH
                 </h3>
                 <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0 wow fadeInUp" data-wow-duration="0.8s"
                     data-wow-delay="0.2s">Famous Beaches</h2>
@@ -200,7 +188,8 @@
                                     <span> 7K+ Rating</span>
                                 </div>
                             </div>
-                            <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Whitehaven Beach</a></h2>
+                            <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Whitehaven
+                                    Beach</a></h2>
                             <div class="cs_card_action">
                                 <a href="" class="cs_btn cs_style_1 cs_fs_18 cs_medium">
                                     Book Now
@@ -238,7 +227,8 @@
                                     <span> 11K+ Rating</span>
                                 </div>
                             </div>
-                            <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Baia do Sancho</a></h2>
+                            <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Baia do
+                                    Sancho</a></h2>
                             <div class="cs_card_action">
                                 <a href="" class="cs_btn cs_style_1 cs_fs_18 cs_medium">
                                     Book Now
@@ -276,7 +266,8 @@
                                     <span> 5K+ Rating</span>
                                 </div>
                             </div>
-                            <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Anse Source d'Argent</a></h2>
+                            <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Anse Source
+                                    d'Argent</a></h2>
                             <div class="cs_card_action">
                                 <a href="" class="cs_btn cs_style_1 cs_fs_18 cs_medium">
                                     Book Now
@@ -314,7 +305,8 @@
                                     <span> 3.5K+ Rating</span>
                                 </div>
                             </div>
-                            <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Pink Sands Beach</a></h2>
+                            <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Pink Sands
+                                    Beach</a></h2>
                             <div class="cs_card_action">
                                 <a href="" class="cs_btn cs_style_1 cs_fs_18 cs_medium">
                                     Book Now
@@ -454,13 +446,20 @@
     <!-- End destination Section -->
 
     <!-- Start Banner Section -->
-    <section class="cs_banner cs_style_1 cs_bg_filed cs_primary_bg" data-src="assets/images/baibiennhatrangbanner.jpg">
+    <section class="cs_banner cs_style_1 cs_bg_filed cs_primary_bg"
+        data-src="assets/images/baibiennhatrangbanner.jpg">
         <div class="cs_height_125 cs_height_lg_70"></div>
         <div class="container">
             <div class="cs_banner_text cs_white_color">
                 <h2 class="cs_banner_title cs_white_color cs_fs_56 wow fadeInRight" data-wow-duration="0.8s"
                     data-wow-delay="0.2s">Nha Trang Beach</h2>
-                <p class="cs_banner_subtitle cs_fs_18"> With its enchanting beauty both day and night, is a must-visit destination to experience at least once in a lifetime. During the day, the soft white sand merges with the sparkling turquoise waters under the bright sun, creating a stunning natural landscape. Visitors can immerse themselves in the crystal-clear sea or stroll along the serene shoreline. As night falls, Nha Trang transforms into a romantic haven, with twinkling lights reflecting on the water's surface and the gentle sound of waves lapping the shore. It’s a tranquil moment that soothes the soul and leaves an unforgettable impression.<br><br>
+                <p class="cs_banner_subtitle cs_fs_18"> With its enchanting beauty both day and night, is a must-visit
+                    destination to experience at least once in a lifetime. During the day, the soft white sand merges
+                    with the sparkling turquoise waters under the bright sun, creating a stunning natural landscape.
+                    Visitors can immerse themselves in the crystal-clear sea or stroll along the serene shoreline. As
+                    night falls, Nha Trang transforms into a romantic haven, with twinkling lights reflecting on the
+                    water's surface and the gentle sound of waves lapping the shore. It’s a tranquil moment that soothes
+                    the soul and leaves an unforgettable impression.<br><br>
                     They really have thought about everything here down to the finest details.</p>
                 <div class="cs_banner_review cs_medium">
                     <svg width="110" height="22" viewBox="0 0 110 22" fill="none"
@@ -499,7 +498,8 @@
         <div class="cs_height_135 cs_height_lg_80"></div>
         <div class="container">
             <div class="cs_section_heading cs_style_1 text-center">
-                <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">HOW TO EXPERIENCE</h3>
+                <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">HOW TO EXPERIENCE
+                </h3>
                 <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0 wow fadeInUp" data-wow-duration="0.8s"
                     data-wow-delay="0.2s">It’s Simple</h2>
             </div>
@@ -512,7 +512,9 @@
                             class="cs_step_number cs_semibold text-white cs_fs_25 rounded-circle cs_accent_bg d-flex align-items-center justify-content-center position-absolute">01</span>
                     </div>
                     <h2 class="cs_fs_25 cs_semibold">Research and Create a List</h2>
-                    <p class="m-0">Explore different beaches based on your preferences, such as scenery, activities, and services available. Read reviews from previous visitors and compile a list of potential beaches to visit.</p>
+                    <p class="m-0">Explore different beaches based on your preferences, such as scenery, activities,
+                        and services available. Read reviews from previous visitors and compile a list of potential
+                        beaches to visit.</p>
                 </div>
                 <div class="cs_step text-center position-relative">
                     <div class="cs_step_thumb rounded-circle position-relative">
@@ -521,7 +523,9 @@
                             class="cs_step_number cs_semibold text-white cs_fs_25 rounded-circle cs_accent_bg d-flex align-items-center justify-content-center position-absolute">02</span>
                     </div>
                     <h2 class="cs_fs_25 cs_semibold">Identify Needs and Budget</h2>
-                    <p class="m-0">Determine what’s important for your trip, including your budget, accommodation type (hotel, resort, or vacation rental), and desired activities (snorkeling, water sports, relaxation, etc.). Ensure the beach you choose aligns with your needs and budget.</p>
+                    <p class="m-0">Determine what’s important for your trip, including your budget, accommodation
+                        type (hotel, resort, or vacation rental), and desired activities (snorkeling, water sports,
+                        relaxation, etc.). Ensure the beach you choose aligns with your needs and budget.</p>
                 </div>
                 <div class="cs_step text-center position-relative">
                     <div class="cs_step_thumb rounded-circle position-relative">
@@ -530,7 +534,10 @@
                             class="cs_step_number cs_semibold text-white cs_fs_25 rounded-circle cs_accent_bg d-flex align-items-center justify-content-center position-absolute">03</span>
                     </div>
                     <h2 class="cs_fs_25 cs_semibold">Book Services and Plan Itinerary</h2>
-                    <p class="m-0">Once you’ve selected a beach, book your travel services, such as flights, accommodations, and activities. Create a detailed itinerary, including sightseeing, travel times, and other planned activities. Don’t forget to check the weather for optimal vacation preparation!</p>
+                    <p class="m-0">Once you’ve selected a beach, book your travel services, such as flights,
+                        accommodations, and activities. Create a detailed itinerary, including sightseeing, travel
+                        times, and other planned activities. Don’t forget to check the weather for optimal vacation
+                        preparation!</p>
                 </div>
             </div>
         </div>
@@ -608,7 +615,14 @@
                                 <h2 class="cs_post_title cs_fs_24 cs_semibold"><a
                                         href="{{ route('blogdetails') }}">Whitehaven Beach, Australia</a>
                                 </h2>
-                                <p class="cs_post_subtitle">Protecting Paradise: New Conservation Efforts at Whitehaven Beach,In a recent initiative to preserve the natural beauty of Whitehaven Beach, local authorities have announced new conservation measures aimed at protecting the unique ecosystem of the Whitsunday Islands. The program includes stricter regulations on tourism activities and the introduction of guided eco-tours to educate visitors about the delicate environment. Tourists can now enjoy the stunning white sands and clear waters while contributing to the conservation of this breathtaking paradise.</p>
+                                <p class="cs_post_subtitle">Protecting Paradise: New Conservation Efforts at Whitehaven
+                                    Beach,In a recent initiative to preserve the natural beauty of Whitehaven Beach,
+                                    local authorities have announced new conservation measures aimed at protecting the
+                                    unique ecosystem of the Whitsunday Islands. The program includes stricter
+                                    regulations on tourism activities and the introduction of guided eco-tours to
+                                    educate visitors about the delicate environment. Tourists can now enjoy the stunning
+                                    white sands and clear waters while contributing to the conservation of this
+                                    breathtaking paradise.</p>
                                 <div class="cs_post_btns cs_gray_bg_1">
                                     <a href="#">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -665,7 +679,13 @@
                                         href="{{ route('blogdetails') }}">Baia do Sancho, Brazil</a>
                                 </h2>
                                 <p class="cs_post_subtitle">Title: "Baia do Sancho Named Best Beach Again!"
-                                    For the third consecutive year, Baia do Sancho has been voted the "Best Beach in the World" in a popular travel survey conducted by Beach Lovers Magazine. Renowned for its stunning scenery and vibrant marine life, this beautiful beach continues to attract visitors from around the globe. In response to its popularity, local businesses are stepping up efforts to enhance visitor experience by offering new water sports activities and eco-friendly tours. Don’t miss the chance to visit this award-winning destination on your next trip to Brazil!</p>
+                                    For the third consecutive year, Baia do Sancho has been voted the "Best Beach in the
+                                    World" in a popular travel survey conducted by Beach Lovers Magazine. Renowned for
+                                    its stunning scenery and vibrant marine life, this beautiful beach continues to
+                                    attract visitors from around the globe. In response to its popularity, local
+                                    businesses are stepping up efforts to enhance visitor experience by offering new
+                                    water sports activities and eco-friendly tours. Don’t miss the chance to visit this
+                                    award-winning destination on your next trip to Brazil!</p>
                                 <div class="cs_post_btns cs_gray_bg_1">
                                     <a href="#">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
