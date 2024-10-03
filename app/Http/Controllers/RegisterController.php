@@ -103,7 +103,7 @@ public function verifyOtp(Request $request)
         // Tạo tài khoản nếu OTP đúng
 
         // dd(session('name'));
-        User::create([
+        $user = User::create([
             'name' => session('name'),
             'email' => session('email'),
             'password' => session('password'),
@@ -114,6 +114,9 @@ public function verifyOtp(Request $request)
         // Xóa session sau khi xác thực
         session()->forget(['name', 'email', 'password', 'role_id', 'otp']);
 
+        // if ($user->role_id == 2) {
+        //     return redirect()->route('dashboard');  // Chuyển hướng tới trang dashboard
+        // }
         // Chuyển hướng đến trang đăng nhập với thông báo thành công
         return redirect()->route('login')->with('otp_success', 'Account created successfully! Please login.');
     }
@@ -126,7 +129,7 @@ public function verifyOtp(Request $request)
 
     public function showOtpForm()
     {
-        return view('auth.verify-otp');
+        return view('auth.Reg-verify-otp');
     }
 
 

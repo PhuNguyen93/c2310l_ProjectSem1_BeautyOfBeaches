@@ -59,6 +59,7 @@ class UserController extends Controller
     // Hàm để lưu người dùng mới (với việc lấy ID người dùng vừa tạo)
     public function store(Request $request)
 {
+
     // Kiểm tra xem email đã tồn tại chưa
     $validator = Validator::make($request->all(), [
         'email' => 'required|email|unique:users,email',
@@ -66,7 +67,7 @@ class UserController extends Controller
     ],[
         'email.unique' => 'Email này đã được sử dụng để đăng ký tài khoản. Vui lòng sử dụng email khác.',
     ]
-);
+    );
     if ($validator->fails()) {
         return back()->withErrors($validator)->withInput();
     }
@@ -80,7 +81,7 @@ class UserController extends Controller
                 'password' => bcrypt($request->password),
                 'role_id' => $request->role_id,
             ]);
-
+    // dd(session()->all());
     // Gửi OTP qua email
     Mail::to($request->email)->send(new OtpMail($otp));
 
@@ -93,7 +94,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        dd(1);
+        // dd(1);
         return view('users.edit', compact('user'));
     }
 
@@ -180,7 +181,7 @@ public function account($id)
     // Lấy người dùng hiện tại
     // $user = Auth::user();
     $user = User::findOrFail($id);
-    dd(3);
+
     // Truyền dữ liệu người dùng vào view
     return view('pages-account', compact('user'));
 }
@@ -286,6 +287,7 @@ public function register(Request $request)
 public function verifyOtp(Request $request)
 {
     // Kiểm tra OTP
+    // dd(3);
     if ($request->otp == session('otp')) {
         // Tạo tài khoản nếu OTP đúng
         User::create([
@@ -300,7 +302,7 @@ public function verifyOtp(Request $request)
         session()->forget(['name', 'email', 'password', 'role_id', 'otp']);
 
            // Thông báo thành công OTP
-        return redirect()->back()->with('otp_success', 'Account created successfully!');
+           return redirect()->route('users.index')->with('success', 'Operation successful!');
     }
 
     // Trả về lỗi nếu OTP sai
@@ -310,6 +312,7 @@ public function verifyOtp(Request $request)
 
 public function showOtpForm()
 {
+    // dd(2);
     return view('auth.verify-otp');
 }
 

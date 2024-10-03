@@ -248,7 +248,7 @@
                 <div class="flex items-center gap-2 mb-3">
                     <h6 class="text-15 grow">Daily Visit Insights <a href="#!" data-tooltip="default"
                             data-tooltip-content="Analyst or business user discovering a pattern in data or a relationship between variables"
-                            class="inline-block align-middle ltr:ml-1 rtl:mr-1 text-slate-500 dark:text-zink-200"><i
+                            class="inline-block align-middaddUserModalle ltr:ml-1 rtl:mr-1 text-slate-500 dark:text-zink-200"><i
                                 data-lucide="info" class="size-4"></i></a></h6>
                     <div class="relative dropdown shrink-0">
                         <button type="button"
