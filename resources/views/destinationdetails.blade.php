@@ -1,5 +1,7 @@
 @extends('layout.layout')
-
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQgZ6Fs6ErAf0bL5tV7fSAg57ocLGAI6k&callback=initMap">
+</script>
 @section('content')
     <!-- Start Hero Section -->
     <x-hero subTitle='{{ $beach->name }}' img='{{ asset($beach->image_url) }}' title='Popular Destination' />
@@ -24,17 +26,9 @@
                                 <li><a href="#tab_4" class="cs_primary_bg cs_white_color cs_radius_5">Reviews</a></li>
                             </ul>
                             <div class="cs_tab_body">
-                                {{-- @if ($beach->location)
-                                        <a href="https://www.google.com/maps?q={{ urlencode($beach->location) }}"
-                                            target="_blank">
-                                            Xem vị trí Biển Mỹ Khê trên Google Maps
-                                        </a>
-                                    @else
-                                        <p>Không có thông tin vị trí.</p>
-                                    @endif --}}
                                 <div class="cs_tab active" id="tab_2">
                                     <iframe id="map"
-                                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-_OQuqIYNqz9RgImViWzdHs2g_j9CUYg&q={{ urlencode($beach->location) }}"
+                                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDo2qqju6Oddo4SkAaIZBD2tUcOCsgYSmU&q={{ urlencode($beach->location) }}"
                                         target="_blank" allowfullscreen></iframe>
                                 </div>
                                 <div class="cs_tab" id="tab_3">
@@ -452,52 +446,52 @@
     <!-- End Destination Details Section -->
 @endsection
 <script>
-   document.addEventListener('DOMContentLoaded', function () {
-    // Bắt sự kiện khi người dùng chọn rating
-    document.querySelectorAll('.star-rating input').forEach((star) => {
-        star.addEventListener('click', function() {
-            console.log(`Rating selected: ${this.value}`);
+    document.addEventListener('DOMContentLoaded', function() {
+        // Bắt sự kiện khi người dùng chọn rating
+        document.querySelectorAll('.star-rating input').forEach((star) => {
+            star.addEventListener('click', function() {
+                console.log(`Rating selected: ${this.value}`);
+            });
         });
-    });
 
-    // Bắt sự kiện lọc comment dựa trên rating
-    const filterButtons = document.querySelectorAll('.filter-rating');
+        // Bắt sự kiện lọc comment dựa trên rating
+        const filterButtons = document.querySelectorAll('.filter-rating');
 
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const rating = this.getAttribute('data-rating');
-            const comments = document.querySelectorAll('#comments-list .cs_comment');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const rating = this.getAttribute('data-rating');
+                const comments = document.querySelectorAll('#comments-list .cs_comment');
 
-            if (rating === 'all') {
-                // Hiển thị tất cả comment
-                comments.forEach(comment => {
-                    comment.style.display = 'block';
-                });
-            } else {
-                // Ẩn tất cả comment trước
-                comments.forEach(comment => {
-                    comment.style.display = 'none';
-                });
+                if (rating === 'all') {
+                    // Hiển thị tất cả comment
+                    comments.forEach(comment => {
+                        comment.style.display = 'block';
+                    });
+                } else {
+                    // Ẩn tất cả comment trước
+                    comments.forEach(comment => {
+                        comment.style.display = 'none';
+                    });
 
-                // Hiển thị comment có rating tương ứng
-                const filteredComments = document.querySelectorAll(`#comments-list .cs_comment[data-rating="${rating}"]`);
-                filteredComments.forEach(comment => {
-                    comment.style.display = 'block';
-                });
+                    // Hiển thị comment có rating tương ứng
+                    const filteredComments = document.querySelectorAll(
+                        `#comments-list .cs_comment[data-rating="${rating}"]`);
+                    filteredComments.forEach(comment => {
+                        comment.style.display = 'block';
+                    });
+                }
+            });
+        });
+
+        // Bắt sự kiện nếu người dùng chưa đăng nhập, hiển thị popup
+        const submitButton = document.getElementById('submitCommentButton');
+        const isAuthenticated = {{ auth()->check() ? 'true' : 'false' }};
+
+        submitButton.addEventListener('click', function(e) {
+            if (!isAuthenticated) {
+                e.preventDefault(); // Ngăn chặn form được submit nếu chưa đăng nhập
+                $('#loginPopup').modal('show'); // Hiển thị popup
             }
         });
     });
-
-    // Bắt sự kiện nếu người dùng chưa đăng nhập, hiển thị popup
-    const submitButton = document.getElementById('submitCommentButton');
-    const isAuthenticated = {{ auth()->check() ? 'true' : 'false' }};
-
-    submitButton.addEventListener('click', function (e) {
-        if (!isAuthenticated) {
-            e.preventDefault();  // Ngăn chặn form được submit nếu chưa đăng nhập
-            $('#loginPopup').modal('show');  // Hiển thị popup
-        }
-    });
-});
-
 </script>
