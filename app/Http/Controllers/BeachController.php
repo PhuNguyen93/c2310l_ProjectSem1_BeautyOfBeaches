@@ -16,7 +16,9 @@ class BeachController extends Controller
 
     $beaches = Beach::when($search, function ($query, $search) {
         return $query->where('name', 'like', "%{$search}%");
-    })->paginate(10);
+    })
+    ->orderBy('created_at','desc')
+    ->paginate(10);
 
     return view('beaches.index', compact('beaches'));
 }

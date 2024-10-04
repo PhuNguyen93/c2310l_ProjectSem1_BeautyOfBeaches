@@ -323,126 +323,63 @@
                     <div class="cs_sidebar cs_style_1 cs_white_bg cs_right_sidebar">
                         <div class="cs_info_widget cs_white_bg">
                             <h3 class="cs_widget_title cs_fs_24 cs_medium">Basic Information:</h3>
-                            <p class="cs_widget_subtitle">Aliquam lorem ante, dapibus in, viverra quis, feugiat viverra
-                                nulla ut metus varius laoreet. Quisque</p>
+                            <p class="cs_widget_subtitle">Aliquam lorem ante, dapibus in, viverra quis, feugiat viverra nulla ut metus varius laoreet. Quisque</p>
                             <ul class="cs_info_list cs_mp0">
                                 <li class="cs_info_item">
-                                    <h3 class="cs_info_title cs_fs_16 cs_semibold mb-0">Destination</h3>
-                                    <p class="cs_info_subtitle mb-0">Iceberg,Greenland</p>
+                                    <h3 class="cs_info_title cs_fs_16 cs_semibold mb-0">Destination:</h3>
+                                    <p class="cs_info_subtitle mb-0">{{ $beach->name }}</p>
                                 </li>
                                 <li class="cs_info_item">
-                                    <h3 class="cs_info_title cs_fs_16 cs_semibold mb-0">Duration</h3>
-                                    <p class="cs_info_subtitle mb-0">3 Days 2 Nights</p>
+                                    <h3 class="cs_info_title cs_fs_16 cs_semibold mb-0">Location:</h3>
+                                    <p class="cs_info_subtitle mb-0">{{ $beach->location }}</p>
                                 </li>
                                 <li class="cs_info_item">
-                                    <h3 class="cs_info_title cs_fs_16 cs_semibold mb-0">Departure</h3>
-                                    <p class="cs_info_subtitle mb-0">Square, Old Town</p>
-                                </li>
-                                <li class="cs_info_item">
-                                    <h3 class="cs_info_title cs_fs_16 cs_semibold mb-0">Departure Time</h3>
-                                    <p class="cs_info_subtitle mb-0">mately 8.30AM</p>
-                                </li>
-                                <li class="cs_info_item">
-                                    <h3 class="cs_info_title cs_fs_16 cs_semibold mb-0">Return Time</h3>
-                                    <p class="cs_info_subtitle mb-0">Approximately 7.30PM</p>
-                                </li>
-                                <li class="cs_info_item">
-                                    <h3 class="cs_info_title cs_fs_16 cs_semibold mb-0">Dress Code</h3>
-                                    <p class="cs_info_subtitle mb-0">Casual <br> comfortable and light</p>
-                                </li>
-                                <li class="cs_info_item">
-                                    <h3 class="cs_info_title cs_fs_16 cs_semibold mb-0">Included</h3>
-                                    <p class="cs_info_subtitle mb-0">Airport Transfer,<br> Personal Guide</p>
-                                </li>
-                                <li class="cs_info_item">
-                                    <h3 class="cs_info_title cs_fs_16 cs_semibold mb-0">Not Included</h3>
-                                    <p class="cs_info_subtitle mb-0">Gallery Ticket, Lunch</p>
-                                </li>
-                                <li class="cs_info_item">
-                                    <h3 class="cs_info_title cs_fs_16 cs_semibold mb-0">Reviews</h3>
+                                    <h3 class="cs_info_title cs_fs_16 cs_semibold mb-0">Average Rating:</h3>
                                     <div class="cs_rating_container">
-                                        <div class="cs_rating scale_half" data-rating="4">
+                                        <div class="cs_rating scale_half" data-rating="{{ $averageRating }}">
                                             <div class="cs_rating_percentage"></div>
                                         </div>
                                     </div>
                                 </li>
+                                <li class="cs_info_item">
+                                    <h3 class="cs_info_title cs_fs_16 cs_semibold mb-0">Total Reviews</h3>
+                                    <p class="cs_info_subtitle mb-0">{{ $totalReviews }}</p>
+                                </li>
                             </ul>
-                            <div class="cs_booking_widget cs_gray_bg">
-                                <h3 class="cs_widget_title cs_fs_24 cs_medium">Drop Messege For Detais</h3>
-                                <form action="" class="cs_booking_form">
-                                    <div class="cs_input_field position-relative">
-                                        <span><i class="fa-solid fa-user"></i></span>
-                                        <input type="text" placeholder="Your Name*" class="cs_form_field cs_radius_5">
-                                    </div>
-                                    <div class="cs_input_field position-relative">
-                                        <span><i class="fa-solid fa-envelope"></i></span>
-                                        <input type="email" placeholder="Your Email*"
-                                            class="cs_form_field cs_radius_5">
-                                    </div>
-                                    <div class="cs_input_field position-relative">
-                                        <span><i class="fa-solid fa-comment"></i></span>
-                                        <textarea rows="5" class="" placeholder="Message"></textarea>
-                                    </div>
-                                    <button type="submit" class="cs_btn cs_style_1 cs_fs_18 cs_medium cs_radius_4">Send
-                                        Message</button>
-                                </form>
-                            </div>
                         </div>
+
                         <div class="cs_post_widget">
-                            <h3 class="cs_widget_title cs_fs_24 cs_semibold">Popular Destination</h3>
+                            <h3 class="cs_widget_title cs_fs_24 cs_semibold">Popular Beaches</h3>
                             <ul class="cs_recent_posts cs_mp0">
-                                <li>
-                                    <article class="cs_recent_post">
-                                        <a href="{{ route('blogdetails') }}" class="cs_recent_post_thumb cs_zoom">
-                                            <img src="assets/images/latest_post_5.jpeg" alt="Post Thumb"
-                                                class="cs_zoom_in w-100 h-100 object-fit-cover">
-                                        </a>
-                                        <div class="cs_recent_post_info">
-                                            <h3 class="cs_recent_post_title cs_fs_18 cs_medium">
-                                                <a href="{{ route('blogdetails') }}">Eiffel Tower</a>
-                                            </h3>
-                                            <div class="cs_recent_post_meta">
-                                                <span>Paris, 24 Trips</span>
+                                @foreach ($popularBeaches as $popularBeach)
+                                    <li>
+                                        <article class="cs_recent_post">
+                                            <a href="{{ route('destinationdetails', $popularBeach->id) }}" class="cs_recent_post_thumb cs_zoom">
+                                                <img src="{{ asset($popularBeach->image_url) }}" alt="Post Thumb"
+                                                     class="cs_zoom_in w-100 h-100 object-fit-cover">
+                                            </a>
+                                            <div class="cs_recent_post_info">
+                                                <h3 class="cs_recent_post_title cs_fs_18 cs_medium">
+                                                    <a href="{{ route('destinationdetails', $popularBeach->id) }}">{{ $popularBeach->name }}</a>
+                                                </h3>
+                                                <div class="cs_recent_post_meta">
+                                                    <span>{{ $popularBeach->location }},
+                                                        {{ $popularBeach->feedbacks_count }} Reviews,
+                                                        <div class="cs_rating scale_half"
+                                                             data-rating="{{ round($popularBeach->feedbacks_avg_rating, 1) }}">
+                                                            <div class="cs_rating_percentage"></div>
+                                                        </div>
+                                                    </span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </article>
-                                </li>
-                                <li>
-                                    <article class="cs_recent_post">
-                                        <a href="{{ route('blogdetails') }}" class="cs_recent_post_thumb cs_zoom">
-                                            <img src="assets/images/latest_post_6.jpeg" alt="Post Thumb"
-                                                class="cs_zoom_in w-100 h-100 object-fit-cover">
-                                        </a>
-                                        <div class="cs_recent_post_info">
-                                            <h3 class="cs_recent_post_title cs_fs_18 cs_medium">
-                                                <a href="{{ route('blogdetails') }}">Pryde Mountains</a>
-                                            </h3>
-                                            <div class="cs_recent_post_meta">
-                                                <span>Prydelands, 100 Trips</span>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
-                                <li>
-                                    <article class="cs_recent_post">
-                                        <a href="{{ route('blogdetails') }}" class="cs_recent_post_thumb cs_zoom">
-                                            <img src="assets/images/latest_post_7.jpeg" alt="Post Thumb"
-                                                class="cs_zoom_in w-100 h-100 object-fit-cover">
-                                        </a>
-                                        <div class="cs_recent_post_info">
-                                            <h3 class="cs_recent_post_title cs_fs_18 cs_medium">
-                                                <a href="{{ route('blogdetails') }}">Lao Lading Island</a>
-                                            </h3>
-                                            <div class="cs_recent_post_meta cs_fs_14">
-                                                <span>Krabal, 12 Trips</span>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
+                                        </article>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
                 </aside>
+
             </div>
         </div>
         <div class="cs_height_140 cs_height_lg_80"></div>
