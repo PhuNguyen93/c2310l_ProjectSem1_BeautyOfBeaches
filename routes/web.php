@@ -78,6 +78,9 @@ Route::get('/feedbacks', [FeedbackController::class, 'index'])->name('feedbacks.
 
 // Beaches routes
 Route::resource('beaches', BeachController::class);
+Route::get('beaches/{beach}/add_pdf', [BeachController::class, 'addPdfForm'])->name('beaches.add_pdf');
+Route::post('beaches/{beach}/add_pdf', [BeachController::class, 'storePdf'])->name('beaches.store_pdf');
+Route::delete('beaches/{download}/delete_pdf', [BeachController::class, 'deletePdf'])->name('beaches.delete_pdf');
 
 // OTP Routes
 Route::get('otp/verify', [UserController::class, 'showOtpForm'])->name('otp.verify.form');

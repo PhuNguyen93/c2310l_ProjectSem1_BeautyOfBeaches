@@ -39,7 +39,7 @@
 
                             <div class="xl:col-span-3 xl:col-start-10">
                                 <div class="flex gap-2 xl:justify-end">
-                                    <button type="submit" class="btn bg-custom-500 text-white">Apply Filters</button>
+                                    <button type="submit" class="btn bg-gray-500 text-white hover:bg-gray-600">Apply Filters</button>
                                 </div>
                             </div>
                         </div>
