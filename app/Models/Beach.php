@@ -38,4 +38,9 @@ class Beach extends Model
     {
         return $this->hasMany(BeachGallery::class);
     }
+
+    public function downloads()
+    {
+        return $this->hasMany(Download::class);
+    }
 }

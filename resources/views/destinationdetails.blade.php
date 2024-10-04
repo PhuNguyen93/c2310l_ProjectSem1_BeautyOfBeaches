@@ -23,6 +23,8 @@
                                         class="cs_primary_bg cs_white_color cs_radius_5">Location</a></li>
                                 <li><a href="#tab_3" class="cs_primary_bg cs_white_color cs_radius_5">Gallery</a></li>
                                 <li><a href="#tab_4" class="cs_primary_bg cs_white_color cs_radius_5">Reviews</a></li>
+                                <li><a href="#tab_5" class="cs_primary_bg cs_white_color cs_radius_5">Dowload</a></li>
+
                             </ul>
                             <div class="cs_tab_body">
                                 <div class="cs_tab active" id="tab_2">
@@ -98,6 +100,59 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="cs_tab" id="tab_5">
+                                    <div class="container mt-5">
+                                        <h3 class="mb-4">Download</h3>
+                                        @if (auth()->user()->role_id == 2)
+                                            <div class="mb-4">
+                                                <form action="{{ route('beaches.store_pdf', $beach->id) }}" method="POST"
+                                                    enctype="multipart/form-data">
+                                                    @csrf
+                                                    <div class="form-group">
+                                                        <label for="pdf_file">Upload PDF</label>
+                                                        <input type="file" name="pdf_file" class="form-control" required>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary mt-3">Add PDF</button>
+                                                </form>
+                                            </div>
+                                        @endif
+
+                                        {{-- Check if there is any PDF file --}}
+                                        @if ($beach->downloads->count() > 0)
+                                            <ul class="list-group">
+                                                @foreach ($beach->downloads as $download)
+                                                    <li
+                                                        class="list-group-item d-flex justify-content-between align-items-center">
+                                                        {{ $download->file_name }}
+                                                        <div class="d-flex align-items-center" style="gap: 10px;">
+                                                            <!-- Thêm khoảng cách giữa các nút -->
+                                                            <!-- Nút Download -->
+                                                            <a href="{{ asset($download->file_url) }}"
+                                                                class="btn btn-success" download>Download</a>
+
+                                                            <!-- Nút Delete, chỉ hiển thị nếu là admin -->
+                                                            @if (auth()->user()->role_id == 2)
+                                                                <form
+                                                                    action="{{ route('beaches.delete_pdf', $download->id) }}"
+                                                                    method="POST"
+                                                                    onsubmit="return confirm('Are you sure you want to delete this PDF?');" class="d-flex">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit"
+                                                                        class="btn btn-danger">Delete</button>
+                                                                </form>
+                                                            @endif
+                                                        </div>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            <p>No files available for download.</p>
+                                        @endif
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -152,7 +207,8 @@
                                         <div class="col-md-2 text-end">
                                             @if (auth()->check() && (auth()->user()->id === $feedback->user_id || auth()->user()->role == 'admin'))
                                                 <!-- Nút Edit (mở modal) -->
-                                                <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal"
+                                                <button type="button" class="btn btn-warning me-2"
+                                                    data-bs-toggle="modal"
                                                     data-bs-target="#editModal{{ $feedback->id }}">
                                                     Edit
                                                 </button>
@@ -323,7 +379,8 @@
                     <div class="cs_sidebar cs_style_1 cs_white_bg cs_right_sidebar">
                         <div class="cs_info_widget cs_white_bg">
                             <h3 class="cs_widget_title cs_fs_24 cs_medium">Basic Information:</h3>
-                            <p class="cs_widget_subtitle">Aliquam lorem ante, dapibus in, viverra quis, feugiat viverra nulla ut metus varius laoreet. Quisque</p>
+                            <p class="cs_widget_subtitle">Aliquam lorem ante, dapibus in, viverra quis, feugiat viverra
+                                nulla ut metus varius laoreet. Quisque</p>
                             <ul class="cs_info_list cs_mp0">
                                 <li class="cs_info_item">
                                     <h3 class="cs_info_title cs_fs_16 cs_semibold mb-0">Destination:</h3>
@@ -354,19 +411,21 @@
                                 @foreach ($popularBeaches as $popularBeach)
                                     <li>
                                         <article class="cs_recent_post">
-                                            <a href="{{ route('destinationdetails', $popularBeach->id) }}" class="cs_recent_post_thumb cs_zoom">
+                                            <a href="{{ route('destinationdetails', $popularBeach->id) }}"
+                                                class="cs_recent_post_thumb cs_zoom">
                                                 <img src="{{ asset($popularBeach->image_url) }}" alt="Post Thumb"
-                                                     class="cs_zoom_in w-100 h-100 object-fit-cover">
+                                                    class="cs_zoom_in w-100 h-100 object-fit-cover">
                                             </a>
                                             <div class="cs_recent_post_info">
                                                 <h3 class="cs_recent_post_title cs_fs_18 cs_medium">
-                                                    <a href="{{ route('destinationdetails', $popularBeach->id) }}">{{ $popularBeach->name }}</a>
+                                                    <a
+                                                        href="{{ route('destinationdetails', $popularBeach->id) }}">{{ $popularBeach->name }}</a>
                                                 </h3>
                                                 <div class="cs_recent_post_meta">
                                                     <span>{{ $popularBeach->location }},
                                                         {{ $popularBeach->feedbacks_count }} Reviews,
                                                         <div class="cs_rating scale_half"
-                                                             data-rating="{{ round($popularBeach->feedbacks_avg_rating, 1) }}">
+                                                            data-rating="{{ round($popularBeach->feedbacks_avg_rating, 1) }}">
                                                             <div class="cs_rating_percentage"></div>
                                                         </div>
                                                     </span>
@@ -435,4 +494,13 @@
             }
         });
     });
+     // Hiển thị popup khi thêm PDF thành công
+     @if (session('success'))
+        alert('Success: {{ session('success') }}');
+    @endif
+
+    // Hiển thị popup khi xóa PDF thành công
+    @if (session('delete'))
+        alert('Deleted: {{ session('delete') }}');
+    @endif
 </script>

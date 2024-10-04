@@ -9,5 +9,11 @@ class Download extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['file_name', 'file_type', 'file_url', 'download_count'];
+    protected $fillable = ['file_name', 'file_url', 'download_count', 'beach_id'];
+
+    public function beach()
+    {
+        return $this->belongsTo(Beach::class);
+    }
 }
+
