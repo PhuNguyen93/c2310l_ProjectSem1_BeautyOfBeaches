@@ -3,66 +3,68 @@
 @section('content')
 <x-page-title title="Beach Details" pagetitle="Beach" />
 
-<div class="bg-white p-6 rounded-lg shadow-md">
+<div class="bg-white p-8 rounded-lg shadow-lg">
     <div class="container mx-auto">
-        <h2 class="text-2xl font-bold text-center mb-6">{{ $beach->name }}</h2>
+        <h2 class="text-3xl font-bold text-center mb-8 text-indigo-800">{{ $beach->name }}</h2>
 
-        <div class="space-y-4">
-            <!-- Quốc Gia -->
+        <div class="space-y-6">
+            <!-- Country -->
             <div class="flex items-center">
-                <label class="w-1/4 font-semibold text-gray-700">{{ __('Quốc Gia') }}:</label>
+                <label class="w-1/4 font-semibold text-gray-800">{{ __('Country') }}:</label>
                 <div class="w-3/4">
-                    <p class="text-gray-600">{{ $beach->country }}</p>
+                    <p class="text-gray-700">{{ $beach->country }}</p>
                 </div>
             </div>
 
-            <!-- Vị Trí -->
+            <!-- Location -->
             <div class="flex items-center">
-                <label class="w-1/4 font-semibold text-gray-700">{{ __('Vị Trí') }}:</label>
+                <label class="w-1/4 font-semibold text-gray-800">{{ __('Location') }}:</label>
                 <div class="w-3/4">
-                    <p class="text-gray-600">{{ $beach->location }}</p>
+                    <p class="text-gray-700">{{ $beach->location }}</p>
                 </div>
             </div>
 
-            <!-- Khu Vực -->
+            <!-- Area -->
             <div class="flex items-center">
-                <label class="w-1/4 font-semibold text-gray-700">{{ __('Khu Vực') }}:</label>
+                <label class="w-1/4 font-semibold text-gray-800">{{ __('Area') }}:</label>
                 <div class="w-3/4">
-                    <p class="text-gray-600">{{ $beach->area ? $beach->area->name : 'Không xác định' }}</p>
+                    <p class="text-gray-700">{{ $beach->area ? $beach->area->name : 'Undefined' }}</p>
                 </div>
             </div>
 
-            <!-- Mô Tả -->
-            <div class="flex flex-col space-y-2">
-                <label class="font-semibold text-gray-700">{{ __('Mô Tả') }}:</label>
-                <p class="text-gray-600">{{ $beach->description }}</p>
-                <p class="text-gray-600">{{ $beach->description2 }}</p>
-                <p class="text-gray-600">{{ $beach->description3 }}</p>
+            <!-- Description -->
+            <div class="flex flex-col space-y-4">
+                <label class="font-semibold text-gray-800">{{ __('Description') }}:</label>
+                <p class="text-gray-700">{{ $beach->description }}</p>
+                <p class="text-gray-700">{{ $beach->description2 }}</p>
+                <p class="text-gray-700">{{ $beach->description3 }}</p>
             </div>
 
-            <!-- Hình Ảnh -->
+            <!-- Image -->
             @if($beach->image_url)
             <div class="flex flex-col items-start">
-                <label class="font-semibold text-gray-700">{{ __('Hình Ảnh') }}:</label>
-                <div>
-                    <img src="{{ asset($beach->image_url) }}" alt="Hình Ảnh Bãi Biển" class="rounded-lg shadow-lg w-full md:w-1/2">
+                <label class="font-semibold text-gray-800">{{ __('Image') }}:</label>
+                <div class="w-full md:w-1/2">
+                    <img src="{{ asset($beach->image_url) }}" alt="Beach Image" class="rounded-lg shadow-lg w-full">
                 </div>
             </div>
             @endif
         </div>
 
-        <!-- Nút hành động -->
-        <div class="mt-6 space-x-2">
-            <form action="{{ route('beaches.destroy', $beach->id) }}" method="POST" class="inline-block">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-700"
-                    onclick="return confirm('{{ __('Bạn có chắc muốn xóa bãi biển này?') }}')">
-                    {{ __('Xóa') }}
-                </button>
-            </form>
-            <a href="{{ route('beaches.index') }}" class="bg-gray-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-gray-700">{{ __('Quay Lại') }}</a>
-            <a href="{{ route('beaches.edit', $beach->id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-yellow-600">{{ __('Sửa') }}</a>
+        <!-- Action buttons -->
+        <div class="mt-8 flex justify-between items-center">
+            <div class="flex space-x-6">
+                <form action="{{ route('beaches.destroy', $beach->id) }}" method="POST" class="inline-block">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="bg-red-500 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-red-600 transition"
+                        onclick="return confirm('{{ __('Are you sure you want to delete this beach?') }}')">
+                        {{ __('Delete') }}
+                    </button>
+                </form>
+                <a href="{{ route('beaches.edit', $beach->id) }}" class="bg-yellow-400 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-yellow-500 transition">{{ __('Edit') }}</a>
+            </div>
+            <a href="{{ route('beaches.index') }}" class="bg-gray-500 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-gray-600 transition">{{ __('Back') }}</a>
         </div>
     </div>
 </div>

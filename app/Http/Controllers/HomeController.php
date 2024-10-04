@@ -36,7 +36,7 @@ class HomeController extends Controller
         $guestOnline = VisitorLog::whereNull('user_id')->count();
 
         // Trả dữ liệu về view
-        return view('index', compact('beaches','totalVisits', 'userOnline', 'guestOnline'));
+        return view('index', compact('beaches', 'totalVisits', 'userOnline', 'guestOnline'));
     }
 
     public function logout()
@@ -84,8 +84,16 @@ class HomeController extends Controller
             1 => $feedbacks->where('rating', 1)->count(),
         ];
 
+        // Lấy các bãi biển và đếm số lượng đánh giá 5 sao
+        $popularBeaches = Beach::withCount('feedbacks')
+        ->withAvg('feedbacks', 'rating') // Tính toán điểm trung bình
+        ->orderByDesc('feedbacks_avg_rating') // Sắp xếp theo điểm số trung bình trước
+        ->orderByDesc('feedbacks_count') // Nếu điểm số trung bình giống nhau, sắp xếp theo số lượng đánh giá
+        ->limit(3)
+        ->get();
+
         // Trả dữ liệu về view chi tiết bãi biển, bao gồm cả dữ liệu đánh giá
-        return view('destinationdetails', compact('beach', 'feedbacks', 'totalReviews', 'averageRating', 'ratingCount'));
+        return view('destinationdetails', compact('beach', 'feedbacks', 'totalReviews', 'averageRating', 'ratingCount', 'popularBeaches'));
     }
 
     public function tour()

@@ -152,8 +152,6 @@ Route::post('/verify-otp', [ForgotPasswordController::class, 'verifyOtp'])->name
 // Reset mật khẩu
 Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('resetPassword');
 
-
-
 //  Profile Controller
 Route::get('/register/verify', [RegisterController::class, 'showOtpForm'])->name('res.verify.form');
 Route::post('/register/verify', [RegisterController::class, 'verifyOtp'])->name('res.verify');
