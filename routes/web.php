@@ -171,3 +171,5 @@ Route::get('/dashboard/blogs/{id}', [BlogController::class, 'show'])->name('blog
 
 
 Route::get('/blogs', [BlogController::class, 'index'])->name('blog');
+Route::get('/blogs/create', [BlogController::class, 'create'])->name('create.blog');
+Route::post('/blogs', [BlogController::class, 'store'])->name('store.blog');

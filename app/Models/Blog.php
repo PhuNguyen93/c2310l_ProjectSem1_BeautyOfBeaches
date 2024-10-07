@@ -18,4 +18,8 @@ class Blog extends Model
     {
         return $this->hasMany(BlogDetail::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
