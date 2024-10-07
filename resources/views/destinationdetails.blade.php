@@ -100,7 +100,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="cs_tab" id="tab_5">
+                                <v class="cs_tab" id="tab_5">
                                     <div class="container mt-5">
                                         <h3 class="mb-4">Download</h3>
                                         @if (auth()->user()->role_id == 2)
@@ -124,11 +124,11 @@
                                                     <li
                                                         class="list-group-item d-flex justify-content-between align-items-center">
                                                         {{ $download->file_name }}
-                                                        <div class="d-flex align-items-center" style="gap: 10px;">
+                                                        <div class="d-flex justify-content-end" style="gap: 10px;">
                                                             <!-- Thêm khoảng cách giữa các nút -->
                                                             <!-- Nút Download -->
                                                             <a href="{{ asset($download->file_url) }}"
-                                                                class="btn btn-success" download>Download</a>
+                                                                class="btn btn-success" style="width: auto; height: 40px; font-size: 14px;" download>Download</a>
 
                                                             <!-- Nút Delete, chỉ hiển thị nếu là admin -->
                                                             @if (auth()->user()->role_id == 2)
@@ -139,7 +139,7 @@
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button type="submit"
-                                                                        class="btn btn-danger">Delete</button>
+                                                                        class="btn btn-danger" style="width: auto; height: 40px; font-size: 14px;">Delete</button>
                                                                 </form>
                                                             @endif
                                                         </div>
@@ -150,9 +150,7 @@
                                             <p>No files available for download.</p>
                                         @endif
                                     </div>
-                                </div>
-
-
+                                </v>
                             </div>
                         </div>
                     </div>
@@ -206,20 +204,23 @@
                                         </div>
                                         <div class="col-md-2 text-end">
                                             @if (auth()->check() && (auth()->user()->id === $feedback->user_id || auth()->user()->role == 'admin'))
-                                                <!-- Nút Edit (mở modal) -->
-                                                <button type="button" class="btn btn-warning me-2"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#editModal{{ $feedback->id }}">
-                                                    Edit
-                                                </button>
+                                                <!-- Sử dụng d-flex và gap để căn hàng và thêm khoảng cách -->
+                                                <div class="d-flex justify-content-end" style="gap: 10px;">
+                                                    <!-- Nút Edit (mở modal) -->
+                                                    <button type="button" class="btn btn-warning" style="width: auto; height: 40px; font-size: 14px;" data-bs-toggle="modal"
+                                                        data-bs-target="#editModal{{ $feedback->id }}">
+                                                        Edit
+                                                    </button>
 
-                                                <!-- Nút Delete -->
-                                                <form action="{{ route('feedbacks.destroy', $feedback->id) }}"
-                                                    method="POST" class="d-inline" onsubmit="return confirmDelete();">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger cs_medium">Del</button>
-                                                </form>
+                                                    <!-- Nút Delete -->
+                                                    <form action="{{ route('feedbacks.destroy', $feedback->id) }}" method="POST" class="d-inline"
+                                                        onsubmit="return confirmDelete();">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger cs_medium" style="width: auto; height: 40px; font-size: 14px;">Del</button>
+                                                    </form>
+                                                </div>
+
                                                 <script>
                                                     function confirmDelete() {
                                                         return confirm('Are you sure you want to delete this feedback? This action cannot be undone.');
@@ -227,6 +228,7 @@
                                                 </script>
                                             @endif
                                         </div>
+
 
                                         <!-- Modal chỉnh sửa comment -->
                                         <div class="modal fade" id="editModal{{ $feedback->id }}" tabindex="-1"
