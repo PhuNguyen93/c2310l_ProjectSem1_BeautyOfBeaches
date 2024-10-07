@@ -159,3 +159,5 @@ Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'
 Route::get('/register/verify', [RegisterController::class, 'showOtpForm'])->name('res.verify.form');
 Route::post('/register/verify', [RegisterController::class, 'verifyOtp'])->name('res.verify');
 Route::get('/register/resend-otp', [RegisterController::class, 'resendOtp'])->name('resend.res');
+
+Route::get('/search-beaches', [BeachController::class, 'search'])->name('searchBeaches');

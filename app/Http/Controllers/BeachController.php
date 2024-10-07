@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Beach;
 use App\Models\Download;
 use Illuminate\Http\Request;
-
+use App\Models\Country;
 class BeachController extends Controller
 {
     /**
@@ -23,6 +23,7 @@ class BeachController extends Controller
 
         return view('beaches.index', compact('beaches'));
     }
+
 
     /**
      * Hiển thị form tạo bãi biển mới.
@@ -196,4 +197,33 @@ class BeachController extends Controller
 
         return redirect()->route('beaches.index')->with('success', 'Đã xóa bãi biển thành công.');
     }
+
+    public function search(Request $request)
+    {
+        $query = Beach::query();
+
+        // Kiểm tra và lọc theo quốc gia
+        if ($request->filled('country')) {
+            $query->where('country', $request->country);
+        }
+
+        // Kiểm tra và lọc theo hướng (nếu có)
+        if ($request->filled('direction')) {
+            $query->where('direction', $request->direction);
+        }
+
+        // Lấy danh sách bãi biển với phân trang
+        $beaches = $query->paginate(5);
+
+        // Kiểm tra xem yêu cầu là AJAX không
+        if ($request->ajax()) {
+            return view('partials.beach_results', compact('beaches'));
+        }
+
+        // Trả về view đầy đủ nếu không phải yêu cầu AJAX
+        $countries = Country::all();
+        return view('destination', compact('beaches', 'countries'));
+    }
+
+
 }
