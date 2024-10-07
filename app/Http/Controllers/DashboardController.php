@@ -9,7 +9,7 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-        if (Auth::user()->role_id != 2) {
+        if (Auth::guest() || Auth::user()->role_id != 2) {
             return redirect()->route('index')->with('error', 'You do not have the required permissions.');
         }
         // Truyền dữ liệu vào view
