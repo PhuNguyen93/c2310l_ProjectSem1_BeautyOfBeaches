@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Beach;
 use App\Models\Download;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BeachController extends Controller
 {
@@ -13,6 +14,10 @@ class BeachController extends Controller
      */
     public function index(Request $request)
     {
+        if (Auth::guest() || Auth::user()->role_id != 2) {
+            return redirect()->route('index')->with('error', 'You do not have the required permissions.');
+        }
+
         $search = $request->input('search');
 
         $beaches = Beach::when($search, function ($query, $search) {

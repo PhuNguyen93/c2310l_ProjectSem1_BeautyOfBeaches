@@ -14,6 +14,9 @@ class CommentHistoryController extends Controller
      */
     public function index(Request $request)
     {
+        if (Auth::guest() || Auth::user()->role_id != 2) {
+            return redirect()->route('index')->with('error', 'You do not have the required permissions.');
+        }
         // Lấy các giá trị tìm kiếm và lọc từ request
         $search = $request->input('search');
         $rating = $request->input('rating');
