@@ -9,40 +9,102 @@
                 <h1 class="cs_hero_title cs_white_color cs_fs_100 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
                     Destinations</h1>
             </div>
+
             <div class="cs_find_form_wrap">
-                <form action="#" class="cs_find_form">
+                <form id="searchForm" class="cs_find_form">
                     <div>
-                        <h2 class="cs_fs_18 cs_normal mb-0">Where to?</h2>
+<select name="country" class="st_select">
+    <option value="">Country</option>
+    <option value="Vietnam">Vietnam</option>
+    <option value="India">India</option>
+    <option value="United States">United States</option>
+    <option value="Germany">Germany</option>
+    <option value="Australia">Australia</option>
+    <option value="United Kingdom">United Kingdom</option>
+    <option value="Italy">Italy</option>
+    <option value="Brazil">Brazil</option>
+    <option value="Mexico">Mexico</option>
+    <option value="Thailand">Thailand</option>
+    <option value="Maldives">Maldives</option>
+    <option value="Greece">Greece</option>
+    <option value="Spain">Spain</option>
+    <option value="Portugal">Portugal</option>
+    <option value="Philippines">Philippines</option>
+    <option value="South Africa">South Africa</option>
+    <option value="Indonesia">Indonesia</option>
+    <option value="Jamaica">Jamaica</option>
+    <option value="Cuba">Cuba</option>
+    <option value="Turkey">Turkey</option>
+    <option value="Egypt">Egypt</option>
+</select>
                     </div>
+
                     <div>
-                        <select name="cars" class="st_select">
-                            <option value="Destination">Destination</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
-                        </select>
+                        <select name="direction" class="st_select">
+                            <option value="">Select Direction</option>
+                            <option value="East">East</option>
+                            <option value="West">West</option>
+                            <option value="South">South</option>
+                            <option value="North">North</option>
+                            <option value="North">North East</option>
+                            <option value="North">North West</option>
+                            <option value="North">South East</option>
+                            <option value="North">South West</option>
                     </div>
+
                     <div>
-                        <select name="cars" class="st_select">
-                            <option value="Guests">Guests</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                    </div>
-                    <div>
-                        <button class="cs_find_btn cs_bold cs_primary_font cs_center"><i
-                                class="fa-solid fa-magnifying-glass"></i> Find Now</button>
+                        <button type="submit" class="cs_find_btn cs_bold cs_primary_font cs_center">
+                            <i class="fa-solid fa-magnifying-glass"></i> Find Now
+                        </button>
                     </div>
                 </form>
             </div>
+
+            <!-- Start destination Section -->
+            <section>
+                <div class="cs_height_140 cs_height_lg_80"></div>
+                <div class="container" id="results">
+                    <div class="cs_grid_1">
+                        @if($beaches->isEmpty())
+                            <p>No beaches found for your search.</p>
+                        @else
+                            @foreach ($beaches as $beach)
+                                <div class="cs_grid_item">
+                                    <a href="{{ route('destinationdetails', ['id' => $beach->id]) }}"
+                                        class="cs_card cs_style_2 cs_zoom position-relative cs_radius_8">
+                                        <div class="cs_card_thumb w-100 h-100">
+                                            <img src="{{ asset($beach->image_url) }}" alt="Card Image" class="w-100 h-100 cs_zoom_in">
+                                        </div>
+                                        <div class="cs_card_content position-absolute">
+                                            <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">{{ $beach->name }}</h2>
+                                            <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">{{ $beach->country }}</p>
+                                            @php
+                                                $totalReviews = $beach->feedbacks->count();
+                                                $averageRating = $totalReviews > 0 ? round($beach->feedbacks->avg('rating'), 1) : 0;
+                                            @endphp
+                                            <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">
+                                                Rating:
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $averageRating)
+                                                        <i class="fas fa-star text-warning"></i>
+                                                    @else
+                                                        <i class="far fa-star text-warning"></i>
+                                                    @endif
+                                                @endfor
+                                                ({{ $totalReviews }} reviews)
+                                            </p>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
+                    {{ $beaches->links('pagination::bootstrap-5') }}
+                </div>
+                <div class="cs_height_140 cs_height_lg_80"></div>
+            </section>
+            <!-- End destination Section -->
+
         </div>
         <div class="cs_hero_shape_1"></div>
         <div class="cs_hero_shape_2"></div>
@@ -50,53 +112,34 @@
     </section>
     <!-- End Hero Section -->
 
-    <!-- Start destination Section -->
-    <section>
-        <div class="cs_height_140 cs_height_lg_80"></div>
-        <div class="container">
-            <div class="cs_grid_1">
-                @foreach ($beaches as $beach)
-                    <div class="cs_grid_item">
-                        <!-- Link tới trang chi tiết bãi biển với ID -->
-                        <a href="{{ route('destinationdetails', ['id' => $beach->id]) }}"
-                            class="cs_card cs_style_2 cs_zoom position-relative cs_radius_8">
-                            <div class="cs_card_thumb w-100 h-100">
-                                <!-- Hiển thị hình ảnh bãi biển -->
-                                <img src="{{ asset($beach->image_url) }}" alt="Card Image" class="w-100 h-100 cs_zoom_in">
-                            </div>
-                            <div class="cs_card_content position-absolute">
-                                <!-- Hiển thị tên bãi biển -->
-                                <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">{{ $beach->name }}</h2>
-                                <!-- Hiển thị vị trí bãi biển và số chuyến đi (nếu có) -->
-                                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">{{ $beach->country }}</p>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#searchForm').on('submit', function(e) {
+                e.preventDefault(); // Ngăn chặn hành động mặc định của form
 
-                                <!-- Tính và hiển thị tổng số sao và số lượng người đánh giá -->
-                                @php
-                                    $totalReviews = $beach->feedbacks->count();
-                                    $averageRating = $totalReviews > 0 ? round($beach->feedbacks->avg('rating'), 1) : 0;
-                                @endphp
-
-                                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">
-                                    Rating:
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        @if ($i <= $averageRating)
-                                            <i class="fas fa-star text-warning"></i>
-                                        @else
-                                            <i class="far fa-star text-warning"></i>
-                                        @endif
-                                    @endfor
-                                    ({{ $totalReviews }} reviews)
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
-            <!-- Thêm phân trang -->
-            {{ $beaches->links('pagination::bootstrap-5') }}
-
-        </div>
-        <div class="cs_height_140 cs_height_lg_80"></div>
-    </section>
-    <!-- End destination Section -->
+                $.ajax({
+                    url: "{{ route('searchBeaches') }}",
+                    method: 'GET',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        $('#results').html(response);
+                    },
+                    error: function(xhr) {
+                        console.error(xhr);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
+
+
+
+
+
+
+
+
+
+
