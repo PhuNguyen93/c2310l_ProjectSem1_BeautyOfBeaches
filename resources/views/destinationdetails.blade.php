@@ -23,8 +23,7 @@
                                         class="cs_primary_bg cs_white_color cs_radius_5">Location</a></li>
                                 <li><a href="#tab_3" class="cs_primary_bg cs_white_color cs_radius_5">Gallery</a></li>
                                 <li><a href="#tab_4" class="cs_primary_bg cs_white_color cs_radius_5">Reviews</a></li>
-                                <li><a href="#tab_5" class="cs_primary_bg cs_white_color cs_radius_5">Dowload</a></li>
-
+                                <li><a href="#tab_5" class="cs_primary_bg cs_white_color cs_radius_5">Download</a></li>
                             </ul>
                             <div class="cs_tab_body">
                                 <div class="cs_tab active" id="tab_2">
@@ -51,11 +50,9 @@
                                     <div class="container mt-5">
                                         <h3 class="mb-4">Our Clients Reviews Details</h3>
                                         <div class="row">
-                                            <!-- Cột hiển thị điểm trung bình và tổng số đánh giá -->
                                             <div class="col-lg-4 text-center">
                                                 <h3>{{ $averageRating }}</h3>
                                                 <div>
-                                                    <!-- Hiển thị ngôi sao trung bình -->
                                                     @for ($i = 1; $i <= 5; $i++)
                                                         @if ($i <= $averageRating)
                                                             <i class="fas fa-star text-warning"></i>
@@ -67,16 +64,13 @@
                                                 <p>{{ $totalReviews }} Reviews</p>
                                             </div>
 
-                                            <!-- Cột hiển thị số lượng đánh giá từng sao -->
                                             <div class="col-lg-8">
                                                 @foreach ([5, 4, 3, 2, 1] as $star)
                                                     <div class="d-flex align-items-center mb-2">
-                                                        <!-- Số sao -->
                                                         <div class="flex-shrink-0 me-3">
                                                             {{ $star }} <i class="fas fa-star text-warning"></i>
                                                         </div>
 
-                                                        <!-- Thanh tiến trình cho mỗi sao -->
                                                         <div class="progress flex-grow-1 me-3" style="height: 8px;">
                                                             @php
                                                                 $percentage =
@@ -90,7 +84,6 @@
                                                                 aria-valuemax="100"></div>
                                                         </div>
 
-                                                        <!-- Số lượng đánh giá mỗi sao -->
                                                         <div class="flex-shrink-0">
                                                             {{ $ratingCount[$star] }}
                                                         </div>
@@ -100,10 +93,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <v class="cs_tab" id="tab_5">
+                                <div class="cs_tab" id="tab_5">
                                     <div class="container mt-5">
                                         <h3 class="mb-4">Download</h3>
-                                        @if (auth()->user()->role_id == 2)
+                                        @if (auth()->check() && auth()->user()->role_id == 2)
                                             <div class="mb-4">
                                                 <form action="{{ route('beaches.store_pdf', $beach->id) }}" method="POST"
                                                     enctype="multipart/form-data">
@@ -117,29 +110,26 @@
                                             </div>
                                         @endif
 
-                                        {{-- Check if there is any PDF file --}}
                                         @if ($beach->downloads->count() > 0)
                                             <ul class="list-group">
                                                 @foreach ($beach->downloads as $download)
-                                                    <li
-                                                        class="list-group-item d-flex justify-content-between align-items-center">
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
                                                         {{ $download->file_name }}
                                                         <div class="d-flex justify-content-end" style="gap: 10px;">
-                                                            <!-- Thêm khoảng cách giữa các nút -->
-                                                            <!-- Nút Download -->
-                                                            <a href="{{ asset($download->file_url) }}"
-                                                                class="btn btn-success" style="width: auto; height: 40px; font-size: 14px;" download>Download</a>
+                                                            @if (auth()->check())
+                                                                <a href="{{ asset($download->file_url) }}"
+                                                                    class="btn btn-success" style="width: auto; height: 40px; font-size: 14px;" download>Download</a>
+                                                            @else
+                                                                <button class="btn btn-secondary" style="width: auto; height: 40px; font-size: 14px;" data-bs-toggle="modal" data-bs-target="#loginPopup">Download</button>
+                                                            @endif
 
-                                                            <!-- Nút Delete, chỉ hiển thị nếu là admin -->
-                                                            @if (auth()->user()->role_id == 2)
-                                                                <form
-                                                                    action="{{ route('beaches.delete_pdf', $download->id) }}"
+                                                            @if (auth()->check() && auth()->user()->role_id == 2)
+                                                                <form action="{{ route('beaches.delete_pdf', $download->id) }}"
                                                                     method="POST"
                                                                     onsubmit="return confirm('Are you sure you want to delete this PDF?');" class="d-flex">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    <button type="submit"
-                                                                        class="btn btn-danger" style="width: auto; height: 40px; font-size: 14px;">Delete</button>
+                                                                    <button type="submit" class="btn btn-danger" style="width: auto; height: 40px; font-size: 14px;">Delete</button>
                                                                 </form>
                                                             @endif
                                                         </div>
@@ -150,7 +140,7 @@
                                             <p>No files available for download.</p>
                                         @endif
                                     </div>
-                                </v>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -164,32 +154,23 @@
                     <hr>
                     <div class="cs_comments">
                         <h3 class="cs_fs_24 cs_semibold">Comment</h3>
-                        <!-- Phần chọn lọc đánh giá -->
                         <div class="cs_filter_rating mb-4">
                             <div class="d-flex justify-content-start">
-                                <button class="btn btn-outline-primary me-2 filter-rating" data-rating="all">
-                                    All
-                                </button>
+                                <button class="btn btn-outline-primary me-2 filter-rating" data-rating="all">All</button>
                                 @for ($i = 5; $i >= 1; $i--)
-                                    <button class="btn btn-outline-primary me-2 filter-rating"
-                                        data-rating="{{ $i }}">
-                                        {{ $i }} <i class="fas fa-star text-warning"></i>
-                                    </button>
+                                    <button class="btn btn-outline-primary me-2 filter-rating" data-rating="{{ $i }}">{{ $i }} <i class="fas fa-star text-warning"></i></button>
                                 @endfor
                             </div>
                         </div>
 
-                        <!-- Danh sách comment được lọc -->
                         <ol class="cs_comment_list cs_mp0" id="comments-list">
                             @foreach ($feedbacks as $feedback)
                                 <li class="cs_comment" data-rating="{{ $feedback->rating }}">
                                     <div class="cs_comment_body row">
                                         <div class="col-md-10">
                                             <div class="cs_comment_author cs_fs_20 cs_semibold cs_primary_color">
-                                                <img src="{{ asset('assets/images/avatar_3.jpeg') }}" alt="Avatar"
-                                                    class="rounded-circle me-2" width="40" height="40">
-                                                <a
-                                                    href="#">{{ $feedback->user ? $feedback->user->name : 'Unknown User' }}</a>
+                                                <img src="{{ asset('assets/images/avatar_3.jpeg') }}" alt="Avatar" class="rounded-circle me-2" width="40" height="40">
+                                                <a href="#">{{ $feedback->user ? $feedback->user->name : 'Unknown User' }}</a>
                                                 <span class="rating-stars">
                                                     @for ($i = 1; $i <= 5; $i++)
                                                         @if ($i <= $feedback->rating)
@@ -204,15 +185,12 @@
                                         </div>
                                         <div class="col-md-2 text-end">
                                             @if (auth()->check() && (auth()->user()->id === $feedback->user_id || auth()->user()->role == 'admin'))
-                                                <!-- Sử dụng d-flex và gap để căn hàng và thêm khoảng cách -->
                                                 <div class="d-flex justify-content-end" style="gap: 10px;">
-                                                    <!-- Nút Edit (mở modal) -->
                                                     <button type="button" class="btn btn-warning" style="width: auto; height: 40px; font-size: 14px;" data-bs-toggle="modal"
                                                         data-bs-target="#editModal{{ $feedback->id }}">
                                                         Edit
                                                     </button>
 
-                                                    <!-- Nút Delete -->
                                                     <form action="{{ route('feedbacks.destroy', $feedback->id) }}" method="POST" class="d-inline"
                                                         onsubmit="return confirmDelete();">
                                                         @csrf
@@ -223,14 +201,12 @@
 
                                                 <script>
                                                     function confirmDelete() {
-                                                        return confirm('Are you sure you want to delete this feedback? This action cannot be undone.');
+                                                        return confirm('Are you sure you want to delete this feedback?');
                                                     }
                                                 </script>
                                             @endif
                                         </div>
 
-
-                                        <!-- Modal chỉnh sửa comment -->
                                         <div class="modal fade" id="editModal{{ $feedback->id }}" tabindex="-1"
                                             aria-labelledby="editModalLabel{{ $feedback->id }}" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -247,13 +223,11 @@
                                                             @csrf
                                                             @method('PUT')
 
-                                                            <!-- Nội dung comment để chỉnh sửa -->
                                                             <div class="form-group">
                                                                 <label for="message">Comment</label>
                                                                 <textarea name="message" id="message" class="form-control" rows="5" required>{{ old('message', $feedback->message) }}</textarea>
                                                             </div>
 
-                                                            <!-- Rating -->
                                                             <div class="col-lg-6 d-flex align-items-center">
                                                                 <label for="rating">Rating:</label>
                                                                 <div class="star-rating ms-2">
@@ -309,7 +283,6 @@
                             @endforeach
                         </ol>
 
-                        <!-- Form gửi bình luận -->
                         <form action="{{ route('feedbacks.store', $beach->id) }}" method="POST"
                             class="cs_comment_form cs_white_bg cs_radius_5" id="commentForm">
                             @csrf
@@ -339,36 +312,31 @@
                                             {{ old('rating') == 1 ? 'checked' : '' }} />
                                         <label for="star1" title="1 star">★</label>
                                     </div>
-                                    <!-- Hiển thị lỗi kế bên phần rating -->
                                     @error('rating')
                                         <span class="text-danger ms-3">{{ $message }}</span>
                                     @enderror
                                 </div>
 
                                 <div class="col-lg-12">
-                                    <button type="submit" class="cs_btn cs_style_1 w-100" id="submitCommentButton">Post
-                                        Comment</button>
+                                    <button type="submit" class="cs_btn cs_style_1 w-100" id="submitCommentButton">Post Comment</button>
                                 </div>
                             </div>
                         </form>
 
-                        <!-- Popup cho người dùng chưa đăng nhập -->
-                        <div id="loginPopup" class="modal" tabindex="-1" role="dialog">
+                        <!-- Popup chung cho người dùng chưa đăng nhập -->
+                        <div id="loginPopup" class="modal fade" tabindex="-1" role="dialog">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title">You're not logged in</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Please log in to post a comment.</p>
+                                        <p>Please log in to perform this action.</p>
                                     </div>
                                     <div class="modal-footer">
                                         <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     </div>
                                 </div>
                             </div>
@@ -447,6 +415,7 @@
     </section>
     <!-- End Destination Details Section -->
 @endsection
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Bắt sự kiện khi người dùng chọn rating
@@ -486,18 +455,27 @@
         });
 
         // Bắt sự kiện nếu người dùng chưa đăng nhập, hiển thị popup
-        const submitButton = document.getElementById('submitCommentButton');
-        const isAuthenticated = {{ auth()->check() ? 'true' : 'false' }};
+        const downloadButtons = document.querySelectorAll('.btn-success');
+        downloadButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                const isAuthenticated = {{ auth()->check() ? 'true' : 'false' }};
+                if (!isAuthenticated) {
+                    e.preventDefault(); // Ngăn chặn form được submit nếu chưa đăng nhập
+                    $('#loginPopup').modal('show'); // Hiển thị popup
+                }
+            });
+        });
 
-        submitButton.addEventListener('click', function(e) {
+        const submitCommentButton = document.getElementById('submitCommentButton');
+        submitCommentButton.addEventListener('click', function(e) {
+            const isAuthenticated = {{ auth()->check() ? 'true' : 'false' }};
             if (!isAuthenticated) {
                 e.preventDefault(); // Ngăn chặn form được submit nếu chưa đăng nhập
                 $('#loginPopup').modal('show'); // Hiển thị popup
             }
         });
     });
-     // Hiển thị popup khi thêm PDF thành công
-     @if (session('success'))
+    @if (session('success'))
         alert('Success: {{ session('success') }}');
     @endif
 
