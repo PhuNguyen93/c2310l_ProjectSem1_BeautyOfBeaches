@@ -463,16 +463,12 @@
                                 </li> --}}
                                 <!-- Logout -->
                                 <li class="pt-2 mt-2 border-t border-slate-200 dark:border-zink-500">
-                                    <form method="POST" action="{{ route('logout') }}" x-data>
+                                    <form action="{{ route('logout') }}" method="POST" class="inline">
                                         @csrf
-
-                                        <a href="{{ route('logout') }}"
-                                            class="block ltr:pr-4 rtl:pl-4 py-1.5 text-base font-medium transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:text-custom-500 focus:text-custom-500 dark:text-zink-200 dark:hover:text-custom-500 dark:focus:text-custom-500"
-                                            @click.prevent="$root.submit();">
-                                            <i data-lucide="log-out"
-                                                class="inline-block size-4 ltr:mr-2 rtl:ml-2"></i>
+                                        <button type="submit" class="block ltr:pr-4 rtl:pl-4 py-1.5 text-base font-medium transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:text-custom-500 focus:text-custom-500 dark:text-zink-200 dark:hover:text-custom-500 dark:focus:text-custom-500">
+                                            <i data-lucide="log-out" class="inline-block size-4 ltr:mr-2 rtl:ml-2"></i>
                                             {{ __('Sign Out') }}
-                                        </a>
+                                        </button>
                                     </form>
                                 </li>
                             </ul>
