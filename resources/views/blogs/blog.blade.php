@@ -12,9 +12,8 @@
                         {{ session('success') }}
                     </div>
                 @endif
-                <button type="submit" class="btn btn-primary">Add New Post</button>
 
-                {{-- <div class="card">
+                <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Đăng Bài Viết Mới</h5>
                         <form action="{{ route('store.blog') }}" method="POST" enctype="multipart/form-data">
@@ -37,7 +36,7 @@
                             </div>
                         </form>
                     </div>
-                </div> --}}
+                </div>
 
 
                 @foreach ($blogs as $blog)

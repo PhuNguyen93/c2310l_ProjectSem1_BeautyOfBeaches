@@ -43,6 +43,6 @@ class BlogController extends Controller
         'image_url' => $imagePath,
     ]);
 
-    return redirect()->route('blogs.blog')->with('success', 'Bài viết đã được đăng thành công!');
+    return redirect()->route('blog')->with('success', 'Bài viết đã được đăng thành công!');
 }
 }
