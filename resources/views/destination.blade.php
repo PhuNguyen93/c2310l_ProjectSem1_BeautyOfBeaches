@@ -13,30 +13,30 @@
             <div class="cs_find_form_wrap">
                 <form id="searchForm" class="cs_find_form">
                     <div>
-<select name="country" class="st_select">
-    <option value="">Country</option>
-    <option value="Vietnam">Vietnam</option>
-    <option value="India">India</option>
-    <option value="United States">United States</option>
-    <option value="Germany">Germany</option>
-    <option value="Australia">Australia</option>
-    <option value="United Kingdom">United Kingdom</option>
-    <option value="Italy">Italy</option>
-    <option value="Brazil">Brazil</option>
-    <option value="Mexico">Mexico</option>
-    <option value="Thailand">Thailand</option>
-    <option value="Maldives">Maldives</option>
-    <option value="Greece">Greece</option>
-    <option value="Spain">Spain</option>
-    <option value="Portugal">Portugal</option>
-    <option value="Philippines">Philippines</option>
-    <option value="South Africa">South Africa</option>
-    <option value="Indonesia">Indonesia</option>
-    <option value="Jamaica">Jamaica</option>
-    <option value="Cuba">Cuba</option>
-    <option value="Turkey">Turkey</option>
-    <option value="Egypt">Egypt</option>
-</select>
+                        <select name="country" class="st_select">
+                            <option value="">Country</option>
+                            <option value="Vietnam">Vietnam</option>
+                            <option value="India">India</option>
+                            <option value="United States">United States</option>
+                            <option value="Germany">Germany</option>
+                            <option value="Australia">Australia</option>
+                            <option value="United Kingdom">United Kingdom</option>
+                            <option value="Italy">Italy</option>
+                            <option value="Brazil">Brazil</option>
+                            <option value="Mexico">Mexico</option>
+                            <option value="Thailand">Thailand</option>
+                            <option value="Maldives">Maldives</option>
+                            <option value="Greece">Greece</option>
+                            <option value="Spain">Spain</option>
+                            <option value="Portugal">Portugal</option>
+                            <option value="Philippines">Philippines</option>
+                            <option value="South Africa">South Africa</option>
+                            <option value="Indonesia">Indonesia</option>
+                            <option value="Jamaica">Jamaica</option>
+                            <option value="Cuba">Cuba</option>
+                            <option value="Turkey">Turkey</option>
+                            <option value="Egypt">Egypt</option>
+                        </select>
                     </div>
 
                     <div>
@@ -50,6 +50,7 @@
                             <option value="North">North West</option>
                             <option value="North">South East</option>
                             <option value="North">South West</option>
+                        </select>
                     </div>
 
                     <div>
@@ -59,7 +60,7 @@
                     </div>
                 </form>
             </div>
-
+        </section>
             <!-- Start destination Section -->
             <section>
                 <div class="cs_height_140 cs_height_lg_80"></div>
@@ -109,8 +110,11 @@
         <div class="cs_hero_shape_1"></div>
         <div class="cs_hero_shape_2"></div>
         <div class="cs_hero_shape_3"></div>
+      </div>
     </section>
     <!-- End Hero Section -->
+
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
