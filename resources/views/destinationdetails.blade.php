@@ -157,26 +157,28 @@
                         @csrf
                         <div class="search-box">
                             <div class="search-item">
-                                <label for="destination">Bạn muốn đến đâu?</label>
-                                <input type="text" id="destination" name="destination" placeholder="Nhập điểm đến">
+                                <label for="destination">Destination</label>
+                                <input type="text" id="destination" name="destination" placeholder="Enter destination">
                             </div>
 
                             <div class="search-item">
-                                <label for="checkin">Ngày nhận phòng</label>
+                                <label for="checkin">Check-in date</label>
                                 <input type="date" id="checkin" name="checkin">
                             </div>
 
                             <div class="search-item">
-                                <label for="checkout">Ngày trả phòng</label>
+                                <label for="checkout">Check-out date</label>
                                 <input type="date" id="checkout" name="checkout">
                             </div>
 
                             <div class="search-item">
-                                <label for="guests">Khách</label>
+                                <label for="guests">Guest</label>
                                 <select id="guests" name="guests">
-                                    <option value="1">1 người lớn</option>
-                                    <option value="2">2 người lớn</option>
-                                    <option value="3">3 người lớn</option>
+                                    <option value="1">1 adult</option>
+                                    <option value="2">2 adult</option>
+                                    <option value="3">3 adult</option>
+                                    <option value="3">1 adult 1 Children</option>
+                                    <option value="3">2 adult 2 Children</option>
                                 </select>
                             </div>
 
