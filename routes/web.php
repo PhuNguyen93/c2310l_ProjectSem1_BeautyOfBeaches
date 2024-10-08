@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BeachController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommentHistoryController;
 use App\Http\Controllers\DashboardController;
@@ -23,13 +24,22 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/about', 'about')->name('about');
     Route::get('/destination', 'destination')->name('destination');
+    Route::get('/blog','blog')->name('blog');
     Route::get('/destinationdetails/{id}', 'destinationdetails')->name('destinationdetails'); // Đảm bảo route này chỉ có 1
     Route::get('/tour', 'tour')->name('tour');
     Route::get('/tourdetails', 'tourdetails')->name('tourdetails');
-    Route::get('/blog', 'blog')->name('blog');
+    // Route::get('/blog', 'blog')->name('blog');
     Route::get('/blogdetails', 'blogdetails')->name('blogdetails');
     Route::get('/contact', 'contact')->name('contact');
 });
+
+Route::get('/blogs', [BlogController::class, 'indexUser'])->name('user.blog');
+
+// Route cho trang blog của admin
+Route::get('/admin/blogs', [BlogController::class, 'index'])->name('admin.blog');
+Route::post('/admin/blogs', [BlogController::class, 'store'])->name('blogs.store');
+Route::delete('/admin/blogs/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy');
+
 
 // Search route
 Route::get('/search', [SearchController::class, 'search'])->name('search');
@@ -159,5 +169,13 @@ Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'
 Route::get('/register/verify', [RegisterController::class, 'showOtpForm'])->name('res.verify.form');
 Route::post('/register/verify', [RegisterController::class, 'verifyOtp'])->name('res.verify');
 Route::get('/register/resend-otp', [RegisterController::class, 'resendOtp'])->name('resend.res');
+
+//blog
+Route::get('/dashboard/blogs', [BlogController::class, 'index'])->name('blogs.index'); // Xem danh sách blog
+Route::get('/dashboard/blogs/{someParameter?}', [BlogController::class, 'index'])->name('blogs.index');
+Route::get('/dashboard/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show'); // Xem chi tiết blog
+// Route::get('/dashboard/blogs/{id}/edit', [BlogController::class, 'edit'])->name('blogs.edit'); // Chỉnh sửa blog
+// Route::put('/dashboard/blogs/{id}', [BlogController::class, 'update'])->name('blogs.update'); // Cập nhật blog
+// Route::delete('/dashboard/blogs/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy'); // Xóa blog
 
 Route::get('/search-beaches', [BeachController::class, 'search'])->name('searchBeaches');
