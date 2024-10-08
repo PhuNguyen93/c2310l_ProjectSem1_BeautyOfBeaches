@@ -115,9 +115,20 @@ Route::resource('users', UserController::class);
 
 // profile (Lam Xuan Hung)
 
-Route::post('/profile/upload-avatar', [ProfileController::class, 'uploadAvatar'])->name('profile.upload_avatar');
+
+
+// Route hiển thị profile (form cập nhật profile sẽ được ẩn đi)
+Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile');
+
+// Route cập nhật thông tin profile
 Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
-Route::get('/profile/{id}/updateProfile', [ProfileController::class, 'showUpdateForm'])->name('profile.showUpdateForm');
+
+// Route upload avatar
+Route::post('/profile/upload-avatar', [ProfileController::class, 'uploadAvatar'])->name('profile.upload_avatar');
+
+// Route::post('/profile/upload-avatar', [ProfileController::class, 'uploadAvatar'])->name('profile.upload_avatar');
+// Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
+// Route::get('/profile/{id}/updateProfile', [ProfileController::class, 'showUpdateForm'])->name('profile.showUpdateForm');
 
 // Dashboard (Lam Xuan Hung)
 
