@@ -151,6 +151,97 @@
                         <a href="#"><i class="fa-brands fa-instagram"></i></a>
                         <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
                     </div>
+
+                    {{-- form trần gia bảo --}}
+                    <form action="" id="flightForm" onsubmit="redirectToAgoda(event)" method="POST">
+                        @csrf
+                        <div class="search-box">
+                            <div class="search-item">
+                                <label for="destination">Bạn muốn đến đâu?</label>
+                                <input type="text" id="destination" name="destination" placeholder="Nhập điểm đến">
+                            </div>
+
+                            <div class="search-item">
+                                <label for="checkin">Ngày nhận phòng</label>
+                                <input type="date" id="checkin" name="checkin">
+                            </div>
+
+                            <div class="search-item">
+                                <label for="checkout">Ngày trả phòng</label>
+                                <input type="date" id="checkout" name="checkout">
+                            </div>
+
+                            <div class="search-item">
+                                <label for="guests">Khách</label>
+                                <select id="guests" name="guests">
+                                    <option value="1">1 người lớn</option>
+                                    <option value="2">2 người lớn</option>
+                                    <option value="3">3 người lớn</option>
+                                </select>
+                            </div>
+
+                            <a href="https://www.agoda.com/vi-vn/flights/airport/HAN/SGN/hanoi-ho-chi-minh-city.html?cid=1834233&tag=05692e1d-05cb-461f-9cf8-90ce9e5067cb&gad_source=1&gclid=Cj0KCQjwsJO4BhDoARIsADDv4vDlKdJ72VP6-hAqxeWVWGkN7R3KMoCKYEL0__TyFHJ3mJUTenxowrkaAvyMEALw_wcB" class="search-button" target="_blank">Search</a>
+                           </div>
+                    </form>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            background-color: #f8f8f8;
+                        }
+
+                        .search-container {
+                            margin: 50px auto;
+                            width: 80%;
+                            max-width: 900px;
+                        }
+
+                        .search-box {
+                            display: flex;
+                            background-color: white;
+                            border: 2px solid #f0ad4e;
+                            border-radius: 5px;
+                            padding: 20px;
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+
+                        .search-item {
+                            flex: 1;
+                            margin-right: 20px;
+                        }
+
+                        .search-item:last-child {
+                            margin-right: 0;
+                        }
+
+                        .search-item label {
+                            display: block;
+                            margin-bottom: 5px;
+                            font-weight: bold;
+                        }
+
+                        .search-item input,
+                        .search-item select {
+                            width: 100%;
+                            padding: 10px;
+                            border: 1px solid #ccc;
+                            border-radius: 5px;
+                        }
+
+                        .search-button {
+                            background-color: #007bff;
+                            color: white;
+                            padding: 10px 20px;
+                            border: none;
+                            border-radius: 5px;
+                            cursor: pointer;
+                        }
+
+                        .search-button:hover {
+                            background-color: #0056b3;
+                        }
+                    </style>
+
                     <hr>
                     <div class="cs_comments">
                         <h3 class="cs_fs_24 cs_semibold">Comment</h3>

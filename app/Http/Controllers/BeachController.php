@@ -225,8 +225,6 @@ class BeachController extends Controller
             return view('partials.beach_results', compact('beaches'));
         }
 
-        // Trả về view đầy đủ nếu không phải yêu cầu AJAX
-        $countries = Country::all();
         return view('destination', compact('beaches', 'countries'));
     }
 
