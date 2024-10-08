@@ -11,6 +11,7 @@ class BlogController extends Controller
 {
     public function indexUser()
     {
+
         $blogs = Blog::orderBy('created_at', 'desc')->paginate(5);
 
         // Trả dữ liệu về view blog.blade.php
@@ -20,6 +21,9 @@ class BlogController extends Controller
     // Display a listing of the blogs.
     public function index(Request $request)
     {
+        if (Auth::guest() || Auth::user()->role_id != 2) {
+            return redirect()->route('index')->with('error', 'You do not have the required permissions.');
+        }
         $search = $request->input('search');
 
         $blogs = Blog::when($search, function ($query, $search) {

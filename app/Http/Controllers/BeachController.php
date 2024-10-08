@@ -21,11 +21,11 @@ class BeachController extends Controller
         $search = $request->input('search');
 
         $beaches = Beach::where('status', 1)
-        ->when($search, function ($query, $search) {
-            return $query->where('name', 'like', "%{$search}%");
-        })
-        ->orderBy('created_at', 'desc')
-        ->paginate(10);
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', "%{$search}%");
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
         return view('beaches.index', compact('beaches'));
     }
 
@@ -172,19 +172,6 @@ class BeachController extends Controller
         return redirect()->route('beaches.index')->with('success', 'Đã cập nhật bãi biển thành công.');
     }
 
-    /**
-     * Xóa một bãi biển khỏi cơ sở dữ liệu.
-     */
-    public function destroy(Beach $beach)
-{
-    // Đổi trạng thái của bãi biển thành 0 thay vì xóa hoàn toàn
-    $beach->status = 0;
-    $beach->save();
-
-    return redirect()->route('beaches.index')->with('success', 'Bãi biển đã được đưa vào thùng rác.');
-}
-
-
     public function search(Request $request)
     {
         $query = Beach::query();
@@ -211,6 +198,7 @@ class BeachController extends Controller
         // $countries = Country::all();
         return view('destination', compact('beaches', 'countries'));
     }
+
     public function bin(Request $request)
     {
         if (Auth::guest() || Auth::user()->role_id != 2) {
@@ -220,14 +208,15 @@ class BeachController extends Controller
         $search = $request->input('search');
 
         $beaches = Beach::where('status', 0)
-        ->when($search, function ($query, $search) {
-            return $query->where('name', 'like', "%{$search}%");
-        })
-        ->orderBy('created_at', 'desc')
-        ->paginate(10);
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', "%{$search}%");
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
         return view('beaches.bin', compact('beaches'));
     }
+
     public function destroybin(Beach $beach)
     {
         // Xóa tất cả các hình ảnh trong beach_galleries nếu có
@@ -256,14 +245,19 @@ class BeachController extends Controller
         return redirect()->route('beaches.index')->with('success', 'Đã xóa bãi biển thành công.');
     }
 
+    public function destroy(Beach $beach)
+    {
+        $beach->status = 0;
+        $beach->save();
+
+        return redirect()->route('beaches.index')->with('success', 'Bãi biển đã được đưa vào thùng rác.');
+    }
+
     public function restore(Beach $beach)
     {
-        // Đổi trạng thái của bãi biển thành 0 thay vì xóa hoàn toàn
         $beach->status = 1;
         $beach->save();
 
-        return redirect()->route('beaches.bin')->with('success', 'Bãi biển đã được đưa vào thùng rác.');
+        return redirect()->route('beaches.bin')->with('success', 'Bãi biển đã được khôi phục.');
     }
-
-
 }
