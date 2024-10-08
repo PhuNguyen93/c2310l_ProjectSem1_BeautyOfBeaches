@@ -91,6 +91,11 @@ Route::resource('beaches', BeachController::class);
 Route::get('beaches/{beach}/add_pdf', [BeachController::class, 'addPdfForm'])->name('beaches.add_pdf');
 Route::post('beaches/{beach}/add_pdf', [BeachController::class, 'storePdf'])->name('beaches.store_pdf');
 Route::delete('beaches/{download}/delete_pdf', [BeachController::class, 'deletePdf'])->name('beaches.delete_pdf');
+Route::get('beaches_bin', [BeachController::class, 'bin'])->name('beaches.bin');
+Route::delete('beaches_bin/destroybin/{beach}', [BeachController::class, 'destroybin'])->name('beaches.destroybin');
+Route::post('beaches_bin/restore/{beach}', [BeachController::class, 'restore'])->name('beaches.restore');
+
+
 
 // OTP Routes
 Route::get('otp/verify', [UserController::class, 'showOtpForm'])->name('otp.verify.form');
