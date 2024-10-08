@@ -125,8 +125,8 @@
                                                         </script>
                                                     </li>
                                                     <li>
-                                                        {{-- <form action="{{ route('beaches.destroybin', $beach->id) }}" --}}
-                                                              <form action=""
+                                                        <form action="{{ route('beaches.destroybin', $beach->id) }}"
+                                                              {{-- <form action="" --}}
                                                             method="POST" style="display:inline;"
                                                             onsubmit="return confirmDelete();">
                                                             @csrf
