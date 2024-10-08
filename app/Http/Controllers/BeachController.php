@@ -20,12 +20,12 @@ class BeachController extends Controller
 
         $search = $request->input('search');
 
-        $beaches = Beach::when($search, function ($query, $search) {
+        $beaches = Beach::where('status', 1)
+        ->when($search, function ($query, $search) {
             return $query->where('name', 'like', "%{$search}%");
         })
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
-
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
         return view('beaches.index', compact('beaches'));
     }
 
@@ -176,6 +176,59 @@ class BeachController extends Controller
      * Xóa một bãi biển khỏi cơ sở dữ liệu.
      */
     public function destroy(Beach $beach)
+{
+    // Đổi trạng thái của bãi biển thành 0 thay vì xóa hoàn toàn
+    $beach->status = 0;
+    $beach->save();
+
+    return redirect()->route('beaches.index')->with('success', 'Bãi biển đã được đưa vào thùng rác.');
+}
+
+
+    public function search(Request $request)
+    {
+        $query = Beach::query();
+
+        // Kiểm tra và lọc theo quốc gia
+        if ($request->filled('country')) {
+            $query->where('country', $request->country);
+        }
+
+        // Kiểm tra và lọc theo hướng (nếu có)
+        if ($request->filled('direction')) {
+            $query->where('direction', $request->direction);
+        }
+
+        // Lấy danh sách bãi biển với phân trang
+        $beaches = $query->paginate(5);
+
+        // Kiểm tra xem yêu cầu là AJAX không
+        if ($request->ajax()) {
+            return view('partials.beach_results', compact('beaches'));
+        }
+
+        // Trả về view đầy đủ nếu không phải yêu cầu AJAX
+        // $countries = Country::all();
+        return view('destination', compact('beaches', 'countries'));
+    }
+    public function bin(Request $request)
+    {
+        if (Auth::guest() || Auth::user()->role_id != 2) {
+            return redirect()->route('index')->with('error', 'You do not have the required permissions.');
+        }
+
+        $search = $request->input('search');
+
+        $beaches = Beach::where('status', 0)
+        ->when($search, function ($query, $search) {
+            return $query->where('name', 'like', "%{$search}%");
+        })
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
+
+        return view('beaches.bin', compact('beaches'));
+    }
+    public function destroybin(Beach $beach)
     {
         // Xóa tất cả các hình ảnh trong beach_galleries nếu có
         foreach ($beach->gallery as $gallery) {
@@ -203,31 +256,13 @@ class BeachController extends Controller
         return redirect()->route('beaches.index')->with('success', 'Đã xóa bãi biển thành công.');
     }
 
-    public function search(Request $request)
+    public function restore(Beach $beach)
     {
-        $query = Beach::query();
+        // Đổi trạng thái của bãi biển thành 0 thay vì xóa hoàn toàn
+        $beach->status = 1;
+        $beach->save();
 
-        // Kiểm tra và lọc theo quốc gia
-        if ($request->filled('country')) {
-            $query->where('country', $request->country);
-        }
-
-        // Kiểm tra và lọc theo hướng (nếu có)
-        if ($request->filled('direction')) {
-            $query->where('direction', $request->direction);
-        }
-
-        // Lấy danh sách bãi biển với phân trang
-        $beaches = $query->paginate(5);
-
-        // Kiểm tra xem yêu cầu là AJAX không
-        if ($request->ajax()) {
-            return view('partials.beach_results', compact('beaches'));
-        }
-
-        // Trả về view đầy đủ nếu không phải yêu cầu AJAX
-        $countries = Country::all();
-        return view('destination', compact('beaches', 'countries'));
+        return redirect()->route('beaches.bin')->with('success', 'Bãi biển đã được đưa vào thùng rác.');
     }
 
 

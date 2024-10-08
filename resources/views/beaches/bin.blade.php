@@ -1,19 +1,19 @@
 @extends('layouts.master')
 
 @section('title')
-    {{ __('Beaches List View') }}
+    {{ __('Beaches Bin ') }}
 @endsection
 
 @section('content')
     <!-- page title -->
-    <x-page-title title="Beach List View" pagetitle="Beach" />
+    <x-page-title title="Beach" pagetitle="Beach" />
 
     <div class="grid grid-cols-1 gap-x-5 xl:grid-cols-12">
         <div class="xl:col-span-12">
             <div class="card" id="beachesTable">
                 <div class="card-body">
                     <div class="flex items-center">
-                        <h6 class="text-15 grow">Beaches List</h6>
+                        <h6 class="text-15 grow">Beaches Listsadsadsadasd</h6>
 
                         <div class="shrink-0">
                             <a href="{{ route('beaches.create') }}"
@@ -61,7 +61,7 @@
                                         Location</th>
                                     <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort"
                                         data-sort="created_at">Creation Date</th>
-                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort">Action</th>
+                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold text-end">Action</th>
                                 </tr>
                             </thead>
 
@@ -107,7 +107,26 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <form action="{{ route('beaches.destroy', $beach->id) }}"
+                                                        <form action="{{ route('beaches.restore', $beach->id) }}"
+                                                            method="POST" style="display:inline;"
+                                                            onsubmit="return confirmRestore();">
+                                                          @csrf
+                                                          <button type="submit"
+                                                                  class="block w-full text-left px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200">
+                                                              <i data-lucide="trash-2" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i>
+                                                              <span class="align-middle">Restore</span>
+                                                          </button>
+                                                      </form>
+
+                                                        <script>
+                                                            function confirmDelete() {
+                                                                return confirm('Are you sure you want to delete this beach? This action cannot be undone.');
+                                                            }
+                                                        </script>
+                                                    </li>
+                                                    <li>
+                                                        {{-- <form action="{{ route('beaches.destroybin', $beach->id) }}" --}}
+                                                              <form action=""
                                                             method="POST" style="display:inline;"
                                                             onsubmit="return confirmDelete();">
                                                             @csrf
