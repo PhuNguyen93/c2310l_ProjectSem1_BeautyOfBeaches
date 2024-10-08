@@ -32,7 +32,9 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/blogdetails', 'blogdetails')->name('blogdetails');
     Route::get('/contact', 'contact')->name('contact');
 });
+
 Route::get('/blogs', [BlogController::class, 'indexUser'])->name('user.blog');
+
 // Route cho trang blog của admin
 Route::get('/admin/blogs', [BlogController::class, 'index'])->name('admin.blog');
 Route::post('/admin/blogs', [BlogController::class, 'store'])->name('blogs.store');
@@ -176,4 +178,4 @@ Route::get('/dashboard/blogs/{id}', [BlogController::class, 'show'])->name('blog
 // Route::put('/dashboard/blogs/{id}', [BlogController::class, 'update'])->name('blogs.update'); // Cập nhật blog
 // Route::delete('/dashboard/blogs/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy'); // Xóa blog
 
-
+Route::get('/search-beaches', [BeachController::class, 'search'])->name('searchBeaches');

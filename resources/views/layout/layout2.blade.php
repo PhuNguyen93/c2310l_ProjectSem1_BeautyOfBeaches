@@ -5,7 +5,7 @@
   <body>
 
     @yield('content2')
-    
+
     <!-- Start footer -->
     <x-footer/>
     <!-- End footer -->

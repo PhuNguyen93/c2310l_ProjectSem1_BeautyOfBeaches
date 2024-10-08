@@ -14,6 +14,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+        // Lấy 5 bãi biển mới nhất
         $beaches = Beach::orderBy('updated_at', 'desc')->take(5)->get();
         $blogs = Blog::orderBy('created_at', 'desc')->paginate(2); // Thêm truy vấn blog
 
@@ -22,23 +23,45 @@ class HomeController extends Controller
             [
                 'user_id' => Auth::check() ? Auth::id() : null, // Nếu người dùng đã đăng nhập
                 'ip_address' => request()->ip(),                 // Lấy IP của người dùng hoặc khách
-                'page_name' => 'home'
+                'page_name' => 'home',
+                'session_id' => session()->getId(),              // Lưu session ID
             ],
             [
                 'visit_count' => DB::raw('visit_count + 1'),    // Tăng số lượng truy cập
                 'updated_at' => now(),                          // Cập nhật thời gian hoạt động
             ]
         );
+
+        // Đếm tổng số lần truy cập vào website
         $totalVisits = VisitorLog::count();
 
-        // Đếm tổng số user online (user_id khác null)
-        $userOnline = VisitorLog::whereNotNull('user_id')->count();
-
-        // Đếm tổng số khách online (user_id là null)
-        $guestOnline = VisitorLog::whereNull('user_id')->count();
+        // Tính số lượng người dùng online (có user_id) và khách online (không có user_id) từ session
+        $activeSessions = $this->countOnlineSessions();
+        $userOnline = VisitorLog::whereNotNull('user_id')
+            ->whereIn('session_id', $activeSessions)
+            ->count();
+        $guestOnline = VisitorLog::whereNull('user_id')
+            ->whereIn('session_id', $activeSessions)
+            ->count();
 
         // Trả dữ liệu về view
         return view('index', compact('beaches', 'blogs', 'totalVisits', 'userOnline', 'guestOnline'));
+    }
+
+    // Phương thức kiểm tra các session hoạt động trong 10 giây gần đây
+    private function countOnlineSessions()
+    {
+        // Lấy tất cả các file session từ thư mục
+        $files = glob(storage_path('framework/sessions/*'));
+        $activeSessions = [];
+
+        // Kiểm tra file session nào hoạt động trong 10 giây gần đây
+        foreach ($files as $file) {
+            if (filemtime($file) >= now()->subSeconds(10)->timestamp) {
+                $activeSessions[] = basename($file); // Lưu tên file session
+            }
+        }
+        return $activeSessions;
     }
 
     public function logout()

@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Feedback; // Đảm bảo bạn đã import model Feedback
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
     public function destroy($id)
     {
+        if (Auth::guest() || Auth::user()->role_id != 2) {
+            return redirect()->route('index')->with('error', 'You do not have the required permissions.');
+        }
         $feedback = Feedback::find($id);
 
         if ($feedback) {
