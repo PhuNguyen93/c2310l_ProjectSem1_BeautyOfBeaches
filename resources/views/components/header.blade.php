@@ -33,11 +33,11 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="{{ route('blog') }}">Blog</a>
-                            <ul>
+                            <a href="{{ route('user.blog') }}">Blog</a>
+                            {{-- <ul>
                                 <li><a href="{{ route('blog') }}">Blog</a></li>
                                 <li><a href="{{ route('blogdetails') }}">Blog Details</a></li>
-                            </ul>
+                            </ul> --}}
                         </li>
                         <li><a href="{{ route('contact') }}">Contacts</a></li>
                         {{--  --}}

@@ -589,140 +589,66 @@
         <div class="container-fluid">
             <div class="cs_section_heading cs_style_1 text-center">
                 <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">News & Blogs</h3>
-                <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0 wow fadeInUp" data-wow-duration="0.8s"
-                    data-wow-delay="0.2s">KEEP YOU INFORMED</h2>
+                <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">KEEP YOU INFORMED</h2>
             </div>
             <div class="cs_height_55 cs_height_lg_40"></div>
             <div class="row cs_gap_y_24">
-                <div class="col-lg-6">
-                    <article class="cs_post cs_style_1">
-                        <a href="{{ route('blogdetails') }}"
-                            class="cs_post_thumb cs_zoom overflow-hidden position-relative">
-                            <img src="assets/images/beach3.jpg" alt="Post Thumb" class="cs_zoom_in">
-                            <div class="cs_posted_by position-absolute">
-                                <span class="cs_accent_bg cs_white_color">27</span>
-                                <span class="cs_primary_bg cs_white_color">March 2024</span>
-                            </div>
-                        </a>
-                        <div class="cs_post_info">
-                            <div class="cs_post_info_in">
-                                <div class="cs_post_avatar">
-                                    <div class="cs_avatar_thumb">
-                                        <img src="assets/images/WHpost.jpeg" alt="Avatar">
+                <!-- Lặp qua các bài viết blog -->
+                @foreach ($blogs as $blog)
+                    <div class="col-lg-6">
+                        <article class="cs_post cs_style_1">
+                            <a href="{{ route('blogdetails', $blog->id) }}" class="cs_post_thumb cs_zoom overflow-hidden position-relative">
+                                <img src="{{ asset($blog->image_url) }}" alt="{{ $blog->title }}" class="cs_zoom_in">
+                                <div class="cs_posted_by position-absolute">
+                                    <span class="cs_accent_bg cs_white_color">{{ $blog->created_at->format('d') }}</span>
+                                    <span class="cs_primary_bg cs_white_color">{{ $blog->created_at->format('F Y') }}</span>
+                                </div>
+                            </a>
+                            <div class="cs_post_info">
+                                <div class="cs_post_info_in">
+                                    <div class="cs_post_avatar">
+                                        <div class="cs_avatar_thumb">
+                                            <img src="{{ asset('assets/images/avatar02.jpeg') }}" alt="Avatar">
+                                        </div>
+                                        <div class="cs_avatar_info">By. <br>{{ $blog->user->name }}</div>
                                     </div>
-                                    <div class="cs_avatar_info">By. <br>Admin</div>
-                                </div>
-                                <h2 class="cs_post_title cs_fs_24 cs_semibold"><a
-                                        href="{{ route('blogdetails') }}">Whitehaven Beach, Australia</a>
-                                </h2>
-                                <p class="cs_post_subtitle">Protecting Paradise: New Conservation Efforts at Whitehaven
-                                    Beach,In a recent initiative to preserve the natural beauty of Whitehaven Beach,
-                                    local authorities have announced new conservation measures aimed at protecting the
-                                    unique ecosystem of the Whitsunday Islands. The program includes stricter
-                                    regulations on tourism activities and the introduction of guided eco-tours to
-                                    educate visitors about the delicate environment. Tourists can now enjoy the stunning
-                                    white sands and clear waters while contributing to the conservation of this
-                                    breathtaking paradise.</p>
-                                <div class="cs_post_btns cs_gray_bg_1">
-                                    <a href="#">
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <mask id="mask01" style="mask-type:alpha" maskUnits="userSpaceOnUse"
-                                                x="0" y="0" width="20" height="20">
-                                                <rect width="20" height="20" fill="#D9D9D9" />
-                                            </mask>
-                                            <g mask="url(#mask01)">
-                                                <path
-                                                    d="M1.66675 18.3337V3.33366C1.66675 2.87533 1.83008 2.48283 2.15675 2.15616C2.48286 1.83005 2.87508 1.66699 3.33341 1.66699H16.6667C17.1251 1.66699 17.5176 1.83005 17.8442 2.15616C18.1704 2.48283 18.3334 2.87533 18.3334 3.33366V13.3337C18.3334 13.792 18.1704 14.1845 17.8442 14.5112C17.5176 14.8373 17.1251 15.0003 16.6667 15.0003H5.00008L1.66675 18.3337ZM3.33341 14.3128L4.31258 13.3337H16.6667V3.33366H3.33341V14.3128Z"
-                                                    fill="currentColor" />
-                                            </g>
-                                        </svg> Comment(5)</a>
-                                    <a href="{{ route('blogdetails') }}" class="cs_post_btn cs_primary_bg">
-                                        More<svg width="10" height="10" viewBox="0 0 10 10" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <g clip-path="url(#clip02)">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M9.15616 4.59014L1.31712 0.0641602C1.24542 0.0224266 1.164 0.000298672 1.08104 0H1.07968C0.996674 0.000329659 0.915216 0.022469 0.843465 0.0641992C0.771208 0.105407 0.711218 0.165101 0.669653 0.237153C0.628087 0.309204 0.606443 0.391019 0.606942 0.474199V9.52607C0.606614 9.60931 0.628283 9.69115 0.669757 9.76332C0.711231 9.83548 0.771035 9.89541 0.843117 9.93703C0.915198 9.97864 0.996997 10.0005 1.08023 10.0003C1.16346 10.0002 1.24518 9.97801 1.3171 9.93611L9.15616 5.41012C9.22813 5.36857 9.2879 5.30881 9.32946 5.23684C9.37101 5.16487 9.39289 5.08323 9.39289 5.00013C9.39289 4.91702 9.37101 4.83538 9.32946 4.76341C9.2879 4.69145 9.22813 4.63168 9.15616 4.59014Z"
-                                                    fill="currentColor" />
-                                            </g>
-                                            <defs>
-                                                <clipPath id="clip02">
-                                                    <rect width="10" height="10" fill="currentColor" />
-                                                </clipPath>
-                                            </defs>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-lg-6">
-                    <article class="cs_post cs_style_1">
-                        <a href="{{ route('blogdetails') }}"
-                            class="cs_post_thumb cs_zoom overflow-hidden position-relative">
-                            <img src="assets/images/baiadopost.webp" alt="Post Thumb" class="cs_zoom_in">
-                            <div class="cs_posted_by position-absolute">
-                                <span class="cs_accent_bg cs_white_color">11</span>
-                                <span class="cs_primary_bg cs_white_color">September 2015</span>
-                            </div>
-                        </a>
-                        <div class="cs_post_info">
-                            <div class="cs_post_info_in">
-                                <div class="cs_post_avatar">
-                                    <div class="cs_avatar_thumb">
-                                        <img src="assets/images/avatar02.jpeg" alt="Avatar">
+                                    <h2 class="cs_post_title cs_fs_24 cs_semibold"><a href="{{ route('blogdetails', $blog->id) }}">{{ $blog->title }}</a></h2>
+                                    <p class="cs_post_subtitle">{{ Str::limit($blog->description, 150) }}</p>
+                                    <div class="cs_post_btns cs_gray_bg_1">
+                                        <a href="#">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <mask id="mask01" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
+                                                    <rect width="20" height="20" fill="#D9D9D9" />
+                                                </mask>
+                                                <g mask="url(#mask01)">
+                                                    <path d="M1.66675 18.3337V3.33366C1.66675 2.87533 1.83008 2.48283 2.15675 2.15616C2.48286 1.83005 2.87508 1.66699 3.33341 1.66699H16.6667C17.1251 1.66699 17.5176 1.83005 17.8442 2.15616C18.1704 2.48283 18.3334 2.87533 18.3334 3.33366V13.3337C18.3334 13.792 18.1704 14.1845 17.8442 14.5112C17.5176 14.8373 17.1251 15.0003 16.6667 15.0003H5.00008L1.66675 18.3337ZM3.33341 14.3128L4.31258 13.3337H16.6667V3.33366H3.33341V14.3128Z" fill="currentColor" />
+                                                </g>
+                                            </svg> Comment(5)
+                                        </a>
+                                        <a href="{{ route('blogdetails', $blog->id) }}" class="cs_post_btn cs_primary_bg">More
+                                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <g clip-path="url(#clip02)">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.15616 4.59014L1.31712 0.0641602C1.24542 0.0224266 1.164 0.000298672 1.08104 0H1.07968C0.996674 0.000329659 0.915216 0.022469 0.843465 0.0641992C0.771208 0.105407 0.711218 0.165101 0.669653 0.237153C0.628087 0.309204 0.606443 0.391019 0.606942 0.474199V9.52607C0.606614 9.60931 0.628283 9.69115 0.669757 9.76332C0.711231 9.83548 0.771035 9.89541 0.843117 9.93703C0.915198 9.97864 0.996997 10.0005 1.08023 10.0003C1.16346 10.0002 1.24518 9.97801 1.3171 9.93611L9.15616 5.41012C9.22813 5.36857 9.2879 5.30881 9.32946 5.23684C9.37101 5.16487 9.39289 5.08323 9.39289 5.00013C9.39289 4.91702 9.37101 4.83538 9.32946 4.76341C9.2879 4.69145 9.22813 4.63168 9.15616 4.59014Z" fill="currentColor" />
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="clip02">
+                                                        <rect width="10" height="10" fill="currentColor" />
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                        </a>
                                     </div>
-                                    <div class="cs_avatar_info">By. <br>Admin</div>
-                                </div>
-                                <h2 class="cs_post_title cs_fs_24 cs_semibold"><a
-                                        href="{{ route('blogdetails') }}">Baia do Sancho, Brazil</a>
-                                </h2>
-                                <p class="cs_post_subtitle">Title: "Baia do Sancho Named Best Beach Again!"
-                                    For the third consecutive year, Baia do Sancho has been voted the "Best Beach in the
-                                    World" in a popular travel survey conducted by Beach Lovers Magazine. Renowned for
-                                    its stunning scenery and vibrant marine life, this beautiful beach continues to
-                                    attract visitors from around the globe. In response to its popularity, local
-                                    businesses are stepping up efforts to enhance visitor experience by offering new
-                                    water sports activities and eco-friendly tours. Don’t miss the chance to visit this
-                                    award-winning destination on your next trip to Brazil!</p>
-                                <div class="cs_post_btns cs_gray_bg_1">
-                                    <a href="#">
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <mask id="mask0_346_344" style="mask-type:alpha"
-                                                maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
-                                                <rect width="20" height="20" fill="#D9D9D9" />
-                                            </mask>
-                                            <g mask="url(#mask0_346_344)">
-                                                <path
-                                                    d="M1.66675 18.3337V3.33366C1.66675 2.87533 1.83008 2.48283 2.15675 2.15616C2.48286 1.83005 2.87508 1.66699 3.33341 1.66699H16.6667C17.1251 1.66699 17.5176 1.83005 17.8442 2.15616C18.1704 2.48283 18.3334 2.87533 18.3334 3.33366V13.3337C18.3334 13.792 18.1704 14.1845 17.8442 14.5112C17.5176 14.8373 17.1251 15.0003 16.6667 15.0003H5.00008L1.66675 18.3337ZM3.33341 14.3128L4.31258 13.3337H16.6667V3.33366H3.33341V14.3128Z"
-                                                    fill="currentColor" />
-                                            </g>
-                                        </svg> Comment(5)
-                                    </a>
-                                    <a href="{{ route('blogdetails') }}" class="cs_post_btn cs_primary_bg">
-                                        More<svg width="10" height="10" viewBox="0 0 10 10" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <g clip-path="url(#clip0_346_351)">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M9.15616 4.59014L1.31712 0.0641602C1.24542 0.0224266 1.164 0.000298672 1.08104 0H1.07968C0.996674 0.000329659 0.915216 0.022469 0.843465 0.0641992C0.771208 0.105407 0.711218 0.165101 0.669653 0.237153C0.628087 0.309204 0.606443 0.391019 0.606942 0.474199V9.52607C0.606614 9.60931 0.628283 9.69115 0.669757 9.76332C0.711231 9.83548 0.771035 9.89541 0.843117 9.93703C0.915198 9.97864 0.996997 10.0005 1.08023 10.0003C1.16346 10.0002 1.24518 9.97801 1.3171 9.93611L9.15616 5.41012C9.22813 5.36857 9.2879 5.30881 9.32946 5.23684C9.37101 5.16487 9.39289 5.08323 9.39289 5.00013C9.39289 4.91702 9.37101 4.83538 9.32946 4.76341C9.2879 4.69145 9.22813 4.63168 9.15616 4.59014Z"
-                                                    fill="currentColor" />
-                                            </g>
-                                            <defs>
-                                                <clipPath id="clip0_346_351">
-                                                    <rect width="10" height="10" fill="currentColor" />
-                                                </clipPath>
-                                            </defs>
-                                        </svg>
-                                    </a>
                                 </div>
                             </div>
-
-                        </div>
-                    </article>
-                </div>
+                        </article>
+                    </div>
+                @endforeach
             </div>
+
+            <!-- Phân trang nếu cần -->
+            {{-- <div class="pagination-links mt-4">
+                {{ $blogs->links() }}
+            </div> --}}
         </div>
         <div class="cs_height_140 cs_height_lg_80"></div>
     </section>

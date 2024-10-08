@@ -24,6 +24,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/about', 'about')->name('about');
     Route::get('/destination', 'destination')->name('destination');
+    Route::get('/blog','blog')->name('blog');
     Route::get('/destinationdetails/{id}', 'destinationdetails')->name('destinationdetails'); // Đảm bảo route này chỉ có 1
     Route::get('/tour', 'tour')->name('tour');
     Route::get('/tourdetails', 'tourdetails')->name('tourdetails');
@@ -31,6 +32,12 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/blogdetails', 'blogdetails')->name('blogdetails');
     Route::get('/contact', 'contact')->name('contact');
 });
+Route::get('/blogs', [BlogController::class, 'indexUser'])->name('user.blog');
+// Route cho trang blog của admin
+Route::get('/admin/blogs', [BlogController::class, 'index'])->name('admin.blog');
+Route::post('/admin/blogs', [BlogController::class, 'store'])->name('blogs.store');
+Route::delete('/admin/blogs/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy');
+
 
 // Search route
 Route::get('/search', [SearchController::class, 'search'])->name('search');
@@ -170,6 +177,3 @@ Route::get('/dashboard/blogs/{id}', [BlogController::class, 'show'])->name('blog
 // Route::delete('/dashboard/blogs/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy'); // Xóa blog
 
 
-Route::get('/blogs', [BlogController::class, 'index'])->name('blog');
-Route::get('/blogs/create', [BlogController::class, 'create'])->name('create.blog');
-Route::post('/blogs', [BlogController::class, 'store'])->name('store.blog');

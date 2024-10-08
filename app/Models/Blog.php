@@ -11,7 +11,7 @@ class Blog extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'title', 'image', 'description'];
+    protected $fillable = ['user_id', 'title', 'image_url', 'description'];
 
     // Relation with BlogDetail
     public function details()

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
@@ -8,41 +9,63 @@ use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
+    public function indexUser()
+    {
+        $blogs = Blog::orderBy('created_at', 'desc')->paginate(5);
+
+        // Trả dữ liệu về view blog.blade.php
+        return view('blogs.blog', compact('blogs'));
+    }
+
     // Display a listing of the blogs.
     public function index(Request $request)
     {
         $search = $request->input('search');
 
-        $user = Auth::user();
-
         $blogs = Blog::when($search, function ($query, $search) {
             return $query->where('title', 'like', "%{$search}%");
         })
-        ->orderBy('created_at', 'desc')
-        ->paginate(10);
+            ->orderBy('created_at', 'desc') // Sắp xếp theo thứ tự giảm dần của ngày tạo
+            ->paginate(5); // Hiển thị 5 bài trên mỗi trang
 
-        return view('blogs.blog', compact('blogs','user'));
+        return view('blogs.index', compact('blogs'));
     }
 
     public function store(Request $request)
-{
-    // Xác thực dữ liệu đầu vào
-    $request->validate([
-        'description' => 'required|string',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-    // Xử lý lưu hình ảnh
-    $imagePath = $request->file('image')->store('assets/images/blogs', 'public');
+        // Xử lý hình ảnh
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('public/assets/blogs');
+            $imageUrl = str_replace('public/', 'storage/', $imagePath); // Đường dẫn đến ảnh
+        } else {
+            $imageUrl = null;
+        }
 
-    // Tạo bài viết mới
-    Blog::create([
-        'user_id' => Auth::id(), // Lưu ID của người dùng hiện tại
-        'title' => 'New Post', // Bạn có thể thay đổi hoặc thêm trường title
-        'description' => $request->description,
-        'image_url' => $imagePath,
-    ]);
+        // Lưu blog
+        Blog::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'image_url' => $imageUrl,
+            'user_id' => Auth::user()->id,
+        ]);
 
-    return redirect()->route('blog')->with('success', 'Bài viết đã được đăng thành công!');
-}
+        return redirect()->route('blogs.index', ['page' => 1])->with('success', 'Blog added successfully');
+    }
+    public function destroy($id)
+    {
+        // Tìm bài viết theo ID
+        $blog = Blog::findOrFail($id);
+
+        // Xóa bài viết
+        $blog->delete();
+
+        // Redirect về trang danh sách với thông báo thành công
+        return redirect()->route('blogs.index')->with('success', 'Blog deleted successfully');
+    }
 }
