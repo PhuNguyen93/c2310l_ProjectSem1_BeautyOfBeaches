@@ -59,4 +59,9 @@ class User extends Authenticatable // Đảm bảo kế thừa từ lớp Authen
     public function blogs(){
         return $this->hasMany(Blog::class);
     }
+
+    public function blogFeedbacks()
+    {
+        return $this->hasMany(BlogFeedback::class);
+    }
 }

@@ -199,7 +199,6 @@
         <div class="block tab-pane" id="overviewTabs">
             <div class="grid grid-cols-1 gap-x-5 2xl:grid-cols-12">
                 <div class="2xl:col-span-9">
-
                     <div class="card">
                         <div class="card-body">
                             <h6 class="mb-3 text-15">Overview</h6>
@@ -260,14 +259,8 @@
 
         </div><!--end tab pane-->
 
-
-
-
-
-        <div class="hidden tab-pane" id="followersTabs">
-
-
-            {{-- <div class="flex flex-col items-center gap-4 mb-4 md:flex-row">
+        {{-- <div class="hidden tab-pane" id="followersTabs">
+            <div class="flex flex-col items-center gap-4 mb-4 md:flex-row">
                 <div class="grow">
                     <p class="text-slate-500 dark:text-zink-200">Showing <b>8</b> of <b>18</b> Results</p>
                 </div>
@@ -307,13 +300,12 @@
                                 class="size-4 rtl:rotate-180" data-lucide="chevron-right"></i></a>
                     </li>
                 </ul>
-            </div> --}}
-        </div><!--end tab pane-->
+            </div>
+        </div><!--end tab pane--> --}}
     </div>
     <div class="mt-5 w-full overflow-x-auto">
         <div class="card-body w-full">
             <h4 class="mb-3 font-semibold text-xl">All Comments on Beaches</h4>
-
             <!-- Form lọc theo số sao -->
             <form method="GET" action="{{ route('user.filterFeedback', ['id' => $user->id]) }}" class="mb-4">
                 <label for="ratingFilter" class="mr-2">Filter by Rating:</label>
@@ -375,7 +367,7 @@
                                 </td>
 
                                 <!-- Comment -->
-                                <td class="px-6 py-4 text-gray-700">{{ Str::limit($feedback->message, 50, '...') }}</td>
+                                <td class="px-6 py-4 text-gray-700">{{ Str::limit($feedback->message, 10) }}</td>
 
                                 <!-- Creation Date -->
                                 <td class="px-6 py-4 text-gray-500">{{ $feedback->created_at->format('Y-m-d H:i:s') }}
@@ -439,6 +431,7 @@
             @endif
         </div>
     </div>
+
 @endsection
 @push('scripts')
     <!-- apexcharts js -->

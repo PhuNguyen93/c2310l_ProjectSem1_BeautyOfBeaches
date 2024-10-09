@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="bg-white p-6 rounded-lg shadow-lg">
+<div class="bg-white p-6 rounded-lg shadow-lg mt-5">
     <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl font-semibold text-center mb-6">Add New Beach</h2>
 
@@ -49,30 +49,6 @@
                         class="mt-1 w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out"></textarea>
                 </div>
 
-                <!-- Additional Description 2 -->
-                <div class="col-span-2">
-                    <div id="description2-container" style="display: none;">
-                        <label for="description2" class="block text-base font-medium text-gray-700">Description 2</label>
-                        <textarea name="description2" id="description2" rows="3" placeholder="Enter additional description"
-                            class="mt-1 w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out"></textarea>
-                    </div>
-                    <button type="button" class="bg-indigo-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-indigo-600 transition ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-50" id="add-description2-btn">
-                        <i class="fas fa-plus"></i> Add Additional Description 2
-                    </button>
-                </div>
-
-                <!-- Additional Description 3 -->
-                <div class="col-span-2">
-                    <div id="description3-container" style="display: none;">
-                        <label for="description3" class="block text-base font-medium text-gray-700">Description 3</label>
-                        <textarea name="description3" id="description3" rows="3" placeholder="Enter additional description"
-                            class="mt-1 w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out"></textarea>
-                    </div>
-                    <button type="button" class="bg-indigo-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-indigo-600 transition ease-in-out duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-50" id="add-description3-btn">
-                        <i class="fas fa-plus"></i> Add Additional Description 3
-                    </button>
-                </div>
-
                 <!-- Image -->
                 <div class="col-span-2">
                     <label for="image_url" class="block text-base font-medium text-gray-700">Image</label>
@@ -98,24 +74,6 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var addDescription2Btn = document.getElementById('add-description2-btn');
-        var description2Container = document.getElementById('description2-container');
-
-        addDescription2Btn.addEventListener('click', function () {
-            description2Container.style.display = 'block'; // Show textarea
-            addDescription2Btn.style.display = 'none'; // Hide button
-        });
-
-        var addDescription3Btn = document.getElementById('add-description3-btn');
-        var description3Container = document.getElementById('description3-container');
-
-        addDescription3Btn.addEventListener('click', function () {
-            description3Container.style.display = 'block'; // Show textarea
-            addDescription3Btn.style.display = 'none'; // Hide button
-        });
-    });
-
     function previewImage(event) {
         var reader = new FileReader();
         reader.onload = function() {
