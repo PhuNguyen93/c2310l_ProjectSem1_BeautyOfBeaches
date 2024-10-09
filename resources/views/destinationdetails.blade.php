@@ -165,7 +165,8 @@
                         <div class="search-box">
                             <div class="search-item">
                                 <label for="destination">Destination</label>
-                                <input type="text" id="destination" name="destination" placeholder="Enter destination">
+                                <input type="text" id="destination" name="destination"
+                                    placeholder="Enter destination">
                             </div>
 
                             <div class="search-item">
@@ -189,8 +190,9 @@
                                 </select>
                             </div>
 
-                            <a href="https://www.agoda.com/vi-vn/flights/airport/HAN/SGN/hanoi-ho-chi-minh-city.html?cid=1834233&tag=05692e1d-05cb-461f-9cf8-90ce9e5067cb&gad_source=1&gclid=Cj0KCQjwsJO4BhDoARIsADDv4vDlKdJ72VP6-hAqxeWVWGkN7R3KMoCKYEL0__TyFHJ3mJUTenxowrkaAvyMEALw_wcB" class="search-button" target="_blank">Search</a>
-                           </div>
+                            <a href="https://www.agoda.com/vi-vn/flights/airport/HAN/SGN/hanoi-ho-chi-minh-city.html?cid=1834233&tag=05692e1d-05cb-461f-9cf8-90ce9e5067cb&gad_source=1&gclid=Cj0KCQjwsJO4BhDoARIsADDv4vDlKdJ72VP6-hAqxeWVWGkN7R3KMoCKYEL0__TyFHJ3mJUTenxowrkaAvyMEALw_wcB"
+                                class="search-button" target="_blank">Search</a>
+                        </div>
                     </form>
                     <style>
                         body {
@@ -272,7 +274,7 @@
                                     <div class="cs_comment_body row">
                                         <div class="col-md-10">
                                             <div class="cs_comment_author cs_fs_20 cs_semibold cs_primary_color">
-                                                <img src="{{ asset('assets/images/avatar_3.jpeg') }}" alt="Avatar"
+                                                <img src="{{ asset($feedback->user->img) }}" alt="Avatar"
                                                     class="rounded-circle me-2" width="40" height="40">
                                                 <a
                                                     href="#">{{ $feedback->user ? $feedback->user->name : 'Unknown User' }}</a>
@@ -304,7 +306,7 @@
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger cs_medium"
-                                                            style="width: auto; height: 40px; font-size: 14px;">Del</button>
+                                                            style="width: auto; height: 40px; font-size: 14px;">Delete</button>
                                                     </form>
                                                 </div>
 
@@ -421,11 +423,10 @@
                                             {{ old('rating') == 1 ? 'checked' : '' }} />
                                         <label for="star1" title="1 star">★</label>
                                     </div>
-                                    @error('rating')
-                                        <span class="text-danger ms-3">{{ $message }}</span>
-                                    @enderror
                                 </div>
-
+                                @error('rating')
+                                    <span class="text-danger ms-3">{{ $message }}</span>
+                                @enderror
                                 <div class="col-lg-12">
                                     <button type="submit" class="cs_btn cs_style_1 w-100" id="submitCommentButton">Post
                                         Comment</button>
@@ -503,14 +504,13 @@
                                                     <a
                                                         href="{{ route('destinationdetails', $popularBeach->id) }}">{{ $popularBeach->name }}</a>
                                                 </h3>
-                                                <div class="cs_recent_post_meta">
-                                                    <span>{{ $popularBeach->location }},
-                                                        {{ $popularBeach->feedbacks_count }} Reviews,
-                                                        <div class="cs_rating scale_half"
-                                                            data-rating="{{ round($popularBeach->feedbacks_avg_rating, 1) }}">
-                                                            <div class="cs_rating_percentage"></div>
-                                                        </div>
-                                                    </span>
+                                                <div class="cs_recent_post_date cs_fs_14">
+                                                    {{ $popularBeach->created_at->format('F d, Y') }}
+                                                </div>
+                                                <div class="cs_recent_post_rating">
+                                                    <i class="fas fa-star text-warning"></i>
+                                                    {{ round($popularBeach->feedbacks_avg_rating, 1) }}
+                                                    ({{ $popularBeach->feedback_count }} reviews)
                                                 </div>
                                             </div>
                                         </article>
@@ -587,6 +587,7 @@
             }
         });
     });
+
     @if (session('success'))
         alert('Success: {{ session('success') }}');
     @endif
