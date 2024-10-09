@@ -41,7 +41,7 @@
 
                     <div>
                         <select name="direction" class="st_select">
-                            <option value="">Select Direction</option>
+                            <option value="">Direction</option>
                             <option value="East">East</option>
                             <option value="West">West</option>
                             <option value="South">South</option>
@@ -137,7 +137,6 @@
         });
     </script>
 @endsection
-
 
 
 
