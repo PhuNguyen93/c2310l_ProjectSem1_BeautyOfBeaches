@@ -118,7 +118,7 @@ public function verifyOtp(Request $request)
         //     return redirect()->route('dashboard');  // Chuyển hướng tới trang dashboard
         // }
         // Chuyển hướng đến trang đăng nhập với thông báo thành công
-        return redirect()->route('login')->with('otp_success', 'Account created successfully! Please login.');
+        return redirect()->back()->with('otp_success', 'Account created successfully! Please login.');
     }
 
     // Trả về lỗi nếu OTP sai
