@@ -43,6 +43,7 @@ class UserController extends Controller
         }
 
         // Phân trang kết quả
+        $query = User::where('status', '=', 1);
         $users = $query->paginate(10);
         // dd(7);
         // Trả về view với dữ liệu người dùng
@@ -137,6 +138,7 @@ class UserController extends Controller
     // Hàm để xóa người dùng
     public function destroy($id)
     {
+
         // Tìm người dùng theo ID
         $user = User::findOrFail($id);
 
