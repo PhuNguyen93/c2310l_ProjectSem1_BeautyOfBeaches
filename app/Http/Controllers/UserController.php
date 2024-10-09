@@ -146,18 +146,12 @@ class UserController extends Controller
             return redirect()->route('users.index')->with('error', 'Admin account cannot be deleted.');
         }
 
-     // Hàm để xóa người dùng
-     public function destroy(User $user)
-{
-    // Tìm người dùng theo ID
-    $user -> status =0;
-    $user-> save();
-
-        // Xóa người dùng nếu không phải admin
-        $user->delete();
+        // Đặt trạng thái người dùng là 0 để xóa mềm (deactivate)
+        $user->status = 0;
+        $user->save();
 
         // Điều hướng về trang danh sách người dùng với thông báo thành công
-        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('users.index')->with('success', 'User deactivated successfully.');
     }
 
     public function changePassword(Request $request)
@@ -361,7 +355,7 @@ class UserController extends Controller
         // Trả về thông báo thành công
         return redirect()->back()->with('success', 'OTP has been resent to your email.');
     }
-}
+
 
     public function bin(Request $request)
     {
@@ -405,8 +399,4 @@ class UserController extends Controller
 
         return redirect()->route('user.bin')->with('success', 'Bãi biển đã được khôi phục.');
     }
-
-
 }
-
-
