@@ -39,7 +39,8 @@
 
                             <div class="xl:col-span-3 xl:col-start-10">
                                 <div class="flex gap-2 xl:justify-end">
-                                    <button type="submit" class="btn bg-gray-500 text-white hover:bg-gray-600">Apply Filters</button>
+                                    <button type="submit" class="btn bg-gray-500 text-white hover:bg-gray-600">Apply
+                                        Filters</button>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +62,7 @@
                                         Location</th>
                                     <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort"
                                         data-sort="created_at">Creation Date</th>
-                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold text-end">Action</th>
+                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort">Action</th>
                                 </tr>
                             </thead>
 
@@ -139,7 +140,8 @@
                     <div class="flex flex-col items-center mt-8 md:flex-row">
                         <div class="mb-4 grow md:mb-0">
                             <p class="text-slate-500 dark:text-zink-200">Showing <b>{{ $beaches->count() }}</b> of
-                                <b>{{ $beaches->total() }}</b> Results</p>
+                                <b>{{ $beaches->total() }}</b> Results
+                            </p>
                         </div>
                         <ul class="flex flex-wrap items-center gap-2">
                             @if ($beaches->onFirstPage())

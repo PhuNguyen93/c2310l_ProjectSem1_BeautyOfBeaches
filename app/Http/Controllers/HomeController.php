@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Beach;
+use App\Models\Blog;
 use App\Models\VisitorLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,7 @@ class HomeController extends Controller
     {
         // Lấy 5 bãi biển mới nhất
         $beaches = Beach::orderBy('updated_at', 'desc')->take(5)->get();
+        $blogs = Blog::orderBy('created_at', 'desc')->paginate(2); // Thêm truy vấn blog
 
         // Ghi lại hoặc cập nhật thông tin truy cập trong bảng visitor_logs
         VisitorLog::updateOrCreate(
@@ -43,7 +45,7 @@ class HomeController extends Controller
             ->count();
 
         // Trả dữ liệu về view
-        return view('index', compact('beaches', 'totalVisits', 'userOnline', 'guestOnline'));
+        return view('index', compact('beaches', 'blogs', 'totalVisits', 'userOnline', 'guestOnline'));
     }
 
     // Phương thức kiểm tra các session hoạt động trong 10 giây gần đây
@@ -131,7 +133,8 @@ class HomeController extends Controller
 
     public function blog()
     {
-        return view('blog');
+        $blogs = Blog::orderBy('created_at', 'desc')->paginate(3); // Lấy tất cả blog và phân trang 6 bài trên mỗi trang
+        return view('index', compact('blogs')); // Trả dữ liệu về view 'home.blade.php'
     }
 
     public function blogdetails()
