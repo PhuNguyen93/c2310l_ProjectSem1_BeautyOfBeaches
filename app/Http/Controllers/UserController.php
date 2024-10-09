@@ -146,6 +146,13 @@ class UserController extends Controller
             return redirect()->route('users.index')->with('error', 'Admin account cannot be deleted.');
         }
 
+     // Hàm để xóa người dùng
+     public function destroy(User $user)
+{
+    // Tìm người dùng theo ID
+    $user -> status =0;
+    $user-> save();
+
         // Xóa người dùng nếu không phải admin
         $user->delete();
 
@@ -355,3 +362,51 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'OTP has been resent to your email.');
     }
 }
+
+    public function bin(Request $request)
+    {
+        if (Auth::guest() || Auth::user()->role_id != 2) {
+            return redirect()->route('index')->with('error', 'You do not have the required permissions.');
+        }
+
+        $search = $request->input('search');
+
+        $users = User::where('status', 0)
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', "%{$search}%");
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('users.bin', compact('users'));
+    }
+    public function destroyBin($id)
+    {
+        // Tìm người dùng theo ID
+        // dd(1);
+        $user = User::findOrFail($id);
+
+        // Kiểm tra nếu vai trò của người dùng là admin
+        if ($user->role_id == 2) { // 2 là role_id của admin
+            // Điều hướng về trang danh sách người dùng với thông báo lỗi
+            return redirect()->route('users.index')->with('error', 'Admin account cannot be deleted.');
+        }
+
+        // Xóa người dùng nếu không phải admin
+        $user->delete();
+
+        // Điều hướng về trang danh sách người dùng với thông báo thành công
+        return redirect()->route('user.bin')->with('success', 'User deleted successfully.');
+    }
+    public function restore(User $user)
+    {
+        $user->status = 1;
+        $user->save();
+
+        return redirect()->route('user.bin')->with('success', 'Bãi biển đã được khôi phục.');
+    }
+
+
+}
+
+

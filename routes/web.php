@@ -17,6 +17,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 // Routes for HomeController
@@ -147,6 +148,13 @@ Route::resource('users', UserController::class);
 Route::get('/account-settings/{id}', [UserController::class, 'showProfile'])->name('account-settings');
 Route::post('/account-settings/{id}/upload-avatar', [UserController::class, 'uploadAvatar'])->name('User.upload_avatar');
 Route::put('/account-settings/{id}/update_user', [UserController::class, 'update'])->name('users.update');
+
+Route::get('/user_bin', [UserController::class, 'bin'])->name('user.bin');
+Route::post('user_bin/restore/{user}', [UserController::class, 'restore'])->name('user.restore');
+Route::delete('user_bin/destroybin/{user}', [UserController::class, 'destroyBin'])->name('user.destroybin');
+
+
+
 // -------(lam Xuan Hung)------------------------------------
 
 // user_comment
