@@ -37,6 +37,8 @@ Route::controller(HomeController::class)->group(function () {
 Route::get('/blogs', [BlogController::class, 'indexUser'])->name('user.blog');
 Route::get('/blogs/{id}', [BlogController::class, 'showDetail'])->name('blogdetails');
 Route::post('/blogs/{id}/feedback', [BlogController::class, 'storeFeedback'])->name('blog.feedback');
+Route::put('/blogs/feedback/{id}', [BlogController::class, 'updateFeedback'])->name('blog.feedback.update');
+Route::delete('/blogs/feedback/{id}', [BlogController::class, 'deleteFeedback'])->name('blog.feedback.delete');
 
 // // Route cho trang blog của admin
 Route::get('/dashboard/blogs', [BlogController::class, 'index'])->name('admin.blog');

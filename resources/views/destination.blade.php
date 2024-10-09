@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Start Hero Section -->
-    <section class="cs_hero cs_style_1 cs_center cs_ripple_activate cs_primary_bg"
+    <section class="cs_hero cs_style_1 cs_center cs_primary_bg"
         style="background-image: url('https://plus.unsplash.com/premium_photo-1669748157617-a3a83cc8ea23?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') ">
         <div class="container">
             <div class="cs_hero_text text-center">

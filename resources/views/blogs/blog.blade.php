@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Hero section -->
-    <x-hero subTitle='Modern & Beautiful Travel Theme' img='assets/images/destination_header_bg.jpeg' title='Latest Blog' />
+    <x-hero subTitle='Modern & Beautiful Travel Theme' img='assets/images/blogimage.jpg' title='Latest Blog' />
 
     <!-- Khoảng cách tùy chỉnh -->
     <div class="cs_height_140 cs_height_lg_80"></div>

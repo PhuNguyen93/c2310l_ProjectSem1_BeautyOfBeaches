@@ -4,19 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\BlogDetail;
+use App\Models\BlogFeedback;
 use App\Models\BlogImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
     public function showDetail($id)
     {
-        // Lấy thông tin blog cùng với các hình ảnh phụ
-        $blog = Blog::with('images')->findOrFail($id);
+        $blog = Blog::with('images', 'feedbacks.user')->findOrFail($id);
+        $popularBlogs = $this->getPopularBlogs();
 
-        // Trả dữ liệu về view blogdetails.blade.php
-        return view('blogs.blogdetails', compact('blog'));
+        return view('blogs.blogdetails', compact('blog','popularBlogs'));
     }
 
     public function indexUser()
@@ -24,11 +25,9 @@ class BlogController extends Controller
 
         $blogs = Blog::orderBy('created_at', 'desc')->paginate(5);
 
-        // Trả dữ liệu về view blog.blade.php
         return view('blogs.blog', compact('blogs'));
     }
 
-    // Display a listing of the blogs.
     public function index(Request $request)
     {
         if (Auth::guest() || Auth::user()->role_id != 2) {
@@ -39,30 +38,25 @@ class BlogController extends Controller
         $blogs = Blog::when($search, function ($query, $search) {
             return $query->where('title', 'like', "%{$search}%");
         })
-            ->orderBy('created_at', 'desc') // Sắp xếp theo thứ tự giảm dần của ngày tạo
-            ->paginate(5); // Hiển thị 5 bài trên mỗi trang
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
 
         return view('blogs.index', compact('blogs'));
     }
 
     public function store(Request $request)
     {
-        // Validate dữ liệu nhập vào
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Hình ảnh chính hoặc phụ
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Khởi tạo biến để lưu ảnh chính
         $mainImageUrl = null;
 
-        // Kiểm tra nếu có hình ảnh được tải lên
         if ($request->hasFile('images')) {
-            // Lấy tất cả các hình ảnh được tải lên
             $images = $request->file('images');
 
-            // Lấy hình ảnh đầu tiên làm ảnh chính
             $mainImagePath = $images[0]->store('public/assets/blogs');
             $mainImageUrl = str_replace('public/', 'storage/', $mainImagePath);
 
@@ -88,17 +82,82 @@ class BlogController extends Controller
         return redirect()->route('admin.blog')->with('success', 'Blog added successfully');
     }
 
-
-
     public function destroy($id)
     {
-        // Tìm bài viết theo ID
         $blog = Blog::findOrFail($id);
-
-        // Xóa bài viết
         $blog->delete();
 
-        // Redirect về trang danh sách với thông báo thành công
         return redirect()->route('blogs.index')->with('success', 'Blog deleted successfully');
+    }
+
+    public function storeFeedback(Request $request, $id)
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Please log in to comment.');
+        }
+        $request->validate([
+            'comment' => 'required|string',
+            'rating' => 'required|integer|between:1,5',
+        ]);
+
+        BlogFeedback::create([
+            'user_id' => Auth::id(),
+            'blog_id' => $id,
+            'rating' => $request->rating,
+            'comment' => $request->comment,
+        ]);
+
+        return redirect()->route('blogdetails', $id)->with('success', 'Feedback posted successfully.');
+    }
+
+    public function updateFeedback(Request $request, $feedbackId)
+    {
+        $request->validate([
+            'comment' => 'required|string',
+            'rating' => 'required|integer|between:1,5',
+        ]);
+
+        $feedback = BlogFeedback::findOrFail($feedbackId);
+
+        // Kiểm tra nếu người dùng hiện tại là chủ của feedback
+        if (Auth::id() !== $feedback->user_id) {
+            return redirect()->back()->with('error', 'You are not allowed to edit this feedback.');
+        }
+
+        $feedback->update([
+            'comment' => $request->comment,
+            'rating' => $request->rating,
+        ]);
+
+        return redirect()->route('blogdetails', $feedback->blog_id)->with('success', 'Feedback updated successfully.');
+    }
+
+    public function deleteFeedback($feedbackId)
+    {
+        $feedback = BlogFeedback::findOrFail($feedbackId);
+
+        // Kiểm tra nếu người dùng hiện tại là chủ của feedback
+        if (Auth::id() !== $feedback->user_id) {
+            return redirect()->back()->with('error', 'You are not allowed to delete this feedback.');
+        }
+
+        $feedback->delete();
+
+        return redirect()->route('blogdetails', $feedback->blog_id)->with('success', 'Feedback deleted successfully.');
+    }
+    public function getPopularBlogs()
+    {
+        // Lấy các blog với trung bình rating và sắp xếp theo rating trung bình, sau đó là số lượng đánh giá
+        $popularBlogs = Blog::withCount(['feedbacks as avg_rating' => function ($query) {
+            $query->select(DB::raw('coalesce(avg(rating),0)'));
+        }, 'feedbacks as feedback_count' => function ($query) {
+            $query->select(DB::raw('count(*)'));
+        }])
+            ->orderByDesc('avg_rating') // Sắp xếp theo điểm trung bình cao nhất
+            ->orderByDesc('feedback_count') // Nếu điểm trung bình giống nhau thì sắp xếp theo số lượng đánh giá
+            ->take(3) // Lấy 3 bài viết nhiều nhất
+            ->get();
+
+        return $popularBlogs;
     }
 }
