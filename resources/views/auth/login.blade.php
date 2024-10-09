@@ -104,7 +104,7 @@
                             <div class="grow">
                                 <a href="index">
                                     <img src="{{ URL::asset('build/images/logo-light.png') }}" alt="" class="hidden h-6 dark:block">
-                                    <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="" class="block h-6 dark:hidden">
+                                    {{-- <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="" class="block h-6 dark:hidden"> --}}
                                 </a>
                             </div>
                             <div class="shrink-0">
@@ -116,12 +116,8 @@
                                             </h6>
                                         </div>
                                     </div>
-
-
-
                                     <div class="absolute z-50 hidden p-3 mt-1 text-left list-none bg-white rounded-md shadow-md dropdown-menu min-w-[9rem] flex flex-col gap-3 dark:bg-zink-600"
                                         aria-labelledby="dropdownMenuButton">
-
                                     </div>
                                 </div>
                             </div>

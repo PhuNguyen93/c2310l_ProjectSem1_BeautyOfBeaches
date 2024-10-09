@@ -163,7 +163,7 @@
           <div class="col-lg-4">
               <div class="cs_team cs_style_1 position-relative">
                   <div class="cs_team_thumb cs_zoom overflow-hidden">
-                      <img src="assets/images/trangiabao.jpg" alt="Team Thumb" class="cs_zoom_in">
+                      <img src="assets/images/trangiabao.jpg" alt="Team Thumb" >
                   </div>
                   <div class="cs_team_info text-center position-absolute">
                       <h2 class="cs_team_title cs_fs_24 cs_medium cs_white_color">Trần Gia Bảo</h2>
@@ -181,7 +181,7 @@
           <div class="col-lg-4">
               <div class="cs_team cs_style_1 position-relative">
                   <div class="cs_team_thumb cs_zoom overflow-hidden">
-                      <img src="assets/images/nguyenminhphu.png" alt="Team Thumb" class="cs_zoom_in">
+                      <img src="assets/images/nguyenminhphu.png" alt="Team Thumb" >
                   </div>
                   <div class="cs_team_info text-center position-absolute">
                       <h2 class="cs_team_title cs_fs_24 cs_medium cs_white_color">Nguyễn Minh Phú</h2>
@@ -199,7 +199,7 @@
           <div class="col-lg-4">
               <div class="cs_team cs_style_1 position-relative">
                   <div class="cs_team_thumb cs_zoom overflow-hidden">
-                      <img src="assets/images/lamxuanhung.jpg" alt="Team Thumb" class="cs_zoom_in">
+                      <img src="assets/images/lamxuanhung.jpg" alt="Team Thumb" >
                   </div>
                   <div class="cs_team_info text-center position-absolute">
                       <h2 class="cs_team_title cs_fs_24 cs_medium cs_white_color">Lâm Xuân Hùng</h2>
@@ -218,11 +218,11 @@
           <div class="col-lg-4 offset-lg-2">
             <div class="cs_team cs_style_1 position-relative">
                 <div class="cs_team_thumb cs_zoom overflow-hidden">
-                    <img src="assets/images/nguyenvietduc.png" alt="Team Thumb" class="cs_zoom_in">
+                    <img src="assets/images/nguyenvietduc.png" alt="Team Thumb" >
                 </div>
                 <div class="cs_team_info text-center position-absolute">
                     <h2 class="cs_team_title cs_fs_24 cs_medium cs_white_color">Nguyễn Việt Đức</h2>
-                    <p class="cs_team_subtitle cs_white_color">Product Owner</p>
+                    <p class="cs_team_subtitle cs_white_color">PO & Tester</p>
                     <div class="cs_social_btns">
                         <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
                         <a href="#"><i class="fa-brands fa-twitter"></i></a>
@@ -237,11 +237,11 @@
         <div class="col-lg-4">
           <div class="cs_team cs_style_1 position-relative">
               <div class="cs_team_thumb cs_zoom overflow-hidden">
-                  <img src="assets/images/dangbaan.png" alt="Team Thumb" class="cs_zoom_in">
+                  <img src="assets/images/dangbaan.png" alt="Team Thumb">
               </div>
               <div class="cs_team_info text-center position-absolute">
                   <h2 class="cs_team_title cs_fs_24 cs_medium cs_white_color">Đặng Bá An</h2>
-                  <p class="cs_team_subtitle cs_white_color">Tester</p>
+                  <p class="cs_team_subtitle cs_white_color">Developer</p>
                   <div class="cs_social_btns">
                       <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
                       <a href="#"><i class="fa-brands fa-twitter"></i></a>
@@ -257,6 +257,14 @@
 
 
   <div class="cs_height_140 cs_height_lg_80"></div>
+  <style>
+    .cs_team_thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+  </style>
 </section>
 <!-- End Team Section -->
 
