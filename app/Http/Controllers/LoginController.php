@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,6 +39,12 @@ class LoginController extends Controller
 
         $loginField = filter_var($request->input('email'), FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
 
+        $user = User::where($loginField, $request->input('email'))->first();
+        if (!$user || $user->status == 0) {
+            return back()->withErrors([
+                'email' => 'Your account is inactive or does not exist.',
+            ])->onlyInput('email');
+        }
         // Đăng nhập bằng email hoặc số điện thoại
         if (Auth::attempt([$loginField => $request->input('email'), 'password' => $request->input('password')])) {
             $request->session()->regenerate();
