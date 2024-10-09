@@ -15,14 +15,13 @@
                     <div class="flex items-center">
                         <h6 class="text-15 grow">Blogs List</h6>
                         <div class="shrink-0">
-                            <!-- Nút "Add Blog" -->
+
                             <button id="openModalButton"
                                 class="px-4 py-2 text-white bg-custom-500 border border-custom-500 hover:bg-custom-600 hover:border-custom-600 rounded-lg flex items-center">
                                 <i data-lucide="plus" class="inline-block size-4 mr-2"></i> <span class="align-middle">Add
                                     Blog</span>
                             </button>
-
-                            <!-- Modal Thêm Blog -->
+                            {{-- modal --}}
                             <div id="addBlogModal" class="modal hidden">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -43,14 +42,15 @@
                                                 <textarea id="description" name="description" rows="3" class="form-input" required></textarea>
                                             </div>
                                             <div class="form-group">
-                                                <label for="image">Image</label>
-                                                <input type="file" id="image" name="image" accept="image/*"
-                                                    onchange="previewImage(event)">
-                                                <img id="imagePreview" class="image-preview hidden">
+                                                <label for="images">Images</label>
+                                                <input type="file" id="images" name="images[]" accept="image/*"
+                                                    multiple onchange="previewImages(event)">
+                                                <div id="imagePreview" class="image-preview-container"></div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="px-4 py-2 text-white bg-custom-500 border border-custom-500 hover:bg-custom-600 hover:border-custom-600 rounded-lg flex items-center">Submit</button>
+                                            <button type="submit"
+                                                class="px-4 py-2 text-white bg-custom-500 border border-custom-500 hover:bg-custom-600 hover:border-custom-600 rounded-lg flex items-center">Submit</button>
                                         </div>
                                     </form>
                                 </div>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="!py-3.5 card-body border-y border-dashed border-slate-200 dark:border-zink-500">
                     <!-- Form tìm kiếm và bộ lọc -->
-                    <form action="{{ route('blogs.index') }}" method="GET">
+                    <form action="{{ route('admin.blog') }}" method="GET">
                         <div class="grid grid-cols-1 gap-5 xl:grid-cols-12">
                             <div class="relative xl:col-span-6">
                                 <input type="text" name="search" value="{{ request('search') }}"
@@ -80,13 +80,12 @@
                     </form>
                 </div>
 
-                <!-- Bảng danh sách  -->
                 <div class="card-body">
                     <div class="-mx-5 -mb-5 overflow-x-auto">
                         <table class="w-full border-separate table-custom border-spacing-y-1 whitespace-nowrap">
                             <thead class="text-left">
                                 <tr class="relative rounded-md bg-slate-100 dark:bg-zink-600">
-                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold">id</th>
+                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold">Image</th>
                                     <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort" data-sort="Title">
                                         Name
                                     </th>
@@ -113,7 +112,7 @@
                                         </td>
                                         <td class="px-3.5 py-2.5" data-sort="id">{{ $blog->user->name }}</td>
                                         <td class="px-3.5 py-2.5" data-sort="Title">{{ $blog->title }}</td>
-                                        <td class="px-3.5 py-2.5" data-sort="Title">{{ $blog->description }}</td>
+                                        <td class="px-3.5 py-2.5" data-sort="Title">{{ Str::limit($blog->description, 30) }}</td>
                                         <td class="px-3.5 py-2.5" data-sort="created_at">
                                             {{ $blog->created_at->format('Y-m-d H:i:s') }}</td>
                                         <td class="px-3.5 py-2.5 text-end">
@@ -133,14 +132,14 @@
                                                             <span class="align-middle">View</span>
                                                         </a>
                                                     </li>
-                                                    <li>
+                                                    {{-- <li>
                                                         <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200"
                                                             href="{{ route('beaches.edit', $blog->id) }}">
                                                             <i data-lucide="file-edit"
                                                                 class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i>
                                                             <span class="align-middle">Edit</span>
                                                         </a>
-                                                    </li>
+                                                    </li> --}}
                                                     <li>
                                                         <form action="{{ route('blogs.destroy', $blog->id) }}"
                                                             method="POST" style="display:inline;"
@@ -154,19 +153,12 @@
                                                                 <span class="align-middle">Delete</span>
                                                             </button>
                                                         </form>
-
-                                                        <script>
-                                                            function confirmDelete() {
-                                                                return confirm('Are you sure you want to delete this beach? This action cannot be undone.');
-                                                            }
-                                                        </script>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </td>
                                     </tr>
                                 @endforeach
-
                             </tbody>
                         </table>
                     </div>
@@ -276,19 +268,43 @@
         });
 
         // Xem trước hình ảnh
-        function previewImage(event) {
-            var imagePreview = document.getElementById('imagePreview');
-            var file = event.target.files[0];
-            if (file) {
-                imagePreview.src = URL.createObjectURL(file);
-                imagePreview.classList.remove('hidden');
-            } else {
-                imagePreview.classList.add('hidden');
+        function previewImages(event) {
+            const imagePreview = document.getElementById('imagePreview');
+            imagePreview.innerHTML = '';
+            const files = event.target.files;
+
+            for (let i = 0; i < files.length; i++) {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(files[i]);
+                img.classList.add('image-preview');
+                imagePreview.appendChild(img);
             }
         }
     </script>
 @endpush
 <style>
+    .image-preview-container {
+        display: flex;
+        flex-wrap: wrap;
+        max-height: 300px;
+        /* Giới hạn chiều cao của phần chứa ảnh */
+        overflow-y: auto;
+        /* Thanh cuộn khi có nhiều ảnh */
+        gap: 10px;
+        /* Khoảng cách giữa các ảnh */
+    }
+
+    .image-preview {
+        width: 100px;
+        /* Chiều rộng cố định của mỗi ảnh */
+        height: 100px;
+        /* Chiều cao cố định của mỗi ảnh */
+        object-fit: cover;
+        /* Giữ tỉ lệ của ảnh và cắt phần thừa */
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
     /* Modal Overlay */
     .modal {
         position: fixed;

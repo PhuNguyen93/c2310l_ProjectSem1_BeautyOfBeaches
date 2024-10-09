@@ -608,12 +608,12 @@
                                 <div class="cs_post_info_in">
                                     <div class="cs_post_avatar">
                                         <div class="cs_avatar_thumb">
-                                            <img src="{{ asset('assets/images/avatar02.jpeg') }}" alt="Avatar">
+                                            <img src="{{ asset($blog->user->img) }}" alt="Avatar" class="rounded-circle">
                                         </div>
                                         <div class="cs_avatar_info">By. <br>{{ $blog->user->name }}</div>
                                     </div>
-                                    <h2 class="cs_post_title cs_fs_24 cs_semibold"><a href="{{ route('blogdetails', $blog->id) }}">{{ $blog->title }}</a></h2>
-                                    <p class="cs_post_subtitle">{{ Str::limit($blog->description, 150) }}</p>
+                                    <h2 class="cs_post_title cs_fs_24 cs_semibold"><a href="{{ route('blogdetails', $blog->id) }}">{{ Str::limit($blog->title, 20) }}</a></h2>
+                                    <p class="cs_post_subtitle">{{ Str::limit($blog->description, 50) }}</p>
                                     <div class="cs_post_btns cs_gray_bg_1">
                                         <a href="#">
                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -644,8 +644,6 @@
                     </div>
                 @endforeach
             </div>
-
-            <!-- Phân trang nếu cần -->
             {{-- <div class="pagination-links mt-4">
                 {{ $blogs->links() }}
             </div> --}}

@@ -35,12 +35,17 @@ Route::controller(HomeController::class)->group(function () {
 });
 
 Route::get('/blogs', [BlogController::class, 'indexUser'])->name('user.blog');
+Route::get('/blogs/{id}', [BlogController::class, 'showDetail'])->name('blogdetails');
+Route::post('/blogs/{id}/feedback', [BlogController::class, 'storeFeedback'])->name('blog.feedback');
 
-// Route cho trang blog của admin
-Route::get('/admin/blogs', [BlogController::class, 'index'])->name('admin.blog');
-Route::post('/admin/blogs', [BlogController::class, 'store'])->name('blogs.store');
-Route::delete('/admin/blogs/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy');
+// // Route cho trang blog của admin
+Route::get('/dashboard/blogs', [BlogController::class, 'index'])->name('admin.blog');
+Route::post('/dashboard/blogs', [BlogController::class, 'store'])->name('blogs.store');
+Route::delete('/dashboard/blogs/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy');
 
+// Route::get('/dashboard/blogs', [BlogController::class, 'index'])->name('blogs.index'); // Xem danh sách blog
+// Route::get('/dashboard/blogs/{someParameter?}', [BlogController::class, 'index'])->name('blogs.index');
+// Route::get('/dashboard/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show'); // Xem chi tiết blog
 
 // Search route
 Route::get('/search', [SearchController::class, 'search'])->name('search');
@@ -82,7 +87,7 @@ Route::controller(RegisterController::class)->group(function () {
 // Feedback Routes
 Route::post('/beaches/{beach}/feedbacks', [FeedbackController::class, 'store'])->name('feedbacks.store');
 Route::delete('/feedbacks/{feedback}', [FeedbackController::class, 'destroy'])->name('feedbacks.destroy');
-Route::get('/feedbacks/{id}/edit', [FeedbackController::class, 'edit'])->name('feedbacks.edit');
+// Route::get('/feedbacks/{id}/edit', [FeedbackController::class, 'edit'])->name('feedbacks.edit');
 Route::put('/feedbacks/{id}', [FeedbackController::class, 'update'])->name('feedbacks.update');
 Route::delete('/feedbacks/{id}', [FeedbackController::class, 'destroy'])->name('feedbacks.destroy');
 Route::get('/feedbacks', [FeedbackController::class, 'index'])->name('feedbacks.index');
@@ -194,12 +199,5 @@ Route::get('/register/verify', [RegisterController::class, 'showOtpForm'])->name
 Route::post('/register/verify', [RegisterController::class, 'verifyOtp'])->name('res.verify');
 Route::get('/register/resend-otp', [RegisterController::class, 'resendOtp'])->name('resend.res');
 
-//blog
-Route::get('/dashboard/blogs', [BlogController::class, 'index'])->name('blogs.index'); // Xem danh sách blog
-Route::get('/dashboard/blogs/{someParameter?}', [BlogController::class, 'index'])->name('blogs.index');
-Route::get('/dashboard/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show'); // Xem chi tiết blog
-// Route::get('/dashboard/blogs/{id}/edit', [BlogController::class, 'edit'])->name('blogs.edit'); // Chỉnh sửa blog
-// Route::put('/dashboard/blogs/{id}', [BlogController::class, 'update'])->name('blogs.update'); // Cập nhật blog
-// Route::delete('/dashboard/blogs/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy'); // Xóa blog
 
 Route::get('/search-beaches', [BeachController::class, 'search'])->name('searchBeaches');

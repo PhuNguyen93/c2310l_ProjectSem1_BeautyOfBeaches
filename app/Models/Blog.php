@@ -13,7 +13,6 @@ class Blog extends Model
 
     protected $fillable = ['user_id', 'title', 'image_url', 'description'];
 
-    // Relation with BlogDetail
     public function details()
     {
         return $this->hasMany(BlogDetail::class);
@@ -21,5 +20,13 @@ class Blog extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function images()
+    {
+        return $this->hasMany(BlogImage::class);
+    }
+    public function feedbacks()
+    {
+        return $this->hasMany(BlogFeedback::class);
     }
 }
