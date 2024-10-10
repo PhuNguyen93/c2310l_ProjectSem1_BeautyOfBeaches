@@ -30,16 +30,19 @@ class BlogController extends Controller
 
     public function index(Request $request)
     {
+
         if (Auth::guest() || Auth::user()->role_id != 2) {
             return redirect()->route('index')->with('error', 'You do not have the required permissions.');
         }
         $search = $request->input('search');
 
-        $blogs = Blog::when($search, function ($query, $search) {
+        $blogs = Blog::where('status', 1) // Thêm điều kiện lọc theo status
+        ->when($search, function ($query, $search) {
             return $query->where('title', 'like', "%{$search}%");
         })
-            ->orderBy('created_at', 'desc')
-            ->paginate(5);
+        ->orderBy('created_at', 'desc')
+        ->paginate(5);
+
 
         return view('blogs.index', compact('blogs'));
     }
@@ -85,8 +88,9 @@ class BlogController extends Controller
     public function destroy($id)
     {
         $blog = Blog::findOrFail($id);
-        $blog->delete();
-
+        // $blog->delete();
+        $blog->status=0;
+        $blog->save();
         return redirect()->route('blogs.index')->with('success', 'Blog deleted successfully');
     }
 
@@ -160,4 +164,34 @@ class BlogController extends Controller
 
         return $popularBlogs;
     }
+
+    public function bin(Request $request)
+    {
+        // Kiểm tra quyền truy cập
+        if (Auth::guest() || Auth::user()->role_id != 2) {
+            return redirect()->route('index')->with('error', 'You do not have the required permissions.');
+        }
+
+        // Tìm kiếm blog theo từ khóa (nếu có)
+        $search = $request->input('search');
+
+        // Truy vấn lấy các blog có status = 1 và áp dụng tìm kiếm
+        $blogs = Blog::where('status', 0)
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', "%{$search}%");
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        // Trả về view cùng với biến $blogs
+        return view('blogs.bin', compact('blogs'));
+    }
+    public function restore(Blog $blog)
+    {
+        $blog->status = 1;
+        $blog->save();
+
+        return redirect()->route('blog.bin')->with('success', 'Bãi biển đã được khôi phục.');
+    }
+
 }
