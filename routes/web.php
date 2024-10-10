@@ -17,6 +17,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Models\Blog;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,6 +45,12 @@ Route::delete('/blogs/feedback/{id}', [BlogController::class, 'deleteFeedback'])
 Route::get('/dashboard/blogs', [BlogController::class, 'index'])->name('admin.blog');
 Route::post('/dashboard/blogs', [BlogController::class, 'store'])->name('blogs.store');
 Route::delete('/dashboard/blogs/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy');
+Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
+
+
+Route::get('/blog_bin', [BlogController::class, 'bin'])->name('blog.bin');
+Route::post('blog_bin/restore/{blog}', [BlogController::class, 'restore'])->name('blog.restore');
+// Route::delete('user_bin/destroybin/{user}', [UserController::class, 'destroyBin'])->name('user.destroybin');
 
 // Route::get('/dashboard/blogs', [BlogController::class, 'index'])->name('blogs.index'); // Xem danh sách blog
 // Route::get('/dashboard/blogs/{someParameter?}', [BlogController::class, 'index'])->name('blogs.index');
