@@ -191,7 +191,7 @@ class BlogController extends Controller
         $blog->status = 1;
         $blog->save();
 
-        return redirect()->route('blog.bin')->with('success', 'Bãi biển đã được khôi phục.');
+        return redirect()->route('blog.bin')->with('success', 'The beach has been restored.');
     }
 
 }
