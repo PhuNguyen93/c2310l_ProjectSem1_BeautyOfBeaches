@@ -91,7 +91,7 @@ class BlogController extends Controller
         // $blog->delete();
         $blog->status=0;
         $blog->save();
-        return redirect()->route('blogs.index')->with('success', 'Blog deleted successfully');
+        return redirect()->route('admin.blog')->with('success', 'Blog deleted successfully');
     }
 
     public function storeFeedback(Request $request, $id)

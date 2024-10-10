@@ -45,7 +45,7 @@ Route::delete('/blogs/feedback/{id}', [BlogController::class, 'deleteFeedback'])
 Route::get('/dashboard/blogs', [BlogController::class, 'index'])->name('admin.blog');
 Route::post('/dashboard/blogs', [BlogController::class, 'store'])->name('blogs.store');
 Route::delete('/dashboard/blogs/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy');
-Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
+// Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
 
 
 Route::get('/blog_bin', [BlogController::class, 'bin'])->name('blog.bin');
