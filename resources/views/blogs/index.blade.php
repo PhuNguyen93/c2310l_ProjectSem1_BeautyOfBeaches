@@ -152,6 +152,37 @@
                                                                     class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i>
                                                                 <span class="align-middle">Delete</span>
                                                             </button>
+
+                                                            @if (session('success'))
+                                                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                                            <script>
+                                                                Swal.fire({
+                                                                    title: 'Success',
+                                                                    text: '{{ session('success') }}',
+                                                                    icon: 'success',
+                                                                    confirmButtonText: 'OK'
+                                                                }).then(() => {
+                                                                    @if (session('otp_sent'))
+                                                                        Alpine.store('step', 'verify');
+                                                                    @elseif (session('otp_verified'))
+                                                                        Alpine.store('step', 'reset');
+                                                                    @endif
+                                                                });
+                                                            </script>
+                                                        @endif
+
+                                                        <!-- SweetAlert thông báo lỗi -->
+                                                        @if (session('error'))
+                                                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                                            <script>
+                                                                Swal.fire({
+                                                                    title: 'Error',
+                                                                    text: '{{ session('error') }}',
+                                                                    icon: 'error',
+                                                                    confirmButtonText: 'OK'
+                                                                });
+                                                            </script>
+                                                        @endif
                                                         </form>
                                                     </li>
                                                 </ul>

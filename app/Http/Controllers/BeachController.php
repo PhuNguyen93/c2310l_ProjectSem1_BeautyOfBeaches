@@ -63,7 +63,7 @@ class BeachController extends Controller
 
         Beach::create($data);
 
-        return redirect()->route('beaches.index')->with('success', 'Đã thêm bãi biển thành công.');
+        return redirect()->route('beaches.index')->with('success', 'Beach added successfully.');
     }
 
     public function storePdf(Request $request, Beach $beach)
@@ -169,7 +169,7 @@ class BeachController extends Controller
         // Cập nhật các thông tin khác
         $beach->update($data);
 
-        return redirect()->route('beaches.index')->with('success', 'Đã cập nhật bãi biển thành công.');
+        return redirect()->route('beaches.index')->with('success', 'Beach updated successfully.');
     }
 
     public function search(Request $request)
@@ -242,7 +242,7 @@ class BeachController extends Controller
         // Xóa bãi biển sau khi đã xóa các bản ghi liên quan
         $beach->delete();
 
-        return redirect()->route('beaches.index')->with('success', 'Đã xóa bãi biển thành công.');
+        return redirect()->route('beaches.index')->with('success', 'Beach cleared successfully.');
     }
 
     public function destroy(Beach $beach)
@@ -250,7 +250,7 @@ class BeachController extends Controller
         $beach->status = 0;
         $beach->save();
 
-        return redirect()->route('beaches.index')->with('success', 'Bãi biển đã được đưa vào thùng rác.');
+        return redirect()->route('beaches.index')->with('success', 'The beach has been trashed.');
     }
 
     public function restore(Beach $beach)
@@ -258,6 +258,6 @@ class BeachController extends Controller
         $beach->status = 1;
         $beach->save();
 
-        return redirect()->route('beaches.bin')->with('success', 'Bãi biển đã được khôi phục.');
+       return redirect()->route('beaches.bin')->with('success','The beach has been restored.');
     }
 }
