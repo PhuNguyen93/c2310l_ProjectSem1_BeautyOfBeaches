@@ -42,7 +42,7 @@ class BlogController extends Controller
 
     public function index(Request $request)
     {
-
+        // dd(1);
         if (Auth::guest() || Auth::user()->role_id != 2) {
             return redirect()->route('index')->with('error', 'You do not have the required permissions.');
         }
@@ -313,6 +313,6 @@ class BlogController extends Controller
         $blog->status = 1;
         $blog->save();
 
-        return redirect()->route('blog.bin')->with('success', 'The beach has been restored.');
+        return redirect()->route('blog.bin')->with('success', 'The Blog has been restored.');
     }
 }

@@ -164,13 +164,12 @@
                                                                   class="block w-full text-left px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200">
                                                               <i data-lucide="trash-2" class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i>
                                                               <span class="align-middle">Restore</span>
+
                                                           </button>
                                                       </form>
 
                                                         <script>
-                                                            function confirmDelete() {
-                                                                return confirm('Are you sure you want to delete this beach? This action cannot be undone.');
-                                                            }
+
                                                         </script>
                                                     </li>
                                                     <li>
@@ -183,6 +182,11 @@
                                                                 <i data-lucide="trash-2"
                                                                     class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i>
                                                                 <span class="align-middle">Delete</span>
+                                                                <script>
+                                                                    function confirmDelete() {
+                                                                        return confirm('Are you sure you want to delete this beach? This action cannot be undone.');
+                                                                    }
+                                                                </script>
                                                             </button>
                                                         </form>
                                                     </li>
@@ -317,24 +321,40 @@
     <!--end add user-->
 
     @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert"
-            style="background-color: #28a745; color: white; font-size: 18px; padding: 20px; border-radius: 8px; box-shadow: 0px 4px 12px rgba(0,0,0,0.1);">
-            {{ session('success') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: white;">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            title: 'Success',
+            text: '{{ session('success') }}',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            @if (session('otp_sent'))
+                Alpine.store('step', 'verify');
+            @elseif (session('otp_verified'))
+                Alpine.store('step', 'reset');
+            @endif
+        });
+    </script>
+@endif
 
-    @if (session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert"
-            style="background-color: #dc3545; color: white; font-size: 18px; padding: 20px; border-radius: 8px; box-shadow: 0px 4px 12px rgba(0,0,0,0.1);">
-            {{ session('error') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: white;">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
+<!-- SweetAlert thông báo lỗi -->
+@if (session('error'))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            title: 'Error',
+            text: '{{ session('error') }}',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    </script>
+@endif
+    <script>
+        function confirmDelete() {
+            return confirm('Are you sure you want to delete this beach? This action cannot be undone.');
+        }
+    </script>
 
 @endsection
 
