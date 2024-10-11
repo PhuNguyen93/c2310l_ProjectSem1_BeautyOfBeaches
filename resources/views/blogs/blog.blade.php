@@ -14,7 +14,7 @@
                 @if (Auth::check())
                     <!-- Form tạo bài viết -->
                     <div class="card mb-4 shadow-sm">
-                        <div class="card-header bg-primary text-white">
+                        <div class="card-header bg-info text-white">
                             Create a Blog Post
                         </div>
                         <div class="card-body">
@@ -36,7 +36,7 @@
                                     data-bs-target="#createPostModal">
                                     <i class="fa fa-camera"></i> Photo
                                 </button>
-                                <button class="btn btn-primary" onclick="showPostModal()">Create Post</button>
+                                <button class="btn btn-info text-white" onclick="showPostModal()">Create Post</button>
                             </div>
                         </div>
                     </div>

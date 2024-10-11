@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\OtpMail;
+use App\Models\Feedback;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -21,9 +22,11 @@ class ProfileController extends Controller
         if (Auth::user()->role_id != 1) {
             return redirect()->route('index')->with('error', 'You do not have the required permissions.');
         }
-
+        $feedbacks = Feedback::with('beach')
+                ->where('user_id', $id)
+                ->get();
         // Truyền thông tin user vào view
-        return view('profile.profile', ['user' => $user]);
+        return view('profile.profile', compact('user', 'feedbacks'));
     }
 
     public function update(Request $request, $id)

@@ -412,59 +412,56 @@
 
                     </div>
 
-                    <div id="userHistoryTab" class="tab-content" style="display: none;">
+                    <div id="userHistoryTab" class="tab-content" style="display: block;">
 
                         <div class="card"
-                            style=" background-color: white; font-family: Arial, sans-serif; color: #333;">
-
-                            <table class="table table-striped text-center">
+                            style="background-color: white; font-family: Arial, sans-serif; color: #333;">
+                            <table class="min-w-full leading-normal">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Date</th>
-                                        <th>Activity</th>
-                                        <th>Action</th>
+                                        <th class="px-6 py-3 text-left text-sm font-bold text-gray-600">Avatar</th>
+                                        <th class="px-6 py-3 text-left text-sm font-bold text-gray-600">User Name</th>
+                                        <th class="px-6 py-3 text-left text-sm font-bold text-gray-600">Beach Name</th>
+                                        <th class="px-6 py-3 text-left text-sm font-bold text-gray-600">Country</th>
+                                        <th class="px-6 py-3 text-left text-sm font-bold text-gray-600">Rating</th>
+                                        <th class="px-6 py-3 text-left text-sm font-bold text-gray-600">Comment</th>
+                                        <th class="px-6 py-3 text-left text-sm font-bold text-gray-600">Creation Date
+                                        </th>
+                                        <th class="px-6 py-3 text-left text-sm font-bold text-gray-600">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Dữ liệu mẫu, bạn có thể thay thế bằng dữ liệu động -->
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2024-10-06</td>
-                                        <td>Commented on "Amazing Beach" blog</td>
-                                        <td>
-                                            <button class="btn btn-info btn-sm">View</button>
-                                            <button class="btn btn-warning btn-sm">Edit</button>
-                                            <button class="btn btn-danger btn-sm">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>2024-10-05</td>
-                                        <td>Wrote blog "Top 10 Beaches to Visit"</td>
-                                        <td>
-                                            <button class="btn btn-info btn-sm">View</button>
-                                            <button class="btn btn-warning btn-sm">Edit</button>
-                                            <button class="btn btn-danger btn-sm">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>2024-10-04</td>
-                                        <td>Updated profile information</td>
-                                        <td>
-                                            <button class="btn btn-info btn-sm">View</button>
-                                            <button class="btn btn-warning btn-sm">Edit</button>
-                                            <button class="btn btn-danger btn-sm">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <!-- Kết thúc dữ liệu mẫu -->
+                                    @foreach ($feedbacks as $feedback)
+                                        <tr>
+                                            <td class="px-6 py-4">
+                                                <img src="{{ asset($user->img) }}" alt="Avatar"
+                                                    class="img-fluid rounded-circle"
+                                                    style="width: 40px; height: 40px;">
+                                            </td>
+                                            <td class="px-6 py-4">{{ $user->name }}</td>
+                                            <td class="px-6 py-4">{{ $feedback->beach->name }}</td>
+                                            <td class="px-6 py-4">{{ $feedback->beach->country }}</td>
+                                            <td class="px-6 py-4">{{ $feedback->rating }} / 5</td>
+                                            <td class="px-6 py-4">{{ $feedback->comment }}</td>
+                                            <td class="px-6 py-4">{{ $feedback->created_at->format('Y-m-d') }}</td>
+                                            <td class="px-6 py-4">
+                                                <a href="" class="btn btn-warning btn-sm">Edit</a>
+                                                <form action="{{ route('feedbacks.destroy', $feedback->id) }}"
+                                                    method="POST" style="display:inline-block;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="btn btn-danger btn-sm">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
 
-
                     </div>
+
 
                     <div id="privacyPolicyTab" class="tab-content" style="display: none;">
                         <div class="card"
