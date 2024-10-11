@@ -162,7 +162,6 @@
                             </tbody>
                         </table>
                     </div>
-
                     <div class="flex flex-col items-center mt-8 md:flex-row">
                         <div class="mb-4 grow md:mb-0">
                             <p class="text-slate-500 dark:text-zink-200">

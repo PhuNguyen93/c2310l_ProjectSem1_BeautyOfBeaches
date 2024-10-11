@@ -40,6 +40,10 @@ Route::get('/blogs/{id}', [BlogController::class, 'showDetail'])->name('blogdeta
 Route::post('/blogs/{id}/feedback', [BlogController::class, 'storeFeedback'])->name('blog.feedback');
 Route::put('/blogs/feedback/{id}', [BlogController::class, 'updateFeedback'])->name('blog.feedback.update');
 Route::delete('/blogs/feedback/{id}', [BlogController::class, 'deleteFeedback'])->name('blog.feedback.delete');
+Route::post('/blogs', [BlogController::class, 'storeBlog'])->name('blog.store');
+Route::put('/blogs/{id}', [BlogController::class, 'update'])->name('blog.update');
+Route::delete('/blogs/{id}', [BlogController::class, 'destroyBlog'])->name('blog.destroy');
+
 
 // // Route cho trang blog của admin
 Route::get('/dashboard/blogs', [BlogController::class, 'index'])->name('admin.blog');

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Feedback extends Model
 {
     use HasFactory;
-
+    protected $table = 'feedbacks';
     protected $fillable = ['user_id', 'beach_id', 'rating', 'message'];
 
     // Feedback thuộc về một người dùng
