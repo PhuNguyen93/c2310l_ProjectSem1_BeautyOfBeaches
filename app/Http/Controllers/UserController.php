@@ -195,11 +195,19 @@ class UserController extends Controller
 
     public function show($id)
     {
+        // dd(1);
         $user = User::findOrFail($id);
 
-        $feedbacks = $user->feedbacks()->with('beach')->paginate(5);
+        $feedbacks = $user->feedbacks()
+        ->with('beach')
+        ->whereHas('beach', function ($query) {
+            $query->where('status', '!=', 0);
+        })
+        ->paginate(5)->withQueryString();
 
-        return view('pages-account', compact('user', 'feedbacks'));
+    // Lọc blog với điều kiện status != 0
+        $blogs = $user->blogs()->where('status', '!=', 0)->paginate(5)->withQueryString();
+        return view('pages-account', compact('user', 'feedbacks','blogs'));
     }
 
     public function filterFeedback(Request $request, $id)
@@ -217,10 +225,13 @@ class UserController extends Controller
         }
 
         // Phân trang các bình luận đã lọc
-        $feedbacks = $query->paginate(5);
-
+        $feedbacks = $query->whereHas('beach', function ($query) {
+            $query->where('status', '!=', 0);
+        })
+        ->paginate(5)->withQueryString();;
+        $blogs = $user->blogs()->where('status', '!=', 0)->paginate(5)->withQueryString();
         // Trả về view cùng với kết quả
-        return view('pages-account', compact('user', 'feedbacks'));
+        return view('pages-account', compact('user', 'feedbacks','blogs'));
     }
 
     public function showProfile($id)
