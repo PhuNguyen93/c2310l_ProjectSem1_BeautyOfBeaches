@@ -57,6 +57,21 @@
                     <img id="image_preview" src="" alt="Image Preview" style="display: none; margin-top: 10px; max-width: 100%; border-radius: 8px;">
                 </div>
             </div>
+              <!-- Longitude -->
+<div class="col-span-2">
+    <label for="longitude" class="block text-base font-medium text-gray-700">Longitude</label>
+    <input type="number" name="longitude" id="longitude" placeholder="Enter longitude"
+        class="mt-1 w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out"
+        step="0.0000001">
+
+<!-- Latitude -->
+<div class="col-span-2">
+    <label for="latitude" class="block text-base font-medium text-gray-700">Latitude</label>
+    <input type="number" name="latitude" id="latitude" placeholder="Enter latitude"
+        class="mt-1 w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out"
+        step="0.0000001">
+</div>
+
 
             <!-- Action Buttons -->
             <div class="text-center mt-6">
