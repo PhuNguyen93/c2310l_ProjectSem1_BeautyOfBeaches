@@ -17,6 +17,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Models\Blog;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,11 +38,23 @@ Route::controller(HomeController::class)->group(function () {
 Route::get('/blogs', [BlogController::class, 'indexUser'])->name('user.blog');
 Route::get('/blogs/{id}', [BlogController::class, 'showDetail'])->name('blogdetails');
 Route::post('/blogs/{id}/feedback', [BlogController::class, 'storeFeedback'])->name('blog.feedback');
+Route::put('/blogs/feedback/{id}', [BlogController::class, 'updateFeedback'])->name('blog.feedback.update');
+Route::delete('/blogs/feedback/{id}', [BlogController::class, 'deleteFeedback'])->name('blog.feedback.delete');
+Route::post('/blogs', [BlogController::class, 'storeBlog'])->name('blog.store');
+Route::put('/blogs/{id}', [BlogController::class, 'update'])->name('blog.update');
+Route::delete('/blogs/{id}', [BlogController::class, 'destroyBlog'])->name('blog.destroy');
+
 
 // // Route cho trang blog của admin
 Route::get('/dashboard/blogs', [BlogController::class, 'index'])->name('admin.blog');
 Route::post('/dashboard/blogs', [BlogController::class, 'store'])->name('blogs.store');
 Route::delete('/dashboard/blogs/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy');
+// Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
+
+
+Route::get('/blog_bin', [BlogController::class, 'bin'])->name('blog.bin');
+Route::post('blog_bin/restore/{blog}', [BlogController::class, 'restore'])->name('blog.restore');
+// Route::delete('user_bin/destroybin/{user}', [UserController::class, 'destroyBin'])->name('user.destroybin');
 
 // Route::get('/dashboard/blogs', [BlogController::class, 'index'])->name('blogs.index'); // Xem danh sách blog
 // Route::get('/dashboard/blogs/{someParameter?}', [BlogController::class, 'index'])->name('blogs.index');

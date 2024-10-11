@@ -65,6 +65,7 @@
                 <a href="#!">
                     <img src="{{ URL::asset('build/images/logo-light.png') }}" alt="" class="hidden h-6 mx-auto dark:block">
                     <img src="{{ URL::asset('assets/images/logo.png') }}" alt="" class="block h-6 mx-auto dark:hidden">
+                    {{-- <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="" class="block h-6 mx-auto dark:hidden"> --}}
                 </a>
 
                 <div class="mt-8 text-center">
@@ -190,6 +191,35 @@
             }
         });
     </script>
+  @if(session('success'))
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                title: 'Success',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                @if(session('otp_sent'))
+                    Alpine.store('step', 'verify');
+                @elseif(session('otp_verified'))
+                    Alpine.store('step', 'reset');
+                @endif
+            });
+        </script>
+    @endif
 
+    <!-- SweetAlert thông báo lỗi -->
+    @if(session('error'))
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                title: 'Error',
+                text: '{{ session('error') }}',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
 </body>
 @endsection

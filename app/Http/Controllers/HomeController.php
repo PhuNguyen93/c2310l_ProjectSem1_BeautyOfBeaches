@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Beach;
 use App\Models\Blog;
+use App\Models\Feedback;
 use App\Models\VisitorLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -96,9 +97,9 @@ class HomeController extends Controller
         $beach = Beach::with('gallery')->findOrFail($id);
 
         // Lấy tất cả phản hồi (feedbacks) cho bãi biển này
-        $feedbacks = \App\Models\Feedback::where('beach_id', $beach->id)->get();
+        $feedbacks = Feedback::where('beach_id', $beach->id)->get();
         $totalReviews = $feedbacks->count(); // Tổng số người đánh giá
-        $averageRating = $totalReviews > 0 ? round($feedbacks->avg('rating'), 1) : 0; // Điểm trung bình
+        $averageRating = $totalReviews > 0 ? round($feedbacks->avg('rating'), 1) : 0;
 
         // Đếm số lượng đánh giá cho từng sao
         $ratingCount = [
@@ -133,8 +134,8 @@ class HomeController extends Controller
 
     public function blog()
     {
-        $blogs = Blog::orderBy('created_at', 'desc')->paginate(3); // Lấy tất cả blog và phân trang 6 bài trên mỗi trang
-        return view('index', compact('blogs')); // Trả dữ liệu về view 'home.blade.php'
+        $blogs = Blog::orderBy('created_at', 'desc')->paginate(3);
+        return view('index', compact('blogs'));
     }
 
     public function blogdetails()
