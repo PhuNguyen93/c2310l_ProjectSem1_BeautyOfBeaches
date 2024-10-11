@@ -5,6 +5,8 @@
 @endsection
 
 @section('content')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- page title -->
     <x-page-title title="Blog List View" pagetitle="Blog" />
 
@@ -58,8 +60,30 @@
                         </div>
                     </div>
                 </div>
+                @if (session('success'))
+                    <script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: '{{ session('success') }}',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                    </script>
+                @endif
+
+                @if (session('error'))
+                    <script>
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: '{{ session('error') }}',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                    </script>
+                @endif
                 <div class="!py-3.5 card-body border-y border-dashed border-slate-200 dark:border-zink-500">
-                    <!-- Form tìm kiếm và bộ lọc -->
                     <form action="{{ route('admin.blog') }}" method="GET">
                         <div class="grid grid-cols-1 gap-5 xl:grid-cols-12">
                             <div class="relative xl:col-span-6">
@@ -95,6 +119,8 @@
                                         Description</th>
                                     <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold sort"
                                         data-sort="created_at">Creation Date</th>
+                                    <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold">Status</th>
+
                                     <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold">Action</th>
                                 </tr>
                             </thead>
@@ -112,9 +138,21 @@
                                         </td>
                                         <td class="px-3.5 py-2.5" data-sort="id">{{ $blog->user->name }}</td>
                                         <td class="px-3.5 py-2.5" data-sort="Title">{{ $blog->title }}</td>
-                                        <td class="px-3.5 py-2.5" data-sort="Title">{{ Str::limit($blog->description, 30) }}</td>
+                                        <td class="px-3.5 py-2.5" data-sort="Title">{{ Str::limit($blog->description, 30) }}
+                                        </td>
                                         <td class="px-3.5 py-2.5" data-sort="created_at">
                                             {{ $blog->created_at->format('Y-m-d H:i:s') }}</td>
+                                        <td class="px-3.5 py-2.5">
+                                            @if ($blog->status == 1)
+                                                <!-- Approved: nền xanh lá nhạt và chữ trắng -->
+                                                <span
+                                                    class="bg-green-500 text-white py-1 px-3 rounded-full text-sm">Approved</span>
+                                            @elseif ($blog->status == 2)
+                                                <!-- Pending: nền vàng nhạt và chữ đen -->
+                                                <span
+                                                    class="bg-yellow-300 text-black py-1 px-3 rounded-full text-sm">Pending</span>
+                                            @endif
+                                        </td>
                                         <td class="px-3.5 py-2.5 text-end">
                                             <div class="relative dropdown">
                                                 <button
@@ -124,6 +162,21 @@
                                                 </button>
                                                 <ul class="absolute z-50 hidden py-2 mt-1 ltr:text-left rtl:text-right list-none bg-white rounded-md shadow-md dropdown-menu min-w-[10rem] dark:bg-zink-600"
                                                     aria-labelledby="beachesAction{{ $blog->id }}">
+                                                    @if ($blog->status == 2)
+                                                        <li>
+                                                            <form action="{{ route('blogs.approve', $blog->id) }}"
+                                                                method="POST" style="display:inline;">
+                                                                @csrf
+                                                                @method('PATCH')
+                                                                <button type="submit"
+                                                                    class="block px-4 py-1.5 text-base text-slate-600 dropdown-item hover:bg-slate-100">
+                                                                    <i data-lucide="file-edit"
+                                                                        class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i>
+                                                                    <span class="align-middle">Approve</span>
+                                                                </button>
+                                                            </form>
+                                                        </li>
+                                                    @endif
                                                     <li>
                                                         <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200"
                                                             href="{{ route('beaches.show', $blog->id) }}">
@@ -132,14 +185,6 @@
                                                             <span class="align-middle">View</span>
                                                         </a>
                                                     </li>
-                                                    {{-- <li>
-                                                        <a class="block px-4 py-1.5 text-base transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:bg-slate-100 hover:text-slate-500 focus:bg-slate-100 focus:text-slate-500 dark:text-zink-100 dark:hover:bg-zink-500 dark:hover:text-zink-200 dark:focus:bg-zink-500 dark:focus:text-zink-200"
-                                                            href="{{ route('beaches.edit', $blog->id) }}">
-                                                            <i data-lucide="file-edit"
-                                                                class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i>
-                                                            <span class="align-middle">Edit</span>
-                                                        </a>
-                                                    </li> --}}
                                                     <li>
                                                         <form action="{{ route('blogs.destroy', $blog->id) }}"
                                                             method="POST" style="display:inline;"

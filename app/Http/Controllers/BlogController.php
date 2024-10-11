@@ -24,13 +24,13 @@ class BlogController extends Controller
     {
         $search = $request->input('search');
 
-        // Nếu có từ khóa tìm kiếm, áp dụng logic tìm kiếm
-        $blogs = Blog::when($search, function ($query, $search) {
-            $query->where('title', 'LIKE', "%{$search}%")
-                ->orWhereHas('user', function ($query) use ($search) {
-                    $query->where('name', 'LIKE', "%{$search}%");
-                });
-        })
+        $blogs = Blog::where('status', 1)
+            ->when($search, function ($query, $search) {
+                $query->where('title', 'LIKE', "%{$search}%")
+                    ->orWhereHas('user', function ($query) use ($search) {
+                        $query->where('name', 'LIKE', "%{$search}%");
+                    });
+            })
             ->orderBy('created_at', 'desc')
             ->paginate(5);
 
@@ -48,7 +48,7 @@ class BlogController extends Controller
         }
         $search = $request->input('search');
 
-        $blogs = Blog::where('status', 1) // Thêm điều kiện lọc theo status
+        $blogs = Blog::where('status', '!=' , 0) // Thêm điều kiện lọc theo status
             ->when($search, function ($query, $search) {
                 return $query->where('title', 'like', "%{$search}%");
             })
@@ -58,19 +58,15 @@ class BlogController extends Controller
 
         return view('blogs.index', compact('blogs'));
     }
-    // public function search(Request $request)
-    // {
-    //     $search = $request->input('search');
+    public function approve($id)
+    {
+        $blog = Blog::findOrFail($id);
+        $blog->status = 1; // approved
+        $blog->save();
 
-    //     $blogs = Blog::where('title', 'LIKE', "%{$search}%")
-    //         ->orWhereHas('user', function ($query) use ($search) {
-    //             $query->where('name', 'LIKE', "%{$search}%");
-    //         })
-    //         ->paginate(5); // Hiển thị 5 blog mỗi trang
+        return redirect()->back()->with('success', 'Blog approved successfully.');
+    }
 
-    //     // Trả về kết quả tìm kiếm cùng với từ khóa tìm kiếm
-    //     return view('blogs.blog', compact('blogs'))->with('search', $search);
-    // }
     public function store(Request $request)
     {
         $request->validate([
@@ -133,6 +129,7 @@ class BlogController extends Controller
                 'description' => $request->description,
                 'user_id' => Auth::user()->id,
                 'image_url' => $mainImageUrl,
+                'status' => 2, //pending
             ]);
 
             foreach ($images as $key => $image) {
@@ -147,7 +144,7 @@ class BlogController extends Controller
                 }
             }
         }
-        return redirect()->route('user.blog')->with('success', 'Blog added successfully');
+        return redirect()->route('user.blog')->with('success', 'Blog has been added and is pending approval.');
     }
     public function update(Request $request, $id)
     {
