@@ -26,6 +26,7 @@
 
                         <h2>{{ $blog->title }}</h2>
                         <p>{!! nl2br(e($blog->description)) !!}</p>
+
                         @if ($blog->images->count() > 0)
                             <div class="row">
                                 @foreach ($blog->images as $image)
@@ -37,7 +38,88 @@
                                 @endforeach
                             </div>
                         @endif
+
+                        <!-- Hiển thị nút Edit và Delete nếu là chủ sở hữu -->
+                        @if (auth()->check() && auth()->user()->id === $blog->user_id)
+                            <div class="mt-3 d-flex justify-content-end">
+                                <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal"
+                                    data-bs-target="#editBlogModal{{ $blog->id }}" style="width: auto; height: 40px; font-size: 14px;">
+                                    Edit
+                                </button>
+                                <form action="{{ route('blog.destroy', $blog->id) }}" method="POST"
+                                    onsubmit="return confirm('Are you sure you want to delete this blog post?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" style="width: auto; height: 40px; font-size: 14px;">Delete</button>
+                                </form>
+                            </div>
+                        @endif
                     </article>
+
+                    <!-- Modal for Editing Blog -->
+                    <div class="modal fade" id="editBlogModal{{ $blog->id }}" tabindex="-1"
+                        aria-labelledby="editBlogModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editBlogModalLabel">Edit Blog Post</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="editBlogForm{{ $blog->id }}"
+                                        action="{{ route('blog.update', $blog->id) }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+
+                                        <!-- Title -->
+                                        <div class="mb-3">
+                                            <label for="title" class="form-label">Blog Title</label>
+                                            <input type="text" class="form-control" id="title" name="title"
+                                                value="{{ $blog->title }}" required>
+                                        </div>
+
+                                        <!-- Description -->
+                                        <div class="mb-3">
+                                            <label for="description" class="form-label">What's on your mind?</label>
+                                            <textarea id="description" name="description" class="form-control" rows="4" required>{{ $blog->description }}</textarea>
+                                        </div>
+
+                                        <!-- Main Image -->
+                                        <div class="mb-3">
+                                            <label for="mainImage" class="form-label">Main Image</label>
+                                            <input type="file" class="form-control" id="mainImage" name="image_url"
+                                                accept="image/*" onchange="previewMainImage(event)">
+                                            <div class="mt-3">
+                                                <img id="mainImagePreview" src="{{ asset($blog->image_url) }}"
+                                                    alt="Main Image" class="img-fluid" style="max-height: 150;">
+                                            </div>
+                                        </div>
+
+                                        <!-- Additional Images -->
+                                        <div class="mb-3">
+                                            <label for="additionalImages" class="form-label">Additional Images</label>
+                                            <input type="file" class="form-control" id="additionalImages" name="images[]"
+                                                multiple accept="image/*" onchange="previewAdditionalImages(event)">
+                                            <div id="additionalImagesPreview" class="mt-3 d-flex flex-wrap gap-2">
+                                                @foreach ($blog->images as $image)
+                                                    <img src="{{ asset($image->image_url) }}" alt="Additional Image"
+                                                        class="img-fluid" style="max-height: 100px;">
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" form="editBlogForm{{ $blog->id }}"
+                                        class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- User Information --}}
                     <div class="cs_post_author">
                         <div class="d-flex align-items-center mb-3">
                             <div class="cs_author_thumb me-3">
@@ -52,8 +134,10 @@
                         <div class="d-flex">
                             <a href="#" class="btn btn-primary btn-sm me-2"><i
                                     class="fa-brands fa-facebook-f"></i></a>
-                            <a href="#" class="btn btn-primary btn-sm me-2"><i class="fa-brands fa-twitter"></i></a>
-                            <a href="#" class="btn btn-primary btn-sm me-2"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" class="btn btn-primary btn-sm me-2"><i
+                                    class="fa-brands fa-twitter"></i></a>
+                            <a href="#" class="btn btn-primary btn-sm me-2"><i
+                                    class="fa-brands fa-instagram"></i></a>
                             <a href="#" class="btn btn-primary btn-sm"><i class="fa-brands fa-linkedin-in"></i></a>
                         </div>
                     </div>
@@ -104,7 +188,8 @@
 
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="editModal{{ $feedback->id }}" tabindex="-1"
-                                                    aria-labelledby="editModalLabel{{ $feedback->id }}" aria-hidden="true">
+                                                    aria-labelledby="editModalLabel{{ $feedback->id }}"
+                                                    aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -252,14 +337,14 @@
                 <!-- Sidebar -->
                 <aside class="col-lg-4">
                     <div class="cs_sidebar cs_right_sidebar">
-                        <!-- Search widget -->
+                        {{-- <!-- Search widget -->
                         <div class="cs_sidebar_item cs_gray_bg widget_search">
                             <form class="cs_sidebar_search cs_white_bg" action="#">
                                 <input type="text" placeholder="Search...">
                                 <button class="cs_sidebar_search_btn cs_accent_bg cs_white_color">
                                     <i class="fa-solid fa-magnifying-glass"></i></button>
                             </form>
-                        </div>
+                        </div> --}}
 
                         <!-- Category widget -->
                         <div class="cs_sidebar_item cs_gray_bg widget_categories">
@@ -339,6 +424,35 @@
             }
         });
     });
+
+    function previewMainImage(event) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const output = document.getElementById('mainImagePreview');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // Preview additional images after selecting files
+    function previewAdditionalImages(event) {
+        const files = event.target.files;
+        const additionalImagesPreview = document.getElementById('additionalImagesPreview');
+        additionalImagesPreview.innerHTML = ''; // Clear the previous images
+
+        Array.from(files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.classList.add('img-fluid');
+                img.style.maxHeight = '100px';
+                img.style.marginRight = '10px';
+                additionalImagesPreview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
 </script>
 <style>
     .image-container {

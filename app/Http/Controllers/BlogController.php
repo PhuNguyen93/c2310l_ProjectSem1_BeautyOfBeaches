@@ -17,15 +17,27 @@ class BlogController extends Controller
         $blog = Blog::with('images', 'feedbacks.user')->findOrFail($id);
         $popularBlogs = $this->getPopularBlogs();
 
-        return view('blogs.blogdetails', compact('blog','popularBlogs'));
+        return view('blogs.blogdetails', compact('blog', 'popularBlogs'));
     }
 
-    public function indexUser()
+    public function indexUser(Request $request)
     {
+        $search = $request->input('search');
 
-        $blogs = Blog::orderBy('created_at', 'desc')->paginate(5);
+        // Nếu có từ khóa tìm kiếm, áp dụng logic tìm kiếm
+        $blogs = Blog::when($search, function ($query, $search) {
+            $query->where('title', 'LIKE', "%{$search}%")
+                ->orWhereHas('user', function ($query) use ($search) {
+                    $query->where('name', 'LIKE', "%{$search}%");
+                });
+        })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
 
-        return view('blogs.blog', compact('blogs'));
+        // Lấy blog phổ biến (Popular Blogs)
+        $popularBlogs = $this->getPopularBlogs();
+
+        return view('blogs.blog', compact('blogs', 'popularBlogs', 'search'));
     }
 
     public function index(Request $request)
@@ -37,16 +49,28 @@ class BlogController extends Controller
         $search = $request->input('search');
 
         $blogs = Blog::where('status', 1) // Thêm điều kiện lọc theo status
-        ->when($search, function ($query, $search) {
-            return $query->where('title', 'like', "%{$search}%");
-        })
-        ->orderBy('created_at', 'desc')
-        ->paginate(5);
+            ->when($search, function ($query, $search) {
+                return $query->where('title', 'like', "%{$search}%");
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
 
 
         return view('blogs.index', compact('blogs'));
     }
+    // public function search(Request $request)
+    // {
+    //     $search = $request->input('search');
 
+    //     $blogs = Blog::where('title', 'LIKE', "%{$search}%")
+    //         ->orWhereHas('user', function ($query) use ($search) {
+    //             $query->where('name', 'LIKE', "%{$search}%");
+    //         })
+    //         ->paginate(5); // Hiển thị 5 blog mỗi trang
+
+    //     // Trả về kết quả tìm kiếm cùng với từ khóa tìm kiếm
+    //     return view('blogs.blog', compact('blogs'))->with('search', $search);
+    // }
     public function store(Request $request)
     {
         $request->validate([
@@ -85,11 +109,109 @@ class BlogController extends Controller
         return redirect()->route('admin.blog')->with('success', 'Blog added successfully');
     }
 
+    public function storeBlog(Request $request)
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'You must be logged in to create a blog post.');
+        }
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $mainImageUrl = null;
+
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
+
+            $mainImagePath = $images[0]->store('public/assets/blogs');
+            $mainImageUrl = str_replace('public/', 'storage/', $mainImagePath);
+
+            $blog = Blog::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'user_id' => Auth::user()->id,
+                'image_url' => $mainImageUrl,
+            ]);
+
+            foreach ($images as $key => $image) {
+                if ($key > 0) {
+                    $imagePath = $image->store('public/assets/blogs');
+                    $imageUrl = str_replace('public/', 'storage/', $imagePath);
+
+                    BlogImage::create([
+                        'blog_id' => $blog->id,
+                        'image_url' => $imageUrl,
+                    ]);
+                }
+            }
+        }
+        return redirect()->route('user.blog')->with('success', 'Blog added successfully');
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $blog = Blog::findOrFail($id);
+
+        if (Auth::user()->id !== $blog->user_id) {
+            return redirect()->back()->with('error', 'You are not authorized to edit this blog post.');
+        }
+
+        $blog->title = $request->title;
+        $blog->description = $request->description;
+
+        // Cập nhật hình ảnh chính
+        if ($request->hasFile('image_url')) {
+            $mainImagePath = $request->file('image_url')->store('public/assets/blogs');
+            $mainImageUrl = str_replace('public/', 'storage/', $mainImagePath);
+            $blog->image_url = $mainImageUrl;
+        }
+
+        $blog->save();
+
+        // Cập nhật hình ảnh phụ
+        if ($request->hasFile('images')) {
+            $blog->images()->delete();
+
+            foreach ($request->file('images') as $image) {
+                $imagePath = $image->store('public/assets/blogs');
+                $imageUrl = str_replace('public/', 'storage/', $imagePath);
+
+                BlogImage::create([
+                    'blog_id' => $blog->id,
+                    'image_url' => $imageUrl,
+                ]);
+            }
+        }
+
+        return redirect()->route('blogdetails', $id)->with('success', 'Blog post updated successfully');
+    }
+
+    public function destroyBlog($id)
+    {
+        $blog = Blog::findOrFail($id);
+
+        if (Auth::user()->id !== $blog->user_id) {
+            return redirect()->back()->with('error', 'You are not authorized to delete this blog post.');
+        }
+
+        $blog->delete();
+
+        return redirect()->route('user.blog')->with('success', 'Blog post deleted successfully');
+    }
+
     public function destroy($id)
     {
         $blog = Blog::findOrFail($id);
         // $blog->delete();
-        $blog->status=0;
+        $blog->status = 0;
         $blog->save();
         return redirect()->route('admin.blog')->with('success', 'Blog deleted successfully');
     }
@@ -193,5 +315,4 @@ class BlogController extends Controller
 
         return redirect()->route('blog.bin')->with('success', 'The beach has been restored.');
     }
-
 }
