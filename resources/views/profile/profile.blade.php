@@ -456,55 +456,48 @@
 
                     </div>
                     <div id="userBlogsTab" class="tab-content" style="display: none;">
-                        <div class="card"
-                            style="background-color: white; font-family: Arial, sans-serif; color: #333;">
+                        <div class="container">
                             @if ($blogs->isEmpty())
                                 <p style="text-align: center">No blogs found for this user.</p>
                             @else
-                                <table style="width: 100%; border-collapse: collapse;">
-                                    <thead>
-                                        <tr>
-                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">#
-                                            </th>
-                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">
-                                                Author</th>
-                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Title
-                                            </th>
-                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">
-                                                Description</th>
-                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Image
-                                            </th>
-                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Date
-                                            </th>
-                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">
-                                                Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($blogs as $blog)
-                                            <tr>
-                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
-                                                    {{ $loop->iteration }}</td>
-                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
-                                                    {{ $blog->user->name }}</td>
-                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
-                                                    {{ Str::limit($blog->title, 3) }}</td>
-                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
-                                                    {{ Str::limit($blog->description, 5) }}</td>
-                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                <div class="row">
+                                    @foreach ($blogs as $blog)
+                                        <div class="col-md-6 mb-4">
+                                            <div class="card"
+                                                style="background-color: white; border: 1px solid #ddd;">
+                                                <div class="card-header">
+                                                    <img src="{{ asset($blog->user->avatar_url) }}"
+                                                        alt="{{ $blog->user->name }}"
+                                                        style="width: 50px; height: 50px; border-radius: 50%;">
+                                                    <strong>{{ $blog->user->name }}</strong>
+                                                    <span
+                                                        class="float-end">{{ $blog->created_at->format('Y-m-d') }}</span>
+                                                </div>
+                                                <div class="card-body position-relative">
                                                     @if ($blog->image_url)
-                                                        <img src="{{ asset($blog->image_url) }}"
-                                                            alt="{{ $blog->title }}"
-                                                            style="max-width: 100px; max-height: 100px; object-fit: cover;">
+                                                        <div class="image-container"
+                                                            style="position: relative; overflow: hidden;">
+                                                            <img src="{{ asset($blog->image_url) }}"
+                                                                class="card-img-top" alt="{{ $blog->title }}"
+                                                                style="width: 300px; height: 300px;  object-fit: cover;">
+                                                        </div>
                                                     @endif
-                                                </td>
-                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
-                                                    {{ $blog->created_at->format('Y-m-d') }}</td>
-                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+
+                                                    <h5 class="card-title position-absolute"
+                                                        style="top: 10px; left: 10px; color: white; text-shadow: 1px 1px 2px black;">
+                                                        {{ $blog->title }}</h5>
+                                                    <p class="card-text position-absolute"
+                                                        style="top: 40px; left: 10px; color: white; text-shadow: 1px 1px 2px black;">
+                                                        {{ Str::limit($blog->description, 100) }}</p>
+                                                </div>
+                                                <div class="card-footer text-center">
                                                     <a href="{{ route('blogdetails', ['id' => $blog->id]) }}"
                                                         class="btn btn-info">View</a>
-                                                    <button onclick="toggleEditForm({{ $blog->id }})"
-                                                        class="btn btn-warning">Edit</button>
+                                                    <button class="btn btn-warning" data-bs-toggle="modal"
+                                                        data-bs-target="#editBlogModal"
+                                                        onclick="populateEditForm({{ $blog->id }}, '{{ $blog->title }}', '{{ $blog->description }}')">
+                                                        Edit
+                                                    </button>
                                                     <form action="{{ route('blogs.permanentlyDelete', $blog->id) }}"
                                                         method="POST" style="display: inline;">
                                                         @csrf
@@ -513,61 +506,69 @@
                                                             onclick="return confirm('Are you sure you want to delete this blog?');"
                                                             class="btn btn-danger">Delete</button>
                                                     </form>
-                                                </td>
-                                            </tr>
-
-                                            <!-- Form chỉnh sửa blog (ẩn mặc định) -->
-                                            <tr id="editForm-{{ $blog->id }}" style="display: none;">
-                                                <td colspan="7" style="border: 1px solid #ddd; padding: 8px;">
-                                                    <form action="{{ route('blogs.update', $blog->id) }}"
-                                                        method="POST" enctype="multipart/form-data">
-                                                        @csrf
-                                                        @method('PUT')
-
-                                                        <div class="form-group">
-                                                            <label for="title">Title:</label>
-                                                            <input type="text" name="title" id="title"
-                                                                class="form-control"
-                                                                value="{{ old('title', $blog->title) }}" required>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="description">Description:</label>
-                                                            <textarea name="description" id="description" class="form-control" required>{{ old('description', $blog->description) }}</textarea>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="image_url">Main Image:</label>
-                                                            <input type="file" name="image_url" id="image_url"
-                                                                class="form-control" accept="image/*">
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="images">Additional Images:</label>
-                                                            <input type="file" name="images[]" id="images"
-                                                                class="form-control" multiple accept="image/*">
-                                                        </div>
-
-                                                        <button type="submit" class="btn btn-primary">Update
-                                                            Blog</button>
-                                                        <button type="button" class="btn btn-danger"
-                                                            onclick="toggleEditForm({{ $blog->id }})">Cancel</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
                             @endif
                         </div>
                     </div>
 
+
+
+                    <!-- Modal chỉnh sửa blog -->
+                    <div class="modal fade" id="editBlogModal" tabindex="-1" aria-labelledby="editBlogModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editBlogModalLabel">Edit Blog</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="editBlogForm" action="" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="mb-3">
+                                            <label for="edit_title" class="form-label">Title:</label>
+                                            <input type="text" name="title" id="edit_title"
+                                                class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="edit_description" class="form-label">Description:</label>
+                                            <textarea name="description" id="edit_description" class="form-control" required></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="edit_image_url" class="form-label">Main Image:</label>
+                                            <input type="file" name="image_url" id="edit_image_url"
+                                                class="form-control" accept="image/*">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="edit_images" class="form-label">Additional Images:</label>
+                                            <input type="file" name="images[]" id="edit_images"
+                                                class="form-control" multiple accept="image/*">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Update Blog</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <script>
-                        function toggleEditForm(blogId) {
-                            const form = document.getElementById('editForm-' + blogId);
-                            form.style.display = (form.style.display === 'none' || form.style.display === '') ? 'table-row' : 'none';
+                        function populateEditForm(blogId, title, description) {
+                            // Cập nhật action của form để chỉ đến blog cụ thể
+                            document.getElementById('editBlogForm').action = '/blogs/' + blogId;
+
+                            // Cập nhật giá trị các trường
+                            document.getElementById('edit_title').value = title;
+                            document.getElementById('edit_description').value = description;
                         }
                     </script>
+
 
 
 
@@ -622,9 +623,11 @@
                                                         class="btn btn-info">View</a>
 
                                                     <!-- Nút Edit chỉ hiển thị nếu người dùng có quyền -->
-                                                    @if (Auth::user()->id === $feedback->user_id || Auth::user()->role === 'admin')
-                                                        <button onclick="toggleEditForm({{ $feedback->id }})"
-                                                            class="btn btn-warning">Edit</button>
+                                                    @if (Auth::check() && (Auth::user()->id === $feedback->user_id || Auth::user()->role === 'admin'))
+                                                        <button class="btn btn-warning" data-bs-toggle="modal"
+                                                            data-bs-target="#editModal-{{ $feedback->id }}">
+                                                            Edit
+                                                        </button>
                                                     @endif
 
                                                     <!-- Form Xóa -->
@@ -639,42 +642,58 @@
                                                 </td>
                                             </tr>
 
-                                            <!-- Form chỉnh sửa comment và rating (ẩn mặc định) -->
-                                            <tr id="editForm-{{ $feedback->id }}" style="display: none;">
-                                                <td colspan="6" style="border: 1px solid #ddd; padding: 8px;">
-                                                    <form action="{{ route('blogFeedbacks.update', $feedback->id) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('PUT')
-
-                                                        <!-- Comment -->
-                                                        <div class="form-group">
-                                                            <label for="comment">Comment:</label>
-                                                            <textarea name="comment" id="comment" class="form-control" required>{{ old('comment', $feedback->comment) }}</textarea>
-                                                            @error('comment')
-                                                                <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
+                                            <!-- Modal chỉnh sửa comment và rating -->
+                                            <div class="modal fade" id="editModal-{{ $feedback->id }}"
+                                                tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="editModalLabel">Edit Feedback
+                                                            </h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
+                                                        <div class="modal-body">
+                                                            <form
+                                                                action="{{ route('blogFeedbacks.update', $feedback->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('PUT')
 
-                                                        <!-- Rating -->
-                                                        <div class="form-group">
-                                                            <label for="rating">Rating (1-5):</label>
-                                                            <input type="number" name="rating" id="rating"
-                                                                class="form-control"
-                                                                value="{{ old('rating', $feedback->rating) }}"
-                                                                min="1" max="5" required>
-                                                            @error('rating')
-                                                                <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
+                                                                <!-- Comment -->
+                                                                <div class="form-group mb-3">
+                                                                    <label for="comment">Comment:</label>
+                                                                    <textarea name="comment" id="comment" class="form-control" required>{{ old('comment', $feedback->comment) }}</textarea>
+                                                                    @error('comment')
+                                                                        <span
+                                                                            class="text-danger">{{ $message }}</span>
+                                                                    @enderror
+                                                                </div>
+
+                                                                <!-- Rating -->
+                                                                <div class="form-group mb-3">
+                                                                    <label for="rating">Rating (1-5):</label>
+                                                                    <input type="number" name="rating"
+                                                                        id="rating" class="form-control"
+                                                                        value="{{ old('rating', $feedback->rating) }}"
+                                                                        min="1" max="5" required>
+                                                                    @error('rating')
+                                                                        <span
+                                                                            class="text-danger">{{ $message }}</span>
+                                                                    @enderror
+                                                                </div>
+
+                                                                <button type="submit" class="btn btn-primary">Update
+                                                                    Feedback</button>
+                                                            </form>
                                                         </div>
-
-                                                        <button type="submit" class="btn btn-primary">Update
-                                                            Feedback</button>
-                                                        <button type="button" class="btn btn-danger"
-                                                            onclick="toggleEditForm({{ $feedback->id }})">Cancel</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -682,16 +701,7 @@
                         </div>
                     </div>
 
-                    <script>
-                        function toggleEditForm(id) {
-                            var form = document.getElementById('editForm-' + id);
-                            if (form.style.display === 'none') {
-                                form.style.display = 'table-row';
-                            } else {
-                                form.style.display = 'none';
-                            }
-                        }
-                    </script>
+
 
 
 
@@ -702,10 +712,8 @@
 
 
                     <div id="userFeedbackTab" class="tab-content" style="display: none;">
-
                         <div class="card"
                             style="background-color: white; font-family: Arial, sans-serif; color: #333;">
-
                             <!-- Hiển thị feedback -->
                             @if ($feedbacks->isEmpty())
                                 <p style="text-align: center">No feedback available.</p>
@@ -713,8 +721,7 @@
                                 <table style="width: 100%; border-collapse: collapse;">
                                     <thead>
                                         <tr>
-                                            <th style="border: 1px solid #ddd; padding: 8px;text-align: center; ">#
-                                            </th>
+                                            <th style="border: 1px solid #ddd; padding: 8px;text-align: center;">#</th>
                                             <th style="border: 1px solid #ddd; padding: 8px;text-align: center;">Beach
                                             </th>
                                             <th style="border: 1px solid #ddd; padding: 8px;text-align: center;">Date
@@ -745,15 +752,17 @@
                                                 <td style="border: 1px solid #ddd; padding: 8px;text-align: center;">
                                                     {{ $feedback->rating }} stars
                                                 </td>
-                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                <td style="border: 1px solid #ddd; padding: 8px;text-align: center;">
                                                     <!-- Nút View -->
                                                     <a href="{{ route('destinationdetails', $feedback->beach->id) }}"
                                                         class="btn btn-info">View</a>
 
                                                     <!-- Nút Edit chỉ hiển thị nếu người dùng có quyền -->
                                                     @if (Auth::user()->id === $feedback->user_id || Auth::user()->role === 'admin')
-                                                        <button onclick="toggleEditForm({{ $feedback->id }})"
-                                                            class="btn btn-warning">Edit</button>
+                                                        <button type="button" class="btn btn-warning"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#editModal-{{ $feedback->id }}">Edit
+                                                        </button>
                                                     @endif
 
                                                     <!-- Form Xóa -->
@@ -768,33 +777,52 @@
                                                 </td>
                                             </tr>
 
-                                            <!-- Form chỉnh sửa comment và rating (ẩn mặc định) -->
-                                            <tr id="editForm-{{ $feedback->id }}" style="display: none;">
-                                                <td colspan="6" style="border: 1px solid #ddd; padding: 8px;">
-                                                    <form action="{{ route('feedbacks.update', $feedback->id) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('PUT')
-
-                                                        <div class="form-group">
-                                                            <label for="message">Comment:</label>
-                                                            <textarea name="message" id="message" class="form-control" required>{{ $feedback->message }}</textarea>
+                                            <!-- Modal chỉnh sửa comment và rating -->
+                                            <div class="modal fade" id="editModal-{{ $feedback->id }}"
+                                                tabindex="-1" aria-labelledby="editModalLabel-{{ $feedback->id }}"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title"
+                                                                id="editModalLabel-{{ $feedback->id }}">Edit Feedback
+                                                            </h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
+                                                        <div class="modal-body">
+                                                            <form
+                                                                action="{{ route('feedbacks.update', $feedback->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('PUT')
 
-                                                        <div class="form-group">
-                                                            <label for="rating">Rating (1-5):</label>
-                                                            <input type="number" name="rating" id="rating"
-                                                                class="form-control" value="{{ $feedback->rating }}"
-                                                                min="1" max="5" required>
+                                                                <!-- Comment field -->
+                                                                <div class="form-group">
+                                                                    <label for="message">Comment:</label>
+                                                                    <textarea name="message" id="message" class="form-control" required>{{ $feedback->message }}</textarea>
+                                                                </div>
+
+                                                                <!-- Rating field -->
+                                                                <div class="form-group">
+                                                                    <label for="rating">Rating (1-5):</label>
+                                                                    <input type="number" name="rating"
+                                                                        id="rating" class="form-control"
+                                                                        value="{{ $feedback->rating }}"
+                                                                        min="1" max="5" required>
+                                                                </div>
+
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Update</button>
+                                                            </form>
                                                         </div>
-
-                                                        <button type="submit" class="btn btn-primary">Update</button>
-                                                        <button type="button"
-                                                            onclick="toggleEditForm({{ $feedback->id }})"
-                                                            class="btn btn-danger">Cancel</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -805,16 +833,7 @@
 
 
 
-                    <script>
-                        function toggleEditForm(feedbackId) {
-                            var form = document.getElementById('editForm-' + feedbackId);
-                            if (form.style.display === 'none') {
-                                form.style.display = 'table-row';
-                            } else {
-                                form.style.display = 'none';
-                            }
-                        }
-                    </script>
+
 
                     <div id="privacyPolicyTab" class="tab-content" style="display: none;">
                         <div class="card"
@@ -945,6 +964,12 @@
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
