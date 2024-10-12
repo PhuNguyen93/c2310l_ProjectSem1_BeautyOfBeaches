@@ -49,6 +49,8 @@ class BeachController extends Controller
             'description' => 'nullable',
             'location' => 'nullable|max:255',
             'country' => 'nullable|max:255',
+            'longitude' => 'nullable|numeric',
+            'latitude' => 'nullable|numeric',
             'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -60,6 +62,9 @@ class BeachController extends Controller
             $request->file('image_url')->move(public_path('assets/images/beaches'), $imageName);
             $data['image_url'] = 'assets/images/beaches/' . $imageName; // Lưu đường dẫn vào database
         }
+
+        // In giá trị $data
+        // dd($data);
 
         Beach::create($data);
 
@@ -146,6 +151,8 @@ class BeachController extends Controller
             'location' => 'nullable|max:255',
             'area_id' => 'nullable|exists:areas,id',
             'country' => 'nullable|max:255',
+            'longitude' => 'nullable|numeric',
+            'latitude' => 'nullable|numeric',
             'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
