@@ -9,12 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class FeedbackController extends Controller
 {
+
+
     public function edit($id)
     {
         $feedback = Feedback::findOrFail($id);
 
         if (Auth::user()->id !== $feedback->user_id && Auth::user()->role !== 'admin') {
-            return redirect()->back()->with('error', 'Bạn không có quyền chỉnh sửa comment này.');
+            return redirect()->back()->with('error', 'You do not have permission to edit this comment.');
         }
 
         return view('feedbacks.edit', compact('feedback'));
@@ -25,7 +27,7 @@ class FeedbackController extends Controller
         $feedback = Feedback::findOrFail($id);
 
         if (Auth::user()->id !== $feedback->user_id && Auth::user()->role !== 'admin') {
-            return redirect()->back()->with('error', 'Bạn không có quyền chỉnh sửa comment này.');
+            return redirect()->back()->with('error', 'You do not have permission to edit this comment.');
         }
 
         $request->validate([
@@ -37,7 +39,19 @@ class FeedbackController extends Controller
         $feedback->rating = $request->rating;
         $feedback->save();
 
-        return redirect()->back()->with('success', 'Comment đã được cập nhật.');
+        return redirect()->back()->with('success', 'Comments have been updated.');
+    }
+    public function destroy($id)
+    {
+        $feedback = Feedback::findOrFail($id);
+
+        if (Auth::id() !== $feedback->user_id && Auth::user()->role !== 'admin') {
+            return redirect()->back()->with('error', 'You do not have permission to delete this comment.');
+        }
+
+        $feedback->delete();
+
+        return redirect()->back()->with('success', 'The comment has been successfully deleted.');
     }
 
     public function store(Request $request, Beach $beach)
@@ -57,16 +71,6 @@ class FeedbackController extends Controller
         return redirect()->back()->with('success', 'Thank you for rating!');
     }
 
-    public function destroy($id)
-    {
-        $feedback = Feedback::findOrFail($id);
 
-        if (Auth::id() !== $feedback->user_id && Auth::user()->role !== 'admin') {
-            return redirect()->back()->with('error', 'Bạn không có quyền xóa bình luận này.');
-        }
 
-        $feedback->delete();
-
-        return redirect()->back()->with('success', 'Bình luận đã được xóa thành công.');
-    }
 }

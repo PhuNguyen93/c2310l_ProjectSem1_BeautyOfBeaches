@@ -59,6 +59,7 @@ class ForgotPasswordController extends Controller
         // OTP hợp lệ, lưu trạng thái xác thực OTP vào session
         session(['otp_verified' => true]);
 
+
         return redirect()->back()->with('otp_verified', true)->with('success', 'OTP is valid. Please reset your password.');
     }
 
@@ -84,6 +85,7 @@ class ForgotPasswordController extends Controller
 
         // Xóa các session liên quan
         session()->forget(['reset_email', 'otp_verified']);
+
 
         return redirect()->route('login')->with('success', 'Your password has been successfully updated.');
     }

@@ -43,14 +43,16 @@
                         @if (auth()->check() && auth()->user()->id === $blog->user_id)
                             <div class="mt-3 d-flex justify-content-end">
                                 <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal"
-                                    data-bs-target="#editBlogModal{{ $blog->id }}" style="width: auto; height: 40px; font-size: 14px;">
+                                    data-bs-target="#editBlogModal{{ $blog->id }}"
+                                    style="width: auto; height: 40px; font-size: 14px;">
                                     Edit
                                 </button>
                                 <form action="{{ route('blog.destroy', $blog->id) }}" method="POST"
                                     onsubmit="return confirm('Are you sure you want to delete this blog post?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger" style="width: auto; height: 40px; font-size: 14px;">Delete</button>
+                                    <button type="submit" class="btn btn-danger"
+                                        style="width: auto; height: 40px; font-size: 14px;">Delete</button>
                                 </form>
                             </div>
                         @endif

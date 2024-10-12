@@ -20,6 +20,7 @@ class BlogController extends Controller
         return view('blogs.blogdetails', compact('blog', 'popularBlogs'));
     }
 
+
     public function indexUser(Request $request)
     {
         $search = $request->input('search');
@@ -188,7 +189,7 @@ class BlogController extends Controller
             }
         }
 
-        return redirect()->route('blogdetails', $id)->with('success', 'Blog post updated successfully');
+        return redirect()->back()->with('success', 'Blog post updated successfully');
     }
 
     public function destroyBlog($id)
@@ -212,6 +213,17 @@ class BlogController extends Controller
         $blog->save();
         return redirect()->route('admin.blog')->with('success', 'Blog deleted successfully');
     }
+    public function permanentlyDelete($id)
+{
+    // Tìm blog theo ID
+    $blog = Blog::findOrFail($id);
+
+    // Xóa vĩnh viễn blog
+    $blog->forceDelete();
+
+    return redirect()->back()->with('success', 'Blog deleted permanently successfully');
+}
+
 
     public function storeFeedback(Request $request, $id)
     {
@@ -229,6 +241,7 @@ class BlogController extends Controller
             'rating' => $request->rating,
             'comment' => $request->comment,
         ]);
+
 
         return redirect()->route('blogdetails', $id)->with('success', 'Feedback posted successfully.');
     }
@@ -252,22 +265,26 @@ class BlogController extends Controller
             'rating' => $request->rating,
         ]);
 
-        return redirect()->route('blogdetails', $feedback->blog_id)->with('success', 'Feedback updated successfully.');
+        return redirect()->back()->with('success', 'Feedback updated successfully.');
     }
 
     public function deleteFeedback($feedbackId)
     {
-        $feedback = BlogFeedback::findOrFail($feedbackId);
+    $feedback = BlogFeedback::findOrFail($feedbackId);
 
-        // Kiểm tra nếu người dùng hiện tại là chủ của feedback
-        if (Auth::id() !== $feedback->user_id) {
-            return redirect()->back()->with('error', 'You are not allowed to delete this feedback.');
-        }
-
-        $feedback->delete();
-
-        return redirect()->route('blogdetails', $feedback->blog_id)->with('success', 'Feedback deleted successfully.');
+    // Kiểm tra nếu người dùng hiện tại là chủ của feedback
+    if (Auth::id() !== $feedback->user_id) {
+        return redirect()->back()->with('error', 'You are not allowed to delete this feedback.');
     }
+
+    // Xóa feedback
+    $feedback->delete();
+
+    // Trả về trang trước đó và thông báo thành công
+    return redirect()->back()->with('success', 'Feedback deleted successfully.');
+
+    }
+
     public function getPopularBlogs()
     {
         // Lấy các blog với trung bình rating và sắp xếp theo rating trung bình, sau đó là số lượng đánh giá
