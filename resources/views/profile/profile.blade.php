@@ -97,7 +97,17 @@
                                     }
                                 });
                             </script>
+
+                            <!-- Nút Home -->
+                            <div class="mt-3">
+                                <a href="http://127.0.0.1:8000"> <!-- Thay đổi đường dẫn đến trang home của bạn -->
+                                    <img src="http://127.0.0.1:8000/assets/images/logo.png" alt="Logo"
+                                        width="64" height="64" style="object-fit: contain;">
+                                </a>
+                            </div>
+
                         </div>
+
 
 
                     </div>
@@ -219,50 +229,84 @@
 
 
                         <div class="row gutters-sm">
-
                             <div class="tab-block">
                                 <ul class="nav nav-tabs"
-                                    style="display: flex; justify-content: center; padding: 0; margin: 20px 20px;">
-                                    <li class="group">
-                                        <a href="http://127.0.0.1:8000"
-                                            class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-t-md text-slate-500 dark:text-zink-200 border-b border-transparent hover:text-custom-500 dark:hover:text-custom-500 active:text-custom-500 dark:active:text-custom-500 -mb-[1px]">
-                                            Home
-                                        </a>
-                                    </li>
+                                    style="display: flex; justify-content: center; padding: 0; margin: 20px 20px; flex-wrap: wrap;">
 
-                                    <li class="group">
+                                    <!-- Hàng đầu tiên: 3 nút đầu tiên -->
+                                    <li class="group" style="margin: 0 10px;">
                                         <a href="javascript:void(0);" data-tab-toggle data-target="updateProfileTab"
                                             class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-t-md text-slate-500 dark:text-zink-200 border-b border-transparent hover:text-custom-500 dark:hover:text-custom-500 active:text-custom-500 dark:active:text-custom-500 -mb-[1px]">
                                             Update Profile
                                         </a>
                                     </li>
-                                    <li class="group">
+                                    <li class="group" style="margin: 0 10px;">
                                         <a href="javascript:void(0);" data-tab-toggle data-target="changePasswordTab"
                                             class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-t-md text-slate-500 dark:text-zink-200 border-b border-transparent hover:text-custom-500 dark:hover:text-custom-500 active:text-custom-500 dark:active:text-custom-500 -mb-[1px]">
                                             Change Password
                                         </a>
                                     </li>
-                                    <li class="group">
-                                        <a href="javascript:void(0);" data-tab-toggle data-target="userHistoryTab"
-                                            class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-t-md text-slate-500 dark:text-zink-200 border-b border-transparent hover:text-custom-500 dark:hover:text-custom-500 active:text-custom-500 dark:active:text-custom-500 -mb-[1px]">
-                                            User History
-                                        </a>
-                                    </li>
-                                    <li class="group">
+                                    <li class="group" style="margin: 0 10px;">
                                         <a href="javascript:void(0);" data-tab-toggle data-target="privacyPolicyTab"
                                             class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-t-md text-slate-500 dark:text-zink-200 border-b border-transparent hover:text-custom-500 dark:hover:text-custom-500 active:text-custom-500 dark:active:text-custom-500 -mb-[1px]">
                                             Privacy Policy
                                         </a>
                                     </li>
+
+                                    <!-- Hàng thứ hai: 3 nút còn lại -->
+                                    <li class="group" style="margin: 0 10px;">
+                                        <a href="javascript:void(0);" data-tab-toggle data-target="userBlogsTab"
+                                            class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-t-md text-slate-500 dark:text-zink-200 border-b border-transparent hover:text-custom-500 dark:hover:text-custom-500 active:text-custom-500 dark:active:text-custom-500 -mb-[1px]">
+                                            Blogs
+                                        </a>
+                                    </li>
+                                    <li class="group" style="margin: 0 10px;">
+                                        <a href="javascript:void(0);" data-tab-toggle
+                                            data-target="userFeedbackBlogsTab"
+                                            class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-t-md text-slate-500 dark:text-zink-200 border-b border-transparent hover:text-custom-500 dark:hover:text-custom-500 active:text-custom-500 dark:active:text-custom-500 -mb-[1px]">
+                                            Feedbacks Blogs
+                                        </a>
+                                    </li>
+                                    <li class="group" style="margin: 0 10px;">
+                                        <a href="javascript:void(0);" data-tab-toggle data-target="userFeedbackTab"
+                                            class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-t-md text-slate-500 dark:text-zink-200 border-b border-transparent hover:text-custom-500 dark:hover:text-custom-500 active:text-custom-500 dark:active:text-custom-500 -mb-[1px]">
+                                            Feedbacks Beachs
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
-
-                            <!-- Nội dung các tab -->
-
-
-
                         </div>
 
+                        <style>
+                            .nav-tabs {
+                                display: flex;
+                                justify-content: center;
+                                /* Căn giữa các tab */
+                                flex-wrap: wrap;
+                                /* Cho phép các tab xuống dòng */
+                                padding: 0;
+                                /* Xóa padding mặc định */
+                                margin: 20px 0;
+                                /* Margin trên và dưới cho các tab */
+                            }
+
+                            .nav-tabs .group {
+                                margin: 10px;
+                                /* Khoảng cách giữa các nút */
+                                flex: 1 0 30%;
+                                /* Chiều rộng cho mỗi nút */
+                                text-align: center;
+                                /* Căn giữa văn bản trong các nút */
+                            }
+
+                            /* Nếu bạn muốn điều chỉnh chiều rộng của các tab */
+                            .tab-link {
+                                padding: 10px 20px;
+                                /* Điều chỉnh khoảng cách trong nút */
+                                display: inline-block;
+                                /* Đảm bảo nút là khối inline */
+                            }
+                        </style>
 
                     </div>
                     <div id="updateProfileTab" class="tab-content" style="display: none;">
@@ -411,60 +455,366 @@
 
 
                     </div>
+                    <div id="userBlogsTab" class="tab-content" style="display: none;">
+                        <div class="card"
+                            style="background-color: white; font-family: Arial, sans-serif; color: #333;">
+                            @if ($blogs->isEmpty())
+                                <p style="text-align: center">No blogs found for this user.</p>
+                            @else
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr>
+                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">#
+                                            </th>
+                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                Author</th>
+                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Title
+                                            </th>
+                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                Description</th>
+                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Image
+                                            </th>
+                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Date
+                                            </th>
+                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($blogs as $blog)
+                                            <tr>
+                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                    {{ $loop->iteration }}</td>
+                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                    {{ $blog->user->name }}</td>
+                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                    {{ Str::limit($blog->title, 3) }}</td>
+                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                    {{ Str::limit($blog->description, 5) }}</td>
+                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                    @if ($blog->image_url)
+                                                        <img src="{{ asset($blog->image_url) }}"
+                                                            alt="{{ $blog->title }}"
+                                                            style="max-width: 100px; max-height: 100px; object-fit: cover;">
+                                                    @endif
+                                                </td>
+                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                    {{ $blog->created_at->format('Y-m-d') }}</td>
+                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                    <a href="{{ route('blogdetails', ['id' => $blog->id]) }}"
+                                                        class="btn btn-info">View</a>
+                                                    <button onclick="toggleEditForm({{ $blog->id }})"
+                                                        class="btn btn-warning">Edit</button>
+                                                    <form action="{{ route('blogs.permanentlyDelete', $blog->id) }}"
+                                                        method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit"
+                                                            onclick="return confirm('Are you sure you want to delete this blog?');"
+                                                            class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
 
-                    <div id="userHistoryTab" class="tab-content" style="display: none;">
+                                            <!-- Form chỉnh sửa blog (ẩn mặc định) -->
+                                            <tr id="editForm-{{ $blog->id }}" style="display: none;">
+                                                <td colspan="7" style="border: 1px solid #ddd; padding: 8px;">
+                                                    <form action="{{ route('blogs.update', $blog->id) }}"
+                                                        method="POST" enctype="multipart/form-data">
+                                                        @csrf
+                                                        @method('PUT')
+
+                                                        <div class="form-group">
+                                                            <label for="title">Title:</label>
+                                                            <input type="text" name="title" id="title"
+                                                                class="form-control"
+                                                                value="{{ old('title', $blog->title) }}" required>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="description">Description:</label>
+                                                            <textarea name="description" id="description" class="form-control" required>{{ old('description', $blog->description) }}</textarea>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="image_url">Main Image:</label>
+                                                            <input type="file" name="image_url" id="image_url"
+                                                                class="form-control" accept="image/*">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="images">Additional Images:</label>
+                                                            <input type="file" name="images[]" id="images"
+                                                                class="form-control" multiple accept="image/*">
+                                                        </div>
+
+                                                        <button type="submit" class="btn btn-primary">Update
+                                                            Blog</button>
+                                                        <button type="button" class="btn btn-danger"
+                                                            onclick="toggleEditForm({{ $blog->id }})">Cancel</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @endif
+                        </div>
+                    </div>
+
+                    <script>
+                        function toggleEditForm(blogId) {
+                            const form = document.getElementById('editForm-' + blogId);
+                            form.style.display = (form.style.display === 'none' || form.style.display === '') ? 'table-row' : 'none';
+                        }
+                    </script>
+
+
+
+
+
+
+                    <div id="userFeedbackBlogsTab" class="tab-content" style="display: none;">
+                        <div class="card"
+                            style="background-color: white; font-family: Arial, sans-serif; color: #333;">
+                            <!-- Hiển thị feedback -->
+                            @if ($blogFeedbacks->isEmpty())
+                                <p style="text-align: center">No feedback available.</p>
+                            @else
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr>
+                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">#
+                                            </th>
+                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Blog
+                                            </th>
+                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Date
+                                            </th>
+                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                Comment</th>
+                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                Rating</th>
+                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($blogFeedbacks->sortByDesc('created_at') as $feedback)
+                                            <tr>
+                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                    {{ $loop->iteration }}
+                                                </td>
+                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                    {{ \Illuminate\Support\Str::words($feedback->blog->title ?? 'N/A', 2, '...') }}
+                                                </td>
+                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                    {{ $feedback->created_at->format('Y-m-d') }}
+                                                </td>
+                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                    {{ \Illuminate\Support\Str::words($feedback->comment, 5, '...') }}
+                                                </td>
+                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                    {{ $feedback->rating }} stars
+                                                </td>
+                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                    <!-- Nút View -->
+                                                    <a href="{{ route('blogdetails', $feedback->blog_id) }}"
+                                                        class="btn btn-info">View</a>
+
+                                                    <!-- Nút Edit chỉ hiển thị nếu người dùng có quyền -->
+                                                    @if (Auth::user()->id === $feedback->user_id || Auth::user()->role === 'admin')
+                                                        <button onclick="toggleEditForm({{ $feedback->id }})"
+                                                            class="btn btn-warning">Edit</button>
+                                                    @endif
+
+                                                    <!-- Form Xóa -->
+                                                    <form action="{{ route('blogFeedback.destroy', $feedback->id) }}"
+                                                        method="POST"
+                                                        onsubmit="return confirm('Are you sure you want to delete this feedback?');"
+                                                        style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Form chỉnh sửa comment và rating (ẩn mặc định) -->
+                                            <tr id="editForm-{{ $feedback->id }}" style="display: none;">
+                                                <td colspan="6" style="border: 1px solid #ddd; padding: 8px;">
+                                                    <form action="{{ route('blogFeedbacks.update', $feedback->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+
+                                                        <!-- Comment -->
+                                                        <div class="form-group">
+                                                            <label for="comment">Comment:</label>
+                                                            <textarea name="comment" id="comment" class="form-control" required>{{ old('comment', $feedback->comment) }}</textarea>
+                                                            @error('comment')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+
+                                                        <!-- Rating -->
+                                                        <div class="form-group">
+                                                            <label for="rating">Rating (1-5):</label>
+                                                            <input type="number" name="rating" id="rating"
+                                                                class="form-control"
+                                                                value="{{ old('rating', $feedback->rating) }}"
+                                                                min="1" max="5" required>
+                                                            @error('rating')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+
+                                                        <button type="submit" class="btn btn-primary">Update
+                                                            Feedback</button>
+                                                        <button type="button" class="btn btn-danger"
+                                                            onclick="toggleEditForm({{ $feedback->id }})">Cancel</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @endif
+                        </div>
+                    </div>
+
+                    <script>
+                        function toggleEditForm(id) {
+                            var form = document.getElementById('editForm-' + id);
+                            if (form.style.display === 'none') {
+                                form.style.display = 'table-row';
+                            } else {
+                                form.style.display = 'none';
+                            }
+                        }
+                    </script>
+
+
+
+
+
+
+
+
+
+                    <div id="userFeedbackTab" class="tab-content" style="display: none;">
 
                         <div class="card"
-                            style=" background-color: white; font-family: Arial, sans-serif; color: #333;">
+                            style="background-color: white; font-family: Arial, sans-serif; color: #333;">
 
-                            <table class="table table-striped text-center">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Date</th>
-                                        <th>Activity</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Dữ liệu mẫu, bạn có thể thay thế bằng dữ liệu động -->
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2024-10-06</td>
-                                        <td>Commented on "Amazing Beach" blog</td>
-                                        <td>
-                                            <button class="btn btn-info btn-sm">View</button>
-                                            <button class="btn btn-warning btn-sm">Edit</button>
-                                            <button class="btn btn-danger btn-sm">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>2024-10-05</td>
-                                        <td>Wrote blog "Top 10 Beaches to Visit"</td>
-                                        <td>
-                                            <button class="btn btn-info btn-sm">View</button>
-                                            <button class="btn btn-warning btn-sm">Edit</button>
-                                            <button class="btn btn-danger btn-sm">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>2024-10-04</td>
-                                        <td>Updated profile information</td>
-                                        <td>
-                                            <button class="btn btn-info btn-sm">View</button>
-                                            <button class="btn btn-warning btn-sm">Edit</button>
-                                            <button class="btn btn-danger btn-sm">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <!-- Kết thúc dữ liệu mẫu -->
-                                </tbody>
-                            </table>
+                            <!-- Hiển thị feedback -->
+                            @if ($feedbacks->isEmpty())
+                                <p style="text-align: center">No feedback available.</p>
+                            @else
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr>
+                                            <th style="border: 1px solid #ddd; padding: 8px;text-align: center; ">#
+                                            </th>
+                                            <th style="border: 1px solid #ddd; padding: 8px;text-align: center;">Beach
+                                            </th>
+                                            <th style="border: 1px solid #ddd; padding: 8px;text-align: center;">Date
+                                            </th>
+                                            <th style="border: 1px solid #ddd; padding: 8px;text-align: center;">
+                                                Comment</th>
+                                            <th style="border: 1px solid #ddd; padding: 8px;text-align: center;">Rating
+                                            </th>
+                                            <th style="border: 1px solid #ddd; padding: 8px;text-align: center;">Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($feedbacks->sortByDesc('created_at') as $feedback)
+                                            <tr>
+                                                <td style="border: 1px solid #ddd; padding: 8px;text-align: center;">
+                                                    {{ $loop->iteration }}
+                                                </td>
+                                                <td style="border: 1px solid #ddd; padding: 8px;text-align: center;">
+                                                    {{ $feedback->beach->name ?? 'N/A' }}
+                                                </td>
+                                                <td style="border: 1px solid #ddd; padding: 8px;text-align: center;">
+                                                    {{ $feedback->created_at->format('Y-m-d') }}
+                                                </td>
+                                                <td style="border: 1px solid #ddd; padding: 8px;text-align: center;">
+                                                    {{ $feedback->message }}
+                                                </td>
+                                                <td style="border: 1px solid #ddd; padding: 8px;text-align: center;">
+                                                    {{ $feedback->rating }} stars
+                                                </td>
+                                                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                    <!-- Nút View -->
+                                                    <a href="{{ route('destinationdetails', $feedback->beach->id) }}"
+                                                        class="btn btn-info">View</a>
+
+                                                    <!-- Nút Edit chỉ hiển thị nếu người dùng có quyền -->
+                                                    @if (Auth::user()->id === $feedback->user_id || Auth::user()->role === 'admin')
+                                                        <button onclick="toggleEditForm({{ $feedback->id }})"
+                                                            class="btn btn-warning">Edit</button>
+                                                    @endif
+
+                                                    <!-- Form Xóa -->
+                                                    <form action="{{ route('feedback.destroy', $feedback->id) }}"
+                                                        method="POST"
+                                                        onsubmit="return confirm('Are you sure you want to delete this feedback?');"
+                                                        style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Form chỉnh sửa comment và rating (ẩn mặc định) -->
+                                            <tr id="editForm-{{ $feedback->id }}" style="display: none;">
+                                                <td colspan="6" style="border: 1px solid #ddd; padding: 8px;">
+                                                    <form action="{{ route('feedbacks.update', $feedback->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+
+                                                        <div class="form-group">
+                                                            <label for="message">Comment:</label>
+                                                            <textarea name="message" id="message" class="form-control" required>{{ $feedback->message }}</textarea>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="rating">Rating (1-5):</label>
+                                                            <input type="number" name="rating" id="rating"
+                                                                class="form-control" value="{{ $feedback->rating }}"
+                                                                min="1" max="5" required>
+                                                        </div>
+
+                                                        <button type="submit" class="btn btn-primary">Update</button>
+                                                        <button type="button"
+                                                            onclick="toggleEditForm({{ $feedback->id }})"
+                                                            class="btn btn-danger">Cancel</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @endif
                         </div>
-
-
                     </div>
+
+
+
+
+                    <script>
+                        function toggleEditForm(feedbackId) {
+                            var form = document.getElementById('editForm-' + feedbackId);
+                            if (form.style.display === 'none') {
+                                form.style.display = 'table-row';
+                            } else {
+                                form.style.display = 'none';
+                            }
+                        }
+                    </script>
 
                     <div id="privacyPolicyTab" class="tab-content" style="display: none;">
                         <div class="card"

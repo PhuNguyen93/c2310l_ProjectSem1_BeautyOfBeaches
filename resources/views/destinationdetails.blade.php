@@ -300,7 +300,7 @@
                                                         data-bs-target="#editModal{{ $feedback->id }}">
                                                         Edit
                                                     </button>
-                                                    <form action="{{ route('feedbacks.destroy', $feedback->id) }}"
+                                                    <form action="{{ route('feedback.destroy', $feedback->id) }}"
                                                         method="POST" class="d-inline"
                                                         onsubmit="return confirmDelete();">
                                                         @csrf

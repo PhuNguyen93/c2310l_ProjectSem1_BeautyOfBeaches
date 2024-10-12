@@ -8,22 +8,40 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
-
+use App\Models\Feedback; // Thêm dòng này
+use App\Models\Blog;
+use App\Models\BlogFeedback; // Thêm dòng này nếu chưa có
 
 class ProfileController extends Controller
 {
     public function show($id)
     {
-        // Lấy thông tin người dùng dựa trên $id
-        $user = User::findOrFail($id);
-
-        // Kiểm tra quyền hạn
         if (Auth::user()->role_id != 1) {
             return redirect()->route('index')->with('error', 'You do not have the required permissions.');
         }
 
-        // Truyền thông tin user vào view
-        return view('profile.profile', ['user' => $user]);
+        // Lấy thông tin người dùng
+        $user = User::findOrFail($id);
+
+        // Lấy tất cả feedback của user
+        $feedbacks = Feedback::where('user_id', $id)->get();
+
+        // Lấy các blog đã được công khai của người dùng
+        $blogs = Blog::where('user_id', $id)->where('status', 1)->get();
+
+        // Lấy lịch sử hoạt động bình luận và đánh giá của người dùng
+        $blogFeedbacks = BlogFeedback::with('blog') // Lấy thông tin blog liên quan
+            ->where('user_id', $id) // Thay thế userId bằng id truyền vào
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Truyền thông tin user, feedback và blogs vào view
+        return view('profile.profile', [
+            'user' => $user,
+            'feedbacks' => $feedbacks, // Thêm feedbacks vào đây
+            'blogs' => $blogs, // Thêm blogs vào đây
+            'blogFeedbacks' => $blogFeedbacks, // Thêm lịch sử hoạt động blog vào đây
+        ]);
     }
 
     public function update(Request $request, $id)

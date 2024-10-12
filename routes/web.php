@@ -21,6 +21,7 @@ use App\Models\Blog;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
+
 // Routes for HomeController
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('index');
@@ -214,3 +215,31 @@ Route::get('/register/resend-otp', [RegisterController::class, 'resendOtp'])->na
 
 
 Route::get('/search-beaches', [BeachController::class, 'search'])->name('searchBeaches');
+
+// Route để xóa feedback liên quan đến beach
+Route::delete('/feedback/{id}', [FeedbackController::class, 'destroy'])->name('feedback.destroy');
+
+
+// Route để hiển thị trang chỉnh sửa feedback với ID cụ thể
+Route::get('feedbacks/{id}/edit', [FeedbackController::class, 'edit'])->name('feedbacks.edit');
+
+// Route để hiển thị chi tiết feedback với ID cụ thể
+Route::get('/feedbacks/{id}', [FeedbackController::class, 'show'])->name('feedbacks.show');
+
+// Route để xóa vĩnh viễn một blog với ID cụ thể
+Route::delete('/blogs/{id}/permanently', [BlogController::class, 'permanentlyDelete'])->name('blogs.permanentlyDelete');
+
+// Route để cập nhật thông tin của một blog với ID cụ thể
+Route::put('blogs/{id}', [BlogController::class, 'update'])->name('blogs.update');
+
+// Route để xóa feedback liên quan đến blog
+Route::delete('/blog-feedback/{feedback}', [BlogController::class, 'deleteFeedback'])->name('blogFeedback.destroy');
+
+// Route để cập nhật thông tin của một blog cụ thể
+Route::put('/blog/{blog}', [BlogController::class, 'update'])->name('blog.update');
+
+// Route để cập nhật feedback với ID cụ thể
+Route::put('/blog-feedbacks/{feedbackId}', [BlogController::class, 'updateFeedback'])->name('blogFeedbacks.update');
+
+
+
