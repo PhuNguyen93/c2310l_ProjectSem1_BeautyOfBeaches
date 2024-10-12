@@ -17,6 +17,8 @@ class Beach extends Model
         'location',
         'area_id',
         'country',
+        'longitude',
+        'latitude',
         'image_url',
     ];
 

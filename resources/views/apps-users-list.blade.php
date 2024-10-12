@@ -165,7 +165,10 @@
                                                                 <i data-lucide="trash-2"
                                                                     class="inline-block size-3 ltr:mr-1 rtl:ml-1"></i>
                                                                 <span class="align-middle">Delete</span>
+
                                                             </button>
+
+
                                                         </form>
                                                     </li>
                                                 </ul>
@@ -298,7 +301,7 @@
     </div>
     <!--end add user-->
 
-    @if (session('success'))
+    {{-- @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert"
             style="background-color: #28a745; color: white; font-size: 18px; padding: 20px; border-radius: 8px; box-shadow: 0px 4px 12px rgba(0,0,0,0.1);">
             {{ session('success') }}
@@ -316,8 +319,42 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-    @endif
+    @endif --}}
+    @if (session('success'))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            title: 'Success',
+            text: '{{ session('success') }}',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            @if (session('otp_sent'))
+                Alpine.store('step', 'verify');
+            @elseif (session('otp_verified'))
+                Alpine.store('step', 'reset');
+            @endif
+        });
+    </script>
+@endif
 
+<!-- SweetAlert thông báo lỗi -->
+@if (session('error'))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            title: 'Error',
+            text: '{{ session('error') }}',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    </script>
+@endif
+    <script>
+        function confirmDelete() {
+            return confirm('Are you sure you want to delete this beach? This action cannot be undone.');
+        }
+    </script>
 @endsection
 
 @push('scripts')

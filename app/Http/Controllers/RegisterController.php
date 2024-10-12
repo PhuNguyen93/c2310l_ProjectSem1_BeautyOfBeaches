@@ -51,7 +51,7 @@ class RegisterController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255|unique:users',
-            'phone' => 'required|string|unique:users,phone', // Kiểm tra số điện thoại
+            'phone' => 'required|string|unique:users,phone',
             'password' => 'required|string|confirmed',
         ]);
 
@@ -108,7 +108,7 @@ public function verifyOtp(Request $request)
             'email' => session('email'),
             'password' => session('password'),
             'role_id' => session('role_id'),
-            'status' => 'Verified',
+            'status' => '1',
         ]);
         // dd(4);
         // Xóa session sau khi xác thực

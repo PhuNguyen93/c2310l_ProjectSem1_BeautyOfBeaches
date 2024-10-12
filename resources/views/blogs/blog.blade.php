@@ -1,6 +1,8 @@
 @extends('layout.layout')
 
 @section('content')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Hero section -->
     <x-hero subTitle='Modern & Beautiful Travel Theme' img='assets/images/blogimage.jpg' title='Latest Blog' />
 
@@ -12,7 +14,7 @@
                 @if (Auth::check())
                     <!-- Form tạo bài viết -->
                     <div class="card mb-4 shadow-sm">
-                        <div class="card-header bg-primary text-white">
+                        <div class="card-header bg-info text-white">
                             Create a Blog Post
                         </div>
                         <div class="card-body">
@@ -34,7 +36,7 @@
                                     data-bs-target="#createPostModal">
                                     <i class="fa fa-camera"></i> Photo
                                 </button>
-                                <button class="btn btn-primary" onclick="showPostModal()">Create Post</button>
+                                <button class="btn btn-info text-white" onclick="showPostModal()">Create Post</button>
                             </div>
                         </div>
                     </div>
@@ -69,6 +71,9 @@
                                         <label for="blogImages" class="form-label">Add Photos</label>
                                         <input class="form-control" type="file" id="blogImages" name="images[]" multiple>
                                     </div>
+
+                                    <!-- Image preview -->
+                                    <div id="imagePreview" class="d-flex flex-wrap"></div>
                                 </form>
                             </div>
                             <div class="modal-footer">
@@ -82,12 +87,58 @@
                         var createPostModal = new bootstrap.Modal(document.getElementById('createPostModal'), {});
                         createPostModal.show();
                     }
+                    document.getElementById('blogImages').addEventListener('change', function(event) {
+                        const imagePreviewContainer = document.getElementById('imagePreview');
+                        imagePreviewContainer.innerHTML = ''; // Clear previous previews
+
+                        // Lấy các file đã chọn
+                        const files = event.target.files;
+
+                        // Duyệt qua các file đã chọn và tạo preview
+                        Array.from(files).forEach(file => {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                // Tạo một thẻ img để hiển thị ảnh
+                                const img = document.createElement('img');
+                                img.src = e.target.result;
+                                img.style.width = '100px';
+                                img.style.height = '100px';
+                                img.style.objectFit = 'cover';
+                                img.style.marginRight = '10px';
+                                img.classList.add('img-thumbnail');
+
+                                // Thêm hình ảnh vào khu vực preview
+                                imagePreviewContainer.appendChild(img);
+                            };
+
+                            // Đọc file dưới dạng URL
+                            reader.readAsDataURL(file);
+                        });
+                    });
                 </script>
 
                 @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
+                    <script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: '{{ session('success') }}',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                    </script>
+                @endif
+
+                @if (session('error'))
+                    <script>
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: '{{ session('error') }}',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                    </script>
                 @endif
 
                 @if ($blogs->isEmpty())
@@ -133,7 +184,8 @@
                     <!-- Search widget -->
                     <div class="cs_sidebar_item cs_gray_bg widget_search">
                         <form class="cs_sidebar_search cs_white_bg" action="{{ route('user.blog') }}" method="GET">
-                            <input type="text" name="search" placeholder="Search..." value="{{ request('search') }}">
+                            <input type="text" name="search" placeholder="Search..."
+                                value="{{ request('search') }}">
                             <button class="cs_sidebar_search_btn cs_accent_bg cs_white_color">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </button>

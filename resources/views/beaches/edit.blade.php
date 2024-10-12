@@ -82,7 +82,20 @@
                         class="mt-4 w-48 h-32 rounded-lg object-cover {{ !$beach->image_url ? 'hidden' : '' }}">
                 </div>
             </div>
+            <!-- Longitude -->
+<div class="col-span-2">
+    <label for="longitude" class="block text-base font-medium text-gray-700">Longitude</label>
+    <input type="number" name="longitude" id="longitude" placeholder="Enter longitude"
+        class="mt-1 w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out"
+        step="0.0000001">
 
+<!-- Latitude -->
+<div class="col-span-2">
+    <label for="latitude" class="block text-base font-medium text-gray-700">Latitude</label>
+    <input type="number" name="latitude" id="latitude" placeholder="Enter latitude"
+        class="mt-1 w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out"
+        step="0.0000001">
+</div>
             <!-- Action Buttons -->
             <div class="flex justify-center space-x-4 mt-6">
                 <button type="submit"

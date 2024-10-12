@@ -568,12 +568,7 @@
                             form.style.display = (form.style.display === 'none' || form.style.display === '') ? 'table-row' : 'none';
                         }
                     </script>
-
-
-
-
-
-
+                    <div id="userHistoryTab" class="tab-content" style="display: block;">
                     <div id="userFeedbackBlogsTab" class="tab-content" style="display: none;">
                         <div class="card"
                             style="background-color: white; font-family: Arial, sans-serif; color: #333;">
@@ -679,6 +674,7 @@
                                     </tbody>
                                 </table>
                             @endif
+
                         </div>
                     </div>
 
@@ -692,15 +688,7 @@
                             }
                         }
                     </script>
-
-
-
-
-
-
-
-
-
+                    
                     <div id="userFeedbackTab" class="tab-content" style="display: none;">
 
                         <div class="card"
@@ -815,7 +803,7 @@
                             }
                         }
                     </script>
-
+                    
                     <div id="privacyPolicyTab" class="tab-content" style="display: none;">
                         <div class="card"
                             style=" padding: 3rem; background-color: white; font-family: Arial, sans-serif; color: #333; text-align: justify;">
