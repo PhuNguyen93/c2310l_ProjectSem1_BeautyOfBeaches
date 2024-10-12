@@ -222,11 +222,7 @@
                                 <div class="col-sm-9 text-secondary">
                                     {{ \Carbon\Carbon::parse($user->created_at)->format('d/m/Y') }}</div>
                             </div>
-
-
                         </div>
-
-
 
                         <div class="row gutters-sm">
                             <div class="tab-block">
@@ -276,39 +272,9 @@
                                 </ul>
                             </div>
                         </div>
-
-                        <style>
-                            .nav-tabs {
-                                display: flex;
-                                justify-content: center;
-                                /* Căn giữa các tab */
-                                flex-wrap: wrap;
-                                /* Cho phép các tab xuống dòng */
-                                padding: 0;
-                                /* Xóa padding mặc định */
-                                margin: 20px 0;
-                                /* Margin trên và dưới cho các tab */
-                            }
-
-                            .nav-tabs .group {
-                                margin: 10px;
-                                /* Khoảng cách giữa các nút */
-                                flex: 1 0 30%;
-                                /* Chiều rộng cho mỗi nút */
-                                text-align: center;
-                                /* Căn giữa văn bản trong các nút */
-                            }
-
-                            /* Nếu bạn muốn điều chỉnh chiều rộng của các tab */
-                            .tab-link {
-                                padding: 10px 20px;
-                                /* Điều chỉnh khoảng cách trong nút */
-                                display: inline-block;
-                                /* Đảm bảo nút là khối inline */
-                            }
-                        </style>
-
                     </div>
+
+                    {{-- Update Profile --}}
                     <div id="updateProfileTab" class="tab-content" style="display: none;">
 
                         <div class="card"
@@ -391,7 +357,7 @@
                             </div>
                         </div>
                     </div>
-
+                    {{-- Change Pass --}}
                     <div id="changePasswordTab" class="tab-content" style="display: none;">
 
                         <div class="card">
@@ -455,6 +421,7 @@
 
 
                     </div>
+                    {{-- blog --}}
                     <div id="userBlogsTab" class="tab-content" style="display: none;">
                         <div class="card"
                             style="background-color: white; font-family: Arial, sans-serif; color: #333;">
@@ -568,7 +535,7 @@
                             form.style.display = (form.style.display === 'none' || form.style.display === '') ? 'table-row' : 'none';
                         }
                     </script>
-                    <div id="userHistoryTab" class="tab-content" style="display: block;">
+
                     <div id="userFeedbackBlogsTab" class="tab-content" style="display: none;">
                         <div class="card"
                             style="background-color: white; font-family: Arial, sans-serif; color: #333;">
@@ -581,9 +548,11 @@
                                         <tr>
                                             <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">#
                                             </th>
-                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Blog
+                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                Blog
                                             </th>
-                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Date
+                                            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                                                Date
                                             </th>
                                             <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">
                                                 Comment</th>
@@ -688,7 +657,7 @@
                             }
                         }
                     </script>
-                    
+
                     <div id="userFeedbackTab" class="tab-content" style="display: none;">
 
                         <div class="card"
@@ -703,15 +672,19 @@
                                         <tr>
                                             <th style="border: 1px solid #ddd; padding: 8px;text-align: center; ">#
                                             </th>
-                                            <th style="border: 1px solid #ddd; padding: 8px;text-align: center;">Beach
+                                            <th style="border: 1px solid #ddd; padding: 8px;text-align: center;">
+                                                Beach
                                             </th>
-                                            <th style="border: 1px solid #ddd; padding: 8px;text-align: center;">Date
+                                            <th style="border: 1px solid #ddd; padding: 8px;text-align: center;">
+                                                Date
                                             </th>
                                             <th style="border: 1px solid #ddd; padding: 8px;text-align: center;">
                                                 Comment</th>
-                                            <th style="border: 1px solid #ddd; padding: 8px;text-align: center;">Rating
+                                            <th style="border: 1px solid #ddd; padding: 8px;text-align: center;">
+                                                Rating
                                             </th>
-                                            <th style="border: 1px solid #ddd; padding: 8px;text-align: center;">Action
+                                            <th style="border: 1px solid #ddd; padding: 8px;text-align: center;">
+                                                Action
                                             </th>
                                         </tr>
                                     </thead>
@@ -789,10 +762,6 @@
                             @endif
                         </div>
                     </div>
-
-
-
-
                     <script>
                         function toggleEditForm(feedbackId) {
                             var form = document.getElementById('editForm-' + feedbackId);
@@ -803,7 +772,7 @@
                             }
                         }
                     </script>
-                    
+
                     <div id="privacyPolicyTab" class="tab-content" style="display: none;">
                         <div class="card"
                             style=" padding: 3rem; background-color: white; font-family: Arial, sans-serif; color: #333; text-align: justify;">
@@ -882,57 +851,81 @@
 
 
 
-                </div>
 
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            // Lấy tất cả các liên kết tab
+                            const tabLinks = document.querySelectorAll('[data-tab-toggle]');
 
+                            // Gắn sự kiện click cho mỗi liên kết
+                            tabLinks.forEach(link => {
+                                link.addEventListener('click', function() {
+                                    // Ẩn tất cả các nội dung tab
+                                    const allTabs = document.querySelectorAll('.tab-content');
+                                    allTabs.forEach(tab => tab.style.display = 'none');
 
-
-
-
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        // Lấy tất cả các liên kết tab
-                        const tabLinks = document.querySelectorAll('[data-tab-toggle]');
-
-                        // Gắn sự kiện click cho mỗi liên kết
-                        tabLinks.forEach(link => {
-                            link.addEventListener('click', function() {
-                                // Ẩn tất cả các nội dung tab
-                                const allTabs = document.querySelectorAll('.tab-content');
-                                allTabs.forEach(tab => tab.style.display = 'none');
-
-                                // Hiển thị tab tương ứng
-                                const targetTab = document.getElementById(this.getAttribute('data-target'));
-                                if (targetTab) {
-                                    targetTab.style.display = 'block';
-                                }
+                                    // Hiển thị tab tương ứng
+                                    const targetTab = document.getElementById(this.getAttribute('data-target'));
+                                    if (targetTab) {
+                                        targetTab.style.display = 'block';
+                                    }
+                                });
                             });
                         });
-                    });
-                </script>
+                    </script>
+                </div>
             </div>
 
-        </div>
 
 
 
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                @foreach ($errors->all() as $error)
-                    <p>{{ $error }}</p>
-                @endforeach
-            </div>
-        @endif
-        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script type="text/javascript"></script>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                </div>
+            @endif
+            <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+            <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <script type="text/javascript"></script>
 </body>
 
 </html>
+
+<style>
+    .nav-tabs {
+        display: flex;
+        justify-content: center;
+        /* Căn giữa các tab */
+        flex-wrap: wrap;
+        /* Cho phép các tab xuống dòng */
+        padding: 0;
+        /* Xóa padding mặc định */
+        margin: 20px 0;
+        /* Margin trên và dưới cho các tab */
+    }
+
+    .nav-tabs .group {
+        margin: 10px;
+        /* Khoảng cách giữa các nút */
+        flex: 1 0 30%;
+        /* Chiều rộng cho mỗi nút */
+        text-align: center;
+        /* Căn giữa văn bản trong các nút */
+    }
+
+    /* Nếu bạn muốn điều chỉnh chiều rộng của các tab */
+    .tab-link {
+        padding: 10px 20px;
+        /* Điều chỉnh khoảng cách trong nút */
+        display: inline-block;
+        /* Đảm bảo nút là khối inline */
+    }
+</style>

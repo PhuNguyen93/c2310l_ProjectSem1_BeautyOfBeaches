@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
-use App\Models\Feedback; // Thêm dòng này
 use App\Models\Blog;
 use App\Models\BlogFeedback; // Thêm dòng này nếu chưa có
 
