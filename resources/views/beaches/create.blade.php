@@ -29,11 +29,35 @@
                 </div>
 
                 <!-- Country -->
-                <div>
-                    <label for="country" class="block text-base font-medium text-gray-700">Country</label>
-                    <input type="text" name="country" id="country" placeholder="Enter country"
-                        class="mt-1 w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out">
-                </div>
+<div>
+    <label for="country" class="block text-base font-medium text-gray-700">Country</label>
+    <select name="country" id="country" class="mt-1 w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out">
+        <option value="" disabled selected>Select a country</option>
+        <option value="">Select a country</option>
+        <option value="Vietnam">Vietnam</option>
+        <option value="India">India</option>
+        <option value="United States">United States</option>
+        <option value="Germany">Germany</option>
+        <option value="Australia">Australia</option>
+        <option value="United Kingdom">United Kingdom</option>
+        <option value="Italy">Italy</option>
+        <option value="Brazil">Brazil</option>
+        <option value="Mexico">Mexico</option>
+        <option value="Thailand">Thailand</option>
+        <option value="Maldives">Maldives</option>
+        <option value="Greece">Greece</option>
+        <option value="Spain">Spain</option>
+        <option value="Portugal">Portugal</option>
+        <option value="Philippines">Philippines</option>
+        <option value="South Africa">South Africa</option>
+        <option value="Indonesia">Indonesia</option>
+        <option value="Jamaica">Jamaica</option>
+        <option value="Cuba">Cuba</option>
+        <option value="Turkey">Turkey</option>
+        <option value="Egypt">Egypt</option>
+    </select>
+</div>
+
 
                 <!-- Location -->
                 <div>
