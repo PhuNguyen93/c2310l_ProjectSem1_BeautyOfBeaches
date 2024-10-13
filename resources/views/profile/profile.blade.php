@@ -481,7 +481,7 @@
                                                             data-bs-toggle="dropdown" aria-expanded="false">
                                                             Actions
                                                         </button>
-                                                        <ul class="dropdown-menu"
+                                                        <ul class="dropdown-menu dropdown-menu-end"
                                                             aria-labelledby="dropdownMenuButton-{{ $blog->id }}">
                                                             <!-- Nút View -->
                                                             <li>
@@ -491,27 +491,24 @@
                                                                 </a>
                                                             </li>
 
-                                                            <!-- Nút Edit chỉ hiển thị nếu người dùng có quyền -->
-                                                            @if (Auth::check() && (Auth::user()->id === $blog->user_id || Auth::user()->role === 'admin'))
-                                                                <li>
-                                                                    <button class="dropdown-item"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#editBlogModal"
-                                                                        onclick="populateEditForm({{ $blog->id }}, '{{ $blog->title }}', '{{ $blog->description }}')">
-                                                                        <i class="fas fa-edit"></i> Edit
-                                                                    </button>
-                                                                </li>
-                                                            @endif
+                                                            <!-- Nút Edit -->
+                                                            <li>
+                                                                <button class="dropdown-item" data-bs-toggle="modal"
+                                                                    data-bs-target="#editBlogModal"
+                                                                    onclick="populateEditForm({{ $blog->id }}, '{{ $blog->title }}', '{{ $blog->description }}')">
+                                                                    <i class="fas fa-edit"></i> Edit
+                                                                </button>
+                                                            </li>
 
                                                             <!-- Nút Delete -->
                                                             <li>
                                                                 <form
                                                                     action="{{ route('blogs.permanentlyDelete', $blog->id) }}"
-                                                                    method="POST" style="display: inline;"
-                                                                    onsubmit="return confirm('Are you sure you want to delete this blog?');">
+                                                                    method="POST" style="display: inline;">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    <button type="submit" class="dropdown-item">
+                                                                    <button type="submit" class="dropdown-item"
+                                                                        onclick="return confirm('Are you sure you want to delete this blog?');">
                                                                         <i class="fas fa-trash"></i> Delete
                                                                     </button>
                                                                 </form>
@@ -529,11 +526,14 @@
                                                         </div>
                                                     @endif
                                                     <h5 class="card-title position-absolute"
-                                                        style="top: 10px; left: 10px; color: white; text-shadow: 1px 1px 2px black;">
-                                                        {{ $blog->title }}</h5>
+                                                        style="top: 10px; right: 10px; color: white; text-shadow: 1px 1px 2px black;">
+                                                        {{ Str::limit($blog->title, 10, '...') }}
+                                                        <!-- Giới hạn tiêu đề -->
+                                                    </h5>
                                                     <p class="card-text position-absolute"
-                                                        style="top: 40px; left: 10px; color: white; text-shadow: 1px 1px 2px black;">
-                                                        {{ Str::limit($blog->description, 100) }}</p>
+                                                        style="top: 40px; right: 10px;; color: white; text-shadow: 1px 1px 2px black;">
+                                                        {{ Str::limit($blog->description, 10) }}</p>
+                                                    <!-- Giới hạn mô tả -->
                                                 </div>
                                             </div>
                                         </div>
@@ -542,6 +542,7 @@
                             @endif
                         </div>
                     </div>
+
 
                     <!-- Modal chỉnh sửa blog -->
                     <div class="modal fade" id="editBlogModal" tabindex="-1" aria-labelledby="editBlogModalLabel"
@@ -785,7 +786,9 @@
                                                 <td style="border: 1px solid #ddd; padding: 8px;text-align: center;">
                                                     {{ $feedback->created_at->format('Y-m-d') }}</td>
                                                 <td style="border: 1px solid #ddd; padding: 8px;text-align: center;">
-                                                    {{ $feedback->message }}</td>
+                                                    {{ Str::limit($feedback->message, 20, '...') }}</td>
+                                                <!-- Giới hạn số từ hiển thị -->
+
                                                 <td style="border: 1px solid #ddd; padding: 8px;text-align: center;">
                                                     {{ $feedback->rating }} stars</td>
                                                 <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
@@ -831,51 +834,64 @@
                                             </tr>
 
                                             <!-- Modal chỉnh sửa comment và rating -->
-                                            <div class="modal fade" id="editModal-{{ $feedback->id }}"
-                                                tabindex="-1" aria-labelledby="editModalLabel-{{ $feedback->id }}"
-                                                aria-hidden="true">
+                                            <div class="modal fade" id="editBlogModal" tabindex="-1"
+                                                aria-labelledby="editBlogModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title"
-                                                                id="editModalLabel-{{ $feedback->id }}">Edit Feedback
+                                                            <h5 class="modal-title" id="editBlogModalLabel">Edit Blog
                                                             </h5>
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form
-                                                                action="{{ route('feedbacks.update', $feedback->id) }}"
-                                                                method="POST">
+                                                            <form id="editBlogForm" action="" method="POST"
+                                                                enctype="multipart/form-data">
                                                                 @csrf
                                                                 @method('PUT')
-
-                                                                <!-- Comment field -->
-                                                                <div class="form-group">
-                                                                    <label for="message">Comment:</label>
-                                                                    <textarea name="message" id="message" class="form-control" required>{{ $feedback->message }}</textarea>
+                                                                <div class="mb-3">
+                                                                    <label for="edit_title"
+                                                                        class="form-label">Title:</label>
+                                                                    <input type="text" name="title"
+                                                                        id="edit_title" class="form-control" required>
                                                                 </div>
-
-                                                                <!-- Rating field -->
-                                                                <div class="form-group">
-                                                                    <label for="rating">Rating (1-5):</label>
-                                                                    <input type="number" name="rating"
-                                                                        id="rating" class="form-control"
-                                                                        value="{{ $feedback->rating }}"
-                                                                        min="1" max="5" required>
+                                                                <div class="mb-3">
+                                                                    <label for="edit_description"
+                                                                        class="form-label">Description:</label>
+                                                                    <textarea name="description" id="edit_description" class="form-control" required></textarea>
                                                                 </div>
-
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">Update</button>
+                                                                <div class="mb-3">
+                                                                    <label for="edit_image_url"
+                                                                        class="form-label">Main Image:</label>
+                                                                    <input type="file" name="image_url"
+                                                                        id="edit_image_url" class="form-control"
+                                                                        accept="image/*">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="edit_images"
+                                                                        class="form-label">Additional Images:</label>
+                                                                    <input type="file" name="images[]"
+                                                                        id="edit_images" class="form-control" multiple
+                                                                        accept="image/*">
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary">Update
+                                                                    Blog</button>
                                                             </form>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <script>
+                                                function populateEditForm(blogId, title, description) {
+                                                    // Cập nhật action của form để chỉ đến blog cụ thể
+                                                    document.getElementById('editBlogForm').action = '/blogs/' + blogId;
+
+                                                    // Cập nhật giá trị các trường
+                                                    document.getElementById('edit_title').value = title;
+                                                    document.getElementById('edit_description').value = description;
+                                                }
+                                            </script>
                                         @endforeach
                                     </tbody>
                                 </table>
