@@ -287,6 +287,8 @@
 @endsection
 
 @push('scripts')
+  <!-- App js -->
+  <script src="{{ URL::asset('build/js/app.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const headers = document.querySelectorAll('.sort');

@@ -17,6 +17,7 @@ class CommentHistoryController extends Controller
         if (Auth::guest() || Auth::user()->role_id != 2) {
             return redirect()->route('index')->with('error', 'You do not have the required permissions.');
         }
+
         // Lấy các giá trị tìm kiếm và lọc từ request
         $search = $request->input('search');
         $rating = $request->input('rating');
@@ -24,12 +25,14 @@ class CommentHistoryController extends Controller
         // Truy vấn feedbacks với điều kiện tìm kiếm theo tên người dùng hoặc tên bãi biển và lọc theo số sao
         $feedbacks = Feedback::with('user', 'beach')
             ->when($search, function ($query) use ($search) {
-                return $query->whereHas('user', function ($query) use ($search) {
-                    $query->where('name', 'like', '%' . $search . '%');
-                })
-                    ->orWhereHas('beach', function ($query) use ($search) {
-                        $query->where('name', 'like', '%' . $search . '%');
+                return $query->where(function ($q) use ($search) {
+                    $q->whereHas('user', function ($subQuery) use ($search) {
+                        $subQuery->where('name', 'like', '%' . $search . '%');
+                    })
+                    ->orWhereHas('beach', function ($subQuery) use ($search) {
+                        $subQuery->where('name', 'like', '%' . $search . '%');
                     });
+                });
             })
             ->when($rating, function ($query) use ($rating) {
                 return $query->where('rating', $rating);
@@ -39,6 +42,7 @@ class CommentHistoryController extends Controller
         // Trả về view với dữ liệu feedbacks đã được lọc và tìm kiếm
         return view('comments.index', compact('feedbacks'));
     }
+
 
 
     /**
