@@ -56,7 +56,7 @@
                 </div>
 
                 <!-- Description 2 -->
-                <div>
+                {{-- <div>
                     <label for="description2" class="block text-base font-medium text-gray-700">Description 2</label>
                     <textarea name="description2" id="description2"
                         class="mt-1 w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out"
@@ -69,7 +69,7 @@
                     <textarea name="description3" id="description3"
                         class="mt-1 w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out"
                         rows="3" placeholder="Enter the third description">{{ old('description3', $beach->description3) }}</textarea>
-                </div>
+                </div> --}}
 
                 <!-- Image -->
                 <div>

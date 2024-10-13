@@ -265,7 +265,7 @@ class BeachController extends Controller
         $beach->status = 1;
         $beach->save();
 
-
+        // dd(1);
        return redirect()->route('beaches.bin')->with('success','The beach has been restored.');
     }
 }

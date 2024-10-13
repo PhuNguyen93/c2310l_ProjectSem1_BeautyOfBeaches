@@ -211,7 +211,7 @@ class BlogController extends Controller
         // $blog->delete();
         $blog->status = 0;
         $blog->save();
-        return redirect()->route('admin.blog')->with('success', 'Blog deleted successfully');
+        return redirect()->route('admin.blog')->with('success', 'Blog has been trashed');
     }
     public function permanentlyDelete($id)
 {
@@ -324,7 +324,7 @@ class BlogController extends Controller
     }
     public function restore(Blog $blog)
     {
-        $blog->status = 1;
+        $blog->status = 2;
         $blog->save();
 
         return redirect()->route('blog.bin')->with('success', 'The Blog has been restored.');

@@ -48,8 +48,8 @@ class ProfileController extends Controller
     {
         $request->validate([
             'name' => ['required','string', 'max:255', Rule::unique('users')->ignore($id)],
-            'country' => 'required|string|max:255',
-            'phone' => ['required','string','max:10','regex:/^[0-9]+$/',Rule::unique('users')->ignore($id)],
+            'country' => 'string|max:255',
+            'phone' => ['string','max:10','regex:/^[0-9]+$/',Rule::unique('users')->ignore($id)],
             'email' => [
                 'nullable',
                 'string',
@@ -103,7 +103,7 @@ class ProfileController extends Controller
     {
         $request->validate([
             'old_password' => 'required',
-            'new_password' => 'required|string|min:6|confirmed',
+            'new_password' => 'required|string|min:0|confirmed',
         ]);
 
         // Lấy thông tin user hiện tại

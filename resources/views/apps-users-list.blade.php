@@ -266,11 +266,9 @@
                     <!-- Status -->
                     <div class="mb-3">
                         <label for="statusSelect" class="inline-block mb-2 text-base font-medium">Status</label>
-                        <select class="form-input border-slate-300 focus:outline-none focus:border-custom-500"
-                            name="status" id="statusSelect">
-                            <option value="Verified" {{ old('status') == 'Verified' ? 'selected' : '' }}>Verified</option>
-                            <option value="Waiting" {{ old('status') == 'Waiting' ? 'selected' : '' }}>Waiting</option>
-                            <option value="Rejected" {{ old('status') == 'Rejected' ? 'selected' : '' }}>Rejected</option>
+                        <select class="form-input border-slate-300 focus:outline-none focus:border-custom-500" name="status" id="statusSelect">
+                            <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Verified</option>
+
                         </select>
                     </div>
 
