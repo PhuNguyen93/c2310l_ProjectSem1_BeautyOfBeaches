@@ -433,6 +433,38 @@
                                 </div>
                             </div>
                         </form>
+                        @if (session('success'))
+                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                            <script>
+                                Swal.fire({
+                                    title: 'Success',
+                                    text: '{{ session('success') }}',
+                                    icon: 'success',
+                                    confirmButtonText: 'OK'
+                                }).then(() => {
+                                    @if (session('otp_sent'))
+                                        Alpine.store('step', 'verify');
+                                    @elseif (session('otp_verified'))
+                                        Alpine.store('step', 'reset');
+                                    @endif
+                                });
+                            </script>
+                        @endif
+
+                        <!-- SweetAlert thông báo lỗi -->
+                        @if (session('error'))
+                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                            <script>
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: '{{ session('error') }}',
+                                    icon: 'error',
+                                    confirmButtonText: 'OK'
+                                });
+                            </script>
+                        @endif
+
+
 
                         <!-- Popup chung cho người dùng chưa đăng nhập -->
                         <div id="loginPopup" class="modal fade" tabindex="-1" role="dialog">
@@ -588,12 +620,5 @@
         });
     });
 
-    @if (session('success'))
-        alert('Success: {{ session('success') }}');
-    @endif
 
-    // Hiển thị popup khi xóa PDF thành công
-    @if (session('delete'))
-        alert('Deleted: {{ session('delete') }}');
-    @endif
 </script>
