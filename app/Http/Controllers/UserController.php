@@ -17,38 +17,34 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     // Hàm để hiển thị danh sách người dùng với phân trang
-    public function index(Request $request)
-    {
-        if (Auth::user()->role_id != 2) {
-            return redirect()->route('index')->with('error', 'You do not have the required permissions.');
-        }
-        // Nhận các tham số từ yêu cầu
-        $search = $request->input('search');
-        $status = $request->input('status');
-
-        // Bắt đầu truy vấn từ bảng users
-        $query = User::query();
-
-        // Nếu có giá trị search, tìm kiếm theo tên, email
-        if ($search) {
-            $query->where(function ($q) use ($search) {
-                $q->where('name', 'LIKE', "%{$search}%")
-                    ->orWhere('email', 'LIKE', "%{$search}%");
-            });
-        }
-
-        // Lọc theo trạng thái nếu có
-        if ($status) {
-            $query->where('status', $status);
-        }
-
-        // Phân trang kết quả
-        $query = User::where('status', '=', 1);
-        $users = $query->paginate(10);
-        // dd(7);
-        // Trả về view với dữ liệu người dùng
-        return view('apps-users-list', compact('users'));
+public function index(Request $request)
+{
+    if (Auth::user()->role_id != 2) {
+        return redirect()->route('index')->with('error', 'You do not have the required permissions.');
     }
+
+    // Nhận các tham số từ yêu cầu
+    $search = $request->input('search');
+
+    // Bắt đầu truy vấn từ bảng users
+    $query = User::query();
+
+    // Nếu có giá trị search, tìm kiếm theo tên và email
+    if ($search) {
+        $query->where(function ($q) use ($search) {
+            $q->where('name', 'LIKE', "%{$search}%")
+              ->orWhere('email', 'LIKE', "%{$search}%")
+              ->orWhere('phone', 'LIKE', "%{$search}%");
+        });
+    }
+
+    // Phân trang kết quả
+    $users = $query->paginate(10);
+
+    // Trả về view với dữ liệu người dùng
+    return view('apps-users-list', compact('users'));
+}
+
 
     // Hàm để hiển thị form tạo người dùng mới (nếu cần)
     public function create()

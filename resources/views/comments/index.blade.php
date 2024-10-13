@@ -12,33 +12,34 @@
         <div class="card-body w-full">
             <h4 class="mb-3 font-semibold text-xl">All Comments on Beaches</h4>
 
-            <!-- Form tìm kiếm -->
-            <form method="GET" action="{{ route('comment-history.index') }}" class="mb-4 flex gap-4 items-center">
-                <!-- Tìm kiếm theo tên người dùng hoặc tên bãi biển -->
-                <div>
-                    <input type="text" name="search" id="search" value="{{ request('search') }}"
-                        class="border px-2 py-1" placeholder="Enter User or Beach Name">
-                </div>
+          <!-- Form tìm kiếm -->
+<form method="GET" action="{{ route('comment-history.index') }}" class="mb-4 flex gap-4 items-center">
+    <!-- Tìm kiếm theo tên người dùng hoặc tên bãi biển -->
+    <div>
+        <input type="text" name="search" id="search" value="{{ request('search') }}"
+            class="border px-2 py-1" placeholder="Enter User or Beach Name">
+    </div>
 
-                <!-- Lọc theo số sao (rating) -->
-                <div>
-                    <select name="rating" id="ratingFilter" class="border px-2 py-1">
-                        <option value="">All Ratings</option>
-                        <option value="5" {{ request('rating') == 5 ? 'selected' : '' }}>5 Stars</option>
-                        <option value="4" {{ request('rating') == 4 ? 'selected' : '' }}>4 Stars</option>
-                        <option value="3" {{ request('rating') == 3 ? 'selected' : '' }}>3 Stars</option>
-                        <option value="2" {{ request('rating') == 2 ? 'selected' : '' }}>2 Stars</option>
-                        <option value="1" {{ request('rating') == 1 ? 'selected' : '' }}>1 Star</option>
-                    </select>
-                </div>
+    <!-- Lọc theo số sao (rating) -->
+    <div>
+        <select name="rating" id="ratingFilter" class="border px-2 py-1">
+            <option value="">All Ratings</option>
+            <option value="5" {{ request('rating') == 5 ? 'selected' : '' }}>5 Stars</option>
+            <option value="4" {{ request('rating') == 4 ? 'selected' : '' }}>4 Stars</option>
+            <option value="3" {{ request('rating') == 3 ? 'selected' : '' }}>3 Stars</option>
+            <option value="2" {{ request('rating') == 2 ? 'selected' : '' }}>2 Stars</option>
+            <option value="1" {{ request('rating') == 1 ? 'selected' : '' }}>1 Star</option>
+        </select>
+    </div>
 
-                <!-- Nút Tìm Kiếm -->
-                <div>
-                    <button type="submit" class="btn bg-custom-500 text-white">
-                        Search
-                    </button>
-                </div>
-            </form>
+    <!-- Nút Tìm Kiếm -->
+    <div>
+        <button type="submit" class="btn bg-custom-500 text-white">
+            Search
+        </button>
+    </div>
+</form>
+
 
             @if ($feedbacks->isEmpty())
                 <p class="text-gray-500">No comments found.</p>
@@ -241,6 +242,10 @@
     </div>
 
 @endsection
+@push('scripts')
+ <!-- App js -->
+ <script src="{{ URL::asset('build/js/app.js') }}"></script>
+@endpush
 <script>
     function openFeedbackModal(id) {
         fetch(`/comment-history/${id}`)
