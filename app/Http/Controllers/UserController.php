@@ -58,6 +58,7 @@ public function index(Request $request)
     {
 
         // Kiểm tra xem email đã tồn tại chưa
+        // dd(1);
         $validator = Validator::make(
             $request->all(),
             [
@@ -149,7 +150,7 @@ public function index(Request $request)
         $user->save();
 
         // Điều hướng về trang danh sách người dùng với thông báo thành công
-        return redirect()->route('users.index')->with('success', 'User deactivated successfully.');
+        return redirect()->route('users.index')->with('success', 'User has been trashed');
     }
 
     public function changePassword(Request $request)
@@ -301,6 +302,7 @@ public function index(Request $request)
     public function verifyOtp(Request $request)
     {
         // Kiểm tra OTP
+
         // dd(3);
         if ($request->otp == session('otp')) {
             // Tạo tài khoản nếu OTP đúng
@@ -309,7 +311,7 @@ public function index(Request $request)
                 'email' => session('email'),
                 'password' => session('password'),
                 'role_id' => session('role_id'),
-                'status' => 'Verified',
+                'status' => '1',
             ]);
 
             // Xóa session sau khi xác thực

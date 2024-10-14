@@ -13,8 +13,8 @@
                 <div class="lg:col-span-5">
                     <div class="!px-12 !py-12 card-body">
                         <div class="text-center">
-                            <h4 class="mb-2 text-purple-500 dark:text-purple-500">Welcome Back !</h4>
-                            <p class="text-slate-500 dark:text-zink-200">Sign in to continue to Tailwick.</p>
+                            <h4 class="mb-2 text-purple-500 dark:text-purple-500">Welcome </h4>
+                            <p class="text-slate-500 dark:text-zink-200">Sign in to continue</p>
                         </div>
 
 
@@ -56,6 +56,21 @@
                                         class="inline-block text-base font-medium align-middle cursor-pointer">Remember
                                         me</label>
                                 </div>
+
+
+
+                                        <div class="relative dropdown text-end">
+                                            <h6
+                                                class="text-base font-medium transition-all duration-200 ease-linear text-slate-600 group-hover/items:text-custom-500 dark:text-zink-200 dark:group-hover/items:text-custom-500">
+                                                <a href="{{ route('forgot-password') }}" class="text-inherit">Forgot
+                                                    Password?</a>
+                                            </h6>
+                                        </div>
+
+                                    <div class="absolute z-50 hidden p-3 mt-1 text-left list-none bg-white rounded-md shadow-md dropdown-menu min-w-[9rem] flex flex-col gap-3 dark:bg-zink-600"
+                                        aria-labelledby="dropdownMenuButton">
+                                    </div>
+
 
                                 <div class="hidden mt-1 text-sm text-red-500">Please check the "Remember
                                     me" before submitting the form.</div>
@@ -130,31 +145,17 @@
                                     {{-- <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="" class="block h-6 dark:hidden"> --}}
                                 </a>
                             </div>
-                            <div class="shrink-0">
-                                <div class="relative dropdown text-end">
-                                    <div class="shrink-0">
-                                        <div class="relative dropdown text-end">
-                                            <h6
-                                                class="text-base font-medium transition-all duration-200 ease-linear text-slate-600 group-hover/items:text-custom-500 dark:text-zink-200 dark:group-hover/items:text-custom-500">
-                                                <a href="{{ route('forgot-password') }}" class="text-inherit">Forgot
-                                                    Password?</a>
-                                            </h6>
-                                        </div>
-                                    </div>
-                                    <div class="absolute z-50 hidden p-3 mt-1 text-left list-none bg-white rounded-md shadow-md dropdown-menu min-w-[9rem] flex flex-col gap-3 dark:bg-zink-600"
-                                        aria-labelledby="dropdownMenuButton">
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                         <div class="mt-auto">
-                            <img src="{{ URL::asset('build/images/auth/img-01.png') }}" alt=""
+                            <img src="{{ asset('images/beaches/1727789376.png') }}" alt="Beach Image"
                                 class="md:max-w-[32rem] mx-auto">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     @endsection
     @push('scripts')
         <script src="{{ URL::asset('build/js/pages/auth-login.init.js') }}"></script>
