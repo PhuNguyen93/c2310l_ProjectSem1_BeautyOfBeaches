@@ -443,41 +443,86 @@
                                                         @if ($blog->image_url)
                                                             <img src="{{ asset($blog->image_url) }}"
                                                                 alt="{{ $blog->title }}" class="cs_zoom_in"
-                                                                style="width: 100%; height: 400px; object-fit: cover; margin-left: 20px; margin-top: 20px;">
+                                                                style="width: 100%; height: 400px; object-fit: cover; margin: 20px 0 0 20px;">
                                                         @endif
-                                                        <div class="cs_posted_by position-absolute">
+                                                        <div class="cs_posted_by position-absolute"
+                                                            style="bottom:    0px; right: 0px;">
                                                             <span
                                                                 class="cs_accent_bg cs_white_color">{{ $blog->created_at->format('d') }}</span>
                                                             <span
                                                                 class="cs_primary_bg cs_white_color">{{ $blog->created_at->format('F Y') }}</span>
                                                         </div>
+
+
+
                                                     </a>
-                                                    <div class="cs_post_info d-flex align-items-center"
-                                                        style="flex: 1; padding-left: 15px; width: 40%;">
-                                                        <div class="cs_post_info_in text-center w-100">
-                                                            <div
-                                                                class="cs_post_avatar d-flex justify-content-center align-items-center mb-3">
+                                                    <div class="cs_post_info d-flex align-items-start"
+                                                        style="flex: 1; padding-left: 15px; width: 40%; position: relative;margin-top: 80px;margin-left: 20px">
+                                                        <div class="cs_post_info_in w-100">
+                                                            <div class="cs_post_avatar d-flex align-items-center mb-3">
                                                                 <div class="cs_avatar_thumb me-2">
-                                                                    <img src="{{ asset($blog->user->avatar_url) }}"
-                                                                        alt="Avatar" class="rounded-circle">
+                                                                    <img src="{{ asset($blog->user->img) }}"
+                                                                        alt="Avatar" class="rounded-circle"
+                                                                        style="height: 50px">
                                                                 </div>
-                                                                <div class="cs_avatar_info">
-                                                                    By.<br>{{ $blog->user->name }}
+                                                                <div class="cs_avatar_info text-start">
+                                                                    <p class="mb-0">By.</p>
+                                                                    <strong>{{ $blog->user->name }}</strong>
                                                                 </div>
                                                             </div>
                                                             <h2 class="cs_post_title cs_fs_24 cs_semibold"
                                                                 style="font-weight: bold; text-decoration: none; color: inherit; white-space: normal; overflow-wrap: break-word;">
                                                                 <a href="{{ route('blogdetails', $blog->id) }}"
-                                                                    style="color: inherit; text-decoration: none;">{{ Str::limit($blog->title, 15) }}</a>
+                                                                    style="color: #80d7e9; text-decoration: none;">{{ Str::limit($blog->title, 15) }}</a>
                                                             </h2>
                                                             <p class="cs_post_subtitle"
                                                                 style="white-space: normal; overflow-wrap: break-word;">
-                                                                {{ Str::limit($blog->description, 80) }}</p>
+                                                                {{ Str::limit($blog->description, 50) }}</p>
+                                                            <div class="cs_post_btns cs_gray_bg_1">
+                                                                <a href="{{ route('blogdetails', $blog->id) }}"
+                                                                    class="cs_comment_btn">
+                                                                    <svg width="20" height="20"
+                                                                        viewBox="0 0 20 20" fill="none"
+                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                        <mask id="mask01" style="mask-type:alpha"
+                                                                            maskUnits="userSpaceOnUse" x="0" y="0"
+                                                                            width="20" height="20">
+                                                                            <rect width="20" height="20"
+                                                                                fill="#D9D9D9" />
+                                                                        </mask>
+                                                                        <g mask="url(#mask01)">
+                                                                            <path
+                                                                                d="M1.66675 18.3337V3.33366C1.66675 2.87533 1.83008 2.48283 2.15675 2.15616C2.48286 1.83005 2.87508 1.66699 3.33341 1.66699H16.6667C17.1251 1.66699 17.5176 1.83005 17.8442 2.15616C18.1704 2.48283 18.3334 2.87533 18.3334 3.33366V13.3337C18.3334 13.792 18.1704 14.1845 17.8442 14.5112C17.5176 14.8373 17.1251 15.0003 16.6667 15.0003H5.00008L1.66675 18.3337ZM3.33341 14.3128L4.31258 13.3337H16.6667V3.33366H3.33341V14.3128Z"
+                                                                                fill="currentColor" />
+                                                                        </g>
+                                                                    </svg>
+                                                                    Comment
+                                                                </a>
+                                                                <a href="{{ route('blogdetails', $blog->id) }}"
+                                                                    class="cs_post_btn cs_primary_bg">
+                                                                    View
+                                                                    <svg width="15" height="15"
+                                                                        style="margin-left: 8px" viewBox="0 0 10 10"
+                                                                        fill="none"
+                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                        <g clip-path="url(#clip02)">
+                                                                            <path fill-rule="evenodd"
+                                                                                clip-rule="evenodd"
+                                                                                d="M9.15616 4.59014L1.31712 0.0641602C1.24542 0.0224266 1.164 0.000298672 1.08104 0H1.07968C0.996674 0.000329659 0.915216 0.022469 0.843465 0.0641992C0.771208 0.105407 0.711218 0.165101 0.669653 0.237153C0.628087 0.309204 0.606443 0.391019 0.606942 0.474199V9.52607C0.606614 9.60931 0.628283 9.69115 0.669757 9.76332C0.711231 9.83548 0.771035 9.89541 0.843117 9.93703C0.915198 9.97864 0.996997 10.0005 1.08023 10.0003C1.16346 10.0002 1.24518 9.97801 1.3171 9.93611L9.15616 5.41012C9.22813 5.36857 9.2879 5.30881 9.32946 5.23684C9.37101 5.16487 9.39289 5.08323 9.39289 5.00013C9.39289 4.91702 9.37101 4.83538 9.32946 4.76341C9.2879 4.69145 9.22813 4.63168 9.15616 4.59014Z"
+                                                                                fill="currentColor" />
+                                                                        </g>
+                                                                        <defs>
+                                                                            <clipPath id="clip02">
+                                                                                <rect width="10" height="10"
+                                                                                    fill="currentColor" />
+                                                                            </clipPath>
+                                                                        </defs>
+                                                                    </svg>
+                                                                </a>
+                                                            </div>
 
-                                                            <p class="cs_post_date"
-                                                                style="margin: 0; font-style: italic;">
-                                                                {{ $blog->created_at->format('F d, Y') }}</p>
-                                                            <div class="cs_post_btns cs_gray_bg_1 text-center">
+
+                                                            <div class="cs_post_btns cs_gray_bg_1 text-start">
                                                                 <div class="dropdown">
                                                                     <button class="btn btn-secondary dropdown-toggle"
                                                                         type="button"
@@ -489,12 +534,12 @@
                                                                     <ul class="dropdown-menu dropdown-menu-end"
                                                                         aria-labelledby="dropdownMenuButton-{{ $blog->id }}">
                                                                         <!-- Nút View -->
-                                                                        <li>
+                                                                        {{-- <li>
                                                                             <a class="dropdown-item"
                                                                                 href="{{ route('blogdetails', ['id' => $blog->id]) }}">
                                                                                 <i class="fas fa-eye"></i> View
                                                                             </a>
-                                                                        </li>
+                                                                        </li> --}}
 
                                                                         <!-- Nút Edit -->
                                                                         <li>
@@ -527,6 +572,8 @@
                                                         </div>
                                                     </div>
                                                 </article>
+
+
                                             </div>
                                         @endforeach
                                     @endif
@@ -1041,48 +1088,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        {{-- <style>
-            .card {
-                border-radius: 10px;
-                /* Bo góc cho card */
-                overflow: hidden;
-                /* Giúp bo góc áp dụng cho cả hình ảnh */
-                /* margin-bottom: 20px; */
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                /* Đổ bóng nhẹ cho card */
-                border: 10px;
-            }
 
-            .card-title {
-                font-size: 30px;
-                font-weight: bold;
-                /* margin-bottom: 10px; */
-                text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
-                margin-left: 200px;
-                /* Tạo hiệu ứng chữ nổi trên nền */
-            }
-
-            .card-text {
-                font-size: 20px;
-                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-                margin-left: 150px;
-            }
-
-            .card-img-overlay {
-                background: rgba(180, 179, 179, 0.6);
-                /* Làm nền mờ để văn bản rõ hơn */
-                padding: 15px;
-                border-bottom-left-radius: 10px;
-                border-bottom-right-radius: 10px;
-                /* Bo góc dưới cho overlay */
-            }
-
-            .card-img {
-                width: 100%;
-                height: auto;
-                object-fit: cover;
-            }
-        </style> --}}
         <style>
             .nav-tabs {
                 display: flex;
@@ -1111,6 +1117,104 @@
                 /* Điều chỉnh khoảng cách trong nút */
                 display: inline-block;
                 /* Đảm bảo nút là khối inline */
+            }
+        </style>
+        <style>
+            .cs_posted_by {
+                position: absolute;
+                /* Giữ nguyên vị trí tuyệt đối */
+
+
+                background-color: hsla(0, 0%, 1%, 0.502);
+                /* Màu nền cho khung */
+
+                padding: 10px;
+                /* Khoảng cách bên trong khung */
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+                /* Bóng cho khung */
+            }
+
+            .date-day,
+            .date-month-year {
+
+                padding: 5px;
+                /* Khoảng cách bên trong */
+                display: inline-block;
+                /* Hiển thị inline-block để có thể căn chỉnh */
+
+            }
+
+            .date-day {
+                background-color: rgba(18, 118, 225, 0.7);
+                /* Màu nền cho ngày */
+            }
+
+            .date-month-year {
+                background-color: rgba(0, 123, 255, 0.5);
+                /* Màu nền cho tháng và năm */
+            }
+
+            .cs_white_color {
+                color: #fff;
+                /* Màu chữ trắng */
+            }
+
+            .cs_post_btns {
+                display: flex;
+                /* Sử dụng flexbox để căn chỉnh các nút */
+                gap: 10px;
+                /* Khoảng cách giữa các nút */
+                padding: 10px;
+                /* Khoảng cách bên trong */
+                background-color: #f7f7f7;
+                /* Màu nền cho khung */
+                border-radius: 8px;
+                /* Góc bo cho khung */
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                /* Bóng cho khung */
+            }
+
+            .cs_comment_btn,
+            .cs_post_btn {
+                display: flex;
+                /* Căn chỉnh biểu tượng và văn bản theo hàng ngang */
+                align-items: center;
+                /* Căn giữa theo chiều dọc */
+                text-decoration: none;
+                /* Xóa gạch chân */
+                color: #333;
+                /* Màu chữ */
+                padding: 10px 15px;
+                /* Khoảng cách bên trong */
+                border-radius: 5px;
+                /* Góc bo cho các nút */
+                transition: background-color 0.3s ease;
+                /* Hiệu ứng chuyển màu nền */
+            }
+
+            .cs_comment_btn:hover,
+            .cs_post_btn:hover {
+                background-color: rgba(0, 0, 0, 0.1);
+                /* Màu nền khi hover */
+            }
+
+            .cs_post_btn.cs_primary_bg {
+                background-color: #007bff;
+                /* Màu nền cho nút "More" */
+                color: #fff;
+                /* Màu chữ trắng */
+            }
+
+            .cs_post_btn.cs_primary_bg:hover {
+                background-color: #0056b3;
+                /* Màu nền khi hover cho nút "More" */
+            }
+
+            svg {
+                margin-right: 10px;
+                /* Khoảng cách giữa biểu tượng và văn bản */
+                fill: currentColor;
+                /* Sử dụng màu hiện tại cho biểu tượng */
             }
         </style>
 </body>
