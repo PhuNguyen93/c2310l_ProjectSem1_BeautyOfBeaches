@@ -428,99 +428,116 @@
                     </div>
                     <div id="userBlogsTab" class="tab-content" style="display: none;">
                         <div class="container">
-                            @if ($blogs->isEmpty())
-                                <p style="text-align: center">No blogs found for this user.</p>
-                            @else
-                                <div class="row">
-                                    @foreach ($blogs->sortByDesc('created_at') as $blog)
-                                        <div class="col-md-6 mb-4">
-                                            <div class="card"
-                                                style="background-color: white; border: 1px solid #ddd;">
-                                                <div
-                                                    class="card-header d-flex justify-content-between align-items-center">
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="{{ asset($blog->user->avatar_url) }}"
-                                                            alt="{{ $blog->user->name }}"
-                                                            style="width: 50px; height: 50px; border-radius: 50%;">
-                                                        <strong class="ms-2">{{ $blog->user->name }}</strong>
-                                                    </div>
-                                                    <span>{{ $blog->created_at->format('Y-m-d') }}</span>
-                                                    <div class="dropdown ms-3">
-                                                        <button class="btn btn-secondary dropdown-toggle"
-                                                            type="button"
-                                                            id="dropdownMenuButton-{{ $blog->id }}"
-                                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                                            Actions
-                                                        </button>
-                                                        <ul class="dropdown-menu dropdown-menu-end"
-                                                            aria-labelledby="dropdownMenuButton-{{ $blog->id }}">
-                                                            <!-- Nút View -->
-                                                            <li>
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('blogdetails', ['id' => $blog->id]) }}">
-                                                                    <i class="fas fa-eye"></i> View
-                                                                </a>
-                                                            </li>
+                            <div class="card"
+                                style="background-color: white; font-family: Arial, sans-serif; color: #333;">
+                                <div class="row cs_gap_y_24">
+                                    @if ($blogs->isEmpty())
+                                        <p style="text-align: center">No blogs found for this user.</p>
+                                    @else
+                                        @foreach ($blogs->sortByDesc('created_at') as $blog)
+                                            <div class="col-lg-12 mb-4">
+                                                <article class="cs_post cs_style_1 d-flex">
+                                                    <a href="{{ route('blogdetails', $blog->id) }}"
+                                                        class="cs_post_thumb cs_zoom overflow-hidden position-relative"
+                                                        style="flex: 1; width: 100%;">
+                                                        @if ($blog->image_url)
+                                                            <img src="{{ asset($blog->image_url) }}"
+                                                                alt="{{ $blog->title }}" class="cs_zoom_in"
+                                                                style="width: 100%; height: 400px; object-fit: cover; margin-left: 20px; margin-top: 20px;">
+                                                        @endif
+                                                        <div class="cs_posted_by position-absolute">
+                                                            <span
+                                                                class="cs_accent_bg cs_white_color">{{ $blog->created_at->format('d') }}</span>
+                                                            <span
+                                                                class="cs_primary_bg cs_white_color">{{ $blog->created_at->format('F Y') }}</span>
+                                                        </div>
+                                                    </a>
+                                                    <div class="cs_post_info d-flex align-items-center"
+                                                        style="flex: 1; padding-left: 15px; width: 40%;">
+                                                        <div class="cs_post_info_in text-center w-100">
+                                                            <div
+                                                                class="cs_post_avatar d-flex justify-content-center align-items-center mb-3">
+                                                                <div class="cs_avatar_thumb me-2">
+                                                                    <img src="{{ asset($blog->user->avatar_url) }}"
+                                                                        alt="Avatar" class="rounded-circle">
+                                                                </div>
+                                                                <div class="cs_avatar_info">
+                                                                    By.<br>{{ $blog->user->name }}
+                                                                </div>
+                                                            </div>
+                                                            <h2 class="cs_post_title cs_fs_24 cs_semibold"
+                                                                style="font-weight: bold; text-decoration: none; color: inherit; white-space: normal; overflow-wrap: break-word;">
+                                                                <a href="{{ route('blogdetails', $blog->id) }}"
+                                                                    style="color: inherit; text-decoration: none;">{{ Str::limit($blog->title, 15) }}</a>
+                                                            </h2>
+                                                            <p class="cs_post_subtitle"
+                                                                style="white-space: normal; overflow-wrap: break-word;">
+                                                                {{ Str::limit($blog->description, 80) }}</p>
 
-                                                            <!-- Nút Edit -->
-                                                            <li>
-                                                                <button class="dropdown-item" data-bs-toggle="modal"
-                                                                    data-bs-target="#editBlogModal"
-                                                                    onclick="populateEditForm({{ $blog->id }}, '{{ $blog->title }}', '{{ $blog->description }}')">
-                                                                    <i class="fas fa-edit"></i> Edit
-                                                                </button>
-                                                            </li>
-
-                                                            <!-- Nút Delete -->
-                                                            <li>
-                                                                <form
-                                                                    action="{{ route('blogs.permanentlyDelete', $blog->id) }}"
-                                                                    method="POST" style="display: inline;">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="dropdown-item"
-                                                                        onclick="return confirm('Are you sure you want to delete this blog?');">
-                                                                        <i class="fas fa-trash"></i> Delete
+                                                            <p class="cs_post_date"
+                                                                style="margin: 0; font-style: italic;">
+                                                                {{ $blog->created_at->format('F d, Y') }}</p>
+                                                            <div class="cs_post_btns cs_gray_bg_1 text-center">
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-secondary dropdown-toggle"
+                                                                        type="button"
+                                                                        id="dropdownMenuButton-{{ $blog->id }}"
+                                                                        data-bs-toggle="dropdown"
+                                                                        aria-expanded="false">
+                                                                        Actions
                                                                     </button>
-                                                                </form>
-                                                            </li>
-                                                        </ul>
+                                                                    <ul class="dropdown-menu dropdown-menu-end"
+                                                                        aria-labelledby="dropdownMenuButton-{{ $blog->id }}">
+                                                                        <!-- Nút View -->
+                                                                        <li>
+                                                                            <a class="dropdown-item"
+                                                                                href="{{ route('blogdetails', ['id' => $blog->id]) }}">
+                                                                                <i class="fas fa-eye"></i> View
+                                                                            </a>
+                                                                        </li>
+
+                                                                        <!-- Nút Edit -->
+                                                                        <li>
+                                                                            <button class="dropdown-item"
+                                                                                data-bs-toggle="modal"
+                                                                                data-bs-target="#editBlogModal"
+                                                                                onclick="populateEditForm({{ $blog->id }}, '{{ $blog->title }}', '{{ $blog->description }}')">
+                                                                                <i class="fas fa-edit"></i> Edit
+                                                                            </button>
+                                                                        </li>
+
+                                                                        <!-- Nút Delete -->
+                                                                        <li>
+                                                                            <form
+                                                                                action="{{ route('blogs.permanentlyDelete', $blog->id) }}"
+                                                                                method="POST"
+                                                                                style="display: inline;">
+                                                                                @csrf
+                                                                                @method('DELETE')
+                                                                                <button type="submit"
+                                                                                    class="dropdown-item"
+                                                                                    onclick="return confirm('Are you sure you want to delete this blog?');">
+                                                                                    <i class="fas fa-trash"></i> Delete
+                                                                                </button>
+                                                                            </form>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-
-
-                                                <div class="card text-white">
-
-                                                    @if ($blog->image_url)
-                                                        <img src="{{ asset($blog->image_url) }}" class="card-img"
-                                                            alt="{{ $blog->title }}"
-                                                            style="height: 350px; object-fit: cover;">
-                                                    @endif
-                                                    <div class="card-img-overlay d-flex flex-column justify-content-end"
-                                                        style="background: #3a3a3a80; ">
-                                                        <h5 class="card-title">
-                                                            {{ Str::limit($blog->title, 15, '...') }}</h5><br>
-                                                        <i class="fa-solid fa-heart"
-                                                            style="font-size: 24px;margin-left: 320px;"></i>
-                                                        <br>
-                                                        <i class="fa-solid fa-comment"
-                                                            style="font-size: 24px;margin-left: 320px;"></i>
-                                                        <br>
-                                                        <i
-                                                            class="fa-solid fa-bookmark"style="font-size: 24px;margin-left: 320px;"></i><br>
-                                                        <p class="card-text">
-                                                            {{ Str::limit($blog->description, 30, '...') }}</p>
-                                                    </div>
-                                                </div>
-
-
+                                                </article>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    @endif
                                 </div>
-                            @endif
+                            </div>
                         </div>
                     </div>
+
+
+
+
 
 
                     <!-- Modal chỉnh sửa blog -->
@@ -1024,7 +1041,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <style>
+        {{-- <style>
             .card {
                 border-radius: 10px;
                 /* Bo góc cho card */
@@ -1065,7 +1082,7 @@
                 height: auto;
                 object-fit: cover;
             }
-        </style>
+        </style> --}}
         <style>
             .nav-tabs {
                 display: flex;
