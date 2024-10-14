@@ -277,36 +277,7 @@
                             </div>
                         </div>
 
-                        <style>
-                            .nav-tabs {
-                                display: flex;
-                                justify-content: center;
-                                /* Căn giữa các tab */
-                                flex-wrap: wrap;
-                                /* Cho phép các tab xuống dòng */
-                                padding: 0;
-                                /* Xóa padding mặc định */
-                                margin: 20px 0;
-                                /* Margin trên và dưới cho các tab */
-                            }
 
-                            .nav-tabs .group {
-                                margin: 10px;
-                                /* Khoảng cách giữa các nút */
-                                flex: 1 0 30%;
-                                /* Chiều rộng cho mỗi nút */
-                                text-align: center;
-                                /* Căn giữa văn bản trong các nút */
-                            }
-
-                            /* Nếu bạn muốn điều chỉnh chiều rộng của các tab */
-                            .tab-link {
-                                padding: 10px 20px;
-                                /* Điều chỉnh khoảng cách trong nút */
-                                display: inline-block;
-                                /* Đảm bảo nút là khối inline */
-                            }
-                        </style>
 
                     </div>
                     <div id="updateProfileTab" class="tab-content" style="display: none;">
@@ -461,7 +432,7 @@
                                 <p style="text-align: center">No blogs found for this user.</p>
                             @else
                                 <div class="row">
-                                    @foreach ($blogs as $blog)
+                                    @foreach ($blogs->sortByDesc('created_at') as $blog)
                                         <div class="col-md-6 mb-4">
                                             <div class="card"
                                                 style="background-color: white; border: 1px solid #ddd;">
@@ -516,25 +487,33 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div class="card-body position-relative">
+
+
+                                                <div class="card text-white">
+
                                                     @if ($blog->image_url)
-                                                        <div class="image-container"
-                                                            style="position: relative; overflow: hidden;">
-                                                            <img src="{{ asset($blog->image_url) }}"
-                                                                class="card-img-top" alt="{{ $blog->title }}"
-                                                                style="width: 300px; height: 300px; object-fit: cover;">
-                                                        </div>
+                                                        <img src="{{ asset($blog->image_url) }}" class="card-img"
+                                                            alt="{{ $blog->title }}"
+                                                            style="height: 350px; object-fit: cover;">
                                                     @endif
-                                                    <h5 class="card-title position-absolute"
-                                                        style="top: 10px; right: 10px; color: white; text-shadow: 1px 1px 2px black;">
-                                                        {{ Str::limit($blog->title, 10, '...') }}
-                                                        <!-- Giới hạn tiêu đề -->
-                                                    </h5>
-                                                    <p class="card-text position-absolute"
-                                                        style="top: 40px; right: 10px;; color: white; text-shadow: 1px 1px 2px black;">
-                                                        {{ Str::limit($blog->description, 10) }}</p>
-                                                    <!-- Giới hạn mô tả -->
+                                                    <div class="card-img-overlay d-flex flex-column justify-content-end"
+                                                        style="background: #3a3a3a80; ">
+                                                        <h5 class="card-title">
+                                                            {{ Str::limit($blog->title, 15, '...') }}</h5><br>
+                                                        <i class="fa-solid fa-heart"
+                                                            style="font-size: 24px;margin-left: 320px;"></i>
+                                                        <br>
+                                                        <i class="fa-solid fa-comment"
+                                                            style="font-size: 24px;margin-left: 320px;"></i>
+                                                        <br>
+                                                        <i
+                                                            class="fa-solid fa-bookmark"style="font-size: 24px;margin-left: 320px;"></i><br>
+                                                        <p class="card-text">
+                                                            {{ Str::limit($blog->description, 30, '...') }}</p>
+                                                    </div>
                                                 </div>
+
+
                                             </div>
                                         </div>
                                     @endforeach
@@ -1042,8 +1021,81 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <style>
+            .card {
+                border-radius: 10px;
+                /* Bo góc cho card */
+                overflow: hidden;
+                /* Giúp bo góc áp dụng cho cả hình ảnh */
+                /* margin-bottom: 20px; */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                /* Đổ bóng nhẹ cho card */
+                border: 10px;
+            }
+
+            .card-title {
+                font-size: 30px;
+                font-weight: bold;
+                /* margin-bottom: 10px; */
+                text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+                margin-left: 200px;
+                /* Tạo hiệu ứng chữ nổi trên nền */
+            }
+
+            .card-text {
+                font-size: 20px;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+                margin-left: 150px;
+            }
+
+            .card-img-overlay {
+                background: rgba(180, 179, 179, 0.6);
+                /* Làm nền mờ để văn bản rõ hơn */
+                padding: 15px;
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+                /* Bo góc dưới cho overlay */
+            }
+
+            .card-img {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
+        </style>
+        <style>
+            .nav-tabs {
+                display: flex;
+                justify-content: center;
+                /* Căn giữa các tab */
+                flex-wrap: wrap;
+                /* Cho phép các tab xuống dòng */
+                padding: 0;
+                /* Xóa padding mặc định */
+                margin: 20px 0;
+                /* Margin trên và dưới cho các tab */
+            }
+
+            .nav-tabs .group {
+                margin: 10px;
+                /* Khoảng cách giữa các nút */
+                flex: 1 0 30%;
+                /* Chiều rộng cho mỗi nút */
+                text-align: center;
+                /* Căn giữa văn bản trong các nút */
+            }
+
+            /* Nếu bạn muốn điều chỉnh chiều rộng của các tab */
+            .tab-link {
+                padding: 10px 20px;
+                /* Điều chỉnh khoảng cách trong nút */
+                display: inline-block;
+                /* Đảm bảo nút là khối inline */
+            }
+        </style>
 </body>
 
 </html>
