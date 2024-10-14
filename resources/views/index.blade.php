@@ -3,52 +3,61 @@
 
 <x-head />
 <style>
-.cs_bg_slideshow {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    background-image: url('assets/images/Avatar/1727664999.png');
-    animation: slideshow 15s infinite;
-}
-
-@keyframes slideshow {
-    0% {
+    .cs_bg_slideshow {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        background-size: cover;
+        background-position: center;
         background-image: url('assets/images/Avatar/1727664999.png');
+        animation: slideshow 15s infinite;
     }
-    33% {
-        background-image: url('assets/images/Avatar/1727713839.jpg');
-    }
-    66% {
-        background-image: url('assets/images/Avatar/1727429758.jpg');
-    }
-    100% {
-        background-image: url('assets/images/Avatar/1727664999.png');
-    }
-}
 
-.cs_banner_text {
-    position: absolute;
-    top: 50%;             /* Centers vertically */
-    right: 10%;           /* Adjust this value to position text further from the right edge */
-    transform: translate(0, -50%); /* Centers the text vertically */
-    text-align: left;     /* Aligns the text to the left */
-    color: white;
-    padding: 20px;        /* Optional: Add some padding for better spacing */
-}
+    @keyframes slideshow {
+        0% {
+            background-image: url('assets/images/Avatar/1727664999.png');
+        }
 
-.cs_banner_title {
-    font-size: 56px;
-    margin-bottom: 20px;
-}
+        33% {
+            background-image: url('assets/images/Avatar/1727713839.jpg');
+        }
 
-.cs_banner_subtitle {
-    font-size: 18px;
-    max-width: 600px;
-    margin: 0;           /* Remove margin for subtitle */
-}
-    </style>
+        66% {
+            background-image: url('assets/images/Avatar/1727429758.jpg');
+        }
+
+        100% {
+            background-image: url('assets/images/Avatar/1727664999.png');
+        }
+    }
+
+    .cs_banner_text {
+        position: absolute;
+        top: 50%;
+        /* Centers vertically */
+        right: 10%;
+        /* Adjust this value to position text further from the right edge */
+        transform: translate(0, -50%);
+        /* Centers the text vertically */
+        text-align: left;
+        /* Aligns the text to the left */
+        color: white;
+        padding: 20px;
+        /* Optional: Add some padding for better spacing */
+    }
+
+    .cs_banner_title {
+        font-size: 56px;
+        margin-bottom: 20px;
+    }
+
+    .cs_banner_subtitle {
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0;
+        /* Remove margin for subtitle */
+    }
+</style>
 
 <body>
 
@@ -542,10 +551,10 @@
     <section class="cs_bg_slideshow cs_height_125 cs_height_lg_70">
         <div class="cs_height_125 cs_height_lg_70"></div>
         <div class="container">
-          <div class="cs_banner_text cs_banner_text cs_white_color">
-            <h2 class="cs_banner_title cs_white_color cs_fs_56 wow fadeInRight data-wow-duration="0.8s"
+            <div class="cs_banner_text cs_banner_text cs_white_color">
+                <h2 class="cs_banner_title cs_white_color cs_fs_56 wow fadeInRight data-wow-duration="0.8s"
                     data-wow-delay="0.2s">Nha Trang Beach</h2>
-            <p class="cs_banner_subtitle cs_fs_18"> With its enchanting beauty both day and night, is a must-visit
+                <p class="cs_banner_subtitle cs_fs_18"> With its enchanting beauty both day and night, is a must-visit
                     destination to experience at least once in a lifetime. During the day, the soft white sand merges
                     with the sparkling turquoise waters under the bright sun, creating a stunning natural landscape.
                     Visitors can immerse themselves in the crystal-clear sea or stroll along the serene shoreline. As
@@ -553,7 +562,7 @@
                     water's surface and the gentle sound of waves lapping the shore. It’s a tranquil moment that soothes
                     the soul and leaves an unforgettable impression.<br><br>
                     They really have thought about everything here down to the finest details.</p>
-             <div class="cs_banner_review cs_medium">
+                <div class="cs_banner_review cs_medium">
                     <svg width="110" height="22" viewBox="0 0 110 22" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 0H20.7736V21.309H0V0Z" fill="#1BB580" />
@@ -579,7 +588,7 @@
                     </svg>
                     01 Jan 2024
                 </div>
-        </div>
+            </div>
         </div>
         <div class="cs_height_140 cs_height_lg_80"></div>
     </section>
@@ -684,7 +693,8 @@
         <div class="container-fluid">
             <div class="cs_section_heading cs_style_1 text-center">
                 <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">News & Blogs</h3>
-                <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">KEEP YOU INFORMED</h2>
+                <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0 wow fadeInUp" data-wow-duration="0.8s"
+                    data-wow-delay="0.2s">KEEP YOU INFORMED</h2>
             </div>
             <div class="cs_height_55 cs_height_lg_40"></div>
             <div class="row cs_gap_y_24">
@@ -692,38 +702,54 @@
                 @foreach ($blogs as $blog)
                     <div class="col-lg-6">
                         <article class="cs_post cs_style_1">
-                            <a href="{{ route('blogdetails', $blog->id) }}" class="cs_post_thumb cs_zoom overflow-hidden position-relative">
-                                <img src="{{ asset($blog->image_url) }}" alt="{{ $blog->title }}" class="cs_zoom_in">
+                            <a href="{{ route('blogdetails', $blog->id) }}"
+                                class="cs_post_thumb cs_zoom overflow-hidden position-relative">
+                                <img src="{{ asset($blog->image_url) }}" alt="{{ $blog->title }}"
+                                    class="cs_zoom_in w-100 h-100 object-fit-cover">
                                 <div class="cs_posted_by position-absolute">
-                                    <span class="cs_accent_bg cs_white_color">{{ $blog->created_at->format('d') }}</span>
-                                    <span class="cs_primary_bg cs_white_color">{{ $blog->created_at->format('F Y') }}</span>
+                                    <span
+                                        class="cs_accent_bg cs_white_color">{{ $blog->created_at->format('d') }}</span>
+                                    <span
+                                        class="cs_primary_bg cs_white_color">{{ $blog->created_at->format('F Y') }}</span>
                                 </div>
                             </a>
                             <div class="cs_post_info">
                                 <div class="cs_post_info_in">
                                     <div class="cs_post_avatar">
                                         <div class="cs_avatar_thumb">
-                                            <img src="{{ asset($blog->user->img) }}" alt="Avatar" class="rounded-circle">
+                                            <img src="{{ asset($blog->user->img) }}" alt="Avatar"
+                                                class="rounded-circle">
                                         </div>
                                         <div class="cs_avatar_info">By. <br>{{ $blog->user->name }}</div>
                                     </div>
-                                    <h2 class="cs_post_title cs_fs_24 cs_semibold"><a href="{{ route('blogdetails', $blog->id) }}">{{ Str::limit($blog->title, 20) }}</a></h2>
+                                    <h2 class="cs_post_title cs_fs_24 cs_semibold"><a
+                                            href="{{ route('blogdetails', $blog->id) }}">{{ Str::limit($blog->title, 20) }}</a>
+                                    </h2>
                                     <p class="cs_post_subtitle">{{ Str::limit($blog->description, 50) }}</p>
                                     <div class="cs_post_btns cs_gray_bg_1">
-                                        <a href="#">
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <mask id="mask01" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
+                                        <a href="{{ route('blogdetails', $blog->id) }}">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <mask id="mask01" style="mask-type:alpha"
+                                                    maskUnits="userSpaceOnUse" x="0" y="0" width="20"
+                                                    height="20">
                                                     <rect width="20" height="20" fill="#D9D9D9" />
                                                 </mask>
                                                 <g mask="url(#mask01)">
-                                                    <path d="M1.66675 18.3337V3.33366C1.66675 2.87533 1.83008 2.48283 2.15675 2.15616C2.48286 1.83005 2.87508 1.66699 3.33341 1.66699H16.6667C17.1251 1.66699 17.5176 1.83005 17.8442 2.15616C18.1704 2.48283 18.3334 2.87533 18.3334 3.33366V13.3337C18.3334 13.792 18.1704 14.1845 17.8442 14.5112C17.5176 14.8373 17.1251 15.0003 16.6667 15.0003H5.00008L1.66675 18.3337ZM3.33341 14.3128L4.31258 13.3337H16.6667V3.33366H3.33341V14.3128Z" fill="currentColor" />
+                                                    <path
+                                                        d="M1.66675 18.3337V3.33366C1.66675 2.87533 1.83008 2.48283 2.15675 2.15616C2.48286 1.83005 2.87508 1.66699 3.33341 1.66699H16.6667C17.1251 1.66699 17.5176 1.83005 17.8442 2.15616C18.1704 2.48283 18.3334 2.87533 18.3334 3.33366V13.3337C18.3334 13.792 18.1704 14.1845 17.8442 14.5112C17.5176 14.8373 17.1251 15.0003 16.6667 15.0003H5.00008L1.66675 18.3337ZM3.33341 14.3128L4.31258 13.3337H16.6667V3.33366H3.33341V14.3128Z"
+                                                        fill="currentColor" />
                                                 </g>
                                             </svg> Comment(5)
                                         </a>
-                                        <a href="{{ route('blogdetails', $blog->id) }}" class="cs_post_btn cs_primary_bg">More
-                                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <a href="{{ route('blogdetails', $blog->id) }}"
+                                            class="cs_post_btn cs_primary_bg">More
+                                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
                                                 <g clip-path="url(#clip02)">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.15616 4.59014L1.31712 0.0641602C1.24542 0.0224266 1.164 0.000298672 1.08104 0H1.07968C0.996674 0.000329659 0.915216 0.022469 0.843465 0.0641992C0.771208 0.105407 0.711218 0.165101 0.669653 0.237153C0.628087 0.309204 0.606443 0.391019 0.606942 0.474199V9.52607C0.606614 9.60931 0.628283 9.69115 0.669757 9.76332C0.711231 9.83548 0.771035 9.89541 0.843117 9.93703C0.915198 9.97864 0.996997 10.0005 1.08023 10.0003C1.16346 10.0002 1.24518 9.97801 1.3171 9.93611L9.15616 5.41012C9.22813 5.36857 9.2879 5.30881 9.32946 5.23684C9.37101 5.16487 9.39289 5.08323 9.39289 5.00013C9.39289 4.91702 9.37101 4.83538 9.32946 4.76341C9.2879 4.69145 9.22813 4.63168 9.15616 4.59014Z" fill="currentColor" />
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M9.15616 4.59014L1.31712 0.0641602C1.24542 0.0224266 1.164 0.000298672 1.08104 0H1.07968C0.996674 0.000329659 0.915216 0.022469 0.843465 0.0641992C0.771208 0.105407 0.711218 0.165101 0.669653 0.237153C0.628087 0.309204 0.606443 0.391019 0.606942 0.474199V9.52607C0.606614 9.60931 0.628283 9.69115 0.669757 9.76332C0.711231 9.83548 0.771035 9.89541 0.843117 9.93703C0.915198 9.97864 0.996997 10.0005 1.08023 10.0003C1.16346 10.0002 1.24518 9.97801 1.3171 9.93611L9.15616 5.41012C9.22813 5.36857 9.2879 5.30881 9.32946 5.23684C9.37101 5.16487 9.39289 5.08323 9.39289 5.00013C9.39289 4.91702 9.37101 4.83538 9.32946 4.76341C9.2879 4.69145 9.22813 4.63168 9.15616 4.59014Z"
+                                                        fill="currentColor" />
                                                 </g>
                                                 <defs>
                                                     <clipPath id="clip02">
@@ -748,14 +774,16 @@
     <!-- End Blog Section -->
 
     <!-- Start footer -->
-    <footer class="cs_footer cs_style_1 cs_white_color cs_bg_filed cs_primary_bg" data-src="assets/images/baiadopost.webp">
+    <footer class="cs_footer cs_style_1 cs_white_color cs_bg_filed cs_primary_bg"
+        data-src="assets/images/baiadopost.webp">
         <div class="cs_newsletter_1_wrap">
             <div class="container-fluid">
                 <div class="cs_newsletter cs_style_1 cs_accent_bg">
                     <div class="cs_newsletter_icon"><img src="assets/images/icons/envlop.png" alt="Icon"></div>
                     <h2 class="cs_newsletter_title cs_fs_40 cs_bold mb-0 cs_white_color">Subscribe Our Newslatter</h2>
                     <form action="#" class="cs_newsletter_form">
-                        <input type="text" class="cs_newsletter_form_field" placeholder="Enter your email address ...">
+                        <input type="text" class="cs_newsletter_form_field"
+                            placeholder="Enter your email address ...">
                         <button type="submit" class="cs_btn cs_style_1 cs_fs_18 cs_medium">
                             Subscribe<svg width="20" height="10" viewBox="0 0 20 10" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -843,16 +871,28 @@
     </footer>
     <style>
         .cs_blur_container {
-        background: rgba(255, 255, 255, 0.1); /* Màu nền với độ trong suốt */
-        border-radius: 10px; /* Bo tròn góc */
-        padding: 20px; /* Khoảng cách bên trong */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Đổ bóng */
-        backdrop-filter: blur(10px); Làm mờ nền
-        -webkit-backdrop-filter: blur(10px); Hỗ trợ cho Safari
-        color: #fff; /* Màu chữ trắng */
-    }
+            background: rgba(255, 255, 255, 0.1);
+            /* Màu nền với độ trong suốt */
+            border-radius: 10px;
+            /* Bo tròn góc */
+            padding: 20px;
+            /* Khoảng cách bên trong */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Đổ bóng */
+            backdrop-filter: blur(10px);
+            Làm mờ nền -webkit-backdrop-filter: blur(10px);
+            Hỗ trợ cho Safari color: #fff;
+            /* Màu chữ trắng */
+        }
+
+        .cs_post_thumb {
+            width: 100%;
+            height: 400px;
+        }
+
+
     </style>
-        <!-- End footer -->
+    <!-- End footer -->
 
     <!-- Script -->
     <x-script />

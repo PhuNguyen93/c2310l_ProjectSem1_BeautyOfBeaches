@@ -35,7 +35,6 @@ class BlogController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(5);
 
-        // Lấy blog phổ biến (Popular Blogs)
         $popularBlogs = $this->getPopularBlogs();
 
         return view('blogs.blog', compact('blogs', 'popularBlogs', 'search'));
@@ -49,7 +48,7 @@ class BlogController extends Controller
         }
         $search = $request->input('search');
 
-        $blogs = Blog::where('status', '!=' , 0) // Thêm điều kiện lọc theo status
+        $blogs = Blog::where('status', '!=', 0)
             ->when($search, function ($query, $search) {
                 return $query->where('title', 'like', "%{$search}%");
             })
@@ -125,12 +124,14 @@ class BlogController extends Controller
             $mainImagePath = $images[0]->store('public/assets/blogs');
             $mainImageUrl = str_replace('public/', 'storage/', $mainImagePath);
 
+            $status = (Auth::user()->role_id == 2) ? 1 : 2;
+
             $blog = Blog::create([
                 'title' => $request->title,
                 'description' => $request->description,
                 'user_id' => Auth::user()->id,
                 'image_url' => $mainImageUrl,
-                'status' => 2, //pending
+                'status' => $status, //pending
             ]);
 
             foreach ($images as $key => $image) {
@@ -146,6 +147,21 @@ class BlogController extends Controller
             }
         }
         return redirect()->route('user.blog')->with('success', 'Blog has been added and is pending approval.');
+    }
+    public function showBlogComments(Request $request)
+    {
+        $search = $request->input('search');
+        $rating = $request->input('rating');
+
+        $feedbacks = BlogFeedback::when($search, function ($query, $search) {
+            $query->whereHas('user', function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%");
+            })->orWhere('comment', 'like', "%{$search}%");
+        })->when($rating, function ($query, $rating) {
+            $query->where('rating', $rating);
+        })->paginate(5);
+
+        return view('blog-comments.index', compact('feedbacks'));
     }
     public function update(Request $request, $id)
     {
@@ -191,7 +207,13 @@ class BlogController extends Controller
 
         return redirect()->back()->with('success', 'Blog post updated successfully');
     }
+    public function destroyBlogComment($id)
+    {
+        $feedback = BlogFeedback::findOrFail($id);
+        $feedback->delete();
 
+        return redirect()->back()->with('success', 'Comment deleted successfully.');
+    }
     public function destroyBlog($id)
     {
         $blog = Blog::findOrFail($id);
@@ -214,15 +236,15 @@ class BlogController extends Controller
         return redirect()->route('admin.blog')->with('success', 'Blog has been trashed');
     }
     public function permanentlyDelete($id)
-{
-    // Tìm blog theo ID
-    $blog = Blog::findOrFail($id);
+    {
+        // Tìm blog theo ID
+        $blog = Blog::findOrFail($id);
 
-    // Xóa vĩnh viễn blog
-    $blog->forceDelete();
+        // Xóa vĩnh viễn blog
+        $blog->forceDelete();
 
-    return redirect()->back()->with('success', 'Blog deleted permanently successfully');
-}
+        return redirect()->back()->with('success', 'Blog deleted permanently successfully');
+    }
 
 
     public function storeFeedback(Request $request, $id)
@@ -270,19 +292,18 @@ class BlogController extends Controller
 
     public function deleteFeedback($feedbackId)
     {
-    $feedback = BlogFeedback::findOrFail($feedbackId);
+        $feedback = BlogFeedback::findOrFail($feedbackId);
 
-    // Kiểm tra nếu người dùng hiện tại là chủ của feedback
-    if (Auth::id() !== $feedback->user_id) {
-        return redirect()->back()->with('error', 'You are not allowed to delete this feedback.');
-    }
+        // Kiểm tra nếu người dùng hiện tại là chủ của feedback
+        if (Auth::id() !== $feedback->user_id) {
+            return redirect()->back()->with('error', 'You are not allowed to delete this feedback.');
+        }
 
-    // Xóa feedback
-    $feedback->delete();
+        // Xóa feedback
+        $feedback->delete();
 
-    // Trả về trang trước đó và thông báo thành công
-    return redirect()->back()->with('success', 'Feedback deleted successfully.');
-
+        // Trả về trang trước đó và thông báo thành công
+        return redirect()->back()->with('success', 'Feedback deleted successfully.');
     }
 
     public function getPopularBlogs()

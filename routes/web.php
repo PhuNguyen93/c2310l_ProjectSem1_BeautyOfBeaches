@@ -51,6 +51,8 @@ Route::get('/dashboard/blogs', [BlogController::class, 'index'])->name('admin.bl
 Route::post('/dashboard/blogs', [BlogController::class, 'store'])->name('blogs.store');
 Route::delete('/dashboard/blogs/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy');
 Route::patch('/dashboard/blogs/approve/{id}', [BlogController::class, 'approve'])->name('blogs.approve');
+Route::get('/dashboard/blogs/comments', [BlogController::class, 'showBlogComments'])->name('blogs.comment');
+Route::delete('dashboard/blogs/comments/{id}', [BlogController::class, 'destroyBlogComment'])->name('blogs.comment.destroy');
 
 // Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
 

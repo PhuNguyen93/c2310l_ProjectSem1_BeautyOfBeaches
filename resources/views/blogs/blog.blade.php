@@ -149,8 +149,7 @@
                         <article class="cs_post cs_style_5">
                             <a href="{{ route('blogdetails', $blog->id) }}" class="cs_post_thumb cs_zoom">
                                 @if ($blog->image_url)
-                                    <img src="{{ asset($blog->image_url) }}" alt="{{ $blog->title }}"
-                                        class="w-100 h-100 cs_zoom_in">
+                                    <img src="{{ asset($blog->image_url) }}" alt="{{ $blog->title }}" class="post-image">
                                 @else
                                     <span class="badge bg-secondary">No Image</span>
                                 @endif
@@ -271,3 +270,10 @@
 
     <div class="cs_height_140 cs_height_lg_80"></div>
 @endsection
+<style>.post-image {
+    width: 100%; /* Chiều rộng của hình ảnh sẽ chiếm hết khung */
+    height: 600px; /* Chiều cao cố định cho hình ảnh */
+    object-fit: cover; /* Giúp hình ảnh giữ tỉ lệ và cắt phần dư nếu cần */
+    object-position: center; /* Canh giữa ảnh trong khung */
+}
+</style>
