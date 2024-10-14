@@ -72,7 +72,7 @@
                                         <td class="px-3.5 py-2.5">
                                             @if ($beach->image_url)
                                                 <img src="{{ asset($beach->image_url) }}" alt="{{ $beach->name }}"
-                                                    class="w-10 h-10 rounded-full img-thumbnail">
+                                                    class="w-20 h-10  img-thumbnail">
                                             @else
                                                 <span class="badge bg-secondary">No Image</span>
                                             @endif

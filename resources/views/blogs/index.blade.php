@@ -131,14 +131,15 @@
                                         <td class="px-3.5 py-2.5">
                                             @if ($blog->image_url)
                                                 <img src="{{ asset($blog->image_url) }}" alt="{{ $blog->title }}"
-                                                    class="w-10 h-10 rounded-full img-thumbnail">
+                                                    class="w-20 h-10 img-thumbnail">
                                             @else
                                                 <span class="badge bg-secondary">No Image</span>
                                             @endif
                                         </td>
                                         <td class="px-3.5 py-2.5" data-sort="id">{{ $blog->user->name }}</td>
                                         <td class="px-3.5 py-2.5" data-sort="Title">{{ $blog->title }}</td>
-                                        <td class="px-3.5 py-2.5" data-sort="Title">{{ Str::limit($blog->description, 30) }}
+                                        <td class="px-3.5 py-2.5" data-sort="Title">
+                                            {{ Str::limit($blog->description, 30) }}
                                         </td>
                                         <td class="px-3.5 py-2.5" data-sort="created_at">
                                             {{ $blog->created_at->format('Y-m-d H:i:s') }}</td>
@@ -199,35 +200,35 @@
                                                             </button>
 
                                                             @if (session('success'))
-                                                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                                                            <script>
-                                                                Swal.fire({
-                                                                    title: 'Success',
-                                                                    text: '{{ session('success') }}',
-                                                                    icon: 'success',
-                                                                    confirmButtonText: 'OK'
-                                                                }).then(() => {
-                                                                    @if (session('otp_sent'))
-                                                                        Alpine.store('step', 'verify');
-                                                                    @elseif (session('otp_verified'))
-                                                                        Alpine.store('step', 'reset');
-                                                                    @endif
-                                                                });
-                                                            </script>
-                                                        @endif
+                                                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                                                <script>
+                                                                    Swal.fire({
+                                                                        title: 'Success',
+                                                                        text: '{{ session('success') }}',
+                                                                        icon: 'success',
+                                                                        confirmButtonText: 'OK'
+                                                                    }).then(() => {
+                                                                        @if (session('otp_sent'))
+                                                                            Alpine.store('step', 'verify');
+                                                                        @elseif (session('otp_verified'))
+                                                                            Alpine.store('step', 'reset');
+                                                                        @endif
+                                                                    });
+                                                                </script>
+                                                            @endif
 
-                                                        <!-- SweetAlert thông báo lỗi -->
-                                                        @if (session('error'))
-                                                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                                                            <script>
-                                                                Swal.fire({
-                                                                    title: 'Error',
-                                                                    text: '{{ session('error') }}',
-                                                                    icon: 'error',
-                                                                    confirmButtonText: 'OK'
-                                                                });
-                                                            </script>
-                                                        @endif
+                                                            <!-- SweetAlert thông báo lỗi -->
+                                                            @if (session('error'))
+                                                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                                                <script>
+                                                                    Swal.fire({
+                                                                        title: 'Error',
+                                                                        text: '{{ session('error') }}',
+                                                                        icon: 'error',
+                                                                        confirmButtonText: 'OK'
+                                                                    });
+                                                                </script>
+                                                            @endif
                                                         </form>
                                                     </li>
                                                 </ul>
@@ -287,8 +288,8 @@
 @endsection
 
 @push('scripts')
-  <!-- App js -->
-  <script src="{{ URL::asset('build/js/app.js') }}"></script>
+    <!-- App js -->
+    <script src="{{ URL::asset('build/js/app.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const headers = document.querySelectorAll('.sort');

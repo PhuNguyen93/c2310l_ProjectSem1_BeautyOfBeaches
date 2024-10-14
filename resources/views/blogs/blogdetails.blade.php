@@ -339,15 +339,6 @@
                 <!-- Sidebar -->
                 <aside class="col-lg-4">
                     <div class="cs_sidebar cs_right_sidebar">
-                        {{-- <!-- Search widget -->
-                        <div class="cs_sidebar_item cs_gray_bg widget_search">
-                            <form class="cs_sidebar_search cs_white_bg" action="#">
-                                <input type="text" placeholder="Search...">
-                                <button class="cs_sidebar_search_btn cs_accent_bg cs_white_color">
-                                    <i class="fa-solid fa-magnifying-glass"></i></button>
-                            </form>
-                        </div> --}}
-
                         <!-- Category widget -->
                         <div class="cs_sidebar_item cs_gray_bg widget_categories">
                             <h3 class="cs_sidebar_widget_title cs_fs_24 cs_semibold">Category</h3>
