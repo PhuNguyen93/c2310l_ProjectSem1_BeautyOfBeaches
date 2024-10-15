@@ -3,7 +3,7 @@
 @section('content')
 
     <!-- Start Hero Section -->
-    <x-hero subTitle='Modern & Beautiful Travel Theme' img='assets/images/tour_header_bg.jpeg' title='Popular Tours Packagess' />
+    <x-hero subTitle='' img='assets/images/1.jpg' title='Popular Tours Packagess' />
     <!-- End Hero Section -->
 
     <!-- Start Package Section -->
@@ -14,7 +14,7 @@
           <div class="col-lg-4">
             <div class="cs_card cs_style_3 cs_white_bg">
               <a href="{{ route('tourdetails') }}" class="cs_card_thumb position-relative cs_zoom">
-                <img src="assets/images/package_img_5.jpeg" alt="Package Thumb" class="cs_zoom_in">
+                <img src="assets/images/bg5.jpg" alt="Package Thumb" class="cs_zoom_in">
                 <div class="cs_package_badge cs_fs_18 cs_semibold cs_primary_color cs_primary_font position-absolute">3 Day 2 Night</div>
               </a>
               <div class="cs_card_content">
@@ -31,7 +31,7 @@
           <div class="col-lg-4">
             <div class="cs_card cs_style_3 cs_white_bg">
               <a href="{{ route('tourdetails') }}" class="cs_card_thumb position-relative cs_zoom">
-                <img src="assets/images/package_img_6.jpeg" alt="Package Thumb" class="cs_zoom_in">
+                <img src="assets/images/bg5.jpg" alt="Package Thumb" class="cs_zoom_in">
                 <div class="cs_package_badge cs_fs_18 cs_semibold cs_primary_color cs_primary_font position-absolute">3 Day 2 Night</div>
               </a>
               <div class="cs_card_content">
@@ -48,7 +48,7 @@
           <div class="col-lg-4">
             <div class="cs_card cs_style_3 cs_white_bg">
               <a href="{{ route('tourdetails') }}" class="cs_card_thumb position-relative cs_zoom">
-                <img src="assets/images/package_img_7.jpeg" alt="Package Thumb" class="cs_zoom_in">
+                <img src="assets/images/bg5.jpg" alt="Package Thumb" class="cs_zoom_in">
                 <div class="cs_package_badge cs_fs_18 cs_semibold cs_primary_color cs_primary_font position-absolute">3 Day 2 Night</div>
               </a>
               <div class="cs_card_content">
@@ -65,7 +65,7 @@
           <div class="col-lg-4">
             <div class="cs_card cs_style_3 cs_white_bg">
               <a href="{{ route('tourdetails') }}" class="cs_card_thumb position-relative cs_zoom">
-                <img src="assets/images/package_img_8.jpeg" alt="Package Thumb" class="cs_zoom_in">
+                <img src="assets/images/bg5.jpg" alt="Package Thumb" class="cs_zoom_in">
                 <div class="cs_package_badge cs_fs_18 cs_semibold cs_primary_color cs_primary_font position-absolute">3 Day 2 Night</div>
               </a>
               <div class="cs_card_content">
@@ -82,7 +82,7 @@
           <div class="col-lg-4">
             <div class="cs_card cs_style_3 cs_white_bg">
               <a href="{{ route('tourdetails') }}" class="cs_card_thumb position-relative cs_zoom">
-                <img src="assets/images/package_img_9.jpeg" alt="Package Thumb" class="cs_zoom_in">
+                <img src="assets/images/bg5.jpg" alt="Package Thumb" class="cs_zoom_in">
                 <div class="cs_package_badge cs_fs_18 cs_semibold cs_primary_color cs_primary_font position-absolute">3 Day 2 Night</div>
               </a>
               <div class="cs_card_content">
@@ -99,7 +99,7 @@
           <div class="col-lg-4">
             <div class="cs_card cs_style_3 cs_white_bg">
               <a href="{{ route('tourdetails') }}" class="cs_card_thumb position-relative cs_zoom">
-                <img src="assets/images/package_img_4.jpeg" alt="Package Thumb" class="cs_zoom_in">
+                <img src="assets/images/bg4.jpg" alt="Package Thumb" class="cs_zoom_in">
                 <div class="cs_package_badge cs_fs_18 cs_semibold cs_primary_color cs_primary_font position-absolute">3 Day 2 Night</div>
               </a>
               <div class="cs_card_content">
@@ -119,4 +119,3 @@
     </section>
     <!-- End Package Section -->
   @endsection
-  

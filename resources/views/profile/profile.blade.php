@@ -343,7 +343,7 @@
                                                 style="color: #333;">Birth Date</label>
                                             <input type="date" id="birthDateInput" name="birth_date"
                                                 style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 0.375rem; background-color: #f9fafb; transition: border-color 0.2s; box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);"
-                                                value="{{ old('birth_date', $user->birth_date) }}">
+                                                value="{{ old('birth_date', $user->birth_date) }}" max="{{ \Carbon\Carbon::today()->format('Y-m-d') }}">
                                         </div>
 
                                         <div>
