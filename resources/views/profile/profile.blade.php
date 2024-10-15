@@ -176,101 +176,118 @@
                 </div>
                 <!-- Info Section -->
                 <div class="col-md-8">
+
                     <div class="card mb-3">
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row mb-3 align-items-center">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Full Name</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">{{ $user->name }}</div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Email</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">{{ $user->email }}</div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Phone</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">{{ $user->phone }}</div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Country</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">{{ $user->country ?? 'Not provided' }}</div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Birthday</h6>
+                                    <h6 class="mb-0 fw-bold text-muted">Full Name</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    {{ $user->birth_date ? \Carbon\Carbon::parse($user->birth_date)->format('d/m/Y') : 'Not provided' }}
+                                    <i class="bi bi-person-fill"></i> {{ $user->name }}
                                 </div>
                             </div>
-                            <hr>
-                            <div class="row">
+                            <div class="border-bottom mb-3"></div>
+
+                            <div class="row mb-3 align-items-center">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Joining Date</h6>
+                                    <h6 class="mb-0 fw-bold text-muted">Email</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    {{ \Carbon\Carbon::parse($user->created_at)->format('d/m/Y') }}</div>
+                                    <i class="bi bi-envelope-fill"></i> {{ $user->email }}
+                                </div>
                             </div>
+                            <div class="border-bottom mb-3"></div>
 
+                            <div class="row mb-3 align-items-center">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0 fw-bold text-muted">Phone</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <i class="bi bi-telephone-fill"></i> {{ $user->phone }}
+                                </div>
+                            </div>
+                            <div class="border-bottom mb-3"></div>
 
+                            <div class="row mb-3 align-items-center">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0 fw-bold text-muted">Country</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <i class="bi bi-globe"></i> {{ $user->country ?? 'Not provided' }}
+                                </div>
+                            </div>
+                            <div class="border-bottom mb-3"></div>
+
+                            <div class="row mb-3 align-items-center">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0 fw-bold text-muted">Birthday</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <i class="bi bi-calendar-fill"></i> {{ $user->birth_date ? \Carbon\Carbon::parse($user->birth_date)->format('d/m/Y') : 'Not provided' }}
+                                </div>
+                            </div>
+                            <div class="border-bottom mb-3"></div>
+
+                            <div class="row mb-3 align-items-center">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0 fw-bold text-muted">Joining Date</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <i class="bi bi-clock-fill"></i> {{ \Carbon\Carbon::parse($user->created_at)->format('d/m/Y') }}
+                                </div>
+                            </div>
                         </div>
-
 
 
                         <div class="row gutters-sm">
                             <div class="tab-block">
-                                <ul class="nav nav-tabs"
-                                    style="display: flex; justify-content: center; padding: 0; margin: 20px 20px; flex-wrap: wrap;">
+                                <ul class="nav nav-tabs justify-content-center flex-wrap"
+                                    style="margin: 20px; padding: 0;">
 
                                     <!-- Hàng đầu tiên: 3 nút đầu tiên -->
-                                    <li class="group" style="margin: 0 10px;">
+                                    <li class="group mx-2">
                                         <a href="javascript:void(0);" data-tab-toggle data-target="updateProfileTab"
-                                            class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-t-md text-slate-500 dark:text-zink-200 border-b border-transparent hover:text-custom-500 dark:hover:text-custom-500 active:text-custom-500 dark:active:text-custom-500 -mb-[1px]">
+                                            class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-md text-slate-500 dark:text-zinc-200 border border-transparent hover:text-white hover:bg-custom-500 dark:hover:bg-custom-500 active:bg-custom-600 dark:active:bg-custom-600 active:text-white shadow-sm"
+                                            style="text-decoration: none;">
                                             Update Profile
                                         </a>
                                     </li>
-                                    <li class="group" style="margin: 0 10px;">
+                                    <li class="group mx-2">
                                         <a href="javascript:void(0);" data-tab-toggle data-target="changePasswordTab"
-                                            class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-t-md text-slate-500 dark:text-zink-200 border-b border-transparent hover:text-custom-500 dark:hover:text-custom-500 active:text-custom-500 dark:active:text-custom-500 -mb-[1px]">
+                                            class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-md text-slate-500 dark:text-zinc-200 border border-transparent hover:text-white hover:bg-custom-500 dark:hover:bg-custom-500 active:bg-custom-600 dark:active:bg-custom-600 active:text-white shadow-sm"
+                                            style="text-decoration: none;">
                                             Change Password
                                         </a>
                                     </li>
-                                    <li class="group" style="margin: 0 10px;">
+                                    <li class="group mx-2">
                                         <a href="javascript:void(0);" data-tab-toggle data-target="privacyPolicyTab"
-                                            class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-t-md text-slate-500 dark:text-zink-200 border-b border-transparent hover:text-custom-500 dark:hover:text-custom-500 active:text-custom-500 dark:active:text-custom-500 -mb-[1px]">
+                                            class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-md text-slate-500 dark:text-zinc-200 border border-transparent hover:text-white hover:bg-custom-500 dark:hover:bg-custom-500 active:bg-custom-600 dark:active:bg-custom-600 active:text-white shadow-sm"
+                                            style="text-decoration: none;">
                                             Privacy Policy
                                         </a>
                                     </li>
 
                                     <!-- Hàng thứ hai: 3 nút còn lại -->
-                                    <li class="group" style="margin: 0 10px;">
+                                    <li class="group mx-2 mt-2">
                                         <a href="javascript:void(0);" data-tab-toggle data-target="userBlogsTab"
-                                            class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-t-md text-slate-500 dark:text-zink-200 border-b border-transparent hover:text-custom-500 dark:hover:text-custom-500 active:text-custom-500 dark:active:text-custom-500 -mb-[1px]">
+                                            class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-md text-slate-500 dark:text-zinc-200 border border-transparent hover:text-white hover:bg-custom-500 dark:hover:bg-custom-500 active:bg-custom-600 dark:active:bg-custom-600 active:text-white shadow-sm"
+                                            style="text-decoration: none;">
                                             Blogs
                                         </a>
                                     </li>
-                                    <li class="group" style="margin: 0 10px;">
-                                        <a href="javascript:void(0);" data-tab-toggle
-                                            data-target="userFeedbackBlogsTab"
-                                            class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-t-md text-slate-500 dark:text-zink-200 border-b border-transparent hover:text-custom-500 dark:hover:text-custom-500 active:text-custom-500 dark:active:text-custom-500 -mb-[1px]">
+                                    <li class="group mx-2 mt-2">
+                                        <a href="javascript:void(0);" data-tab-toggle data-target="userFeedbackBlogsTab"
+                                            class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-md text-slate-500 dark:text-zinc-200 border border-transparent hover:text-white hover:bg-custom-500 dark:hover:bg-custom-500 active:bg-custom-600 dark:active:bg-custom-600 active:text-white shadow-sm"
+                                            style="text-decoration: none;">
                                             Feedbacks Blogs
                                         </a>
                                     </li>
-                                    <li class="group" style="margin: 0 10px;">
+                                    <li class="group mx-2 mt-2">
                                         <a href="javascript:void(0);" data-tab-toggle data-target="userFeedbackTab"
-                                            class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-t-md text-slate-500 dark:text-zink-200 border-b border-transparent hover:text-custom-500 dark:hover:text-custom-500 active:text-custom-500 dark:active:text-custom-500 -mb-[1px]">
-                                            Feedbacks Beachs
+                                            class="tab-link inline-block px-4 py-2 text-base transition-all duration-300 ease-linear rounded-md text-slate-500 dark:text-zinc-200 border border-transparent hover:text-white hover:bg-custom-500 dark:hover:bg-custom-500 active:bg-custom-600 dark:active:bg-custom-600 active:text-white shadow-sm"
+                                            style="text-decoration: none;">
+                                            Feedbacks Beaches
                                         </a>
                                     </li>
                                 </ul>
@@ -278,8 +295,8 @@
                         </div>
 
 
-
                     </div>
+
                     <div id="updateProfileTab" class="tab-content" style="display: none;">
 
                         <div class="card"
@@ -434,158 +451,131 @@
                                     @if ($blogs->isEmpty())
                                         <p style="text-align: center">No blogs found for this user.</p>
                                     @else
-                                        @foreach ($blogs->sortByDesc('created_at') as $blog)
-                                            <div class="col-lg-12 mb-4">
-                                                <article class="cs_post cs_style_1 d-flex">
-                                                    <a href="{{ route('blogdetails', $blog->id) }}"
-                                                        class="cs_post_thumb cs_zoom overflow-hidden position-relative"
-                                                        style="flex: 1; width: 100%;">
-                                                        @if ($blog->image_url)
-                                                            <img src="{{ asset($blog->image_url) }}"
-                                                                alt="{{ $blog->title }}" class="cs_zoom_in"
-                                                                style="width: 100%; height: 400px; object-fit: cover; margin: 20px 0 0 20px;">
-                                                        @endif
-                                                        <div class="cs_posted_by position-absolute"
-                                                            style="bottom:    0px; right: 0px;">
-                                                            <span
-                                                                class="cs_accent_bg cs_white_color">{{ $blog->created_at->format('d') }}</span>
-                                                            <span
-                                                                class="cs_primary_bg cs_white_color">{{ $blog->created_at->format('F Y') }}</span>
-                                                        </div>
+                                    @foreach ($blogs->sortByDesc('created_at') as $blog)
+                                    <div class="col-lg-12 mb-4">
+                                        <article class="cs_post cs_style_1 d-flex flex-wrap"
+                                                 style="background-color: #f8f9fa; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px;">
+                                            <!-- Blog Image -->
+                                            <a href="{{ route('blogdetails', $blog->id) }}"
+                                               class="cs_post_thumb cs_zoom overflow-hidden position-relative"
+                                               style="flex: 1; width: 100%; max-width: 400px; border-radius: 8px;">
+                                                @if ($blog->image_url)
+                                                    <img src="{{ asset($blog->image_url) }}"
+                                                         alt="{{ $blog->title }}"
+                                                         class="cs_zoom_in img-fluid"
+                                                         style="border-radius: 8px; object-fit: cover; height: 100%; width: 100%;">
+                                                @endif
+
+                                                <!-- Date Overlay -->
+                                                <div class="cs_posted_by position-absolute"
+                                                     style="bottom: 15px; right: 15px; background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 5px 10px; border-radius: 4px;">
+                                                    <span class="cs_accent_bg cs_white_color">{{ $blog->created_at->format('d') }}</span>
+                                                    <span class="cs_primary_bg cs_white_color">{{ $blog->created_at->format('F Y') }}</span>
+                                                </div>
+                                            </a>
 
 
-
-                                                    </a>
-                                                    <div class="cs_post_info d-flex align-items-start"
-                                                        style="flex: 1; padding-left: 15px; width: 40%; position: relative;margin-top: 80px;margin-left: 20px">
-                                                        <div class="cs_post_info_in w-100">
-                                                            <div class="cs_post_avatar d-flex align-items-center mb-3">
-                                                                <div class="cs_avatar_thumb me-2">
-                                                                    <img src="{{ asset($blog->user->img) }}"
-                                                                        alt="Avatar" class="rounded-circle"
-                                                                        style="height: 50px">
-                                                                </div>
-                                                                <div class="cs_avatar_info text-start">
-                                                                    <p class="mb-0">By.</p>
-                                                                    <strong>{{ $blog->user->name }}</strong>
-                                                                </div>
-                                                            </div>
-                                                            <h2 class="cs_post_title cs_fs_24 cs_semibold"
-                                                                style="font-weight: bold; text-decoration: none; color: inherit; white-space: normal; overflow-wrap: break-word;">
-                                                                <a href="{{ route('blogdetails', $blog->id) }}"
-                                                                    style="color: #80d7e9; text-decoration: none;">{{ Str::limit($blog->title, 15) }}</a>
-                                                            </h2>
-                                                            <p class="cs_post_subtitle"
-                                                                style="white-space: normal; overflow-wrap: break-word;">
-                                                                {{ Str::limit($blog->description, 50) }}</p>
-                                                            <div class="cs_post_btns cs_gray_bg_1">
-                                                                <a href="{{ route('blogdetails', $blog->id) }}"
-                                                                    class="cs_comment_btn">
-                                                                    <svg width="20" height="20"
-                                                                        viewBox="0 0 20 20" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <mask id="mask01" style="mask-type:alpha"
-                                                                            maskUnits="userSpaceOnUse" x="0" y="0"
-                                                                            width="20" height="20">
-                                                                            <rect width="20" height="20"
-                                                                                fill="#D9D9D9" />
-                                                                        </mask>
-                                                                        <g mask="url(#mask01)">
-                                                                            <path
-                                                                                d="M1.66675 18.3337V3.33366C1.66675 2.87533 1.83008 2.48283 2.15675 2.15616C2.48286 1.83005 2.87508 1.66699 3.33341 1.66699H16.6667C17.1251 1.66699 17.5176 1.83005 17.8442 2.15616C18.1704 2.48283 18.3334 2.87533 18.3334 3.33366V13.3337C18.3334 13.792 18.1704 14.1845 17.8442 14.5112C17.5176 14.8373 17.1251 15.0003 16.6667 15.0003H5.00008L1.66675 18.3337ZM3.33341 14.3128L4.31258 13.3337H16.6667V3.33366H3.33341V14.3128Z"
-                                                                                fill="currentColor" />
-                                                                        </g>
-                                                                    </svg>
-                                                                    Comment
-                                                                </a>
-                                                                <a href="{{ route('blogdetails', $blog->id) }}"
-                                                                    class="cs_post_btn cs_primary_bg">
-                                                                    View
-                                                                    <svg width="15" height="15"
-                                                                        style="margin-left: 8px" viewBox="0 0 10 10"
-                                                                        fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <g clip-path="url(#clip02)">
-                                                                            <path fill-rule="evenodd"
-                                                                                clip-rule="evenodd"
-                                                                                d="M9.15616 4.59014L1.31712 0.0641602C1.24542 0.0224266 1.164 0.000298672 1.08104 0H1.07968C0.996674 0.000329659 0.915216 0.022469 0.843465 0.0641992C0.771208 0.105407 0.711218 0.165101 0.669653 0.237153C0.628087 0.309204 0.606443 0.391019 0.606942 0.474199V9.52607C0.606614 9.60931 0.628283 9.69115 0.669757 9.76332C0.711231 9.83548 0.771035 9.89541 0.843117 9.93703C0.915198 9.97864 0.996997 10.0005 1.08023 10.0003C1.16346 10.0002 1.24518 9.97801 1.3171 9.93611L9.15616 5.41012C9.22813 5.36857 9.2879 5.30881 9.32946 5.23684C9.37101 5.16487 9.39289 5.08323 9.39289 5.00013C9.39289 4.91702 9.37101 4.83538 9.32946 4.76341C9.2879 4.69145 9.22813 4.63168 9.15616 4.59014Z"
-                                                                                fill="currentColor" />
-                                                                        </g>
-                                                                        <defs>
-                                                                            <clipPath id="clip02">
-                                                                                <rect width="10" height="10"
-                                                                                    fill="currentColor" />
-                                                                            </clipPath>
-                                                                        </defs>
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-
-
-                                                            <div class="cs_post_btns cs_gray_bg_1 text-start">
-                                                                <div class="dropdown">
-                                                                    <button class="btn btn-secondary dropdown-toggle"
-                                                                        type="button"
-                                                                        id="dropdownMenuButton-{{ $blog->id }}"
-                                                                        data-bs-toggle="dropdown"
-                                                                        aria-expanded="false">
-                                                                        Actions
-                                                                    </button>
-                                                                    <ul class="dropdown-menu dropdown-menu-end"
-                                                                        aria-labelledby="dropdownMenuButton-{{ $blog->id }}">
-                                                                        <!-- Nút View -->
-                                                                        {{-- <li>
-                                                                            <a class="dropdown-item"
-                                                                                href="{{ route('blogdetails', ['id' => $blog->id]) }}">
-                                                                                <i class="fas fa-eye"></i> View
-                                                                            </a>
-                                                                        </li> --}}
-
-                                                                        <!-- Nút Edit -->
-                                                                        <li>
-                                                                            <button class="dropdown-item"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#editBlogModal"
-                                                                                onclick="populateEditForm({{ $blog->id }}, '{{ $blog->title }}', '{{ $blog->description }}')">
-                                                                                <i class="fas fa-edit"></i> Edit
-                                                                            </button>
-                                                                        </li>
-
-                                                                        <!-- Nút Delete -->
-                                                                        <li>
-                                                                            <form
-                                                                                action="{{ route('blogs.permanentlyDelete', $blog->id) }}"
-                                                                                method="POST"
-                                                                                style="display: inline;">
-                                                                                @csrf
-                                                                                @method('DELETE')
-                                                                                <button type="submit"
-                                                                                    class="dropdown-item"
-                                                                                    onclick="return confirm('Are you sure you want to delete this blog?');">
-                                                                                    <i class="fas fa-trash"></i> Delete
-                                                                                </button>
-                                                                            </form>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                            <!-- Blog Content -->
+                                            <div class="cs_post_info d-flex align-items-start flex-column"
+                                                 style="flex: 2; padding-left: 25px;">
+                                                <!-- Author Avatar and Info -->
+                                                <div class="cs_post_avatar d-flex align-items-center mb-3">
+                                                    <div class="cs_avatar_thumb me-2">
+                                                        <img src="{{ asset($blog->user->img) }}"
+                                                             alt="Avatar"
+                                                             class="rounded-circle img-fluid"
+                                                             style="height: 50px; width: 50px; object-fit: cover;">
                                                     </div>
-                                                </article>
+                                                    <div class="cs_avatar_info text-start">
+                                                        <p class="mb-0" style="font-size: 14px; color: #888;">By.</p>
+                                                        <strong style="font-size: 16px; color: #333;">{{ $blog->user->name }}</strong>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Blog Title -->
+                                                <h2 class="cs_post_title cs_fs_24 cs_semibold"
+                                                    style="font-weight: bold; color: #007bff; margin-top: 10px;">
+                                                    <a href="{{ route('blogdetails', $blog->id) }}"
+                                                       style="text-decoration: none; color: #007bff;">
+                                                        {{ Str::limit($blog->title, 50) }}
+                                                    </a>
+                                                </h2>
+
+                                                <!-- Blog Description -->
+                                                <p class="cs_post_subtitle"
+                                                   style="color: #555; line-height: 1.5; font-size: 15px; margin: 10px 0;">
+                                                    {{ Str::limit($blog->description, 120) }}
+                                                </p>
+
+                                                <!-- Action Buttons (View & Comment) -->
+                                                <div class="cs_post_btns cs_gray_bg_1 mt-auto"
+                                                     style="margin-top: auto;">
+                                                    <a href="{{ route('blogdetails', $blog->id) }}"
+                                                       class="btn btn-primary"
+                                                       style="margin-right: 10px;">
+                                                        View
+                                                    </a>
+                                                    <a href="{{ route('blogdetails', $blog->id) }}"
+                                                       class="btn btn-outline-secondary">
+                                                        Comment
+                                                    </a>
+                                                </div>
 
 
+                                                <!-- Dropdown Actions (Edit & Delete) -->
+                                                <div class="cs_post_btns cs_gray_bg_1 text-start mt-3">
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-secondary dropdown-toggle"
+                                                                type="button"
+                                                                id="dropdownMenuButton-{{ $blog->id }}"
+                                                                data-bs-toggle="dropdown"
+                                                                aria-expanded="false">
+                                                                Settings
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-end"
+                                                            aria-labelledby="dropdownMenuButton-{{ $blog->id }}">
+                                                            <!-- Nút Edit -->
+                                                            <li>
+                                                                <button class="dropdown-item"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#editBlogModal"
+                                                                        onclick="populateEditForm({{ $blog->id }}, '{{ $blog->title }}', '{{ $blog->description }}')">
+                                                                    <i class="fas fa-edit"></i> Edit
+                                                                </button>
+                                                            </li>
+
+                                                            <!-- Nút Delete -->
+                                                            <li>
+                                                                <form action="{{ route('blogs.permanentlyDelete', $blog->id) }}"
+                                                                      method="POST"
+                                                                      style="display: inline;">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit"
+                                                                            class="dropdown-item text-danger"
+                                                                            onclick="return confirm('Are you sure you want to delete this blog?');">
+                                                                        <i class="fas fa-trash"></i> Delete
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        @endforeach
+
+
+
+                                        </article>
+                                    </div>
+                                @endforeach
+
+
+
                                     @endif
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
-
-
 
                     <!-- Modal chỉnh sửa blog -->
                     <div class="modal fade" id="editBlogModal" tabindex="-1" aria-labelledby="editBlogModalLabel"
@@ -1028,10 +1018,7 @@
 
 
                 </div>
-
-
-
-
+                    <!-- End Info Section -->
 
 
                 <script>
