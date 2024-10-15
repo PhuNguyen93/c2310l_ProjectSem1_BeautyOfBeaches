@@ -14,7 +14,6 @@
                 <div class="card-body">
                     <div class="flex items-center">
                         <h6 class="text-15 grow">Beaches List</h6>
-
                         <div class="shrink-0">
                             <a href="{{ route('beaches.create') }}"
                                 class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">
@@ -22,9 +21,9 @@
                                     Beach</span>
                             </a>
                         </div>
-
                     </div>
                 </div>
+
                 <div class="!py-3.5 card-body border-y border-dashed border-slate-200 dark:border-zink-500">
                     <!-- Form tìm kiếm và bộ lọc -->
                     <form action="{{ route('beaches.index') }}" method="GET">
@@ -152,8 +151,6 @@
                                                                 @endif
                                                             </button>
                                                         </form>
-
-
                                                     </li>
                                                 </ul>
                                             </div>

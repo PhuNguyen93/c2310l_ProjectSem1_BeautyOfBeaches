@@ -33,7 +33,7 @@
                                     <div class="cs_grid_3 cs_gallery_list cs_style_1">
                                         @foreach ($beach->gallery as $image)
                                             <a href="{{ asset($image->image_url) }}" class="cs_gallery_item cs_zoom">
-                                                <img src="{{ asset($image->image_url) }}" alt="{{ $image->caption }}"
+                                                <img src="{{ asset($image->image_url) }}" alt="Beach Image"
                                                     class="cs_zoom_in">
                                                 <div class="cs_gallery_overlay"></div>
                                                 <div class="cs_gallery_icon position-absolute">
@@ -159,7 +159,6 @@
                         <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
                     </div>
 
-                    {{-- form trần gia bảo --}}
                     <form action="" id="flightForm" onsubmit="redirectToAgoda(event)" method="POST">
                         @csrf
                         <div class="search-box">
@@ -619,6 +618,5 @@
             }
         });
     });
-
-
 </script>
+<!-- Country -->
