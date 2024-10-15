@@ -15,19 +15,19 @@
 
     @keyframes slideshow {
         0% {
-            background-image: url('assets/images/Avatar/1727664999.png');
+            background-image: url('assets/images/bondi1.jpg');
         }
 
         33% {
-            background-image: url('assets/images/Avatar/1727713839.jpg');
+            background-image: url('assets/images/halong1.jpg');
         }
 
         66% {
-            background-image: url('assets/images/Avatar/1727429758.jpg');
+            background-image: url('assets/images/halong2.jpg');
         }
 
         100% {
-            background-image: url('assets/images/Avatar/1727664999.png');
+            background-image: url('assets/images/bondi1.jpg');
         }
     }
 
@@ -156,7 +156,7 @@
     <!-- End About Section -->
 
     <!-- Start featured section -->
-    <section class="cs_featured cs_style_1 cs_bg_filed" data-src="assets/images/feature-bg.jpg">
+    <section class="cs_featured cs_style_1 cs_bg_filed" style= "background-image: url('assets/images/maya2.jpg')">
         <div class="cs_height_140 cs_height_lg_80"></div>
         <div class="container">
             <div class="row cs_gap_y_40 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.2s">
@@ -553,7 +553,7 @@
         <div class="container">
             <div class="cs_banner_text cs_banner_text cs_white_color">
                 <h2 class="cs_banner_title cs_white_color cs_fs_56 wow fadeInRight data-wow-duration="0.8s"
-                    data-wow-delay="0.2s">Nha Trang Beach</h2>
+                    data-wow-delay="0.2s">Beach</h2>
                 <p class="cs_banner_subtitle cs_fs_18"> With its enchanting beauty both day and night, is a must-visit
                     destination to experience at least once in a lifetime. During the day, the soft white sand merges
                     with the sparkling turquoise waters under the bright sun, creating a stunning natural landscape.
@@ -775,7 +775,7 @@
 
     <!-- Start footer -->
     <footer class="cs_footer cs_style_1 cs_white_color cs_bg_filed cs_primary_bg"
-        data-src="assets/images/baiadopost.webp">
+        data-src="assets/images/sey7.jpg">
         <div class="cs_newsletter_1_wrap">
             <div class="container-fluid">
                 <div class="cs_newsletter cs_style_1 cs_accent_bg">

@@ -7,7 +7,7 @@
     <!-- End Hero Section -->
 
     <!-- Start About Section -->
-    <section class="cs_about cs_style_1">
+    <section class="cs_about cs_style_1 cs_ripple_activate">
       <div class="cs_height_140 cs_height_lg_80"></div>
       <div class="container">
         <div class="row align-items-center cs_gap_y_40 cs_mobile_reverse">
@@ -256,7 +256,7 @@
   </div>
 
 
-  <div class="cs_height_140 cs_height_lg_80"></div>
+  <div class="cs_height_140 cs_height_lg_80" ></div>
   <style>
     .cs_team_thumb img {
     width: 100%;
@@ -289,9 +289,9 @@
 
     <!-- Start Brands Section -->
     <div>
-      <div class="cs_height_76 cs_height_lg_40"></div>
+      <div class="cs_height_76 cs_height_lg_40"  ></div>
       <div class="container">
-        <div class="cs_brand_list cs_style_1">
+        <div class="cs_brand_list cs_style_1" data-src="assets/images/sey7.jpg">
           {{-- <div class="cs_brand"><img src="assets/images/brand_1.svg" alt="Brand"></div>
           <div class="cs_brand"><img src="assets/images/brand_2.svg" alt="Brand"></div>
           <div class="cs_brand"><img src="assets/images/brand_3.svg" alt="Brand"></div>
@@ -299,7 +299,7 @@
           <div class="cs_brand"><img src="assets/images/brand_5.svg" alt="Brand"></div> --}}
         </div>
       </div>
-      <div class="cs_height_135 cs_height_lg_80"></div>
+      <div class="cs_height_135 cs_height_lg_80" ></div>
     </div>
     <!-- End Brands Section -->
   @endsection

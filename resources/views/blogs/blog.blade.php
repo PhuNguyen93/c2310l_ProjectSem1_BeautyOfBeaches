@@ -4,7 +4,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Hero section -->
-    <x-hero subTitle='Modern & Beautiful Travel Theme' img='assets/images/blogimage.jpg' title='Latest Blog' />
+    <x-hero subTitle='' img='assets/images/danang/danang4.jpg' title='Blog' />
 
     <div class="cs_height_140 cs_height_lg_80"></div>
     <!-- Blog content -->
