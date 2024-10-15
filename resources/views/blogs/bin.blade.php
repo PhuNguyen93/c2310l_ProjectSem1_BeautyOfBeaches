@@ -16,12 +16,12 @@
                         <h6 class="text-15 grow">Blogs List</h6>
                         <div class="shrink-0">
 
-                            <button id="openModalButton"
+                            {{-- <button id="openModalButton"
                                 class="px-4 py-2 text-white bg-custom-500 border border-custom-500 hover:bg-custom-600 hover:border-custom-600 rounded-lg flex items-center">
                                 <i data-lucide="plus" class="inline-block size-4 mr-2"></i> <span class="align-middle">Add
                                     Blog</span>
                             </button>
-                            {{-- modal --}}
+
                             <div id="addBlogModal" class="modal hidden">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -54,7 +54,7 @@
                                         </div>
                                     </form>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

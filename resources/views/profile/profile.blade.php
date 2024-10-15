@@ -318,7 +318,7 @@
                                             <input type="email" id="emailInput" name="email"
                                                 style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 0.375rem; background-color: #f9fafb; transition: border-color 0.2s; box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);"
                                                 placeholder="Enter your email address"
-                                                value="{{ old('email', $user->email) }}">
+                                                value="{{ old('email', $user->email) }}" disabled>
                                         </div>
 
                                         <div>

@@ -4,9 +4,10 @@
 @endsection
 @section('content')
 
-<body class="flex items-center justify-center min-h-screen px-4 py-16 bg-cover bg-auth-pattern dark:bg-auth-pattern-dark dark:text-zink-100 font-public">
+{{-- <body class="flex items-center justify-center min-h-screen px-4 py-16 bg-cover bg-auth-pattern dark:bg-auth-pattern-dark dark:text-zink-100 font-public"> --}}
+    <body style="background-image: url('/assets/images/bg5.jpg'); background-size: cover; background-position: center;" class="flex items-center justify-center min-h-screen px-4 py-16 dark:text-zink-100 font-public">
 
-    <div class="mb-0 border-none shadow-none xl:w-2/3 card bg-white/70 dark:bg-zink-500/70">
+    <div class="mb-0 border-none shadow-none xl:w-2/3 card bg-white/80 dark:bg-zink-500/70">
         <div class="grid grid-cols-1 gap-0 lg:grid-cols-12">
             <div class="lg:col-span-5">
                 <div class="!px-10 !py-12 card-body">

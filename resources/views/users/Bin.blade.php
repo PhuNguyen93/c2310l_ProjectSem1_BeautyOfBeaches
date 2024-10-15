@@ -13,12 +13,12 @@
                     <div class="flex items-center">
                         <h6 class="text-15 grow">Users List</h6>
 
-                        <div class="shrink-0">
+                        {{-- <div class="shrink-0">
                             <button data-modal-target="addUserModal" type="button"
                                 class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20">
                                 <i data-lucide="plus" class="inline-block size-4"></i> <span class="align-middle">Add
                                     User</span></button>
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>
