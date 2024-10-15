@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Start Hero Section -->
-    <x-hero subTitle='Modern & Beautiful TravelPro Theme' img='assets/images/blogimage.jpg' title="{{ $blog->title }}" />
+    <x-hero subTitle='' img='assets/images/blogimage.jpg' title="{{ $blog->title }}" />
     <!-- End Hero Section -->
 
     <!-- Start Blog Section -->

@@ -46,35 +46,53 @@ class ProfileController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => ['required','string', 'max:255', Rule::unique('users')->ignore($id)],
-            'country' => 'string|max:255',
-            'phone' => ['string','max:10','regex:/^[0-9]+$/',Rule::unique('users')->ignore($id)],
-            'email' => [
-                'nullable',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique('users')->ignore($id),
-            ],
-        ]);
+        // Lấy phương thức đăng nhập từ session (email hoặc phone)
+        $loginMethod = session('login_method');
 
-        // Lấy thông tin người dùng
+        // Lấy thông tin người dùng từ database
         $user = User::findOrFail($id);
 
-        // Cập nhật thông tin người dùng
-        if ($request->filled('email')) {
-            $user->email = $request->input('email');
+        // Kiểm tra phương thức đăng nhập và điều chỉnh validate
+        if ($loginMethod == 'email') {
+            // Người dùng đăng nhập bằng email, vô hiệu hóa trường email trong quá trình update
+            $request->validate([
+                'name' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($id)],
+                'country' => 'required|string|max:255',
+                'phone' => ['required', 'string', 'max:10', 'regex:/^[0-9]+$/', Rule::unique('users')->ignore($id)],
+                // Email không được validate vì không thay đổi
+            ]);
+
+            // Cập nhật thông tin người dùng ngoại trừ email
+            $user->phone = $request->input('phone');
+        } else if ($loginMethod == 'phone') {
+            // Người dùng đăng nhập bằng số điện thoại, vô hiệu hóa trường phone
+            $request->validate([
+                'name' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($id)],
+                'country' => 'required|string|max:255',
+                'email' => [
+                    'nullable',
+                    'string',
+                    'email',
+                    'max:255',
+                    Rule::unique('users')->ignore($id),
+                ],
+                // Phone không được validate vì không thay đổi
+            ]);
+
+            // Cập nhật thông tin người dùng ngoại trừ số điện thoại
+            if ($request->filled('email')) {
+                $user->email = $request->input('email');
+            }
         }
+
+        // Cập nhật các trường khác không liên quan đến phương thức đăng nhập
         $user->name = $request->input('name');
-        $user->phone = $request->input('phone');
         $user->birth_date = $request->input('birth_date');
         $user->country = $request->input('country');
         $user->save();
 
         return redirect()->route('profile', ['id' => $user->id])->with('success', 'Profile updated successfully');
     }
-
     public function uploadAvatar(Request $request)
 {
     $request->validate([
