@@ -80,17 +80,16 @@ class HomeController extends Controller
     {
         return view('about');
     }
-
     public function destination()
     {
-        // Lấy tất cả các bãi biển từ database
-        // $beaches = Beach::all();
+        // Lấy tất cả các bãi biển có status = 1 từ database và liên kết với feedbacks
         $beaches = Beach::with('feedbacks')
+            ->where('status', 1) // Thêm điều kiện lọc status = 1
             ->orderBy('created_at', 'desc')
             ->paginate(10);
+
         return view('destination', compact('beaches'));
     }
-
     public function destinationdetails($id)
     {
         // Lấy bãi biển theo ID

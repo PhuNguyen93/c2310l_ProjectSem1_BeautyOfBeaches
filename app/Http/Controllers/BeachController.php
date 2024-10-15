@@ -24,7 +24,7 @@ class BeachController extends Controller
                 return $query->where('name', 'like', "%{$search}%");
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate(5);
         return view('beaches.index', compact('beaches'));
     }
 
@@ -211,7 +211,7 @@ class BeachController extends Controller
     public function search(Request $request)
     {
         $query = Beach::query();
-
+        $query = Beach::where('status', 1);
         // Kiểm tra và lọc theo quốc gia
         if ($request->filled('country')) {
             $query->where('country', $request->country);
@@ -223,7 +223,7 @@ class BeachController extends Controller
         }
 
         // Lấy danh sách bãi biển với phân trang
-        $beaches = $query->paginate(5);
+        $beaches = $query->paginate(10);
 
         // Kiểm tra xem yêu cầu là AJAX không
         if ($request->ajax()) {
@@ -248,7 +248,7 @@ class BeachController extends Controller
                 return $query->where('name', 'like', "%{$search}%");
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate(5);
 
         return view('beaches.bin', compact('beaches'));
     }
@@ -278,7 +278,7 @@ class BeachController extends Controller
         // Xóa bãi biển sau khi đã xóa các bản ghi liên quan
         $beach->delete();
 
-        return redirect()->route('beaches.index')->with('success', 'Beach cleared successfully.');
+        return redirect()->route('beaches.bin')->with('success', 'Beach cleared successfully.');
     }
 
     public function destroy(Beach $beach)

@@ -39,7 +39,7 @@ public function index(Request $request)
     }
 
     // Phân trang kết quả
-    $users = $query->paginate(10);
+    $users = $query->paginate(5);
 
     // Trả về view với dữ liệu người dùng
     return view('apps-users-list', compact('users'));

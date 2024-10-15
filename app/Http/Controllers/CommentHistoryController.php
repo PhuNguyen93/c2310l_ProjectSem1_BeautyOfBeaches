@@ -37,7 +37,7 @@ class CommentHistoryController extends Controller
             ->when($rating, function ($query) use ($rating) {
                 return $query->where('rating', $rating);
             })
-            ->paginate(10);
+            ->paginate(5);
 
         // Trả về view với dữ liệu feedbacks đã được lọc và tìm kiếm
         return view('comments.index', compact('feedbacks'));
