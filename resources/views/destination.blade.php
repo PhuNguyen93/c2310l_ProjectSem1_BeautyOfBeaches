@@ -46,10 +46,10 @@
                             <option value="West">West</option>
                             <option value="South">South</option>
                             <option value="North">North</option>
-                            <option value="North">North East</option>
-                            <option value="North">North West</option>
-                            <option value="North">South East</option>
-                            <option value="North">South West</option>
+                            <option value="North East">North East</option>
+                            <option value="North West">North West</option>
+                            <option value="South East">South East</option>
+                            <option value="South West">South West</option>
                         </select>
                     </div>
 
