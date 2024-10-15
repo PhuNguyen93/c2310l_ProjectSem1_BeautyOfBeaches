@@ -80,9 +80,9 @@
                 Travel Top Destination <br>of The World</h1>
         </div>
         </div>
-        <div class="cs_hero_shape_1"></div>
+        {{-- <div class="cs_hero_shape_1"></div>
         <div class="cs_hero_shape_2"></div>
-        <div class="cs_hero_shape_3"></div>
+        <div class="cs_hero_shape_3"></div> --}}
         </div>
         {{-- <div class="container mt-5 text-center">
             <!-- Hiển thị tổng số lượng người đã truy cập vào website -->

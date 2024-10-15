@@ -221,11 +221,12 @@
                             </div><!--end col-->
 
                             <!-- Birth Date -->
-                            <div class="xl:col-span-6">
-                                <label for="birth_date" class="inline-block mb-2 text-base font-medium text-gray-700 dark:text-zinc-200">Birth Date</label>
-                                <input type="date" name="birth_date" id="birth_date" value="{{ old('birth_date', $user->birth_date) }}"
-                                    class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out dark:bg-zinc-800 dark:border-zinc-600 dark:text-zinc-100">
-                            </div>
+<div class="xl:col-span-6">
+    <label for="birth_date" class="inline-block mb-2 text-base font-medium text-gray-700 dark:text-zinc-200">Birth Date</label>
+    <input type="date" name="birth_date" id="birth_date" value="{{ old('birth_date', $user->birth_date) }}"
+        class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-200 ease-in-out dark:bg-zinc-800 dark:border-zinc-600 dark:text-zinc-100"
+        max="{{ \Carbon\Carbon::today()->format('Y-m-d') }}">
+</div>
 
                             <div class="xl:col-span-6">
                                 <label for="joiningDateInput" class="inline-block mb-2 text-base font-medium">Joining Date</label>

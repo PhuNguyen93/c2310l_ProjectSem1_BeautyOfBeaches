@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Start Hero Section -->
-    <x-hero subTitle='' img='assets/images/blogimage.jpg' title="{{ $blog->title }}" />
+    <x-hero subTitle=''  img="{{ asset('assets/images/bg4.jpg') }}"  title="{{ $blog->title }}" />
     <!-- End Hero Section -->
 
     <!-- Start Blog Section -->
