@@ -148,6 +148,7 @@ class BlogController extends Controller
         }
         return redirect()->route('user.blog')->with('success', 'Blog has been added and is pending approval.');
     }
+
     public function showBlogComments(Request $request)
     {
         $search = $request->input('search');

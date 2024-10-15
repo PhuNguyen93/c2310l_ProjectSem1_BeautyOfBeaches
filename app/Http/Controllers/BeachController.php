@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Beach;
+use App\Models\BeachGallery;
 use App\Models\Download;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BeachController extends Controller
 {
-    /**
-     * Hiển thị danh sách các bãi biển.
-     */
+
     public function index(Request $request)
     {
         if (Auth::guest() || Auth::user()->role_id != 2) {
@@ -29,21 +28,13 @@ class BeachController extends Controller
         return view('beaches.index', compact('beaches'));
     }
 
-
-    /**
-     * Hiển thị form tạo bãi biển mới.
-     */
     public function create()
     {
         return view('beaches.create');
     }
 
-    /**
-     * Lưu bãi biển mới vào cơ sở dữ liệu.
-     */
     public function store(Request $request)
     {
-        // Xác thực dữ liệu đầu vào
         $request->validate([
             'name' => 'required|max:255',
             'description' => 'nullable',
@@ -51,25 +42,44 @@ class BeachController extends Controller
             'country' => 'nullable|max:255',
             'longitude' => 'nullable|numeric',
             'latitude' => 'nullable|numeric',
-            'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Multiple images
         ]);
 
         $data = $request->all();
+        $beach = Beach::create([
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'location' => $data['location'],
+            'country' => $data['country'],
+            'longitude' => $data['longitude'],
+            'latitude' => $data['latitude'],
+        ]);
 
-        // Xử lý upload hình ảnh và lưu vào thư mục public
-        if ($request->hasFile('image_url')) {
-            $imageName = time() . '.' . $request->file('image_url')->extension();
-            $request->file('image_url')->move(public_path('assets/images/beaches'), $imageName);
-            $data['image_url'] = 'assets/images/beaches/' . $imageName; // Lưu đường dẫn vào database
+        // Xử lý lưu hình ảnh
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
+
+            foreach ($images as $index => $image) {
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('assets/images/beaches'), $imageName);
+
+                if ($index === 0) {
+                    // Lưu ảnh đầu tiên làm ảnh bìa
+                    $beach->image_url = 'assets/images/beaches/' . $imageName;
+                    $beach->save();
+                } else {
+                    // Lưu các ảnh còn lại vào bảng BeachImage (nếu có bảng này)
+                    BeachGallery::create([
+                        'beach_id' => $beach->id,
+                        'image_url' => 'assets/images/beaches/' . $imageName,
+                    ]);
+                }
+            }
         }
-
-        // In giá trị $data
-        // dd($data);
-
-        Beach::create($data);
 
         return redirect()->route('beaches.index')->with('success', 'Beach added successfully.');
     }
+
 
     public function storePdf(Request $request, Beach $beach)
     {
@@ -141,43 +151,62 @@ class BeachController extends Controller
      * Cập nhật thông tin bãi biển trong cơ sở dữ liệu.
      */
     public function update(Request $request, Beach $beach)
-    {
-        // Xác thực dữ liệu đầu vào
-        $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'nullable',
-            'description2' => 'nullable',
-            'description3' => 'nullable',
-            'location' => 'nullable|max:255',
-            'area_id' => 'nullable|exists:areas,id',
-            'country' => 'nullable|max:255',
-            'longitude' => 'nullable|numeric',
-            'latitude' => 'nullable|numeric',
-            'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+{
+    // Xác thực dữ liệu đầu vào
+    $request->validate([
+        'name' => 'required|max:255',
+        'description' => 'nullable',
+        'description2' => 'nullable',
+        'description3' => 'nullable',
+        'location' => 'nullable|max:255',
+        'area_id' => 'nullable|exists:areas,id',
+        'country' => 'nullable|max:255',
+        'longitude' => 'nullable|numeric',
+        'latitude' => 'nullable|numeric',
+        'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'gallery.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validate cho các ảnh phụ
+    ]);
 
-        $data = $request->all();
+    $data = $request->all();
 
-        // Xử lý upload hình ảnh mới
-        if ($request->hasFile('image_url')) {
-            // Xóa hình ảnh cũ nếu có
-            if ($beach->image_url && file_exists(public_path($beach->image_url))) {
-                unlink(public_path($beach->image_url));
+    // Xử lý upload hình ảnh chính (Main Image)
+    if ($request->hasFile('image_url')) {
+        if ($beach->image_url && file_exists(public_path($beach->image_url))) {
+            unlink(public_path($beach->image_url));
+        }
+        $imageName = time() . '.' . $request->file('image_url')->extension();
+        $request->file('image_url')->move(public_path('assets/images/beaches'), $imageName);
+        $data['image_url'] = 'assets/images/beaches/' . $imageName;
+    }
+
+    // Cập nhật các thông tin khác của biển
+    $beach->update($data);
+
+    // Xử lý cập nhật hình ảnh phụ (gallery)
+    if ($request->hasFile('gallery')) {
+        // Xóa các hình ảnh phụ cũ
+        foreach ($beach->gallery as $gallery) {
+            if (file_exists(public_path($gallery->image_url))) {
+                unlink(public_path($gallery->image_url));
             }
-
-            // Lưu hình ảnh mới vào thư mục public/assets/images/beaches
-            $imageName = time() . '.' . $request->file('image_url')->extension();
-            $request->file('image_url')->move(public_path('assets/images/beaches'), $imageName);
-
-            // Cập nhật đường dẫn hình ảnh mới vào database
-            $data['image_url'] = 'assets/images/beaches/' . $imageName;
+            $gallery->delete(); // Xóa bản ghi trong bảng beach_galleries
         }
 
-        // Cập nhật các thông tin khác
-        $beach->update($data);
+        // Lưu các hình ảnh phụ mới
+        foreach ($request->file('gallery') as $image) {
+            $galleryImageName = time() . '-' . $image->getClientOriginalName();
+            $image->move(public_path('assets/images/beaches/galleries'), $galleryImageName);
 
-        return redirect()->route('beaches.index')->with('success', 'Beach updated successfully.');
+            // Thêm bản ghi mới vào bảng beach_galleries
+            $beach->gallery()->create([
+                'image_url' => 'assets/images/beaches/galleries/' . $galleryImageName,
+                'caption' => $image->getClientOriginalName(),
+            ]);
+        }
     }
+
+    return redirect()->route('beaches.index')->with('success', 'Beach updated successfully.');
+}
 
     public function search(Request $request)
     {
@@ -266,6 +295,6 @@ class BeachController extends Controller
         $beach->save();
 
         // dd(1);
-       return redirect()->route('beaches.bin')->with('success','The beach has been restored.');
+        return redirect()->route('beaches.bin')->with('success', 'The beach has been restored.');
     }
 }
