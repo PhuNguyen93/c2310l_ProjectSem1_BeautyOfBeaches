@@ -7,60 +7,137 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+Beauty of Beaches
+Welcome to the Beauty of Beaches project! This web application showcases beautiful beaches from around the world, allowing users to explore and search for beaches based on various criteria.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Prerequisites
+Before setting up the project, make sure you have the following tools installed on your machine:
+Visual Studio Code.
+XAMPP (for Apache and MySQL).
+Composer (PHP dependency manager).
+Git (to clone the repository).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Optional but recommended:
+DBeaver (Database management tool).
+![alt text](./other/image1.png)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+### Installation instructions
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**Step 1: Clone the Repository**
+First, open Command Prompt or Git Bash and navigate to the htdocs folder of XAMPP:
+```shell
+cd C:\xampp\htdocs
+```
+![alt text](./other/Picture2.png)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+ Now clone the project repository:
+git clone https://github.com/PhuNguyen93/c2310l_ProjectSem1_BeautyOfBeaches.git   
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+![alt text](./other/Picture3.png)
 
-## Laravel Sponsors
+**Step 2: Install Dependencies**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Navigate into the project folder:
+```shell
+cd c2310l_ProjectSem1_BeautyOfBeaches
+```
+![alt text](./other/Picture4.png)
 
-### Premium Partners
+Install the required dependencies using Composer:
+```shell
+composer install
+```
+![alt text](./other/Picture5.png)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
 
-## Contributing
+**Step 3: Set Up Environment Variables `.env`**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Create a copy of the .env.example file and name it .env:
+```shell
+cp.env.example.env
+```
+![alt text](./other/Picture6.png)
 
-## Code of Conduct
+Open the .env file and configure the following variables based on your environment:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```shell
+APP_NAME=BeautyOfBeaches
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://localhost
 
-## Security Vulnerabilities
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=beach_db
+DB_USERNAME=root
+DB_PASSWORD=
+DB_CHARSET=utf8mb4
+DB_COLLATION=utf8mb4_unicode_ci
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your_email@gmail.com
+MAIL_PASSWORD=your_email_password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=your_email@gmail.com
+MAIL_FROM_NAME="Beauty Of Beaches"
+```
 
-## License
+Generate the application key:
+```shell
+php artisan key:generate
+```
+![alt text](./other/Picture7.png)
+![alt text](./other/Picture8.png)
+![alt text](./other/Picture9.png)
+![alt text](./other/Picture10.png)
+![alt text](./other/Picture11.png)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Step 4: Set Up Database**
+
+Open phpMyAdmin by visiting http://localhost/phpmyadmin/.
+Create a new database named beach_db.
+Import the database schema provided in the database folder of the project.
+Alternatively, you can run migrations to create the tables:
+```shell
+php artisan migrate
+```
+
+**Step 5: Link Storage**
+Run the following command to create a symbolic link between the public directory and storage:
+```shell
+php artisan storage:link
+```
+![alt text](./other/Picture12.png)
+
+**Step 6: Serve the Application**
+Finally, start the development server using:
+
+```shell
+php artisan serve
+```
+
+![alt text](./other/Picture13.png)
+
+Open your browser and visit the project at http://127.0.0.1:8000.
+
+![alt text](./other/Picture14.png)
+
+Features
+
+Browse beaches based on country, direction, and other filters.
+User authentication and OTP verification.
+Reset password functionality via email.
+Admin dashboard for managing users, beaches, and content.
+
+
+Troubleshooting
+
+If you encounter any issues, check the following:
+Ensure XAMPP is running Apache and MySQL services.
+Ensure your database credentials in the .env file are correct.
+Make sure Composer dependencies are installed properly.
+For further assistance, please contact the project maintainer.
