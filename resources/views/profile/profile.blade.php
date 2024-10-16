@@ -12,7 +12,8 @@
     <style>
         body {
             margin-top: 20px;
-            background-color: #e2e8f0;
+            background-color: #5e9ff5;
+
             color: #1a202c;
         }
 
