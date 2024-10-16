@@ -79,11 +79,11 @@ DB_COLLATION=utf8mb4_unicode_ci
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.gmail.com
 MAIL_PORT=587
-MAIL_USERNAME=your_email@gmail.com
-MAIL_PASSWORD=your_email_password
+MAIL_USERNAME=trangiabaotest2201@gmail.com
+MAIL_PASSWORD="pmhb yfyw bnaj wkpe"
 MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS=your_email@gmail.com
-MAIL_FROM_NAME="Beauty Of Beaches"
+MAIL_FROM_ADDRESS=trangiabaotest2201@gmail.com
+MAIL_FROM_NAME="Register Account Request"
 ```
 
 Generate the application key:
