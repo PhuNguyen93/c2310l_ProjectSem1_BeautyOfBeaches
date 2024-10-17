@@ -15,9 +15,14 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // Lấy 5 bãi biển mới nhất
-        $beaches = Beach::orderBy('updated_at', 'desc')->take(5)->get();
-        $blogs = Blog::orderBy('created_at', 'desc')->paginate(2); // Thêm truy vấn blog
+        $beaches = Beach::where('status', 1)
+        ->orderBy('updated_at', 'desc')
+        ->take(5)
+        ->get();
+
+    $blogs = Blog::where('status', 1)
+        ->orderBy('created_at', 'desc')
+        ->paginate(2);
 
         // Ghi lại hoặc cập nhật thông tin truy cập trong bảng visitor_logs
         VisitorLog::updateOrCreate(

@@ -17,33 +17,35 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     // Hàm để hiển thị danh sách người dùng với phân trang
-public function index(Request $request)
-{
-    if (Auth::user()->role_id != 2) {
-        return redirect()->route('index')->with('error', 'You do not have the required permissions.');
+    public function index(Request $request)
+    {
+        if (Auth::user()->role_id != 2) {
+            return redirect()->route('index')->with('error', 'You do not have the required permissions.');
+        }
+
+        // Nhận các tham số từ yêu cầu
+        $search = $request->input('search');
+
+        // Bắt đầu truy vấn từ bảng users
+        $query = User::query();
+
+        $query = User::where('status', '=', 1);
+
+        // Nếu có giá trị search, tìm kiếm theo tên và email
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'LIKE', "%{$search}%")
+                    ->orWhere('email', 'LIKE', "%{$search}%")
+                    ->orWhere('phone', 'LIKE', "%{$search}%");
+            });
+        }
+
+        // Phân trang kết quả
+        $users = $query->paginate(5);
+
+        // Trả về view với dữ liệu người dùng
+        return view('apps-users-list', compact('users'));
     }
-
-    // Nhận các tham số từ yêu cầu
-    $search = $request->input('search');
-
-    // Bắt đầu truy vấn từ bảng users
-    $query = User::query();
-
-    // Nếu có giá trị search, tìm kiếm theo tên và email
-    if ($search) {
-        $query->where(function ($q) use ($search) {
-            $q->where('name', 'LIKE', "%{$search}%")
-              ->orWhere('email', 'LIKE', "%{$search}%")
-              ->orWhere('phone', 'LIKE', "%{$search}%");
-        });
-    }
-
-    // Phân trang kết quả
-    $users = $query->paginate(5);
-
-    // Trả về view với dữ liệu người dùng
-    return view('apps-users-list', compact('users'));
-}
 
 
     // Hàm để hiển thị form tạo người dùng mới (nếu cần)
@@ -131,28 +133,6 @@ public function index(Request $request)
         // dd($user);
         return redirect()->route('users.index');
     }
-
-    // Hàm để xóa người dùng
-    public function destroy($id)
-    {
-
-        // Tìm người dùng theo ID
-        $user = User::findOrFail($id);
-
-        // Kiểm tra nếu vai trò của người dùng là admin
-        if ($user->role_id == 2) { // 2 là role_id của admin
-            // Điều hướng về trang danh sách người dùng với thông báo lỗi
-            return redirect()->route('users.index')->with('error', 'Admin account cannot be deleted.');
-        }
-
-        // Đặt trạng thái người dùng là 0 để xóa mềm (deactivate)
-        $user->status = 0;
-        $user->save();
-
-        // Điều hướng về trang danh sách người dùng với thông báo thành công
-        return redirect()->route('users.index')->with('success', 'User has been trashed');
-    }
-
     public function changePassword(Request $request)
     {
         // Kiểm tra nếu người dùng đã xác thực
@@ -196,15 +176,15 @@ public function index(Request $request)
         $user = User::findOrFail($id);
 
         $feedbacks = $user->feedbacks()
-        ->with('beach')
-        ->whereHas('beach', function ($query) {
-            $query->where('status', '!=', 0);
-        })
-        ->paginate(5)->withQueryString();
+            ->with('beach')
+            ->whereHas('beach', function ($query) {
+                $query->where('status', '!=', 0);
+            })
+            ->paginate(5)->withQueryString();
 
-    // Lọc blog với điều kiện status != 0
+        // Lọc blog với điều kiện status != 0
         $blogs = $user->blogs()->where('status', '!=', 0)->paginate(5)->withQueryString();
-        return view('pages-account', compact('user', 'feedbacks','blogs'));
+        return view('pages-account', compact('user', 'feedbacks', 'blogs'));
     }
 
     public function filterFeedback(Request $request, $id)
@@ -225,10 +205,10 @@ public function index(Request $request)
         $feedbacks = $query->whereHas('beach', function ($query) {
             $query->where('status', '!=', 0);
         })
-        ->paginate(5)->withQueryString();;
+            ->paginate(5)->withQueryString();;
         $blogs = $user->blogs()->where('status', '!=', 0)->paginate(5)->withQueryString();
         // Trả về view cùng với kết quả
-        return view('pages-account', compact('user', 'feedbacks','blogs'));
+        return view('pages-account', compact('user', 'feedbacks', 'blogs'));
     }
 
     public function showProfile($id)
@@ -367,7 +347,25 @@ public function index(Request $request)
         return redirect()->back()->with('success', 'OTP has been resent to your email.');
     }
 
+    public function destroy($id)
+    {
 
+        // Tìm người dùng theo ID
+        $user = User::findOrFail($id);
+
+        // Kiểm tra nếu vai trò của người dùng là admin
+        if ($user->role_id == 2) { // 2 là role_id của admin
+            // Điều hướng về trang danh sách người dùng với thông báo lỗi
+            return redirect()->route('users.index')->with('error', 'Admin account cannot be deleted.');
+        }
+
+        // Đặt trạng thái người dùng là 0 để xóa mềm (deactivate)
+        $user->status = 0;
+        $user->save();
+
+        // Điều hướng về trang danh sách người dùng với thông báo thành công
+        return redirect()->route('users.index')->with('success', 'User has been trashed');
+    }
     public function bin(Request $request)
     {
         if (Auth::guest() || Auth::user()->role_id != 2) {
@@ -388,7 +386,6 @@ public function index(Request $request)
     public function destroyBin($id)
     {
         // Tìm người dùng theo ID
-        // dd(1);
         $user = User::findOrFail($id);
 
         // Kiểm tra nếu vai trò của người dùng là admin
@@ -397,11 +394,15 @@ public function index(Request $request)
             return redirect()->route('users.index')->with('error', 'Admin account cannot be deleted.');
         }
 
-        // Xóa người dùng nếu không phải admin
+        $user->feedbacks()->delete();
+        $user->blogFeedbacks()->delete();
+        $user->blogs()->delete();
+
+        // Cuối cùng, xóa người dùng khỏi database
         $user->delete();
 
         // Điều hướng về trang danh sách người dùng với thông báo thành công
-        return redirect()->route('user.bin')->with('success', 'Account deleted successfully.');
+        return redirect()->route('user.bin')->with('success', 'User and related data deleted successfully.');
     }
     public function restore(User $user)
     {
